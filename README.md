@@ -55,7 +55,6 @@ LiveScoreFootball/
     popup.css
     popup.html
     popup.js
-  package-extension-store.bat
   store-assets/
     promo-marquee-1400x560.png
     promo-small-440x280.png
@@ -68,9 +67,11 @@ LiveScoreFootball/
     smoke-test.js
   worker/
     index.js
-  memory-bank/
-    *.md
 ```
+
+Local-only files such as `memory-bank/`, `package-extension-store.bat`,
+`crop.ps1`, `dist/`, `.wrangler/`, and raw capture files under
+`store-assets/sources/` are intentionally ignored and should not be pushed.
 
 ## Backend
 
@@ -276,13 +277,14 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools/download-league-logos.
 
 ## Package for Chrome Web Store
 
-Run the packaging script from the project root:
+Create the Chrome Web Store zip from the project root:
 
-```bat
-package-extension-store.bat
+```powershell
+New-Item -ItemType Directory -Force dist
+Compress-Archive -Path extension\* -DestinationPath dist\hype-live-football-scores-v1.1-chrome-web-store.zip -Force
 ```
 
-The script creates:
+The command creates:
 
 ```text
 dist/hype-live-football-scores-v1.1-chrome-web-store.zip
@@ -392,4 +394,4 @@ Expected UI states:
 - `tools/smoke-test.js` is the quick guard against silent response-shape breakage.
 - CORS blocks normal web pages and raw no-Origin calls, but server-to-server clients can still spoof request headers. If traffic grows, add Cloudflare WAF/rate limiting.
 - Team logos remain remote images; league logos are packaged locally in the extension.
-- If extension runtime files change, bump `extension/manifest.json`, run `package-extension-store.bat`, and upload the new zip.
+- If extension runtime files change, bump `extension/manifest.json`, create a new Chrome Web Store zip from `extension/`, and upload it.

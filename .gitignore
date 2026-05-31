@@ -1,4 +1,7 @@
 .chrome-store-capture-profile/
 .wrangler/
 dist/
-store-assets/sources/headless-test*.png
+memory-bank/
+package-extension-store.bat
+crop.ps1
+store-assets/sources/

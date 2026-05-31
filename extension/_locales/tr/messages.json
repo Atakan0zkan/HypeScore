@@ -1,0 +1,225 @@
+{
+  "extName": {
+    "message": "Hype - Canlı Futbol Skorları"
+  },
+  "extDescription": {
+    "message": "Canlı futbol skorları, fikstür, sonuçlar ve lig puan durumları."
+  },
+  "appTitle": {
+    "message": "Hype Skorları"
+  },
+  "subtitle": {
+    "message": "Canlı skorlar, sonuçlar ve puan durumları tek ekranda."
+  },
+  "loading": {
+    "message": "Maçlar yükleniyor…"
+  },
+  "error": {
+    "message": "Veri alınamadı"
+  },
+  "extensionRuntimeRequired": {
+    "message": "Canlı veriler dosya önizlemesinde yüklenmez. Skorları görmek için Chrome eklenti penceresini açın."
+  },
+  "empty": {
+    "message": "Bugün gösterilecek maç bulunamadı."
+  },
+  "ready": {
+    "message": "Hazır"
+  },
+  "refreshing": {
+    "message": "Yenileniyor"
+  },
+  "notUpdated": {
+    "message": "Henüz güncellenmedi"
+  },
+  "updated": {
+    "message": "Güncellendi"
+  },
+  "live": {
+    "message": "Canlı"
+  },
+  "matches": {
+    "message": "Maç"
+  },
+  "results": {
+    "message": "Sonuçlar"
+  },
+  "upcoming": {
+    "message": "Yaklaşan"
+  },
+  "standings": {
+    "message": "Puan Durumu"
+  },
+  "played": {
+    "message": "O"
+  },
+  "wins": {
+    "message": "G"
+  },
+  "draws": {
+    "message": "B"
+  },
+  "losses": {
+    "message": "M"
+  },
+  "goalsFor": {
+    "message": "A"
+  },
+  "goalsAgainst": {
+    "message": "Y"
+  },
+  "goalDifference": {
+    "message": "AV"
+  },
+  "points": {
+    "message": "P"
+  },
+  "paused": {
+    "message": "Duraklatıldı"
+  },
+  "autoPaused": {
+    "message": "İstekleri azaltmak için otomatik yenileme duraklatıldı."
+  },
+  "idlePaused": {
+    "message": "Pasif kalındığı için yenileme durdu."
+  },
+  "requestLimitReached": {
+    "message": "Günlük istek limiti doldu. Kayıtlı veriler gösteriliyor."
+  },
+  "refreshFailed": {
+    "message": "Yenileme başarısız. Son veriler gösteriliyor."
+  },
+  "club": {
+    "message": "Takım"
+  },
+  "backToLeagues": {
+    "message": "← Ligler"
+  },
+  "selectLeague": {
+    "message": "Bir lig seçin"
+  },
+  "noLiveMatches": {
+    "message": "Canlı maç yok"
+  },
+  "liveCount": {
+    "message": "$COUNT$ canlı",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCount": {
+    "message": "$COUNT$ maç",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fullTime": {
+    "message": "MS"
+  },
+  "halfTime": {
+    "message": "Devre"
+  },
+  "scheduled": {
+    "message": "Başlamadı"
+  },
+  "stats": {
+    "message": "İstatistikler"
+  },
+  "favorite": {
+    "message": "Favori"
+  },
+  "removeFavorite": {
+    "message": "Favoriden kaldır"
+  },
+  "turnOff": {
+    "message": "Eklentiyi kapat"
+  },
+  "turnOn": {
+    "message": "Eklentiyi aç"
+  },
+  "favoriteLeague": {
+    "message": "Ligi favorilere ekle"
+  },
+  "forceEnglishOn": {
+    "message": "İngilizce göster"
+  },
+  "forceEnglishOff": {
+    "message": "Tarayıcı diline dön"
+  },
+  "other": {
+    "message": "Diğer"
+  },
+  "team": {
+    "message": "Takım"
+  },
+  "unknownLeague": {
+    "message": "Bilinmeyen Lig"
+  },
+  "unknownTeam": {
+    "message": "Bilinmeyen Takım"
+  },
+  "matchDetails": {
+    "message": "Maç detayları"
+  },
+  "loadingDetails": {
+    "message": "Maç detayları yükleniyor…"
+  },
+  "loadingStandings": {
+    "message": "Puan durumu yükleniyor…"
+  },
+  "detailsUnavailable": {
+    "message": "Detaylar alınamadı"
+  },
+  "noDetails": {
+    "message": "Bu maç için ek detay bulunamadı."
+  },
+  "noSectionData": {
+    "message": "Veri bulunamadı."
+  },
+  "noStats": {
+    "message": "Maç istatistiği bulunamadı."
+  },
+  "noStandings": {
+    "message": "Bu lig için puan durumu bulunamadı."
+  },
+  "noNews": {
+    "message": "Haber bulunamadı."
+  },
+  "noLinks": {
+    "message": "Bağlantı bulunamadı."
+  },
+  "venue": {
+    "message": "Stadyum"
+  },
+  "kickoff": {
+    "message": "Başlama saati"
+  },
+  "broadcasts": {
+    "message": "Yayınlar"
+  },
+  "timeline": {
+    "message": "Olaylar"
+  },
+  "commentary": {
+    "message": "Anlatım"
+  },
+  "lineups": {
+    "message": "Kadrolar"
+  },
+  "headToHead": {
+    "message": "Aralarındaki maçlar"
+  },
+  "news": {
+    "message": "Haberler"
+  },
+  "highlights": {
+    "message": "Özetler"
+  },
+  "links": {
+    "message": "Bağlantılar"
+  }
+}

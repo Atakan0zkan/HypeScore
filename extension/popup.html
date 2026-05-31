@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hype - Live Football Scores</title>
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="hero">
+        <div class="hero-copy">
+          <div class="brand-lockup">
+            <img class="brand-logo" src="icons/icon48.png" alt="" aria-hidden="true">
+            <div class="brand-text">
+              <h1 id="appTitle">Hype Scores</h1>
+              <p id="subtitle" class="subtitle">
+                Fast live scores, results and league tables.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="hero-actions">
+          <button id="englishToggle" class="language-toggle" type="button" title="Show English labels" aria-label="Show English labels" aria-pressed="false">
+            ENG
+          </button>
+          <button id="powerToggle" class="power-toggle" type="button" title="Toggle extension" aria-label="Toggle extension on/off">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+              <path d="M12 2v8"/>
+              <path d="M17.66 6.34A8 8 0 1 1 6.34 6.34"/>
+            </svg>
+          </button>
+        </div>
+      </header>
+
+
+
+      <section id="loadingState" class="state-card">
+        Loading matches…
+      </section>
+
+      <section id="errorState" class="state-card state-card--error" hidden>
+        Could not load data
+      </section>
+
+      <section id="emptyState" class="state-card" hidden>
+        No matches found today.
+      </section>
+
+      <!-- League pick list (main view) -->
+      <section id="leaguePickList" class="league-pick-list" aria-live="polite" hidden></section>
+
+      <!-- League detail view -->
+      <section id="leagueDetailView" hidden>
+        <button id="backBtn" class="back-btn" type="button">← Leagues</button>
+        <div id="leagueDetailContent" class="league-detail-scroll"></div>
+      </section>
+    </main>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

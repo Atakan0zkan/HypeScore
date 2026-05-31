@@ -1,0 +1,225 @@
+{
+  "extName": {
+    "message": "Hype - Scores de football en direct"
+  },
+  "extDescription": {
+    "message": "Scores de football en direct, matchs, résultats et classements."
+  },
+  "appTitle": {
+    "message": "Hype Scores"
+  },
+  "subtitle": {
+    "message": "Scores en direct, résultats et classements en un clin d’œil."
+  },
+  "loading": {
+    "message": "Chargement des matchs…"
+  },
+  "error": {
+    "message": "Impossible de charger les données"
+  },
+  "extensionRuntimeRequired": {
+    "message": "Les données en direct ne se chargent pas dans l’aperçu local. Ouvrez la fenêtre de l’extension Chrome pour voir les scores."
+  },
+  "empty": {
+    "message": "Aucun match trouvé aujourd’hui."
+  },
+  "ready": {
+    "message": "Prêt"
+  },
+  "refreshing": {
+    "message": "Actualisation"
+  },
+  "notUpdated": {
+    "message": "Pas encore actualisé"
+  },
+  "updated": {
+    "message": "Actualisé"
+  },
+  "live": {
+    "message": "En direct"
+  },
+  "matches": {
+    "message": "Matchs"
+  },
+  "results": {
+    "message": "Résultats"
+  },
+  "upcoming": {
+    "message": "À venir"
+  },
+  "standings": {
+    "message": "Classement"
+  },
+  "played": {
+    "message": "J"
+  },
+  "wins": {
+    "message": "V"
+  },
+  "draws": {
+    "message": "N"
+  },
+  "losses": {
+    "message": "D"
+  },
+  "goalsFor": {
+    "message": "BP"
+  },
+  "goalsAgainst": {
+    "message": "BC"
+  },
+  "goalDifference": {
+    "message": "DB"
+  },
+  "points": {
+    "message": "Pts"
+  },
+  "paused": {
+    "message": "En pause"
+  },
+  "autoPaused": {
+    "message": "Actualisation automatique mise en pause pour économiser les requêtes."
+  },
+  "idlePaused": {
+    "message": "Mise en pause pendant l’inactivité."
+  },
+  "requestLimitReached": {
+    "message": "Limite quotidienne de requêtes atteinte. Affichage des données en cache."
+  },
+  "refreshFailed": {
+    "message": "Échec de l’actualisation. Affichage des dernières données."
+  },
+  "club": {
+    "message": "Club"
+  },
+  "backToLeagues": {
+    "message": "← Ligues"
+  },
+  "selectLeague": {
+    "message": "Choisir une ligue"
+  },
+  "noLiveMatches": {
+    "message": "Aucun match en direct"
+  },
+  "liveCount": {
+    "message": "$COUNT$ en direct",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCount": {
+    "message": "$COUNT$ matchs",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fullTime": {
+    "message": "Terminé"
+  },
+  "halfTime": {
+    "message": "Mi-temps"
+  },
+  "scheduled": {
+    "message": "Programmé"
+  },
+  "stats": {
+    "message": "Statistiques"
+  },
+  "favorite": {
+    "message": "Favori"
+  },
+  "removeFavorite": {
+    "message": "Retirer des favoris"
+  },
+  "turnOff": {
+    "message": "Désactiver l’extension"
+  },
+  "turnOn": {
+    "message": "Activer l’extension"
+  },
+  "favoriteLeague": {
+    "message": "Ajouter la ligue aux favoris"
+  },
+  "forceEnglishOn": {
+    "message": "Afficher en anglais"
+  },
+  "forceEnglishOff": {
+    "message": "Revenir à la langue du navigateur"
+  },
+  "other": {
+    "message": "Autres"
+  },
+  "team": {
+    "message": "Équipe"
+  },
+  "unknownLeague": {
+    "message": "Championnat inconnu"
+  },
+  "unknownTeam": {
+    "message": "Équipe inconnue"
+  },
+  "matchDetails": {
+    "message": "Détails du match"
+  },
+  "loadingDetails": {
+    "message": "Chargement des détails du match…"
+  },
+  "loadingStandings": {
+    "message": "Chargement du classement…"
+  },
+  "detailsUnavailable": {
+    "message": "Détails indisponibles"
+  },
+  "noDetails": {
+    "message": "Aucun détail supplémentaire pour ce match."
+  },
+  "noSectionData": {
+    "message": "Aucune donnée disponible."
+  },
+  "noStats": {
+    "message": "Aucune statistique disponible pour ce match."
+  },
+  "noStandings": {
+    "message": "Aucun classement disponible pour cette ligue."
+  },
+  "noNews": {
+    "message": "Aucune actualité disponible."
+  },
+  "noLinks": {
+    "message": "Aucun lien disponible."
+  },
+  "venue": {
+    "message": "Stade"
+  },
+  "kickoff": {
+    "message": "Coup d’envoi"
+  },
+  "broadcasts": {
+    "message": "Diffusions"
+  },
+  "timeline": {
+    "message": "Chronologie"
+  },
+  "commentary": {
+    "message": "Commentaire"
+  },
+  "lineups": {
+    "message": "Compositions"
+  },
+  "headToHead": {
+    "message": "Face-à-face"
+  },
+  "news": {
+    "message": "Actualités"
+  },
+  "highlights": {
+    "message": "Temps forts"
+  },
+  "links": {
+    "message": "Liens"
+  }
+}

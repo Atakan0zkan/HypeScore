@@ -1,0 +1,4 @@
+.chrome-store-capture-profile/
+.wrangler/
+dist/
+store-assets/sources/headless-test*.png

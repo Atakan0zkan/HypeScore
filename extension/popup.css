@@ -1,0 +1,1245 @@
+:root {
+  --popup-width: 580px;
+  --popup-height: 600px;
+  --scroll-safe-bottom: 46px;
+  --bg: #0a0a0a;
+  --bg-mid: #1a0e0e;
+  --panel: rgba(24, 12, 12, 0.92);
+  --panel-strong: #2a1414;
+  --panel-soft: rgba(255, 200, 200, 0.06);
+  --ink: #f5f0f0;
+  --muted: #b0a0a0;
+  --line: rgba(214, 91, 86, 0.16);
+  --accent: #d64b45;
+  --accent-strong: #ef7468;
+  --accent-soft: rgba(214, 75, 69, 0.16);
+  --gold: #f0bd63;
+  --danger: #ff9a8d;
+  --danger-soft: rgba(255, 117, 100, 0.13);
+  --shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+html,
+body {
+  width: var(--popup-width);
+  height: var(--popup-height);
+  max-width: var(--popup-width);
+  max-height: var(--popup-height);
+  margin: 0;
+  overflow: hidden;
+  overflow: clip;
+  overscroll-behavior: none;
+  scrollbar-width: none;
+}
+
+body {
+  position: fixed;
+  inset: 0 auto auto 0;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 14% -8%, rgba(214, 75, 69, 0.16), transparent 32%),
+    radial-gradient(circle at 108% 8%, rgba(240, 189, 99, 0.12), transparent 25%),
+    linear-gradient(145deg, var(--bg), var(--bg-mid));
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.app-shell {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  flex-direction: column;
+  gap: 14px;
+  overflow: hidden;
+  overscroll-behavior: none;
+  padding: 18px;
+}
+
+/* ── Hero header ────────────────────────────── */
+
+.hero {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.hero-copy {
+  min-width: 0;
+}
+
+.brand-lockup {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-logo {
+  width: 48px;
+  height: 48px;
+  flex: 0 0 auto;
+  border: 1px solid rgba(214, 75, 69, 0.28);
+  border-radius: 14px;
+  padding: 5px;
+  background:
+    radial-gradient(circle at 28% 20%, rgba(255, 88, 88, 0.24), transparent 42%),
+    linear-gradient(145deg, rgba(42, 15, 15, 0.98), rgba(12, 5, 5, 0.98));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 12px 32px rgba(214, 75, 69, 0.11);
+  object-fit: contain;
+}
+
+.brand-text {
+  min-width: 0;
+}
+
+h1 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 36px;
+  line-height: 0.95;
+  text-shadow: 0 14px 38px rgba(214, 75, 69, 0.1);
+}
+
+.subtitle {
+  max-width: 320px;
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.status-bar {
+  margin: 8px 0 0;
+  color: rgba(255, 210, 210, 0.62);
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ── Header actions ─────────────────────────── */
+
+.hero-actions {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 8px;
+}
+
+.power-toggle,
+.language-toggle {
+  position: relative;
+  z-index: 101;
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  padding: 0;
+  color: var(--accent);
+  background: var(--accent-soft);
+  cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+}
+
+.language-toggle {
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+}
+
+.power-toggle:hover,
+.language-toggle:hover {
+  color: #fff;
+  background: var(--accent);
+}
+
+.language-toggle--active {
+  color: #fff;
+  background: linear-gradient(135deg, rgba(214, 75, 69, 0.98), rgba(115, 26, 24, 0.95));
+  box-shadow: 0 0 18px rgba(214, 75, 69, 0.24);
+}
+
+.power-toggle--off {
+  border-color: #555;
+  color: #555;
+  background: rgba(85, 85, 85, 0.12);
+}
+
+.power-toggle--off:hover {
+  color: #888;
+  background: rgba(85, 85, 85, 0.22);
+}
+
+/* ── Shared card style ──────────────────────── */
+
+.state-card,
+.league-card,
+.league-pick-card {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+
+/* ── State cards ────────────────────────────── */
+
+.state-card {
+  border-radius: 20px;
+  padding: 22px;
+  color: var(--muted);
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+  text-align: center;
+}
+
+.state-card--error {
+  border-color: rgba(255, 154, 141, 0.28);
+  color: var(--danger);
+  background: var(--danger-soft);
+}
+
+/* ── League pick list (main view) ───────────── */
+
+.league-pick-list {
+  display: flex;
+  min-height: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-right: 6px;
+  padding-bottom: var(--scroll-safe-bottom);
+  scroll-padding-bottom: var(--scroll-safe-bottom);
+  scrollbar-color: rgba(214, 75, 69, 0.52) rgba(255, 255, 255, 0.06);
+}
+
+.league-pick-list::-webkit-scrollbar,
+.league-detail-scroll::-webkit-scrollbar {
+  width: 9px;
+}
+
+.league-pick-list::-webkit-scrollbar-track,
+.league-detail-scroll::-webkit-scrollbar-track {
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.league-pick-list::-webkit-scrollbar-thumb,
+.league-detail-scroll::-webkit-scrollbar-thumb {
+  border: 2px solid rgba(20, 8, 8, 0.95);
+  border-radius: 999px;
+  background: linear-gradient(180deg, #d85a50, #78201f);
+}
+
+.league-pick-card {
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  align-items: center;
+  gap: 14px;
+  flex: 0 0 auto;
+  border-radius: 16px;
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: background 0.18s ease, border-color 0.18s ease;
+}
+
+.league-pick-card:hover {
+  border-color: rgba(214, 91, 86, 0.34);
+  background: var(--panel-strong);
+}
+
+.league-pick-card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.league-card-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.league-pick-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  overflow: hidden;
+  padding: 3px;
+  border: 1px solid rgba(214, 91, 86, 0.2);
+  background:
+    radial-gradient(circle at 28% 16%, rgba(255, 255, 255, 0.16), transparent 38%),
+    radial-gradient(circle at 78% 86%, rgba(214, 75, 69, 0.2), transparent 42%),
+    linear-gradient(145deg, rgba(78, 30, 30, 0.98), rgba(21, 7, 7, 0.98) 62%, rgba(8, 3, 3, 0.98));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 10px 22px rgba(0, 0, 0, 0.22);
+}
+
+.league-pick-info {
+  display: grid;
+  min-width: 0;
+  gap: 2px;
+}
+
+.league-pick-name {
+  overflow: hidden;
+  color: var(--ink);
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.league-pick-meta {
+  color: var(--muted);
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.league-pick-badge {
+  display: inline-flex;
+  min-width: 74px;
+  justify-content: center;
+  border: 1px solid rgba(255, 160, 160, 0.46);
+  border-radius: 999px;
+  padding: 6px 11px;
+  color: #fff;
+  background:
+    linear-gradient(135deg, rgba(214, 75, 69, 0.98), rgba(115, 26, 24, 0.95));
+  box-shadow: 0 0 18px rgba(214, 75, 69, 0.24);
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ── Back button ────────────────────────────── */
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 8px;
+  border: none;
+  padding: 6px 12px;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border-radius: 999px;
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.back-btn:hover {
+  background: rgba(214, 75, 69, 0.25);
+}
+
+/* ── League detail view ─────────────────────── */
+
+#leagueDetailView {
+  min-height: 0;
+  flex: 1;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+#leagueDetailView:not([hidden]) {
+  display: flex;
+}
+
+.league-detail-scroll {
+  display: flex;
+  min-height: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 14px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-right: 6px;
+  padding-bottom: var(--scroll-safe-bottom);
+  scroll-padding-bottom: var(--scroll-safe-bottom);
+  scrollbar-color: rgba(214, 75, 69, 0.52) rgba(255, 255, 255, 0.06);
+}
+
+.league-detail-scroll > * {
+  flex: 0 0 auto;
+}
+
+.league-detail-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 15px 16px;
+  background:
+    linear-gradient(90deg, rgba(214, 75, 69, 0.12), transparent),
+    var(--panel-strong);
+}
+
+.league-detail-copy {
+  min-width: 0;
+  flex: 1;
+}
+
+.league-detail-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 66px;
+  height: 66px;
+  border-radius: 16px;
+  overflow: hidden;
+  padding: 4px;
+  border: 1px solid rgba(214, 91, 86, 0.2);
+  background:
+    radial-gradient(circle at 28% 16%, rgba(255, 255, 255, 0.16), transparent 38%),
+    radial-gradient(circle at 78% 86%, rgba(214, 75, 69, 0.2), transparent 42%),
+    linear-gradient(145deg, rgba(78, 30, 30, 0.98), rgba(21, 7, 7, 0.98) 62%, rgba(8, 3, 3, 0.98));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 10px 22px rgba(0, 0, 0, 0.22);
+}
+
+.league-logo-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter:
+    drop-shadow(0 0 1px rgba(255, 255, 255, 0.9))
+    drop-shadow(0 0 8px rgba(255, 255, 255, 0.28))
+    drop-shadow(0 3px 7px rgba(0, 0, 0, 0.5));
+}
+
+.league-logo--light {
+  border-color: rgba(255, 220, 190, 0.3);
+  background:
+    radial-gradient(circle at 28% 16%, rgba(255, 255, 255, 0.85), transparent 42%),
+    linear-gradient(145deg, rgba(255, 246, 232, 0.96), rgba(190, 151, 135, 0.84));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    0 10px 22px rgba(0, 0, 0, 0.24);
+}
+
+.league-logo--light .league-logo-image {
+  filter:
+    drop-shadow(0 1px 0 rgba(255, 255, 255, 0.75))
+    drop-shadow(0 3px 6px rgba(0, 0, 0, 0.38));
+}
+
+.league-detail-title {
+  margin: 0;
+  color: var(--ink);
+  font-size: 22px;
+  line-height: 1.1;
+}
+
+.league-detail-meta {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* ── League card (inside detail) ────────────── */
+
+.league-list {
+  display: flex;
+  min-height: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 14px;
+  overflow-y: auto;
+  padding-right: 6px;
+  scrollbar-color: rgba(214, 75, 69, 0.52) rgba(255, 255, 255, 0.06);
+}
+
+.league-card {
+  flex: 0 0 auto;
+  overflow: hidden;
+  border-radius: 22px;
+}
+
+.league-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 15px 16px 12px;
+  background:
+    linear-gradient(90deg, rgba(214, 75, 69, 0.12), transparent),
+    var(--panel-strong);
+}
+
+.league-title {
+  margin: 0;
+  color: var(--ink);
+  font-size: 19px;
+  line-height: 1.1;
+}
+
+.league-meta {
+  margin: 5px 0 0;
+  color: var(--muted);
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.league-chip {
+  flex: 0 0 auto;
+  border-radius: 999px;
+  padding: 5px 9px;
+  color: var(--accent-strong);
+  background: var(--accent-soft);
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+/* ── Match section ──────────────────────────── */
+
+.match-section {
+  padding: 12px 14px 0;
+}
+
+.match-section:last-child {
+  padding-bottom: 14px;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 0 8px;
+  color: var(--accent);
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.match-stack {
+  display: grid;
+  gap: 8px;
+}
+
+.match-card {
+  display: grid;
+  grid-template-columns: 76px minmax(0, 1fr) 58px;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(214, 91, 86, 0.1);
+  border-radius: 16px;
+  padding: 10px;
+  background: var(--panel-soft);
+}
+
+.match-card--clickable {
+  cursor: pointer;
+  transition: border-color 0.16s ease, background 0.16s ease, transform 0.16s ease;
+}
+
+.match-card--clickable:hover,
+.match-card--clickable:focus-visible {
+  outline: none;
+  border-color: rgba(214, 91, 86, 0.32);
+  background: rgba(255, 200, 200, 0.09);
+  transform: translateY(-1px);
+}
+
+.time-badge {
+  display: inline-flex;
+  min-width: 70px;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 6px 8px;
+  color: #fff;
+  background: var(--accent);
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+  font-size: 12px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.match-teams {
+  display: grid;
+  min-width: 0;
+  gap: 5px;
+}
+
+.team-row {
+  display: grid;
+  min-width: 0;
+  grid-template-columns: 22px minmax(0, 1fr) 28px;
+  align-items: center;
+  gap: 7px;
+}
+
+.team-logo {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  object-fit: contain;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.team-name {
+  overflow: hidden;
+  color: var(--ink);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.team-score {
+  color: var(--accent-strong);
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+  font-size: 17px;
+  font-weight: 900;
+  text-align: right;
+}
+
+.status-pill {
+  justify-self: end;
+  color: var(--muted);
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.25;
+  text-align: right;
+}
+
+.status-pill--empty {
+  visibility: hidden;
+}
+
+/* ── Favorites ─────────────────────────────── */
+
+.favorite-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  flex: 0 0 auto;
+  border: 1px solid rgba(240, 189, 99, 0.3);
+  border-radius: 999px;
+  padding: 0;
+  color: rgba(240, 189, 99, 0.72);
+  background: rgba(240, 189, 99, 0.08);
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+  font-size: 17px;
+  font-weight: 900;
+  cursor: pointer;
+  line-height: 1;
+  transition: background 0.16s ease, border-color 0.16s ease, color 0.16s ease;
+}
+
+.favorite-btn:hover,
+.favorite-btn:focus-visible {
+  outline: none;
+  border-color: rgba(240, 189, 99, 0.55);
+  color: var(--gold);
+  background: rgba(240, 189, 99, 0.16);
+}
+
+.favorite-btn--active {
+  border-color: rgba(240, 189, 99, 0.65);
+  color: #191006;
+  background: linear-gradient(135deg, #ffd37a, #eaa94e);
+  box-shadow: 0 0 18px rgba(240, 189, 99, 0.24);
+}
+
+/* ── Match details ─────────────────────────── */
+
+.match-detail-hero,
+.detail-section,
+.detail-meta-grid {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+
+.match-detail-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 96px minmax(0, 1fr);
+  align-items: stretch;
+  gap: 10px;
+  border-radius: 22px;
+  padding: 14px;
+}
+
+.detail-team {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 6px;
+  min-width: 0;
+  border-radius: 18px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.035);
+  text-align: center;
+}
+
+.detail-team-logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  object-fit: contain;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.detail-team-name {
+  overflow: hidden;
+  max-width: 118px;
+  color: var(--ink);
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.detail-team-score {
+  color: var(--accent-strong);
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+  font-size: 30px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.detail-score-block {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 8px;
+}
+
+.detail-score {
+  color: #fff;
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.detail-minute {
+  border-radius: 999px;
+  padding: 6px 10px;
+  color: #fff;
+  background: var(--accent);
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.detail-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  border-radius: 18px;
+  padding: 10px;
+}
+
+.detail-meta-grid--secondary {
+  margin-top: -6px;
+}
+
+.detail-meta-grid--single {
+  grid-template-columns: 1fr;
+}
+
+.detail-meta-item {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+  border-radius: 14px;
+  padding: 9px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.detail-meta-label {
+  color: var(--muted);
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.detail-meta-value {
+  overflow: hidden;
+  color: var(--ink);
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.detail-section {
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.detail-section-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 13px 12px;
+  color: var(--accent-strong);
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+
+.detail-section-summary::-webkit-details-marker {
+  display: none;
+}
+
+.detail-section-summary::after {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 auto;
+  border-radius: 999px;
+  color: #fff;
+  background: rgba(214, 75, 69, 0.18);
+  content: "+";
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+  font-size: 15px;
+  font-weight: 900;
+  line-height: 22px;
+  text-align: center;
+}
+
+.detail-section[open] .detail-section-summary::after {
+  content: "−";
+}
+
+.detail-section-title {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  color: var(--accent-strong);
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.detail-list,
+.link-list,
+.video-list,
+.stats-list {
+  display: grid;
+  gap: 7px;
+  padding: 0 12px 12px;
+}
+
+.detail-empty {
+  margin: 0;
+  padding: 10px 12px 12px;
+  color: var(--muted);
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.timeline-item,
+.commentary-item,
+.h2h-item {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 0.7fr) minmax(0, 1.4fr);
+  gap: 8px;
+  align-items: center;
+  border-radius: 14px;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.commentary-item,
+.h2h-item {
+  grid-template-columns: 44px minmax(0, 1fr);
+}
+
+.timeline-minute {
+  justify-self: start;
+  border-radius: 999px;
+  padding: 4px 7px;
+  color: #fff;
+  background: rgba(214, 75, 69, 0.9);
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.timeline-type,
+.timeline-text,
+.h2h-match {
+  overflow: hidden;
+  color: var(--ink);
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.timeline-text {
+  color: var(--muted);
+}
+
+.h2h-date {
+  color: var(--muted);
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.stat-item {
+  display: grid;
+  grid-template-columns: 68px minmax(0, 1fr) 68px;
+  gap: 8px;
+  align-items: center;
+  border-radius: 14px;
+  padding: 9px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.stat-label {
+  overflow: hidden;
+  color: var(--muted);
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+  font-size: 10px;
+  font-weight: 900;
+  text-align: center;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.stat-value {
+  color: var(--ink);
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.stat-value--home {
+  text-align: left;
+}
+
+.stat-value--away {
+  color: var(--accent-strong);
+  text-align: right;
+}
+
+.lineup-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  padding: 10px 12px 12px;
+}
+
+.lineup-team {
+  min-width: 0;
+  border-radius: 14px;
+  padding: 9px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.lineup-title {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 8px;
+  color: var(--ink);
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+  font-size: 11px;
+}
+
+.lineup-logo {
+  width: 24px;
+  height: 24px;
+  border-radius: 7px;
+  object-fit: contain;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.lineup-players {
+  display: grid;
+  gap: 5px;
+}
+
+.lineup-player {
+  overflow: hidden;
+  color: var(--muted);
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lineup-player--starter {
+  color: var(--ink);
+  font-weight: 800;
+}
+
+.detail-link,
+.video-card {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+  border-radius: 14px;
+  padding: 9px;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.035);
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.detail-link:hover,
+.video-card:hover {
+  color: #fff;
+  background: rgba(214, 75, 69, 0.14);
+}
+
+.detail-link--disabled {
+  color: var(--muted);
+  cursor: default;
+}
+
+.video-thumb {
+  width: 54px;
+  height: 36px;
+  flex: 0 0 auto;
+  border-radius: 9px;
+  object-fit: cover;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.detail-state {
+  flex: 0 0 auto;
+}
+
+/* ── Standings ──────────────────────────────── */
+
+.standings {
+  margin: 12px 14px 14px;
+  border: 1px solid rgba(214, 91, 86, 0.1);
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.standings-title {
+  margin: 0;
+  padding: 10px 11px 2px;
+  color: var(--accent-strong);
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.standings-message {
+  margin: 0;
+  padding: 12px;
+  color: var(--muted);
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.standings-message--error {
+  color: var(--danger);
+}
+
+.standings-table-wrap {
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.standings-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+  font-size: 10px;
+  table-layout: fixed;
+}
+
+.standings-table th,
+.standings-table td {
+  padding: 7px 2px;
+  border-top: 1px solid rgba(214, 91, 86, 0.08);
+  color: var(--ink);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.standings-table th:first-child,
+.standings-table td:first-child {
+  width: 24px;
+}
+
+.standings-table th:nth-child(2),
+.standings-table td:nth-child(2) {
+  overflow: hidden;
+  width: auto;
+  text-align: left;
+  text-overflow: ellipsis;
+}
+
+.standings-table th:nth-child(n + 3),
+.standings-table td:nth-child(n + 3) {
+  width: 28px;
+}
+
+.standings-table th:nth-child(9),
+.standings-table td:nth-child(9),
+.standings-table th:nth-child(10),
+.standings-table td:nth-child(10) {
+  width: 32px;
+}
+
+.standings-table th:nth-child(4),
+.standings-table td:nth-child(4) {
+  color: #60e991;
+}
+
+.standings-table th:nth-child(5),
+.standings-table td:nth-child(5) {
+  color: #f2a83b;
+}
+
+.standings-table th:nth-child(6),
+.standings-table td:nth-child(6) {
+  color: #c44d4d;
+}
+
+.standings-table th {
+  color: var(--muted);
+  font-size: 10px;
+  text-transform: uppercase;
+}
+
+.standings-table th:nth-child(4) {
+  color: #75f2a4;
+}
+
+.standings-table th:nth-child(5) {
+  color: #ffb650;
+}
+
+.standings-table th:nth-child(6) {
+  color: #d75a5a;
+}
+
+.standings-table td {
+  font-weight: 800;
+}
+
+.standings-group-cell {
+  color: var(--accent-strong) !important;
+  background: rgba(214, 75, 69, 0.1);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-align: left !important;
+  text-transform: uppercase;
+}
+
+.standings-team {
+  display: inline-flex;
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+  align-items: center;
+  gap: 5px;
+}
+
+.standings-team-logo {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+  border-radius: 5px;
+  object-fit: contain;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.standings-team-name {
+  overflow: hidden;
+  min-width: 0;
+  max-width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── Disabled state (power off) ─────────────── */
+
+.app-shell--disabled {
+  filter: grayscale(1) brightness(0.6);
+  transition: filter 0.3s ease;
+}
+
+.app-shell--disabled .power-toggle {
+  filter: none;
+}
+
+.app-shell--disabled .language-toggle {
+  filter: none;
+}
+
+.content-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 100;
+  cursor: not-allowed;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

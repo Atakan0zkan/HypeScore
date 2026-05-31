@@ -2,6 +2,7 @@
 
 ## Overall Status
 The project is published on the Chrome Web Store. The Worker is deployed, the extension is functional, the main request-reduction/security hardening refactor is complete, and the local store-ready extension package is currently `v1.1`.
+The project now has a dedicated private GitHub repository at `https://github.com/Atakan0zkan/Hype---Live-Scores.git`, with `main` pushed and tracking `origin/main`.
 
 ## What Works
 - Cloudflare Worker is deployed and serving public JSON.

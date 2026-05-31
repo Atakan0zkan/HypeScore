@@ -89,6 +89,8 @@
 - The project now has its own dedicated GitHub repository: `https://github.com/Atakan0zkan/Hype---Live-Scores.git`.
 - Use a dedicated `.git` repository inside `C:\Users\aozka\CascadeProjects\LiveScoreFootball`; do not use the parent user-home Git repository for this project.
 - The older parent user-home Git repository commit `ea5bb3c Add LiveScoreFootball extension project` is historical only and should not be treated as the project repository.
+- Dedicated repository initial project commit: `ed770f8 Initial Hype live scores project`.
+- `main` is pushed to `origin/main` and tracks `https://github.com/Atakan0zkan/Hype---Live-Scores.git`.
 - `.gitignore` now excludes `.chrome-store-capture-profile/`, `.wrangler/`, `dist/`, and temporary `store-assets/sources/headless-test*.png` files.
 - `dist/hype-live-football-scores-v1.1-chrome-web-store.zip` exists locally and is intentionally ignored from Git.
 - Future pushes should target `origin` on the dedicated repo above.

@@ -201,6 +201,8 @@ powershell -ExecutionPolicy Bypass -File tools/generate-store-assets.ps1
 - Use a dedicated `.git` repository inside `C:\Users\aozka\CascadeProjects\LiveScoreFootball`.
 - Do not use the parent user-home repository at `C:\Users\aozka` for this project; it previously caused noisy status output and an unrelated/inaccessible remote.
 - Current GitHub repository is private unless changed in GitHub settings.
+- Branch `main` tracks `origin/main`.
+- Initial dedicated project commit pushed to GitHub: `ed770f8 Initial Hype live scores project`.
 - Project `.gitignore` ignores local runtime/build artifacts: `.chrome-store-capture-profile/`, `.wrangler/`, `dist/`, and `store-assets/sources/headless-test*.png`.
 
 ## Chrome Web Store Assets

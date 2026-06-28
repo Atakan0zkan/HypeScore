@@ -175,6 +175,7 @@ let dailyLimitReached = false;
 let consecutiveRefreshErrors = 0;
 let selectedLeagueKey = null;
 let selectedMatchKey = null;
+let selectedMatchSnapshot = null;
 let isEnabled = true;
 let isEnglishOverride = false;
 let contentOverlay = null;
@@ -620,17 +621,23 @@ function renderPayload(payload) {
     if (!league) {
       selectedLeagueKey = null;
       selectedMatchKey = null;
+      selectedMatchSnapshot = null;
       renderLeaguePickList(leagues);
       return;
     }
 
     if (selectedMatchKey) {
-      const match = league.matches.find((item) => getMatchKey(item) === selectedMatchKey);
+      const match =
+        league.matches.find((item) => getMatchKey(item) === selectedMatchKey) ||
+        (selectedMatchSnapshot && getMatchKey(selectedMatchSnapshot) === selectedMatchKey
+          ? selectedMatchSnapshot
+          : null);
       if (match) {
         renderMatchDetail(league, match);
         return;
       }
       selectedMatchKey = null;
+      selectedMatchSnapshot = null;
     }
 
     renderLeagueDetail(league);
@@ -657,6 +664,7 @@ function renderLeaguePickList(leagues) {
     const openLeague = () => {
       selectedLeagueKey = leagueKey;
       selectedMatchKey = null;
+      selectedMatchSnapshot = null;
       clearTimeout(refreshTimer);
       if (lastPayload) renderPayload(lastPayload);
     };
@@ -853,8 +861,9 @@ function createTeamRow(team) {
 function openMatchDetail(league, match) {
   selectedLeagueKey = getLeagueKey(league);
   selectedMatchKey = getMatchKey(match);
+  selectedMatchSnapshot = { ...match };
   clearTimeout(refreshTimer);
-  renderMatchDetail(league, match);
+  renderMatchDetail(league, selectedMatchSnapshot);
 }
 
 function renderMatchDetail(league, match) {
@@ -1173,37 +1182,29 @@ function createTournamentBracketSection(league) {
   summary.appendChild(createTextElement("span", "detail-section-title", msg("bracket")));
 
   section.appendChild(summary);
+  const body = document.createElement("div");
+  body.className = "tournament-bracket-body";
+  body.dataset.leagueCode = leagueCode;
+  section.appendChild(body);
+
   section.addEventListener("toggle", () => {
     if (section.open) {
       openTournamentBracketLeagueCodes.add(leagueCode);
-      if (!hasActiveTournamentBracketCache(leagueCode)) {
-        tournamentBracketCache.set(leagueCode, { status: "loading" });
-        if (lastPayload) renderPayload(lastPayload);
-        loadTournamentBracket(leagueCode);
-      }
+      renderTournamentBracketBody(body, league);
     } else {
       openTournamentBracketLeagueCodes.delete(leagueCode);
     }
   });
 
   if (section.open) {
-    appendTournamentBracketBody(section, league);
+    renderTournamentBracketBody(body, league);
   }
 
   return section;
 }
 
-function hasActiveTournamentBracketCache(leagueCode) {
-  const cached = tournamentBracketCache.get(leagueCode);
-  if (isExpiredLazyError(cached)) {
-    tournamentBracketCache.delete(leagueCode);
-    return false;
-  }
-
-  return Boolean(cached);
-}
-
-function appendTournamentBracketBody(section, league) {
+function renderTournamentBracketBody(container, league) {
+  container.replaceChildren();
   const leagueCode = league.code;
   let cached = tournamentBracketCache.get(leagueCode);
 
@@ -1214,18 +1215,18 @@ function appendTournamentBracketBody(section, league) {
 
   if (!cached) {
     tournamentBracketCache.set(leagueCode, { status: "loading" });
-    section.appendChild(createTextElement("p", "bracket-message", msg("loadingBracket")));
+    container.appendChild(createTextElement("p", "bracket-message", msg("loadingBracket")));
     loadTournamentBracket(leagueCode);
     return;
   }
 
   if (cached.status === "loading") {
-    section.appendChild(createTextElement("p", "bracket-message", msg("loadingBracket")));
+    container.appendChild(createTextElement("p", "bracket-message", msg("loadingBracket")));
     return;
   }
 
   if (cached.status === "error") {
-    section.appendChild(
+    container.appendChild(
       createTextElement("p", "bracket-message bracket-message--error", msg("bracketUnavailable")),
     );
     return;
@@ -1234,7 +1235,7 @@ function appendTournamentBracketBody(section, league) {
   const rounds = Array.isArray(cached.rounds) ? cached.rounds : [];
 
   if (rounds.length === 0) {
-    section.appendChild(createTextElement("p", "bracket-message", msg("noBracket")));
+    container.appendChild(createTextElement("p", "bracket-message", msg("noBracket")));
     return;
   }
 
@@ -1245,7 +1246,7 @@ function appendTournamentBracketBody(section, league) {
     roundsWrap.appendChild(createBracketRound(round, league));
   }
 
-  section.appendChild(roundsWrap);
+  container.appendChild(roundsWrap);
 }
 
 function createBracketRound(round, league) {
@@ -1364,9 +1365,27 @@ async function loadTournamentBracket(leagueCode) {
     console.error(error);
     tournamentBracketCache.set(leagueCode, { status: "error", failedAt: Date.now() });
   } finally {
-    if (lastPayload && selectedLeagueKey && !selectedMatchKey) {
-      renderPayload(lastPayload);
-    }
+    updateVisibleTournamentBracket(leagueCode);
+  }
+}
+
+function updateVisibleTournamentBracket(leagueCode) {
+  if (!lastPayload || !selectedLeagueKey || selectedMatchKey || !leagueDetailContent) return;
+
+  const body = leagueDetailContent.querySelector(".tournament-bracket-body");
+  if (!body || body.dataset.leagueCode !== leagueCode) {
+    renderPayload(lastPayload);
+    return;
+  }
+
+  const league = normalizeLeagueGroups(lastPayload).find(
+    (item) => getLeagueKey(item) === selectedLeagueKey,
+  );
+
+  if (league) {
+    renderTournamentBracketBody(body, league);
+  } else {
+    renderPayload(lastPayload);
   }
 }
 
@@ -1531,12 +1550,14 @@ function createStandingTeamCell(team) {
 function handleBack() {
   if (selectedMatchKey) {
     selectedMatchKey = null;
+    selectedMatchSnapshot = null;
     if (lastPayload) renderPayload(lastPayload);
     refreshIfStaleOrSchedule();
     return;
   }
 
   selectedLeagueKey = null;
+  selectedMatchSnapshot = null;
   if (lastPayload) renderPayload(lastPayload);
   refreshIfStaleOrSchedule({ minAgeMs: DETAIL_RETURN_REFRESH_MIN_INTERVAL_MS });
 }

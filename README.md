@@ -9,8 +9,8 @@ The popup is English by default and supports Turkish, German, Spanish, French, B
 - Chrome Web Store listing: `https://chromewebstore.google.com/detail/hype-live-football-scores/cdnpjnmhmagmiefkleefgchgffeaacaa`
 - GitHub repository: `https://github.com/Atakan0zkan/Hype---Live-Scores.git`
 - Published extension ID: `cdnpjnmhmagmiefkleefgchgffeaacaa`
-- Extension manifest version: `1.4`
-- Current store package: `dist/hype-live-football-scores-v1.4-chrome-web-store.zip`
+- Extension manifest version: `1.3`
+- Current store package: `dist/hype-live-football-scores-v1.3-chrome-web-store.zip`
 - Worker URL: `https://live-score-football.atakanozkan2001.workers.dev`
 - Latest deployed Worker version recorded in the memory bank: `85d2bc5c-2e40-477b-ba70-f1a9a5edfb25`
 
@@ -298,13 +298,13 @@ Create the Chrome Web Store zip from the project root:
 
 ```powershell
 New-Item -ItemType Directory -Force dist
-Compress-Archive -Path extension\* -DestinationPath dist\hype-live-football-scores-v1.4-chrome-web-store.zip -Force
+Compress-Archive -Path extension\* -DestinationPath dist\hype-live-football-scores-v1.3-chrome-web-store.zip -Force
 ```
 
 The command creates:
 
 ```text
-dist/hype-live-football-scores-v1.4-chrome-web-store.zip
+dist/hype-live-football-scores-v1.3-chrome-web-store.zip
 ```
 
 Only extension runtime files are included. The zip root contains `manifest.json`; backend, memory-bank, README, Wrangler files, and local tooling are excluded.

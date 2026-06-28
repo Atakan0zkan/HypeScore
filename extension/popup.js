@@ -15,7 +15,8 @@ const AUTO_PAUSE_AFTER_MS = 10 * 60 * 1000;
 const INACTIVITY_PAUSE_AFTER_MS = 3 * 60 * 1000;
 const ERROR_RETRY_DELAYS_MS = [120000, 300000, 600000];
 const DAILY_REQUEST_LIMIT = 2000;
-const CLIENT_LIVE_CACHE_VERSION = "v7";
+const CLIENT_LIVE_CACHE_VERSION = "v8";
+const REQUIRED_CLIENT_CACHE_LEAGUE_CODES = ["fifa.world"];
 const CLIENT_LIVE_CACHE_MAX_AGE_LIVE_MS = 30000;
 const CLIENT_LIVE_CACHE_MAX_AGE_IDLE_MS = 120000;
 const CLIENT_LIVE_CACHE_MAX_AGE_QUIET_MS = 30 * 60 * 1000;
@@ -1333,8 +1334,19 @@ function readClientLiveCache() {
   const cached = safeReadStorageJson(STORAGE_KEY_LIVE_CACHE, null);
   if (!cached || cached.version !== CLIENT_LIVE_CACHE_VERSION) return null;
   if (!cached.payload || !Array.isArray(cached.payload.matches)) return null;
+  if (!hasRequiredClientCacheLeagues(cached.payload)) return null;
   if (!Number.isFinite(cached.savedAt)) return null;
   return cached;
+}
+
+function hasRequiredClientCacheLeagues(payload) {
+  const leagueCodes = new Set(
+    (payload.leagues || [])
+      .map((league) => league?.code)
+      .filter(Boolean),
+  );
+
+  return REQUIRED_CLIENT_CACHE_LEAGUE_CODES.every((code) => leagueCodes.has(code));
 }
 
 function writeClientLiveCache(payload, savedAt) {

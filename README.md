@@ -9,8 +9,8 @@ The popup is English by default and supports Turkish, German, Spanish, French, B
 - Chrome Web Store listing: `https://chromewebstore.google.com/detail/hype-live-football-scores/cdnpjnmhmagmiefkleefgchgffeaacaa`
 - GitHub repository: `https://github.com/Atakan0zkan/Hype---Live-Scores.git`
 - Published extension ID: `cdnpjnmhmagmiefkleefgchgffeaacaa`
-- Extension manifest version: `1.2`
-- Current store package: `dist/hype-live-football-scores-v1.2-chrome-web-store.zip`
+- Extension manifest version: `1.3`
+- Current store package: `dist/hype-live-football-scores-v1.3-chrome-web-store.zip`
 - Worker URL: `https://live-score-football.atakanozkan2001.workers.dev`
 - Latest deployed Worker version recorded in the memory bank: `19dc86e2-b67a-4103-b8ef-34b835bcf399`
 
@@ -24,6 +24,7 @@ The popup is English by default and supports Turkish, German, Spanish, French, B
 - Match detail accordions for stats, timeline, lineups, commentary, news, and links.
 - ESPN team logos on match cards; known ESPN gaps can use curated HTTPS overrides such as Cancún FC.
 - FIFA World Cup is included in the curated league/cup roster when ESPN exposes current fixtures.
+- The popup live-payload cache is versioned so roster changes such as World Cup support invalidate older cached league lists.
 - English default locale plus Turkish, German, Spanish, French, Brazilian Portuguese, and European Portuguese Chrome-locale support.
 - Header `ENG` toggle forces English labels for quick translation fallback, then returns to the browser/default locale when turned off.
 - Dark Hype theme with muted red accents and fixed 580x600 popup sizing.
@@ -282,13 +283,13 @@ Create the Chrome Web Store zip from the project root:
 
 ```powershell
 New-Item -ItemType Directory -Force dist
-Compress-Archive -Path extension\* -DestinationPath dist\hype-live-football-scores-v1.2-chrome-web-store.zip -Force
+Compress-Archive -Path extension\* -DestinationPath dist\hype-live-football-scores-v1.3-chrome-web-store.zip -Force
 ```
 
 The command creates:
 
 ```text
-dist/hype-live-football-scores-v1.2-chrome-web-store.zip
+dist/hype-live-football-scores-v1.3-chrome-web-store.zip
 ```
 
 Only extension runtime files are included. The zip root contains `manifest.json`; backend, memory-bank, README, Wrangler files, and local tooling are excluded.

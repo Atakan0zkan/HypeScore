@@ -16,6 +16,7 @@ $downloads = @(
   @{ File = "eng-fa.png"; Source = "https://a.espncdn.com/i/leaguelogos/soccer/500/40.png" },
   @{ File = "eng-w-1.png"; Source = "https://a.espncdn.com/i/leaguelogos/soccer/500/2314.png" },
   @{ File = "esp-1.png"; Source = "https://a.espncdn.com/i/leaguelogos/soccer/500/15.png" },
+  @{ File = "fifa-world.png"; Source = "https://a.espncdn.com/i/leaguelogos/soccer/500/4.png" },
   @{ File = "fra-1.png"; Source = "https://a.espncdn.com/i/leaguelogos/soccer/500/9.png" },
   @{ File = "ger-1.png"; Source = "https://a.espncdn.com/i/leaguelogos/soccer/500/10.png" },
   @{ File = "ger-2.png"; Source = "https://a.espncdn.com/i/leaguelogos/soccer/500/97.png" },

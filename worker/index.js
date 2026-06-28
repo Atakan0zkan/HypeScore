@@ -12,7 +12,7 @@ const STANDINGS_CACHE_TTL_SECONDS = 1800;
 const MATCH_DETAIL_CACHE_TTL_SECONDS = 60;
 const UPSTREAM_FETCH_TIMEOUT_MS = 8000;
 const UPCOMING_MATCH_WINDOW_MS = 24 * 60 * 60 * 1000;
-const LIVE_MATCHES_CACHE_KEY_VERSION = "v12";
+const LIVE_MATCHES_CACHE_KEY_VERSION = "v13";
 const STANDINGS_CACHE_KEY_VERSION = "v4";
 const MATCH_DETAIL_CACHE_KEY_VERSION = "v4";
 const CACHE_KEY_URL = `https://live-score-extension.internal/live-matches/${LIVE_MATCHES_CACHE_KEY_VERSION}`;
@@ -27,7 +27,7 @@ const ESPN_LEAGUE_LOGO_BASE = "https://a.espncdn.com/i/leaguelogos/soccer";
 const ESPN_LINK_HOST_SUFFIXES = ["espn.com"];
 const ESPN_MEDIA_HOST_SUFFIXES = ["espncdn.com"];
 const TEAM_LOGO_OVERRIDE_HOST_SUFFIXES = ["cancunfc.mx"];
-const EXTRA_ESPN_SCOREBOARD_LEAGUES = ["uefa.europa.conf"];
+const EXTRA_ESPN_SCOREBOARD_LEAGUES = ["uefa.europa.conf", "fifa.world"];
 const DANISH_SUPERLIGA_LOGO_URL =
   "https://commons.wikimedia.org/wiki/Special:Redirect/file/Superliga_2010.svg?width=512&type=png";
 const UEFA_CONFERENCE_LEAGUE_LOGO_URL =
@@ -50,6 +50,7 @@ const TEAM_LOGO_OVERRIDES_BY_NAME = new Map([
  * soccer ball SVG.
  */
 const ESPN_LEAGUES_BY_ID = {
+  "606":   { code: "fifa.world", name: "FIFA World Cup",                 logoId: "4", logoTone: "light" },
   "775":   { code: "uefa.champions", name: "UEFA Champions League",          logoId: "2", logoStyle: "dark" },
   "700":   { code: "eng.1",   name: "English Premier League",        logoId: "23" },
   "710":   { code: "fra.1",   name: "Ligue 1",                       logoId: "9" },

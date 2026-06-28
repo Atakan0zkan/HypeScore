@@ -12,7 +12,7 @@ The popup is English by default and supports Turkish, German, Spanish, French, B
 - Extension manifest version: `1.2`
 - Current store package: `dist/hype-live-football-scores-v1.2-chrome-web-store.zip`
 - Worker URL: `https://live-score-football.atakanozkan2001.workers.dev`
-- Latest deployed Worker version recorded in the memory bank: `e145b8fb-f760-45ac-b0ad-7c0986b59159`
+- Latest deployed Worker version recorded in the memory bank: `19dc86e2-b67a-4103-b8ef-34b835bcf399`
 
 ## Main features
 
@@ -23,6 +23,7 @@ The popup is English by default and supports Turkish, German, Spanish, French, B
 - Match detail screen loaded only when a match is opened.
 - Match detail accordions for stats, timeline, lineups, commentary, news, and links.
 - ESPN team logos on match cards; known ESPN gaps can use curated HTTPS overrides such as Cancún FC.
+- FIFA World Cup is included in the curated league/cup roster when ESPN exposes current fixtures.
 - English default locale plus Turkish, German, Spanish, French, Brazilian Portuguese, and European Portuguese Chrome-locale support.
 - Header `ENG` toggle forces English labels for quick translation fallback, then returns to the browser/default locale when turned off.
 - Dark Hype theme with muted red accents and fixed 580x600 popup sizing.
@@ -307,9 +308,9 @@ deploys, or before packaging a Chrome Web Store update.
 Latest recorded smoke result:
 
 ```text
-PASS GET /live-matches - 20 matches, 28 leagues
+PASS GET /live-matches - 2 matches, 29 leagues
 PASS GET /league-standings?leagueCode=esp.1 - 0 rows
-PASS GET /match-detail?eventId=740954&leagueCode=eng.1 - Tottenham Hotspur vs Leeds United
+PASS GET /match-detail?eventId=760486&leagueCode=fifa.world - South Africa vs Canada
 ```
 
 The standings row count can be `0` for a league at a given moment and still be

@@ -39,6 +39,7 @@ const LOCAL_LEAGUE_LOGOS = {
   "eng.fa": "icons/leagues/eng-fa.png",
   "eng.w.1": "icons/leagues/eng-w-1.png",
   "esp.1": "icons/leagues/esp-1.png",
+  "fifa.world": "icons/leagues/fifa-world.png",
   "fra.1": "icons/leagues/fra-1.png",
   "ger.1": "icons/leagues/ger-1.png",
   "ger.2": "icons/leagues/ger-2.png",

@@ -50,6 +50,39 @@
   "standings": {
     "message": "Tabela"
   },
+  "bracket": {
+    "message": "Mata-mata"
+  },
+  "loadingBracket": {
+    "message": "Carregando chave do mata-mata…"
+  },
+  "noBracket": {
+    "message": "Nenhuma chave do mata-mata disponível."
+  },
+  "bracketUnavailable": {
+    "message": "Chave do mata-mata indisponível."
+  },
+  "tbd": {
+    "message": "A definir"
+  },
+  "roundOf32": {
+    "message": "Fase de 32"
+  },
+  "roundOf16": {
+    "message": "Oitavas de final"
+  },
+  "quarterfinals": {
+    "message": "Quartas de final"
+  },
+  "semifinals": {
+    "message": "Semifinais"
+  },
+  "thirdPlace": {
+    "message": "Disputa de 3º lugar"
+  },
+  "final": {
+    "message": "Final"
+  },
   "played": {
     "message": "J"
   },

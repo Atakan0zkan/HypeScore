@@ -9,10 +9,10 @@ The popup is English by default and supports Turkish, German, Spanish, French, B
 - Chrome Web Store listing: `https://chromewebstore.google.com/detail/hype-live-football-scores/cdnpjnmhmagmiefkleefgchgffeaacaa`
 - GitHub repository: `https://github.com/Atakan0zkan/Hype---Live-Scores.git`
 - Published extension ID: `cdnpjnmhmagmiefkleefgchgffeaacaa`
-- Extension manifest version: `1.3`
-- Current store package: `dist/hype-live-football-scores-v1.3-chrome-web-store.zip`
+- Extension manifest version: `1.4`
+- Current store package: `dist/hype-live-football-scores-v1.4-chrome-web-store.zip`
 - Worker URL: `https://live-score-football.atakanozkan2001.workers.dev`
-- Latest deployed Worker version recorded in the memory bank: `19dc86e2-b67a-4103-b8ef-34b835bcf399`
+- Latest deployed Worker version recorded in the memory bank: `85d2bc5c-2e40-477b-ba70-f1a9a5edfb25`
 
 ## Main features
 
@@ -24,6 +24,7 @@ The popup is English by default and supports Turkish, German, Spanish, French, B
 - Match detail accordions for stats, timeline, lineups, commentary, news, and links.
 - ESPN team logos on match cards; known ESPN gaps can use curated HTTPS overrides such as Cancún FC.
 - FIFA World Cup is included in the curated league/cup roster when ESPN exposes current fixtures.
+- FIFA World Cup knockout rounds are available as a lazy World Cup-only section using ESPN date-range scoreboard data.
 - The popup live-payload cache is versioned so roster changes such as World Cup support invalidate older cached league lists.
 - English default locale plus Turkish, German, Spanish, French, Brazilian Portuguese, and European Portuguese Chrome-locale support.
 - Header `ENG` toggle forces English labels for quick translation fallback, then returns to the browser/default locale when turned off.
@@ -83,6 +84,7 @@ The Worker exposes:
 GET /live-matches
 GET /league-standings?leagueCode={leagueCode}
 GET /match-detail?eventId={eventId}&leagueCode={leagueCode}
+GET /tournament-bracket?leagueCode=fifa.world
 ```
 
 Response shape:
@@ -182,6 +184,19 @@ Match details are intentionally lazy-loaded only after a user clicks a match. Th
 - ESPN links
 
 Match detail responses are cached for 60 seconds.
+
+FIFA World Cup knockout data is intentionally lazy-loaded only when the user opens
+the World Cup league detail section and expands the knockout bracket. It uses
+ESPN's `fifa.world` date-range scoreboard rather than a second provider:
+
+```text
+https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/scoreboard?dates=20260628-20260719
+```
+
+The Worker normalizes the payload into grouped rounds such as round of 32,
+round of 16, quarter-finals, semi-finals, third-place match, and final. Bracket
+responses are cached separately for 15 minutes and are never fetched by the
+main `/live-matches` refresh loop.
 
 ## Deploy the Worker
 
@@ -283,13 +298,13 @@ Create the Chrome Web Store zip from the project root:
 
 ```powershell
 New-Item -ItemType Directory -Force dist
-Compress-Archive -Path extension\* -DestinationPath dist\hype-live-football-scores-v1.3-chrome-web-store.zip -Force
+Compress-Archive -Path extension\* -DestinationPath dist\hype-live-football-scores-v1.4-chrome-web-store.zip -Force
 ```
 
 The command creates:
 
 ```text
-dist/hype-live-football-scores-v1.3-chrome-web-store.zip
+dist/hype-live-football-scores-v1.4-chrome-web-store.zip
 ```
 
 Only extension runtime files are included. The zip root contains `manifest.json`; backend, memory-bank, README, Wrangler files, and local tooling are excluded.
@@ -302,7 +317,8 @@ Run the Worker/API shape smoke test from the project root:
 node tools/smoke-test.js
 ```
 
-The script checks `/live-matches`, `/league-standings`, and `/match-detail`
+The script checks `/live-matches`, `/league-standings`, `/tournament-bracket`,
+and `/match-detail`
 against the deployed Worker. It is useful after ESPN response changes, Worker
 deploys, or before packaging a Chrome Web Store update.
 
@@ -311,6 +327,7 @@ Latest recorded smoke result:
 ```text
 PASS GET /live-matches - 2 matches, 29 leagues
 PASS GET /league-standings?leagueCode=esp.1 - 0 rows
+PASS GET /tournament-bracket?leagueCode=fifa.world - 6 rounds, 32 matches
 PASS GET /match-detail?eventId=760486&leagueCode=fifa.world - South Africa vs Canada
 ```
 

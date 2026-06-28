@@ -10,15 +10,18 @@ const LIVE_CACHE_TTL_SECONDS = 30;
 const IDLE_CACHE_TTL_SECONDS = 120;
 const STANDINGS_CACHE_TTL_SECONDS = 1800;
 const MATCH_DETAIL_CACHE_TTL_SECONDS = 60;
+const TOURNAMENT_BRACKET_CACHE_TTL_SECONDS = 900;
 const UPSTREAM_FETCH_TIMEOUT_MS = 8000;
 const UPCOMING_MATCH_WINDOW_MS = 24 * 60 * 60 * 1000;
 const LIVE_MATCHES_CACHE_KEY_VERSION = "v13";
 const STANDINGS_CACHE_KEY_VERSION = "v4";
 const MATCH_DETAIL_CACHE_KEY_VERSION = "v4";
+const TOURNAMENT_BRACKET_CACHE_KEY_VERSION = "v1";
 const CACHE_KEY_URL = `https://live-score-extension.internal/live-matches/${LIVE_MATCHES_CACHE_KEY_VERSION}`;
 let liveMatchesRefreshPromise = null;
 const standingsRefreshPromises = new Map();
 const matchDetailRefreshPromises = new Map();
+const tournamentBracketRefreshPromises = new Map();
 const ALLOWED_ORIGINS = new Set([
   "chrome-extension://cdnpjnmhmagmiefkleefgchgffeaacaa",
 ]);
@@ -28,6 +31,8 @@ const ESPN_LINK_HOST_SUFFIXES = ["espn.com"];
 const ESPN_MEDIA_HOST_SUFFIXES = ["espncdn.com"];
 const TEAM_LOGO_OVERRIDE_HOST_SUFFIXES = ["cancunfc.mx"];
 const EXTRA_ESPN_SCOREBOARD_LEAGUES = ["uefa.europa.conf", "fifa.world"];
+const FIFA_WORLD_CUP_LEAGUE_CODE = "fifa.world";
+const FIFA_WORLD_CUP_KNOCKOUT_DATES = "20260628-20260719";
 const DANISH_SUPERLIGA_LOGO_URL =
   "https://commons.wikimedia.org/wiki/Special:Redirect/file/Superliga_2010.svg?width=512&type=png";
 const UEFA_CONFERENCE_LEAGUE_LOGO_URL =
@@ -91,7 +96,7 @@ const securityHeaders = {
 };
 
 export default {
-  async fetch(request, env, ctx) {
+  async fetch(request, env) {
     return handleRequest(request, env);
   },
 };
@@ -128,6 +133,10 @@ async function handleRequest(request, env) {
 
   if (url.pathname === "/league-standings") {
     return handleLeagueStandingsRequest(request, url);
+  }
+
+  if (url.pathname === "/tournament-bracket") {
+    return handleTournamentBracketRequest(request, url);
   }
 
   return jsonResponse(
@@ -292,6 +301,58 @@ async function handleLeagueStandingsRequest(request, url) {
   }
 }
 
+async function handleTournamentBracketRequest(request, url) {
+  if (request.method !== "GET") {
+    return jsonResponse(
+      { error: "Method not allowed" },
+      { status: 405, cache: "BYPASS", source: "none", request },
+    );
+  }
+
+  const leagueCode = url.searchParams.get("leagueCode") || "";
+
+  if (leagueCode !== FIFA_WORLD_CUP_LEAGUE_CODE) {
+    return jsonResponse(
+      { error: "Invalid tournament bracket request" },
+      { status: 400, cache: "BYPASS", source: "none", request },
+    );
+  }
+
+  const cache = caches.default;
+  const cacheKey = getTournamentBracketCacheKey(leagueCode);
+  const cachedResponse = await cache.match(cacheKey);
+
+  if (cachedResponse) {
+    const body = await cachedResponse.text();
+    return new Response(body, {
+      status: cachedResponse.status,
+      headers: responseHeaders({
+        request,
+        cache: "HIT",
+        source: "espn-tournament-bracket",
+        cacheControl:
+          cachedResponse.headers.get("Cache-Control") ||
+          `public, max-age=${TOURNAMENT_BRACKET_CACHE_TTL_SECONDS}`,
+      }),
+    });
+  }
+
+  try {
+    return await getFreshTournamentBracketResponse(
+      leagueCode,
+      cache,
+      cacheKey,
+      request,
+    );
+  } catch (error) {
+    console.warn(`Tournament bracket failed: ${getErrorMessage(error)}`);
+    return jsonResponse(
+      { error: "Tournament bracket could not be fetched" },
+      { status: 502, cache: "BYPASS", source: "none", request },
+    );
+  }
+}
+
 async function getFreshLiveMatchesResponse(env, cache, cacheKey, request) {
   if (!liveMatchesRefreshPromise) {
     liveMatchesRefreshPromise = refreshLiveMatches(
@@ -345,6 +406,27 @@ async function getFreshStandingsForLeague(leagueCode, cache, cacheKey) {
   return standingsRefreshPromises.get(leagueCode);
 }
 
+async function getFreshTournamentBracketResponse(
+  leagueCode,
+  cache,
+  cacheKey,
+  request,
+) {
+  if (!tournamentBracketRefreshPromises.has(leagueCode)) {
+    tournamentBracketRefreshPromises.set(
+      leagueCode,
+      refreshTournamentBracket(leagueCode, cache, cacheKey, request).finally(
+        () => {
+          tournamentBracketRefreshPromises.delete(leagueCode);
+        },
+      ),
+    );
+  }
+
+  const response = await tournamentBracketRefreshPromises.get(leagueCode);
+  return response.clone();
+}
+
 async function refreshLiveMatches(env, cache, cacheKey, request) {
   const { matches, source } = await getLiveMatches(env);
   const cacheTtl = countLiveMatches(matches) > 0
@@ -393,6 +475,27 @@ async function refreshMatchDetail(eventId, leagueCode, cache, cacheKey, request)
     await cache.put(cacheKey, response.clone());
   } catch (error) {
     console.warn(`Match detail cache put failed: ${getErrorMessage(error)}`);
+  }
+
+  return response;
+}
+
+async function refreshTournamentBracket(leagueCode, cache, cacheKey, request) {
+  const payload = await fetchJson(
+    `${ESPN_SUMMARY_BASE_URL}/${leagueCode}/scoreboard?dates=${FIFA_WORLD_CUP_KNOCKOUT_DATES}`,
+  );
+  const data = normalizeTournamentBracket(payload, leagueCode);
+  const response = jsonResponse(data, {
+    request,
+    cache: "MISS",
+    source: "espn-tournament-bracket",
+    cacheControl: `public, max-age=${TOURNAMENT_BRACKET_CACHE_TTL_SECONDS}`,
+  });
+
+  try {
+    await cache.put(cacheKey, response.clone());
+  } catch (error) {
+    console.warn(`Tournament bracket cache put failed: ${getErrorMessage(error)}`);
   }
 
   return response;
@@ -575,6 +678,121 @@ function normalizeSportsDbMatches(payload) {
       kickoff: event.dateEvent || event.strTimestamp || event.date || null,
     }))
     .filter(isRelevantMatch);
+}
+
+function normalizeTournamentBracket(payload, leagueCode) {
+  const events = Array.isArray(payload?.events) ? payload.events : [];
+  const roundsBySlug = new Map();
+
+  for (const event of events) {
+    const match = normalizeTournamentBracketMatch(event, leagueCode);
+    if (!match) {
+      continue;
+    }
+
+    if (!roundsBySlug.has(match.roundSlug)) {
+      roundsBySlug.set(match.roundSlug, {
+        slug: match.roundSlug,
+        name: formatTournamentRoundName(match.roundSlug),
+        order: getTournamentRoundOrder(match.roundSlug),
+        matches: [],
+      });
+    }
+
+    roundsBySlug.get(match.roundSlug).matches.push(match);
+  }
+
+  const rounds = [...roundsBySlug.values()]
+    .map((round) => ({
+      slug: round.slug,
+      name: round.name,
+      matches: round.matches.sort(compareTournamentMatches),
+    }))
+    .sort((a, b) => getTournamentRoundOrder(a.slug) - getTournamentRoundOrder(b.slug));
+
+  return {
+    leagueCode,
+    dates: FIFA_WORLD_CUP_KNOCKOUT_DATES,
+    rounds,
+  };
+}
+
+function normalizeTournamentBracketMatch(event, leagueCode) {
+  const competition = Array.isArray(event?.competitions)
+    ? event.competitions[0]
+    : null;
+  const competitors = Array.isArray(competition?.competitors)
+    ? competition.competitors
+    : [];
+  const home = competitors.find((team) => team.homeAway === "home") || competitors[0];
+  const away = competitors.find((team) => team.homeAway === "away") || competitors[1];
+
+  if (!competition || !home || !away) {
+    return null;
+  }
+
+  const status = competition.status || event.status || {};
+  const roundSlug = normalizeTournamentRoundSlug(event?.season?.slug);
+
+  return {
+    id: String(event.id || competition.id || ""),
+    leagueCode,
+    roundSlug,
+    roundName: formatTournamentRoundName(roundSlug),
+    homeTeam: getEspnTeamName(home),
+    awayTeam: getEspnTeamName(away),
+    homeTeamId: getEspnTeamId(home),
+    awayTeamId: getEspnTeamId(away),
+    homeLogo: getEspnTeamLogo(home),
+    awayLogo: getEspnTeamLogo(away),
+    homeScore: toNumber(home.score),
+    awayScore: toNumber(away.score),
+    minute: formatEspnMinute(status),
+    status: formatEspnStatus(status),
+    state: getEspnMatchState(status),
+    kickoff: event.date || competition.date || null,
+    venue: formatVenue(competition.venue),
+  };
+}
+
+function normalizeTournamentRoundSlug(value) {
+  const slug = String(value || "").trim().toLowerCase();
+  return slug || "other";
+}
+
+function formatTournamentRoundName(slug) {
+  const names = {
+    "round-of-32": "Round of 32",
+    "round-of-16": "Round of 16",
+    quarterfinals: "Quarter-finals",
+    semifinals: "Semi-finals",
+    "3rd-place-match": "Third-place match",
+    final: "Final",
+  };
+
+  return names[slug] || formatLeagueName(slug);
+}
+
+function getTournamentRoundOrder(slug) {
+  const order = {
+    "round-of-32": 10,
+    "round-of-16": 20,
+    quarterfinals: 30,
+    semifinals: 40,
+    "3rd-place-match": 50,
+    final: 60,
+  };
+
+  return order[slug] || 999;
+}
+
+function compareTournamentMatches(a, b) {
+  const dateDiff = Date.parse(a.kickoff || "") - Date.parse(b.kickoff || "");
+  if (Number.isFinite(dateDiff) && dateDiff !== 0) {
+    return dateDiff;
+  }
+
+  return a.homeTeam.localeCompare(b.homeTeam);
 }
 
 function getEspnTeamName(competitor) {
@@ -1432,6 +1650,13 @@ function getStandingsCacheKey(leagueCode) {
   );
 }
 
+function getTournamentBracketCacheKey(leagueCode) {
+  return new Request(
+    `https://live-score-extension.internal/tournament-bracket/${TOURNAMENT_BRACKET_CACHE_KEY_VERSION}/${leagueCode}/${FIFA_WORLD_CUP_KNOCKOUT_DATES}`,
+    { method: "GET" },
+  );
+}
+
 function formatVenue(venue) {
   if (!venue) {
     return "";
@@ -1634,10 +1859,6 @@ function safeHttpsUrl(value, allowedHostSuffixes = null) {
   } catch {
     return null;
   }
-}
-
-function isAllowedRequestOrigin(request) {
-  return getRequestOriginPolicy(request).allowed;
 }
 
 function getRequestOriginPolicy(request) {

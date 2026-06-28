@@ -15,8 +15,9 @@ const AUTO_PAUSE_AFTER_MS = 10 * 60 * 1000;
 const INACTIVITY_PAUSE_AFTER_MS = 3 * 60 * 1000;
 const ERROR_RETRY_DELAYS_MS = [120000, 300000, 600000];
 const DAILY_REQUEST_LIMIT = 2000;
-const CLIENT_LIVE_CACHE_VERSION = "v8";
+const CLIENT_LIVE_CACHE_VERSION = "v9";
 const REQUIRED_CLIENT_CACHE_LEAGUE_CODES = ["fifa.world"];
+const FIFA_WORLD_CUP_LEAGUE_CODE = "fifa.world";
 const CLIENT_LIVE_CACHE_MAX_AGE_LIVE_MS = 30000;
 const CLIENT_LIVE_CACHE_MAX_AGE_IDLE_MS = 120000;
 const CLIENT_LIVE_CACHE_MAX_AGE_QUIET_MS = 30 * 60 * 1000;
@@ -71,6 +72,8 @@ const FALLBACK_MESSAGES = {
   appTitle: "Hype Scores",
   autoPaused: "Auto refresh paused to save requests.",
   backToLeagues: "← Leagues",
+  bracket: "Knockout",
+  bracketUnavailable: "Knockout bracket unavailable.",
   broadcasts: "Broadcasts",
   club: "Club",
   commentary: "Commentary",
@@ -98,6 +101,7 @@ const FALLBACK_MESSAGES = {
   live: "Live",
   loading: "Loading matches…",
   loadingDetails: "Loading match details…",
+  loadingBracket: "Loading knockout bracket…",
   loadingStandings: "Loading standings…",
   losses: "L",
   matchDetails: "Match details",
@@ -105,6 +109,7 @@ const FALLBACK_MESSAGES = {
   news: "News",
   noLinks: "No links available.",
   noNews: "No news available.",
+  noBracket: "No knockout bracket available.",
   noDetails: "No extra details available for this match.",
   noSectionData: "No data available.",
   noStats: "No match stats available.",
@@ -125,6 +130,7 @@ const FALLBACK_MESSAGES = {
   standings: "Standings",
   subtitle: "Fast live scores, results and league tables.",
   team: "Team",
+  tbd: "TBD",
   timeline: "Timeline",
   turnOff: "Turn extension off",
   turnOn: "Turn extension on",
@@ -133,6 +139,12 @@ const FALLBACK_MESSAGES = {
   upcoming: "Upcoming",
   venue: "Venue",
   wins: "W",
+  roundOf32: "Round of 32",
+  roundOf16: "Round of 16",
+  quarterfinals: "Quarter-finals",
+  semifinals: "Semi-finals",
+  thirdPlace: "Third-place match",
+  final: "Final",
 };
 
 let appShell;
@@ -170,6 +182,8 @@ let detailAbortController = null;
 let favoriteLeagues = new Set();
 const matchDetailCache = new Map();
 const leagueStandingsCache = new Map();
+const tournamentBracketCache = new Map();
+const openTournamentBracketLeagueCodes = new Set();
 
 document.addEventListener("DOMContentLoaded", () => {
   appShell = document.querySelector(".app-shell");
@@ -742,6 +756,8 @@ function renderLeagueDetail(league) {
   appendMatchSection(card, msg("results"), finishedMatches, league);
   appendMatchSection(card, msg("upcoming"), upcomingMatches, league);
   if (otherMatches.length > 0) appendMatchSection(card, msg("other"), otherMatches, league);
+  const bracketSection = createTournamentBracketSection(league);
+  if (bracketSection) card.appendChild(bracketSection);
   card.appendChild(createStandingsSection(league));
 
   leagueDetailContent.appendChild(card);
@@ -1142,6 +1158,218 @@ function createStatePanel(text, isError = false) {
   return panel;
 }
 
+function createTournamentBracketSection(league) {
+  if (league.code !== FIFA_WORLD_CUP_LEAGUE_CODE) {
+    return null;
+  }
+
+  const leagueCode = league.code;
+  const section = document.createElement("details");
+  section.className = "tournament-bracket detail-section detail-section--accordion";
+  section.open = openTournamentBracketLeagueCodes.has(leagueCode);
+
+  const summary = document.createElement("summary");
+  summary.className = "detail-section-summary";
+  summary.appendChild(createTextElement("span", "detail-section-title", msg("bracket")));
+
+  section.appendChild(summary);
+  section.addEventListener("toggle", () => {
+    if (section.open) {
+      openTournamentBracketLeagueCodes.add(leagueCode);
+      if (!hasActiveTournamentBracketCache(leagueCode)) {
+        tournamentBracketCache.set(leagueCode, { status: "loading" });
+        if (lastPayload) renderPayload(lastPayload);
+        loadTournamentBracket(leagueCode);
+      }
+    } else {
+      openTournamentBracketLeagueCodes.delete(leagueCode);
+    }
+  });
+
+  if (section.open) {
+    appendTournamentBracketBody(section, league);
+  }
+
+  return section;
+}
+
+function hasActiveTournamentBracketCache(leagueCode) {
+  const cached = tournamentBracketCache.get(leagueCode);
+  if (isExpiredLazyError(cached)) {
+    tournamentBracketCache.delete(leagueCode);
+    return false;
+  }
+
+  return Boolean(cached);
+}
+
+function appendTournamentBracketBody(section, league) {
+  const leagueCode = league.code;
+  let cached = tournamentBracketCache.get(leagueCode);
+
+  if (isExpiredLazyError(cached)) {
+    tournamentBracketCache.delete(leagueCode);
+    cached = null;
+  }
+
+  if (!cached) {
+    tournamentBracketCache.set(leagueCode, { status: "loading" });
+    section.appendChild(createTextElement("p", "bracket-message", msg("loadingBracket")));
+    loadTournamentBracket(leagueCode);
+    return;
+  }
+
+  if (cached.status === "loading") {
+    section.appendChild(createTextElement("p", "bracket-message", msg("loadingBracket")));
+    return;
+  }
+
+  if (cached.status === "error") {
+    section.appendChild(
+      createTextElement("p", "bracket-message bracket-message--error", msg("bracketUnavailable")),
+    );
+    return;
+  }
+
+  const rounds = Array.isArray(cached.rounds) ? cached.rounds : [];
+
+  if (rounds.length === 0) {
+    section.appendChild(createTextElement("p", "bracket-message", msg("noBracket")));
+    return;
+  }
+
+  const roundsWrap = document.createElement("div");
+  roundsWrap.className = "bracket-rounds";
+
+  for (const round of rounds) {
+    roundsWrap.appendChild(createBracketRound(round, league));
+  }
+
+  section.appendChild(roundsWrap);
+}
+
+function createBracketRound(round, league) {
+  const wrapper = document.createElement("section");
+  wrapper.className = "bracket-round";
+  wrapper.appendChild(
+    createTextElement(
+      "h4",
+      "bracket-round-title",
+      getTournamentRoundLabel(round.slug, round.name),
+    ),
+  );
+
+  const list = document.createElement("div");
+  list.className = "bracket-match-list";
+
+  for (const match of Array.isArray(round.matches) ? round.matches : []) {
+    list.appendChild(createBracketMatchCard(match, league));
+  }
+
+  wrapper.appendChild(list);
+  return wrapper;
+}
+
+function createBracketMatchCard(match, league) {
+  const card = document.createElement("article");
+  card.className = "bracket-match-card";
+
+  if (match.id && match.leagueCode) {
+    card.classList.add("bracket-match-card--clickable");
+    card.tabIndex = 0;
+    card.setAttribute("role", "button");
+    card.setAttribute("aria-label", match.homeTeam + " vs " + match.awayTeam);
+    const openDetail = () => openMatchDetail(league, normalizeBracketMatchForDetail(match));
+    card.addEventListener("click", openDetail);
+    card.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        openDetail();
+      }
+    });
+  }
+
+  const meta = document.createElement("div");
+  meta.className = "bracket-match-meta";
+  meta.append(
+    createTextElement("span", "bracket-match-date", formatDateTime(match.kickoff)),
+    createTextElement("span", "bracket-match-status", translateStatus(match.status)),
+  );
+
+  const teams = document.createElement("div");
+  teams.className = "bracket-teams";
+  teams.append(
+    createBracketTeamRow(match.homeTeam, match.homeLogo, getBracketScore(match, "home")),
+    createBracketTeamRow(match.awayTeam, match.awayLogo, getBracketScore(match, "away")),
+  );
+
+  card.append(meta, teams);
+  return card;
+}
+
+function createBracketTeamRow(name, logo, score) {
+  const row = document.createElement("div");
+  row.className = "bracket-team-row";
+  row.append(
+    createLogoImage("bracket-team-logo", logo, name),
+    createTextElement("span", "bracket-team-name", name || msg("tbd")),
+    createTextElement("strong", "bracket-team-score", score),
+  );
+  return row;
+}
+
+function normalizeBracketMatchForDetail(match) {
+  return {
+    ...match,
+    minute: match.minute || "-",
+    status: match.status || "",
+    state: match.state || "scheduled",
+    venue: match.venue || "",
+  };
+}
+
+function getBracketScore(match, side) {
+  if (match.state === "scheduled") {
+    return "-";
+  }
+
+  return String(Number(side === "home" ? match.homeScore : match.awayScore) || 0);
+}
+
+function getTournamentRoundLabel(slug, fallbackName) {
+  const labels = {
+    "round-of-32": msg("roundOf32"),
+    "round-of-16": msg("roundOf16"),
+    quarterfinals: msg("quarterfinals"),
+    semifinals: msg("semifinals"),
+    "3rd-place-match": msg("thirdPlace"),
+    final: msg("final"),
+  };
+
+  return labels[slug] || fallbackName || msg("bracket");
+}
+
+async function loadTournamentBracket(leagueCode) {
+  try {
+    const data = await fetchJsonWithTimeout(buildTournamentBracketUrl(leagueCode));
+    tournamentBracketCache.set(leagueCode, {
+      status: "loaded",
+      rounds: Array.isArray(data.rounds) ? data.rounds : [],
+    });
+  } catch (error) {
+    if (isDailyRequestLimitError(error)) {
+      dailyLimitReached = true;
+      setStatus(msg("requestLimitReached"));
+    }
+    console.error(error);
+    tournamentBracketCache.set(leagueCode, { status: "error", failedAt: Date.now() });
+  } finally {
+    if (lastPayload && selectedLeagueKey && !selectedMatchKey) {
+      renderPayload(lastPayload);
+    }
+  }
+}
+
 function appendMetaItem(parent, label, value) {
   const item = document.createElement("div");
   item.className = "detail-meta-item";
@@ -1535,6 +1763,13 @@ function buildMatchDetailUrl(match) {
 function buildLeagueStandingsUrl(leagueCode) {
   const url = new URL(BACKEND_URL);
   url.pathname = "/league-standings";
+  url.searchParams.set("leagueCode", leagueCode);
+  return url.href;
+}
+
+function buildTournamentBracketUrl(leagueCode) {
+  const url = new URL(BACKEND_URL);
+  url.pathname = "/tournament-bracket";
   url.searchParams.set("leagueCode", leagueCode);
   return url.href;
 }

@@ -50,6 +50,39 @@
   "standings": {
     "message": "Classificação"
   },
+  "bracket": {
+    "message": "Fase a eliminar"
+  },
+  "loadingBracket": {
+    "message": "A carregar o quadro da fase a eliminar…"
+  },
+  "noBracket": {
+    "message": "Não há quadro da fase a eliminar disponível."
+  },
+  "bracketUnavailable": {
+    "message": "Quadro da fase a eliminar indisponível."
+  },
+  "tbd": {
+    "message": "Por definir"
+  },
+  "roundOf32": {
+    "message": "Ronda de 32"
+  },
+  "roundOf16": {
+    "message": "Oitavos de final"
+  },
+  "quarterfinals": {
+    "message": "Quartos de final"
+  },
+  "semifinals": {
+    "message": "Meias-finais"
+  },
+  "thirdPlace": {
+    "message": "Jogo do 3.º lugar"
+  },
+  "final": {
+    "message": "Final"
+  },
   "played": {
     "message": "J"
   },

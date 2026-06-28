@@ -50,6 +50,39 @@
   "standings": {
     "message": "Clasificación"
   },
+  "bracket": {
+    "message": "Eliminatorias"
+  },
+  "loadingBracket": {
+    "message": "Cargando cuadro de eliminatorias…"
+  },
+  "noBracket": {
+    "message": "No hay cuadro de eliminatorias disponible."
+  },
+  "bracketUnavailable": {
+    "message": "Cuadro de eliminatorias no disponible."
+  },
+  "tbd": {
+    "message": "Por definir"
+  },
+  "roundOf32": {
+    "message": "Dieciseisavos"
+  },
+  "roundOf16": {
+    "message": "Octavos de final"
+  },
+  "quarterfinals": {
+    "message": "Cuartos de final"
+  },
+  "semifinals": {
+    "message": "Semifinales"
+  },
+  "thirdPlace": {
+    "message": "Tercer puesto"
+  },
+  "final": {
+    "message": "Final"
+  },
   "played": {
     "message": "PJ"
   },

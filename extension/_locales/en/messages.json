@@ -50,6 +50,39 @@
   "standings": {
     "message": "Standings"
   },
+  "bracket": {
+    "message": "Knockout"
+  },
+  "loadingBracket": {
+    "message": "Loading knockout bracket…"
+  },
+  "noBracket": {
+    "message": "No knockout bracket available."
+  },
+  "bracketUnavailable": {
+    "message": "Knockout bracket unavailable."
+  },
+  "tbd": {
+    "message": "TBD"
+  },
+  "roundOf32": {
+    "message": "Round of 32"
+  },
+  "roundOf16": {
+    "message": "Round of 16"
+  },
+  "quarterfinals": {
+    "message": "Quarter-finals"
+  },
+  "semifinals": {
+    "message": "Semi-finals"
+  },
+  "thirdPlace": {
+    "message": "Third-place match"
+  },
+  "final": {
+    "message": "Final"
+  },
   "played": {
     "message": "P"
   },

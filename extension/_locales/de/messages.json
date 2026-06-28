@@ -50,6 +50,39 @@
   "standings": {
     "message": "Tabelle"
   },
+  "bracket": {
+    "message": "K.-o.-Runde"
+  },
+  "loadingBracket": {
+    "message": "K.-o.-Baum wird geladen…"
+  },
+  "noBracket": {
+    "message": "Kein K.-o.-Baum verfügbar."
+  },
+  "bracketUnavailable": {
+    "message": "K.-o.-Baum nicht verfügbar."
+  },
+  "tbd": {
+    "message": "Offen"
+  },
+  "roundOf32": {
+    "message": "Runde der letzten 32"
+  },
+  "roundOf16": {
+    "message": "Achtelfinale"
+  },
+  "quarterfinals": {
+    "message": "Viertelfinale"
+  },
+  "semifinals": {
+    "message": "Halbfinale"
+  },
+  "thirdPlace": {
+    "message": "Spiel um Platz drei"
+  },
+  "final": {
+    "message": "Finale"
+  },
   "played": {
     "message": "Sp"
   },

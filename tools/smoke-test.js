@@ -37,6 +37,12 @@ async function main() {
     return `${countStandingsRows(payload.standings)} rows`;
   });
 
+  await step("GET /tournament-bracket?leagueCode=fifa.world", async () => {
+    const payload = await fetchJson("/tournament-bracket?leagueCode=fifa.world");
+    assertTournamentBracketPayload(payload);
+    return `${payload.rounds.length} rounds, ${countBracketMatches(payload.rounds)} matches`;
+  });
+
   const match = livePayload.matches.find((item) => item.id && item.leagueCode);
   if (!match) {
     results.push({
@@ -149,8 +155,51 @@ function assertMatchDetailPayload(payload, match) {
   assertArray(payload.links, "matchDetail.links");
 }
 
+function assertTournamentBracketPayload(payload) {
+  assertObject(payload, "tournament bracket payload");
+  if (payload.leagueCode !== "fifa.world") {
+    throw new Error(`Expected tournament bracket leagueCode fifa.world, got ${payload.leagueCode}`);
+  }
+  assertArray(payload.rounds, "tournament bracket rounds");
+
+  if (payload.rounds.length === 0) {
+    throw new Error("Expected at least one tournament bracket round");
+  }
+
+  for (const round of payload.rounds) {
+    assertString(round.slug, "bracketRound.slug");
+    assertString(round.name, "bracketRound.name");
+    assertArray(round.matches, "bracketRound.matches");
+  }
+
+  const firstMatch = payload.rounds.flatMap((round) => round.matches)[0];
+  assertObject(firstMatch, "bracketMatch");
+  assertString(firstMatch.id, "bracketMatch.id");
+  assertString(firstMatch.homeTeam, "bracketMatch.homeTeam");
+  assertString(firstMatch.awayTeam, "bracketMatch.awayTeam");
+  assertString(firstMatch.kickoff, "bracketMatch.kickoff");
+}
+
 function countStandingsRows(standings) {
-  return standings.reduce((total, group) => total + (Array.isArray(group.entries) ? group.entries.length : 0), 0);
+  if (!Array.isArray(standings)) {
+    return 0;
+  }
+
+  if (standings.some((row) => Array.isArray(row?.entries))) {
+    return standings.reduce(
+      (total, group) => total + (Array.isArray(group.entries) ? group.entries.length : 0),
+      0,
+    );
+  }
+
+  return standings.length;
+}
+
+function countBracketMatches(rounds) {
+  return rounds.reduce(
+    (total, round) => total + (Array.isArray(round.matches) ? round.matches.length : 0),
+    0,
+  );
 }
 
 function printResults() {

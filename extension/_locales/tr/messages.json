@@ -50,6 +50,39 @@
   "standings": {
     "message": "Puan Durumu"
   },
+  "bracket": {
+    "message": "Eleme Ağacı"
+  },
+  "loadingBracket": {
+    "message": "Eleme ağacı yükleniyor…"
+  },
+  "noBracket": {
+    "message": "Eleme ağacı henüz yok."
+  },
+  "bracketUnavailable": {
+    "message": "Eleme ağacı alınamadı."
+  },
+  "tbd": {
+    "message": "Belli değil"
+  },
+  "roundOf32": {
+    "message": "Son 32"
+  },
+  "roundOf16": {
+    "message": "Son 16"
+  },
+  "quarterfinals": {
+    "message": "Çeyrek final"
+  },
+  "semifinals": {
+    "message": "Yarı final"
+  },
+  "thirdPlace": {
+    "message": "Üçüncülük maçı"
+  },
+  "final": {
+    "message": "Final"
+  },
   "played": {
     "message": "O"
   },

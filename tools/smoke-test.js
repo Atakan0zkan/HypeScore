@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const DEFAULT_WORKER_URL = "https://live-score-football.atakanozkan2001.workers.dev";
+const DEFAULT_WORKER_URL = "https://api.atakanozkan.com";
 const EXTENSION_ORIGIN = "chrome-extension://cdnpjnmhmagmiefkleefgchgffeaacaa";
 const REQUEST_TIMEOUT_MS = 10000;
 

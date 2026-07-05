@@ -22,6 +22,6 @@
   },
   "permissions": [],
   "host_permissions": [
-    "https://live-score-football.atakanozkan2001.workers.dev/*"
+    "https://api.atakanozkan.com/*"
   ]
 }

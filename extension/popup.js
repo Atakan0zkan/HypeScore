@@ -4,7 +4,7 @@
  */
 
 const BACKEND_URL =
-  "https://live-score-football.atakanozkan2001.workers.dev/live-matches";
+  "https://api.atakanozkan.com/live-matches";
 const LIVE_REFRESH_INTERVAL_MS = 60000;
 const IDLE_REFRESH_INTERVAL_MS = 300000;
 const QUIET_REFRESH_INTERVAL_MS = 30 * 60 * 1000;

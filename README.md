@@ -18,7 +18,7 @@ shown when the upstream API supports that data.
 - Published extension ID: `cdnpjnmhmagmiefkleefgchgffeaacaa`
 - Extension manifest version: `1.3`
 - Current store package: `dist/hype-live-football-scores-v1.3-chrome-web-store.zip`
-- Worker URL: `https://live-score-football.atakanozkan2001.workers.dev`
+- Worker URL: `https://api.atakanozkan.com`
 - Latest deployed Worker version recorded in the memory bank: `c6d3f8cb-03c0-4828-abe2-2ef367231ace`
 
 ## Open-source notes
@@ -251,7 +251,7 @@ https://live-score-football.YOUR_ACCOUNT.workers.dev/live-matches
 The included Store build is configured to use:
 
 ```text
-https://live-score-football.atakanozkan2001.workers.dev/live-matches
+https://api.atakanozkan.com/live-matches
 ```
 
 For your own Cloudflare account, open `extension/popup.js` and replace:

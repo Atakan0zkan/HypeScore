@@ -62,11 +62,15 @@ const LOCAL_LEAGUE_LOGOS = {
   "usa.usl.1": "icons/leagues/usa-usl-1.png",
 };
 
-const FALLBACK_LOGO =
-  "data:image/svg+xml," +
-  encodeURIComponent(
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><circle cx="16" cy="16" r="14" fill="#2a1414" stroke="#d64b45" stroke-width="1"/><text x="16" y="20" text-anchor="middle" fill="#ef7468" font-size="14" font-family="sans-serif">⚽</text></svg>',
-  );
+const FALLBACK_LOGO_SVG = [
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">',
+  '<circle cx="16" cy="16" r="14" fill="#2a1414" stroke="#d64b45" stroke-width="1"/>',
+  '<text x="16" y="20" text-anchor="middle" fill="#ef7468" ',
+  'font-size="14" font-family="sans-serif">⚽</text>',
+  "</svg>",
+].join("");
+
+const FALLBACK_LOGO = "data:image/svg+xml," + encodeURIComponent(FALLBACK_LOGO_SVG);
 
 const FALLBACK_MESSAGES = {
   appTitle: "Hype Scores",
@@ -627,11 +631,13 @@ function renderPayload(payload) {
     }
 
     if (selectedMatchKey) {
+      const snapshotMatchesSelection =
+        selectedMatchSnapshot &&
+        getMatchKey(selectedMatchSnapshot) === selectedMatchKey;
       const match =
         league.matches.find((item) => getMatchKey(item) === selectedMatchKey) ||
-        (selectedMatchSnapshot && getMatchKey(selectedMatchSnapshot) === selectedMatchKey
-          ? selectedMatchSnapshot
-          : null);
+        (snapshotMatchesSelection ? selectedMatchSnapshot : null);
+
       if (match) {
         renderMatchDetail(league, match);
         return;
@@ -1179,7 +1185,9 @@ function createTournamentBracketSection(league) {
 
   const summary = document.createElement("summary");
   summary.className = "detail-section-summary";
-  summary.appendChild(createTextElement("span", "detail-section-title", msg("bracket")));
+  summary.appendChild(
+    createTextElement("span", "detail-section-title", msg("bracket")),
+  );
 
   section.appendChild(summary);
   const body = document.createElement("div");
@@ -1215,13 +1223,17 @@ function renderTournamentBracketBody(container, league) {
 
   if (!cached) {
     tournamentBracketCache.set(leagueCode, { status: "loading" });
-    container.appendChild(createTextElement("p", "bracket-message", msg("loadingBracket")));
+    container.appendChild(
+      createTextElement("p", "bracket-message", msg("loadingBracket")),
+    );
     loadTournamentBracket(leagueCode);
     return;
   }
 
   if (cached.status === "loading") {
-    container.appendChild(createTextElement("p", "bracket-message", msg("loadingBracket")));
+    container.appendChild(
+      createTextElement("p", "bracket-message", msg("loadingBracket")),
+    );
     return;
   }
 

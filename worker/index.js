@@ -55,35 +55,95 @@ const TEAM_LOGO_OVERRIDES_BY_NAME = new Map([
  * soccer ball SVG.
  */
 const ESPN_LEAGUES_BY_ID = {
-  "606":   { code: "fifa.world", name: "FIFA World Cup",                 logoId: "4", logoTone: "light" },
-  "775":   { code: "uefa.champions", name: "UEFA Champions League",          logoId: "2", logoStyle: "dark" },
-  "700":   { code: "eng.1",   name: "English Premier League",        logoId: "23" },
-  "710":   { code: "fra.1",   name: "Ligue 1",                       logoId: "9" },
-  "715":   { code: "por.1",   name: "Portuguese Primeira Liga",       logoId: "14" },
-  "720":   { code: "ger.1",   name: "German Bundesliga",             logoId: "10" },
-  "725":   { code: "ned.1",   name: "Dutch Eredivisie",              logoId: "11" },
-  "730":   { code: "ita.1",   name: "Italian Serie A",               logoId: "12" },
-  "735":   { code: "sco.1",   name: "Scottish Premiership",          logoId: "45" },
-  "740":   { code: "esp.1",   name: "LaLiga",                        logoId: "15" },
-  "745":   { code: "arg.1",   name: "Argentine Liga Profesional",    logoId: "1" },
-  "760":   { code: "mex.1",   name: "Mexican Liga MX",               logoId: "22" },
-  "770":   { code: "usa.1",   name: "MLS",                           logoId: "19" },
-  "2310":  { code: "uefa.europa", name: "UEFA Europa League",         logoId: "2310", logoStyle: "dark" },
-  "3901":  { code: "bel.1",   name: "Belgian Pro League",            logoId: "6" },
-  "3906":  { code: "aus.1",   name: "Australian A-League Men",       logoId: "1308", logoStyle: "dark" },
-  "3907":  { code: "aut.1",   name: "Austrian Bundesliga",           logoId: "5" },
-  "3913":  { code: "den.1",   name: "Danish Superliga",              logoId: null, logoUrl: DANISH_SUPERLIGA_LOGO_URL, logoTone: "light" },
-  "3914":  { code: "eng.2",   name: "English Championship",          logoId: "24" },
-  "3918":  { code: "eng.fa",  name: "English FA Cup",                logoId: "40" },
-  "3927":  { code: "ger.2",   name: "German 2. Bundesliga",          logoId: "97", logoStyle: "default" },
-  "3932":  { code: "mex.2",   name: "Mexican Liga de Expansion MX",  logoId: "2306" },
-  "3939":  { code: "rus.1",   name: "Russian Premier League",        logoId: "106" },
-  "3945":  { code: "swe.1",   name: "Swedish Allsvenskan",           logoId: "16", logoStyle: "default" },
-  "3946":  { code: "tur.1",   name: "Turkish Super Lig",             logoId: "18" },
-  "3955":  { code: "gre.1",   name: "Greek Super League",            logoId: "98", logoStyle: "default" },
-  "8097":  { code: "eng.w.1", name: "English Women's Super League",  logoId: "2314" },
-  "uefa.europa.conf": { code: "uefa.europa.conf", name: "UEFA Conference League", logoId: null, logoUrl: UEFA_CONFERENCE_LEAGUE_LOGO_URL, logoTone: "light" },
-  "23633": { code: "usa.usl.1", name: "USL Championship",            logoId: "2292", logoTone: "light" },
+  "606": {
+    code: "fifa.world",
+    name: "FIFA World Cup",
+    logoId: "4",
+    logoTone: "light",
+  },
+  "775": {
+    code: "uefa.champions",
+    name: "UEFA Champions League",
+    logoId: "2",
+    logoStyle: "dark",
+  },
+  "700": { code: "eng.1", name: "English Premier League", logoId: "23" },
+  "710": { code: "fra.1", name: "Ligue 1", logoId: "9" },
+  "715": { code: "por.1", name: "Portuguese Primeira Liga", logoId: "14" },
+  "720": { code: "ger.1", name: "German Bundesliga", logoId: "10" },
+  "725": { code: "ned.1", name: "Dutch Eredivisie", logoId: "11" },
+  "730": { code: "ita.1", name: "Italian Serie A", logoId: "12" },
+  "735": { code: "sco.1", name: "Scottish Premiership", logoId: "45" },
+  "740": { code: "esp.1", name: "LaLiga", logoId: "15" },
+  "745": { code: "arg.1", name: "Argentine Liga Profesional", logoId: "1" },
+  "760": { code: "mex.1", name: "Mexican Liga MX", logoId: "22" },
+  "770": { code: "usa.1", name: "MLS", logoId: "19" },
+  "2310": {
+    code: "uefa.europa",
+    name: "UEFA Europa League",
+    logoId: "2310",
+    logoStyle: "dark",
+  },
+  "3901": { code: "bel.1", name: "Belgian Pro League", logoId: "6" },
+  "3906": {
+    code: "aus.1",
+    name: "Australian A-League Men",
+    logoId: "1308",
+    logoStyle: "dark",
+  },
+  "3907": { code: "aut.1", name: "Austrian Bundesliga", logoId: "5" },
+  "3913": {
+    code: "den.1",
+    name: "Danish Superliga",
+    logoId: null,
+    logoUrl: DANISH_SUPERLIGA_LOGO_URL,
+    logoTone: "light",
+  },
+  "3914": { code: "eng.2", name: "English Championship", logoId: "24" },
+  "3918": { code: "eng.fa", name: "English FA Cup", logoId: "40" },
+  "3927": {
+    code: "ger.2",
+    name: "German 2. Bundesliga",
+    logoId: "97",
+    logoStyle: "default",
+  },
+  "3932": {
+    code: "mex.2",
+    name: "Mexican Liga de Expansion MX",
+    logoId: "2306",
+  },
+  "3939": { code: "rus.1", name: "Russian Premier League", logoId: "106" },
+  "3945": {
+    code: "swe.1",
+    name: "Swedish Allsvenskan",
+    logoId: "16",
+    logoStyle: "default",
+  },
+  "3946": { code: "tur.1", name: "Turkish Super Lig", logoId: "18" },
+  "3955": {
+    code: "gre.1",
+    name: "Greek Super League",
+    logoId: "98",
+    logoStyle: "default",
+  },
+  "8097": {
+    code: "eng.w.1",
+    name: "English Women's Super League",
+    logoId: "2314",
+  },
+  "uefa.europa.conf": {
+    code: "uefa.europa.conf",
+    name: "UEFA Conference League",
+    logoId: null,
+    logoUrl: UEFA_CONFERENCE_LEAGUE_LOGO_URL,
+    logoTone: "light",
+  },
+  "23633": {
+    code: "usa.usl.1",
+    name: "USL Championship",
+    logoId: "2292",
+    logoTone: "light",
+  },
 };
 
 const securityHeaders = {
@@ -1651,10 +1711,14 @@ function getStandingsCacheKey(leagueCode) {
 }
 
 function getTournamentBracketCacheKey(leagueCode) {
-  return new Request(
-    `https://live-score-extension.internal/tournament-bracket/${TOURNAMENT_BRACKET_CACHE_KEY_VERSION}/${leagueCode}/${FIFA_WORLD_CUP_KNOCKOUT_DATES}`,
-    { method: "GET" },
-  );
+  const cacheKeyUrl = [
+    "https://live-score-extension.internal/tournament-bracket",
+    TOURNAMENT_BRACKET_CACHE_KEY_VERSION,
+    leagueCode,
+    FIFA_WORLD_CUP_KNOCKOUT_DATES,
+  ].join("/");
+
+  return new Request(cacheKeyUrl, { method: "GET" });
 }
 
 function formatVenue(venue) {
@@ -1864,9 +1928,10 @@ function safeHttpsUrl(value, allowedHostSuffixes = null) {
 function getRequestOriginPolicy(request) {
   const origin = request.headers.get("Origin");
   if (origin) {
+    const allowed = isAllowedCorsOrigin(origin);
     return {
-      allowed: isAllowedCorsOrigin(origin),
-      reason: isAllowedCorsOrigin(origin) ? "allowed-origin" : "blocked-origin",
+      allowed,
+      reason: allowed ? "allowed-origin" : "blocked-origin",
     };
   }
 
@@ -1915,7 +1980,10 @@ function isAllowedCorsOrigin(origin) {
 function isChromeExtensionOrigin(origin) {
   try {
     const url = new URL(origin);
-    return url.protocol === "chrome-extension:" && /^[a-p]{32}$/.test(url.hostname);
+    return (
+      url.protocol === "chrome-extension:" &&
+      /^[a-p]{32}$/.test(url.hostname)
+    );
   } catch {
     return false;
   }

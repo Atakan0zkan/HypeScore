@@ -5,6 +5,10 @@ $targetDir = Join-Path $root "extension\icons\leagues"
 
 New-Item -ItemType Directory -Force -Path $targetDir | Out-Null
 
+$uefaConferenceSource =
+  "https://commons.wikimedia.org/wiki/Special:Redirect/file/" +
+  "UEFA_Conference_League_full_logo_(2024_version).svg?width=512&type=png"
+
 $downloads = @(
   @{ File = "arg-1.png"; Source = "https://a.espncdn.com/i/leaguelogos/soccer/500/1.png" },
   @{ File = "aus-1.png"; Source = "https://a.espncdn.com/i/leaguelogos/soccer/500-dark/1308.png" },
@@ -32,7 +36,10 @@ $downloads = @(
   @{ File = "tur-1.png"; Source = "https://a.espncdn.com/i/leaguelogos/soccer/500/18.png" },
   @{ File = "uefa-champions.png"; Source = "https://a.espncdn.com/i/leaguelogos/soccer/500-dark/2.png" },
   @{ File = "uefa-europa.png"; Source = "https://a.espncdn.com/i/leaguelogos/soccer/500-dark/2310.png" },
-  @{ File = "uefa-europa-conf.png"; Source = "https://commons.wikimedia.org/wiki/Special:Redirect/file/UEFA_Conference_League_full_logo_(2024_version).svg?width=512&type=png" },
+  @{
+    File = "uefa-europa-conf.png"
+    Source = $uefaConferenceSource
+  },
   @{ File = "usa-1.png"; Source = "https://a.espncdn.com/i/leaguelogos/soccer/500/19.png" },
   @{ File = "usa-usl-1.png"; Source = "https://a.espncdn.com/i/leaguelogos/soccer/500/2292.png" }
 )

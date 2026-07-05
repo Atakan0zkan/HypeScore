@@ -1,6 +1,32 @@
+.DS_Store
+Thumbs.db
+
+# Local editor and assistant state
+.vscode/
+.idea/
+.agents/
+.codex/
 .chrome-store-capture-profile/
+
+# Cloudflare/Wrangler local state and secrets
 .wrangler/
+.dev.vars
+.dev.vars.*
+.env
+.env.*
+!.env.example
+
+# Dependencies, logs, and build output
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+coverage/
 dist/
+*.zip
+
+# Project-local private/release helpers
 memory-bank/
 package-extension-store.bat
 crop.ps1

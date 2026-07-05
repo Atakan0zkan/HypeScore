@@ -1,18 +1,38 @@
-# Hype - Live Football Scores
+# HypeScore
 
-Dependency-free example project for a Chrome browser extension backed by a Cloudflare Worker. The extension uses adaptive refresh and cache-backed lazy detail endpoints to stay friendly to the Cloudflare Workers Free plan.
+HypeScore is the open-source codebase behind **Hype - Live Football Scores**,
+a dependency-free Chrome browser extension backed by a Cloudflare Worker. The
+extension uses adaptive refresh and cache-backed lazy detail endpoints to stay
+friendly to the Cloudflare Workers Free plan.
 
-The popup is English by default and supports Turkish, German, Spanish, French, Brazilian Portuguese, and European Portuguese through Chrome locale files. Matches are grouped by league, with live matches, results, upcoming fixtures, team logos, local favorites, full standings, and lazy-loaded match details shown when the upstream API supports that data.
+The popup is English by default and supports Turkish, German, Spanish, French,
+Brazilian Portuguese, and European Portuguese through Chrome locale files.
+Matches are grouped by league, with live matches, results, upcoming fixtures,
+team logos, local favorites, full standings, and lazy-loaded match details
+shown when the upstream API supports that data.
 
 ## Current release
 
 - Chrome Web Store listing: `https://chromewebstore.google.com/detail/hype-live-football-scores/cdnpjnmhmagmiefkleefgchgffeaacaa`
-- GitHub repository: `https://github.com/Atakan0zkan/Hype---Live-Scores.git`
+- GitHub repository: `https://github.com/Atakan0zkan/HypeScore.git`
 - Published extension ID: `cdnpjnmhmagmiefkleefgchgffeaacaa`
 - Extension manifest version: `1.3`
 - Current store package: `dist/hype-live-football-scores-v1.3-chrome-web-store.zip`
 - Worker URL: `https://live-score-football.atakanozkan2001.workers.dev`
-- Latest deployed Worker version recorded in the memory bank: `85d2bc5c-2e40-477b-ba70-f1a9a5edfb25`
+- Latest deployed Worker version recorded in the memory bank: `c6d3f8cb-03c0-4828-abe2-2ef367231ace`
+
+## Open-source notes
+
+- License: MIT.
+- Runtime dependencies: none.
+- Build step: none.
+- Local/private files are excluded through `.gitignore`, including
+  `memory-bank/`, `.wrangler/`, `.dev.vars`, `.env*`, `dist/`, and raw store
+  capture sources.
+- The checked-in extension currently points to the production Worker used by
+  the published Chrome Web Store listing. If you fork this project, deploy your
+  own Worker and update both `extension/popup.js` and
+  `extension/manifest.json` before publishing your own extension.
 
 ## Main features
 
@@ -73,8 +93,9 @@ LiveScoreFootball/
 ```
 
 Local-only files such as `memory-bank/`, `package-extension-store.bat`,
-`crop.ps1`, `dist/`, `.wrangler/`, and raw capture files under
-`store-assets/sources/` are intentionally ignored and should not be pushed.
+`crop.ps1`, `dist/`, `.wrangler/`, `.dev.vars`, `.env*`, and raw capture files
+under `store-assets/sources/` are intentionally ignored and should not be
+pushed.
 
 ## Backend
 
@@ -146,9 +167,14 @@ ESPN standings are fetched from:
 https://site.api.espn.com/apis/v2/sports/soccer/{leagueCode}/standings
 ```
 
-Live match responses use dynamic cache TTLs: 30 seconds when live matches exist, 120 seconds when there are no live matches. Standings are no longer fetched as part of `/live-matches`; they are loaded lazily through `/league-standings` when a user opens a league detail view.
+Live match responses use dynamic cache TTLs: 30 seconds when live matches exist,
+120 seconds when there are no live matches. Standings are no longer fetched as
+part of `/live-matches`; they are loaded lazily through `/league-standings` when
+a user opens a league detail view.
 
-Standings are cached separately for 30 minutes and omitted when a league has no usable table. When ESPN returns a table, the Worker returns all available teams rather than limiting the table to five rows.
+Standings are cached separately for 30 minutes and omitted when a league has no
+usable table. When ESPN returns a table, the Worker returns all available teams
+rather than limiting the table to five rows.
 
 Standings endpoint response:
 
@@ -170,7 +196,9 @@ Standings endpoint response:
 }
 ```
 
-Match details are intentionally lazy-loaded only after a user clicks a match. This keeps the adaptive main score refresh light while still allowing a richer detail view with ESPN summary data:
+Match details are intentionally lazy-loaded only after a user clicks a match.
+This keeps the adaptive main score refresh light while still allowing a richer
+detail view with ESPN summary data:
 
 - timeline/key events
 - venue and kickoff
@@ -220,7 +248,7 @@ https://live-score-football.YOUR_ACCOUNT.workers.dev/live-matches
 
 ## Configure the extension
 
-The included example is already configured to use:
+The included Store build is configured to use:
 
 ```text
 https://live-score-football.atakanozkan2001.workers.dev/live-matches
@@ -233,6 +261,9 @@ const BACKEND_URL = "https://YOUR-WORKER-SUBDOMAIN.workers.dev/live-matches";
 ```
 
 with your deployed Worker URL.
+
+Also update `extension/manifest.json` so `host_permissions` contains your
+Worker domain instead of the production HypeScore Worker domain.
 
 The Worker accepts valid Chrome extension origins and browser-like no-Origin
 Chrome/Edge extension fetches. It rejects normal web origins, raw no-Origin
@@ -271,7 +302,10 @@ The popup fetches scores on open and uses adaptive refresh:
 - When the popup becomes visible again, it refreshes once if the last request is older than 30 seconds.
 - Returning from detail to the main list refreshes only if the last successful score fetch is older than 60 seconds.
 - A local request guard and short-lived client cache help reduce repeated Worker requests.
-- The local daily guard records `attempted` and `successful` requests separately. The 2,000/day pause is based on successful backend JSON responses, so timeouts, aborts, failed responses, or invalid JSON do not prematurely consume the success budget.
+- The local daily guard records `attempted` and `successful` requests separately.
+  The 2,000/day pause is based on successful backend JSON responses, so
+  timeouts, aborts, failed responses, or invalid JSON do not prematurely consume
+  the success budget.
 
 Favorites are local-only:
 
@@ -307,7 +341,9 @@ The command creates:
 dist/hype-live-football-scores-v1.3-chrome-web-store.zip
 ```
 
-Only extension runtime files are included. The zip root contains `manifest.json`; backend, memory-bank, README, Wrangler files, and local tooling are excluded.
+Only extension runtime files are included. The zip root contains
+`manifest.json`; backend, memory-bank, README, Wrangler files, and local tooling
+are excluded.
 
 ## Smoke test
 
@@ -358,7 +394,8 @@ Validate JSON files in PowerShell:
 
 ```powershell
 Get-Content -Raw extension/manifest.json | ConvertFrom-Json
-Get-ChildItem extension/_locales -Recurse -Filter messages.json | ForEach-Object { Get-Content -Raw $_.FullName | ConvertFrom-Json | Out-Null }
+Get-ChildItem extension/_locales -Recurse -Filter messages.json |
+  ForEach-Object { Get-Content -Raw $_.FullName | ConvertFrom-Json | Out-Null }
 ```
 
 Then reload the unpacked extension from `chrome://extensions` and test the real
@@ -370,7 +407,8 @@ data because Worker CORS intentionally rejects `Origin: null`.
 ```bash
 curl -i -H "Origin: chrome-extension://YOUR_EXTENSION_ID" https://YOUR-WORKER-SUBDOMAIN.workers.dev/live-matches
 curl -i -H "Origin: chrome-extension://YOUR_EXTENSION_ID" "https://YOUR-WORKER-SUBDOMAIN.workers.dev/league-standings?leagueCode=esp.1"
-curl -i -H "Origin: chrome-extension://YOUR_EXTENSION_ID" "https://YOUR-WORKER-SUBDOMAIN.workers.dev/match-detail?eventId=401867653&leagueCode=eng.fa"
+curl -i -H "Origin: chrome-extension://YOUR_EXTENSION_ID" \
+  "https://YOUR-WORKER-SUBDOMAIN.workers.dev/match-detail?eventId=401867653&leagueCode=eng.fa"
 curl -i -X OPTIONS -H "Origin: chrome-extension://YOUR_EXTENSION_ID" https://YOUR-WORKER-SUBDOMAIN.workers.dev/live-matches
 curl -i -H "Origin: chrome-extension://YOUR_EXTENSION_ID" https://YOUR-WORKER-SUBDOMAIN.workers.dev/unknown
 ```
@@ -402,15 +440,25 @@ Expected UI states:
 - Worker fallback ESPN logo asset IDs are sanitized before building CDN URLs.
 - Worker team-logo overrides are hardcoded HTTPS URLs and host-allowlisted separately from ESPN media URLs.
 - Worker upstream API requests have an 8 second timeout.
-- Worker CORS/origin policy is restricted to Chrome extension origins plus browser-like no-Origin Chrome/Edge extension fetches; it rejects raw no-Origin, `file://`, and normal web origins.
+- Worker CORS/origin policy is restricted to Chrome extension origins plus
+  browser-like no-Origin Chrome/Edge extension fetches; it rejects raw
+  no-Origin, `file://`, and normal web origins.
 - Worker JSON responses include `X-Content-Type-Options: nosniff`, `Referrer-Policy: no-referrer`, and `X-Robots-Tag: noindex`.
 - Match details are fetched lazily and cached to avoid amplifying upstream API traffic.
 - Public Worker errors are generic; detailed errors stay in Worker logs.
+
+See `SECURITY.md` for the vulnerability reporting policy.
 
 ## Known production notes
 
 - ESPN APIs used here are unofficial and can change without notice.
 - `tools/smoke-test.js` is the quick guard against silent response-shape breakage.
-- CORS blocks normal web pages and raw no-Origin calls, but server-to-server clients can still spoof request headers. If traffic grows, add Cloudflare WAF/rate limiting.
+- CORS blocks normal web pages and raw no-Origin calls, but server-to-server
+  clients can still spoof request headers. If traffic grows, add Cloudflare WAF
+  or rate limiting.
 - Team logos remain remote images; league logos are packaged locally in the extension.
 - If extension runtime files change, bump `extension/manifest.json`, create a new Chrome Web Store zip from `extension/`, and upload it.
+
+## License
+
+MIT. See `LICENSE`.

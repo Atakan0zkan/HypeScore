@@ -3,6 +3,9 @@
   "name": "live-score-football",
   "main": "worker/index.js",
   "compatibility_date": "2026-04-26",
+  "placement": {
+    "mode": "smart"
+  },
   "observability": {
     "enabled": false,
     "head_sampling_rate": 1,

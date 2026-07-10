@@ -3,13 +3,13 @@
     "message": "Hype - Resultados de futebol em direto"
   },
   "extDescription": {
-    "message": "Resultados de futebol em direto, jogos, resultados e classificações."
+    "message": "Resultados de futebol em direto, jogos, resultados finais e classificações."
   },
   "appTitle": {
     "message": "Hype Scores"
   },
   "subtitle": {
-    "message": "Resultados em direto, resultados finais e classificações num só lugar."
+    "message": "Resultados em direto, finais e classificações num só lugar."
   },
   "loading": {
     "message": "A carregar jogos…"
@@ -241,7 +241,7 @@
     "message": "Comentários"
   },
   "lineups": {
-    "message": "Equipas"
+    "message": "Formações"
   },
   "headToHead": {
     "message": "Confronto direto"

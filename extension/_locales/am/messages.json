@@ -1,0 +1,258 @@
+{
+  "extName": {
+    "message": "Hype - የቀጥታ እግር ኳስ ውጤቶች"
+  },
+  "extDescription": {
+    "message": "የቀጥታ እግር ኳስ ውጤቶች፣ ጨዋታዎች፣ ውጤቶች እና የሊግ ሰንጠረዦች።"
+  },
+  "appTitle": {
+    "message": "Hype Scores"
+  },
+  "subtitle": {
+    "message": "ፈጣን ቀጥታ ውጤቶች፣ ውጤቶች እና ሰንጠረዦች።"
+  },
+  "loading": {
+    "message": "ጨዋታዎች በመጫን ላይ…"
+  },
+  "error": {
+    "message": "ውሂብ መጫን አልተቻለም"
+  },
+  "extensionRuntimeRequired": {
+    "message": "ቀጥታ ውሂብ በፋይል ቅድመ-እይታ ተከልክሏል። ውጤቶችን ለመጫን የChrome ቅጥያ ብቅ-ባይ ይክፈቱ።"
+  },
+  "empty": {
+    "message": "ዛሬ ጨዋታዎች አልተገኙም።"
+  },
+  "ready": {
+    "message": "ዝግጁ"
+  },
+  "refreshing": {
+    "message": "በማደስ ላይ"
+  },
+  "notUpdated": {
+    "message": "እስካሁን አልተዘመነም"
+  },
+  "updated": {
+    "message": "ተዘምኗል"
+  },
+  "live": {
+    "message": "ቀጥታ"
+  },
+  "matches": {
+    "message": "ጨዋታዎች"
+  },
+  "results": {
+    "message": "ውጤቶች"
+  },
+  "upcoming": {
+    "message": "መጪ"
+  },
+  "standings": {
+    "message": "ሰንጠረዥ"
+  },
+  "bracket": {
+    "message": "ኖክአውት"
+  },
+  "loadingBracket": {
+    "message": "የኖክአውት ቻርት በመጫን ላይ…"
+  },
+  "noBracket": {
+    "message": "የኖክአውት ቻርት የለም።"
+  },
+  "bracketUnavailable": {
+    "message": "የኖክአውት ቻርት አይገኝም።"
+  },
+  "tbd": {
+    "message": "TBD"
+  },
+  "roundOf32": {
+    "message": "የ32 ዙር"
+  },
+  "roundOf16": {
+    "message": "የ16 ዙር"
+  },
+  "quarterfinals": {
+    "message": "ሩብ ፍፃሜ"
+  },
+  "semifinals": {
+    "message": "ግማሽ ፍፃሜ"
+  },
+  "thirdPlace": {
+    "message": "ለ3ኛ ደረጃ ጨዋታ"
+  },
+  "final": {
+    "message": "ፍፃሜ"
+  },
+  "played": {
+    "message": "ጨ"
+  },
+  "wins": {
+    "message": "አ"
+  },
+  "draws": {
+    "message": "እ"
+  },
+  "losses": {
+    "message": "ተ"
+  },
+  "goalsFor": {
+    "message": "ገባ"
+  },
+  "goalsAgainst": {
+    "message": "ገባበት"
+  },
+  "goalDifference": {
+    "message": "ልዩነት"
+  },
+  "points": {
+    "message": "ነጥብ"
+  },
+  "paused": {
+    "message": "ቆሟል"
+  },
+  "autoPaused": {
+    "message": "ጥያቄዎችን ለመቆጠብ ራስ-ሰር ማደስ ቆሟል።"
+  },
+  "idlePaused": {
+    "message": "እንቅስቃሴ በሌለበት ቆሟል።"
+  },
+  "requestLimitReached": {
+    "message": "የዕለቱ የጥያቄ ገደብ ተሞልቷል። የተሸፈነ ውሂብ ይታያል።"
+  },
+  "refreshFailed": {
+    "message": "ማደስ አልተሳካም። የቅርብ ጊዜ ውሂብ ይታያል።"
+  },
+  "club": {
+    "message": "ክለብ"
+  },
+  "backToLeagues": {
+    "message": "← ሊጎች"
+  },
+  "selectLeague": {
+    "message": "ሊግ ይምረጡ"
+  },
+  "noLiveMatches": {
+    "message": "ቀጥታ ጨዋታ የለም"
+  },
+  "liveCount": {
+    "message": "$COUNT$ ቀጥታ",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCount": {
+    "message": "$COUNT$ ጨዋታዎች",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fullTime": {
+    "message": "ተጠናቋል"
+  },
+  "halfTime": {
+    "message": "ግማሽ"
+  },
+  "scheduled": {
+    "message": "ታቅዷል"
+  },
+  "stats": {
+    "message": "ስታቲስቲክስ"
+  },
+  "favorite": {
+    "message": "ተወዳጅ"
+  },
+  "removeFavorite": {
+    "message": "ከተወዳጆች አስወግድ"
+  },
+  "turnOff": {
+    "message": "ቅጥያውን አጥፋ"
+  },
+  "turnOn": {
+    "message": "ቅጥያውን አብራ"
+  },
+  "favoriteLeague": {
+    "message": "ሊጉን ወደ ተወዳጆች ጨምር"
+  },
+  "forceEnglishOn": {
+    "message": "የእንግሊዝኛ መለያዎችን አሳይ"
+  },
+  "forceEnglishOff": {
+    "message": "ወደ አሳሽ ቋንቋ ተመለስ"
+  },
+  "other": {
+    "message": "ሌላ"
+  },
+  "team": {
+    "message": "ቡድን"
+  },
+  "unknownLeague": {
+    "message": "ያልታወቀ ሊግ"
+  },
+  "unknownTeam": {
+    "message": "ያልታወቀ ቡድን"
+  },
+  "matchDetails": {
+    "message": "የጨዋታ ዝርዝሮች"
+  },
+  "loadingDetails": {
+    "message": "የጨዋታ ዝርዝሮች በመጫን ላይ…"
+  },
+  "loadingStandings": {
+    "message": "ሰንጠረዥ በመጫን ላይ…"
+  },
+  "detailsUnavailable": {
+    "message": "ዝርዝሮች አይገኙም"
+  },
+  "noDetails": {
+    "message": "ለዚህ ጨዋታ ተጨማሪ ዝርዝር የለም።"
+  },
+  "noSectionData": {
+    "message": "ውሂብ የለም።"
+  },
+  "noStats": {
+    "message": "የጨዋታ ስታቲስቲክስ የለም።"
+  },
+  "noStandings": {
+    "message": "ለዚህ ሊግ ሰንጠረዥ የለም።"
+  },
+  "noNews": {
+    "message": "ዜና የለም።"
+  },
+  "noLinks": {
+    "message": "አገናኞች የሉም።"
+  },
+  "venue": {
+    "message": "ስታዲየም"
+  },
+  "kickoff": {
+    "message": "መጀመሪያ"
+  },
+  "broadcasts": {
+    "message": "ስርጭቶች"
+  },
+  "timeline": {
+    "message": "ጊዜ መስመር"
+  },
+  "commentary": {
+    "message": "ትንታኔ"
+  },
+  "lineups": {
+    "message": "መስመሮች"
+  },
+  "headToHead": {
+    "message": "ጭንቅላት ለጭንቅላት"
+  },
+  "news": {
+    "message": "ዜና"
+  },
+  "highlights": {
+    "message": "ማጠቃለያ"
+  },
+  "links": {
+    "message": "አገናኞች"
+  }
+}

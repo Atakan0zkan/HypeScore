@@ -1,0 +1,258 @@
+{
+  "extName": {
+    "message": "Hype - Live fotbollsresultat"
+  },
+  "extDescription": {
+    "message": "Live fotbollsresultat, matcher, resultat och tabeller."
+  },
+  "appTitle": {
+    "message": "Hype Scores"
+  },
+  "subtitle": {
+    "message": "Snabba livesiffror, resultat och tabeller."
+  },
+  "loading": {
+    "message": "Laddar matcher…"
+  },
+  "error": {
+    "message": "Kunde inte ladda data"
+  },
+  "extensionRuntimeRequired": {
+    "message": "Livedata blockeras i filförhandsvisning. Öppna Chrome-tilläggets popup för att ladda resultat."
+  },
+  "empty": {
+    "message": "Inga matcher hittades idag."
+  },
+  "ready": {
+    "message": "Klar"
+  },
+  "refreshing": {
+    "message": "Uppdaterar"
+  },
+  "notUpdated": {
+    "message": "Inte uppdaterad ännu"
+  },
+  "updated": {
+    "message": "Uppdaterad"
+  },
+  "live": {
+    "message": "Live"
+  },
+  "matches": {
+    "message": "Matcher"
+  },
+  "results": {
+    "message": "Resultat"
+  },
+  "upcoming": {
+    "message": "Kommande"
+  },
+  "standings": {
+    "message": "Tabell"
+  },
+  "bracket": {
+    "message": "Utslagsspel"
+  },
+  "loadingBracket": {
+    "message": "Laddar utslagsträd…"
+  },
+  "noBracket": {
+    "message": "Inget utslagsträd tillgängligt."
+  },
+  "bracketUnavailable": {
+    "message": "Utslagsträd otillgängligt."
+  },
+  "tbd": {
+    "message": "TBD"
+  },
+  "roundOf32": {
+    "message": "Åttondelsfinalkval"
+  },
+  "roundOf16": {
+    "message": "Åttondelsfinal"
+  },
+  "quarterfinals": {
+    "message": "Kvartsfinal"
+  },
+  "semifinals": {
+    "message": "Semifinal"
+  },
+  "thirdPlace": {
+    "message": "Bronsmatch"
+  },
+  "final": {
+    "message": "Final"
+  },
+  "played": {
+    "message": "M"
+  },
+  "wins": {
+    "message": "V"
+  },
+  "draws": {
+    "message": "O"
+  },
+  "losses": {
+    "message": "F"
+  },
+  "goalsFor": {
+    "message": "GM"
+  },
+  "goalsAgainst": {
+    "message": "IM"
+  },
+  "goalDifference": {
+    "message": "MS"
+  },
+  "points": {
+    "message": "P"
+  },
+  "paused": {
+    "message": "Pausad"
+  },
+  "autoPaused": {
+    "message": "Automatisk uppdatering pausad för att spara förfrågningar."
+  },
+  "idlePaused": {
+    "message": "Pausad vid inaktivitet."
+  },
+  "requestLimitReached": {
+    "message": "Daglig förfrågningsgräns nådd. Visar cachad data."
+  },
+  "refreshFailed": {
+    "message": "Uppdatering misslyckades. Visar senaste data."
+  },
+  "club": {
+    "message": "Klubb"
+  },
+  "backToLeagues": {
+    "message": "← Ligor"
+  },
+  "selectLeague": {
+    "message": "Välj en liga"
+  },
+  "noLiveMatches": {
+    "message": "Inga livematcher"
+  },
+  "liveCount": {
+    "message": "$COUNT$ live",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCount": {
+    "message": "$COUNT$ matcher",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fullTime": {
+    "message": "FT"
+  },
+  "halfTime": {
+    "message": "HT"
+  },
+  "scheduled": {
+    "message": "Schemalagd"
+  },
+  "stats": {
+    "message": "Statistik"
+  },
+  "favorite": {
+    "message": "Favorit"
+  },
+  "removeFavorite": {
+    "message": "Ta bort favorit"
+  },
+  "turnOff": {
+    "message": "Stäng av tillägget"
+  },
+  "turnOn": {
+    "message": "Slå på tillägget"
+  },
+  "favoriteLeague": {
+    "message": "Favoritmarkera liga"
+  },
+  "forceEnglishOn": {
+    "message": "Visa engelska etiketter"
+  },
+  "forceEnglishOff": {
+    "message": "Tillbaka till webbläsarspråk"
+  },
+  "other": {
+    "message": "Övrigt"
+  },
+  "team": {
+    "message": "Lag"
+  },
+  "unknownLeague": {
+    "message": "Okänd liga"
+  },
+  "unknownTeam": {
+    "message": "Okänt lag"
+  },
+  "matchDetails": {
+    "message": "Matchdetaljer"
+  },
+  "loadingDetails": {
+    "message": "Laddar matchdetaljer…"
+  },
+  "loadingStandings": {
+    "message": "Laddar tabell…"
+  },
+  "detailsUnavailable": {
+    "message": "Detaljer otillgängliga"
+  },
+  "noDetails": {
+    "message": "Inga extra detaljer för den här matchen."
+  },
+  "noSectionData": {
+    "message": "Ingen data tillgänglig."
+  },
+  "noStats": {
+    "message": "Ingen matchstatistik tillgänglig."
+  },
+  "noStandings": {
+    "message": "Ingen tabell för den här ligan."
+  },
+  "noNews": {
+    "message": "Inga nyheter tillgängliga."
+  },
+  "noLinks": {
+    "message": "Inga länkar tillgängliga."
+  },
+  "venue": {
+    "message": "Arena"
+  },
+  "kickoff": {
+    "message": "Avspark"
+  },
+  "broadcasts": {
+    "message": "Sändningar"
+  },
+  "timeline": {
+    "message": "Tidslinje"
+  },
+  "commentary": {
+    "message": "Referat"
+  },
+  "lineups": {
+    "message": "Laguppställningar"
+  },
+  "headToHead": {
+    "message": "Inbördes möten"
+  },
+  "news": {
+    "message": "Nyheter"
+  },
+  "highlights": {
+    "message": "Höjdpunkter"
+  },
+  "links": {
+    "message": "Länkar"
+  }
+}

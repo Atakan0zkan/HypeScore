@@ -1,0 +1,258 @@
+{
+  "extName": {
+    "message": "Hype - நேரடி கால்பந்து மதிப்பெண்கள்"
+  },
+  "extDescription": {
+    "message": "நேரடி கால்பந்து மதிப்பெண்கள், போட்டிகள், முடிவுகள் மற்றும் அட்டவணைகள்."
+  },
+  "appTitle": {
+    "message": "Hype Scores"
+  },
+  "subtitle": {
+    "message": "விரைவான நேரடி மதிப்பெண்கள், முடிவுகள் மற்றும் அட்டவணைகள்."
+  },
+  "loading": {
+    "message": "போட்டிகள் ஏற்றப்படுகிறது…"
+  },
+  "error": {
+    "message": "தரவை ஏற்ற முடியவில்லை"
+  },
+  "extensionRuntimeRequired": {
+    "message": "கோப்பு முன்னோட்டத்தில் நேரடி தரவு தடுக்கப்பட்டுள்ளது. மதிப்பெண்களுக்கு Chrome நீட்டிப்பு பாப்அப்பைத் திறக்கவும்."
+  },
+  "empty": {
+    "message": "இன்று போட்டிகள் இல்லை."
+  },
+  "ready": {
+    "message": "தயார்"
+  },
+  "refreshing": {
+    "message": "புதுப்பிக்கிறது"
+  },
+  "notUpdated": {
+    "message": "இன்னும் புதுப்பிக்கப்படவில்லை"
+  },
+  "updated": {
+    "message": "புதுப்பிக்கப்பட்டது"
+  },
+  "live": {
+    "message": "நேரடி"
+  },
+  "matches": {
+    "message": "போட்டிகள்"
+  },
+  "results": {
+    "message": "முடிவுகள்"
+  },
+  "upcoming": {
+    "message": "வரவிருக்கும்"
+  },
+  "standings": {
+    "message": "அட்டவணை"
+  },
+  "bracket": {
+    "message": "நாக்அவுட்"
+  },
+  "loadingBracket": {
+    "message": "நாக்அவுட் அட்டவணை ஏற்றப்படுகிறது…"
+  },
+  "noBracket": {
+    "message": "நாக்அவுட் அட்டவணை இல்லை."
+  },
+  "bracketUnavailable": {
+    "message": "நாக்அவுட் அட்டவணை கிடைக்கவில்லை."
+  },
+  "tbd": {
+    "message": "TBD"
+  },
+  "roundOf32": {
+    "message": "32 அணி சுற்று"
+  },
+  "roundOf16": {
+    "message": "16 அணி சுற்று"
+  },
+  "quarterfinals": {
+    "message": "காலிறுதி"
+  },
+  "semifinals": {
+    "message": "அரையிறுதி"
+  },
+  "thirdPlace": {
+    "message": "மூன்றாம் இடப் போட்டி"
+  },
+  "final": {
+    "message": "இறுதி"
+  },
+  "played": {
+    "message": "போ"
+  },
+  "wins": {
+    "message": "வெ"
+  },
+  "draws": {
+    "message": "சம"
+  },
+  "losses": {
+    "message": "தோ"
+  },
+  "goalsFor": {
+    "message": "அடி"
+  },
+  "goalsAgainst": {
+    "message": "விட்"
+  },
+  "goalDifference": {
+    "message": "வேறு"
+  },
+  "points": {
+    "message": "புள்ளி"
+  },
+  "paused": {
+    "message": "இடைநிறுத்தம்"
+  },
+  "autoPaused": {
+    "message": "கோரிக்கைகளைச் சேமிக்க தானியங்கி புதுப்பிப்பு இடைநிறுத்தப்பட்டது."
+  },
+  "idlePaused": {
+    "message": "செயலற்றபோது இடைநிறுத்தப்பட்டது."
+  },
+  "requestLimitReached": {
+    "message": "தினசரி கோரிக்கை வரம்பு எட்டியது. கேச் தரவு காட்டப்படுகிறது."
+  },
+  "refreshFailed": {
+    "message": "புதுப்பிப்பு தோல்வி. சமீபத்திய தரவு காட்டப்படுகிறது."
+  },
+  "club": {
+    "message": "கிளப்"
+  },
+  "backToLeagues": {
+    "message": "← லீக்குகள்"
+  },
+  "selectLeague": {
+    "message": "ஒரு லீக்கைத் தேர்ந்தெடுக்கவும்"
+  },
+  "noLiveMatches": {
+    "message": "நேரடி போட்டிகள் இல்லை"
+  },
+  "liveCount": {
+    "message": "$COUNT$ நேரடி",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCount": {
+    "message": "$COUNT$ போட்டிகள்",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fullTime": {
+    "message": "முடிவு"
+  },
+  "halfTime": {
+    "message": "பாதி"
+  },
+  "scheduled": {
+    "message": "திட்டமிடப்பட்டது"
+  },
+  "stats": {
+    "message": "புள்ளிவிவரங்கள்"
+  },
+  "favorite": {
+    "message": "பிடித்தது"
+  },
+  "removeFavorite": {
+    "message": "பிடித்ததிலிருந்து நீக்கு"
+  },
+  "turnOff": {
+    "message": "நீட்டிப்பை அணை"
+  },
+  "turnOn": {
+    "message": "நீட்டிப்பை இயக்கு"
+  },
+  "favoriteLeague": {
+    "message": "லீக்கைப் பிடித்ததில் சேர்"
+  },
+  "forceEnglishOn": {
+    "message": "ஆங்கில லேபிள்களைக் காட்டு"
+  },
+  "forceEnglishOff": {
+    "message": "உலாவி மொழிக்குத் திரும்பு"
+  },
+  "other": {
+    "message": "மற்றவை"
+  },
+  "team": {
+    "message": "அணி"
+  },
+  "unknownLeague": {
+    "message": "தெரியாத லீக்"
+  },
+  "unknownTeam": {
+    "message": "தெரியாத அணி"
+  },
+  "matchDetails": {
+    "message": "போட்டி விவரங்கள்"
+  },
+  "loadingDetails": {
+    "message": "போட்டி விவரங்கள் ஏற்றப்படுகிறது…"
+  },
+  "loadingStandings": {
+    "message": "அட்டவணை ஏற்றப்படுகிறது…"
+  },
+  "detailsUnavailable": {
+    "message": "விவரங்கள் இல்லை"
+  },
+  "noDetails": {
+    "message": "இந்தப் போட்டிக்கு கூடுதல் விவரங்கள் இல்லை."
+  },
+  "noSectionData": {
+    "message": "தரவு இல்லை."
+  },
+  "noStats": {
+    "message": "போட்டிப் புள்ளிவிவரங்கள் இல்லை."
+  },
+  "noStandings": {
+    "message": "இந்த லீக்கிற்கு அட்டவணை இல்லை."
+  },
+  "noNews": {
+    "message": "செய்திகள் இல்லை."
+  },
+  "noLinks": {
+    "message": "இணைப்புகள் இல்லை."
+  },
+  "venue": {
+    "message": "மைதானம்"
+  },
+  "kickoff": {
+    "message": "தொடக்கம்"
+  },
+  "broadcasts": {
+    "message": "ஒளிபரப்பு"
+  },
+  "timeline": {
+    "message": "நேரக்கோடு"
+  },
+  "commentary": {
+    "message": "விளக்கம்"
+  },
+  "lineups": {
+    "message": "அணி அமைப்பு"
+  },
+  "headToHead": {
+    "message": "நேருக்கு நேர்"
+  },
+  "news": {
+    "message": "செய்திகள்"
+  },
+  "highlights": {
+    "message": "சிறப்பம்சங்கள்"
+  },
+  "links": {
+    "message": "இணைப்புகள்"
+  }
+}

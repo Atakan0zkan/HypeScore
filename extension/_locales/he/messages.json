@@ -1,0 +1,258 @@
+{
+  "extName": {
+    "message": "Hype - תוצאות כדורגל בשידור חי"
+  },
+  "extDescription": {
+    "message": "תוצאות כדורגל בשידור חי, משחקים, תוצאות וטבלאות."
+  },
+  "appTitle": {
+    "message": "Hype Scores"
+  },
+  "subtitle": {
+    "message": "תוצאות חיות מהירות, תוצאות וטבלאות."
+  },
+  "loading": {
+    "message": "טוען משחקים…"
+  },
+  "error": {
+    "message": "לא ניתן לטעון נתונים"
+  },
+  "extensionRuntimeRequired": {
+    "message": "נתונים חיים חסומים בתצוגה מקדימה של קובץ. פתחו את חלון התוסף של Chrome."
+  },
+  "empty": {
+    "message": "לא נמצאו משחקים היום."
+  },
+  "ready": {
+    "message": "מוכן"
+  },
+  "refreshing": {
+    "message": "מרענן"
+  },
+  "notUpdated": {
+    "message": "עדיין לא עודכן"
+  },
+  "updated": {
+    "message": "עודכן"
+  },
+  "live": {
+    "message": "חי"
+  },
+  "matches": {
+    "message": "משחקים"
+  },
+  "results": {
+    "message": "תוצאות"
+  },
+  "upcoming": {
+    "message": "קרובים"
+  },
+  "standings": {
+    "message": "טבלה"
+  },
+  "bracket": {
+    "message": "נוקאאוט"
+  },
+  "loadingBracket": {
+    "message": "טוען תרשים נוקאאוט…"
+  },
+  "noBracket": {
+    "message": "אין תרשים נוקאאוט."
+  },
+  "bracketUnavailable": {
+    "message": "תרשים הנוקאאוט אינו זמין."
+  },
+  "tbd": {
+    "message": "ייקבע"
+  },
+  "roundOf32": {
+    "message": "שמינית גמר מוקדמות"
+  },
+  "roundOf16": {
+    "message": "שמינית גמר"
+  },
+  "quarterfinals": {
+    "message": "רבע גמר"
+  },
+  "semifinals": {
+    "message": "חצי גמר"
+  },
+  "thirdPlace": {
+    "message": "משחק על המקום השלישי"
+  },
+  "final": {
+    "message": "גמר"
+  },
+  "played": {
+    "message": "מש"
+  },
+  "wins": {
+    "message": "נ"
+  },
+  "draws": {
+    "message": "ת"
+  },
+  "losses": {
+    "message": "ה"
+  },
+  "goalsFor": {
+    "message": "שז"
+  },
+  "goalsAgainst": {
+    "message": "שח"
+  },
+  "goalDifference": {
+    "message": "הפרש"
+  },
+  "points": {
+    "message": "נק"
+  },
+  "paused": {
+    "message": "מושהה"
+  },
+  "autoPaused": {
+    "message": "רענון אוטומטי הושהה כדי לחסוך בבקשות."
+  },
+  "idlePaused": {
+    "message": "מושהה בזמן חוסר פעילות."
+  },
+  "requestLimitReached": {
+    "message": "הגעת למכסת הבקשות היומית. מציג נתונים שמורים."
+  },
+  "refreshFailed": {
+    "message": "הרענון נכשל. מציג את הנתונים העדכניים ביותר."
+  },
+  "club": {
+    "message": "מועדון"
+  },
+  "backToLeagues": {
+    "message": "← ליגות"
+  },
+  "selectLeague": {
+    "message": "בחרו ליגה"
+  },
+  "noLiveMatches": {
+    "message": "אין משחקים חיים"
+  },
+  "liveCount": {
+    "message": "$COUNT$ חי",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCount": {
+    "message": "$COUNT$ משחקים",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fullTime": {
+    "message": "סיום"
+  },
+  "halfTime": {
+    "message": "הפסקה"
+  },
+  "scheduled": {
+    "message": "מתוכנן"
+  },
+  "stats": {
+    "message": "סטטיסטיקה"
+  },
+  "favorite": {
+    "message": "מועדף"
+  },
+  "removeFavorite": {
+    "message": "הסרה ממועדפים"
+  },
+  "turnOff": {
+    "message": "כיבוי התוסף"
+  },
+  "turnOn": {
+    "message": "הפעלת התוסף"
+  },
+  "favoriteLeague": {
+    "message": "הוספת ליגה למועדפים"
+  },
+  "forceEnglishOn": {
+    "message": "הצגת תוויות באנגלית"
+  },
+  "forceEnglishOff": {
+    "message": "חזרה לשפת הדפדפן"
+  },
+  "other": {
+    "message": "אחר"
+  },
+  "team": {
+    "message": "קבוצה"
+  },
+  "unknownLeague": {
+    "message": "ליגה לא ידועה"
+  },
+  "unknownTeam": {
+    "message": "קבוצה לא ידועה"
+  },
+  "matchDetails": {
+    "message": "פרטי משחק"
+  },
+  "loadingDetails": {
+    "message": "טוען פרטי משחק…"
+  },
+  "loadingStandings": {
+    "message": "טוען טבלה…"
+  },
+  "detailsUnavailable": {
+    "message": "פרטים אינם זמינים"
+  },
+  "noDetails": {
+    "message": "אין פרטים נוספים למשחק זה."
+  },
+  "noSectionData": {
+    "message": "אין נתונים זמינים."
+  },
+  "noStats": {
+    "message": "אין סטטיסטיקת משחק."
+  },
+  "noStandings": {
+    "message": "אין טבלה לליגה זו."
+  },
+  "noNews": {
+    "message": "אין חדשות."
+  },
+  "noLinks": {
+    "message": "אין קישורים."
+  },
+  "venue": {
+    "message": "אצטדיון"
+  },
+  "kickoff": {
+    "message": "שריקת פתיחה"
+  },
+  "broadcasts": {
+    "message": "שידורים"
+  },
+  "timeline": {
+    "message": "ציר זמן"
+  },
+  "commentary": {
+    "message": "פרשנות"
+  },
+  "lineups": {
+    "message": "הרכב"
+  },
+  "headToHead": {
+    "message": "מפגשים קודמים"
+  },
+  "news": {
+    "message": "חדשות"
+  },
+  "highlights": {
+    "message": "תקצירים"
+  },
+  "links": {
+    "message": "קישורים"
+  }
+}

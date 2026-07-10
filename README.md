@@ -5,8 +5,9 @@ a dependency-free Chrome browser extension backed by a Cloudflare Worker. The
 extension uses adaptive refresh and cache-backed lazy detail endpoints to stay
 friendly to the Cloudflare Workers Free plan.
 
-The popup is English by default and supports Turkish, German, Spanish, French,
-Brazilian Portuguese, and European Portuguese through Chrome locale files.
+The popup defaults to English and follows the browser language through Chrome
+locale files (`extension/_locales`), with `55` locales including regional
+English/Spanish/Portuguese variants. Arabic, Hebrew, and Persian use RTL layout.
 Matches are grouped by league, with live matches, results, upcoming fixtures,
 team logos, local favorites, full standings, and lazy-loaded match details
 shown when the upstream API supports that data.
@@ -16,8 +17,8 @@ shown when the upstream API supports that data.
 - Chrome Web Store listing: `https://chromewebstore.google.com/detail/hype-live-football-scores/cdnpjnmhmagmiefkleefgchgffeaacaa`
 - GitHub repository: `https://github.com/Atakan0zkan/HypeScore.git`
 - Published extension ID: `cdnpjnmhmagmiefkleefgchgffeaacaa`
-- Extension manifest version: `1.3`
-- Current store package: `dist/hype-live-football-scores-v1.3-chrome-web-store.zip`
+- Extension manifest version: `1.4.0`
+- Current store package: rebuild from `extension/` after locale packaging
 - Worker URL: `https://api.atakanozkan.com`
 - Latest deployed Worker version recorded in the memory bank: `c6d3f8cb-03c0-4828-abe2-2ef367231ace`
 
@@ -46,8 +47,10 @@ shown when the upstream API supports that data.
 - FIFA World Cup is included in the curated league/cup roster when ESPN exposes current fixtures.
 - FIFA World Cup knockout rounds are available as a lazy World Cup-only section using ESPN date-range scoreboard data.
 - The popup live-payload cache is versioned so roster changes such as World Cup support invalidate older cached league lists.
-- English default locale plus Turkish, German, Spanish, French, Brazilian Portuguese, and European Portuguese Chrome-locale support.
+- `55` Chrome UI locales with automatic browser-language selection (`default_locale: en`).
+- RTL popup direction for Arabic, Hebrew, and Persian.
 - Header `ENG` toggle forces English labels for quick translation fallback, then returns to the browser/default locale when turned off.
+- Chrome Web Store long-description copy for the same language set lives in `store-assets/store-listing-copy.md`.
 - Dark Hype theme with muted red accents and fixed 580x600 popup sizing.
 - Cloudflare Free-plan-friendly refresh behavior with local cache, lazy endpoints, and a local daily request guard.
 
@@ -60,13 +63,7 @@ LiveScoreFootball/
   README.md
   extension/
     _locales/
-      de/messages.json
-      en/messages.json
-      es/messages.json
-      fr/messages.json
-      pt_BR/messages.json
-      pt_PT/messages.json
-      tr/messages.json
+      <55 locale codes>/messages.json
     icons/
       icon16.png
       icon32.png
@@ -84,6 +81,9 @@ LiveScoreFootball/
     store-listing-copy.md
     screenshot-*.png
   tools/
+    apply-locales.js
+    seed-locale-sources.js
+    seed-store-listing.js
     capture-store-sources.ps1
     download-league-logos.ps1
     generate-store-assets.ps1
@@ -332,13 +332,13 @@ Create the Chrome Web Store zip from the project root:
 
 ```powershell
 New-Item -ItemType Directory -Force dist
-Compress-Archive -Path extension\* -DestinationPath dist\hype-live-football-scores-v1.3-chrome-web-store.zip -Force
+Compress-Archive -Path extension\* -DestinationPath dist\hype-live-football-scores-v1.4.0-chrome-web-store.zip -Force
 ```
 
 The command creates:
 
 ```text
-dist/hype-live-football-scores-v1.3-chrome-web-store.zip
+dist/hype-live-football-scores-v1.4.0-chrome-web-store.zip
 ```
 
 Only extension runtime files are included. The zip root contains

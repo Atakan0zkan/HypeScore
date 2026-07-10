@@ -1,0 +1,258 @@
+{
+  "extName": {
+    "message": "Hype - ผลบอลสด"
+  },
+  "extDescription": {
+    "message": "ผลบอลสด โปรแกรมการแข่งขัน ผลและตารางคะแนน"
+  },
+  "appTitle": {
+    "message": "Hype Scores"
+  },
+  "subtitle": {
+    "message": "ผลสด ผลแข่ง และตารางคะแนนอย่างรวดเร็ว"
+  },
+  "loading": {
+    "message": "กำลังโหลดแมตช์…"
+  },
+  "error": {
+    "message": "โหลดข้อมูลไม่ได้"
+  },
+  "extensionRuntimeRequired": {
+    "message": "ข้อมูลสดถูกบล็อกในพรีวิวไฟล์ เปิดป๊อปอัปของส่วนขยาย Chrome เพื่อโหลดสกอร์"
+  },
+  "empty": {
+    "message": "วันนี้ไม่พบแมตช์"
+  },
+  "ready": {
+    "message": "พร้อม"
+  },
+  "refreshing": {
+    "message": "กำลังรีเฟรช"
+  },
+  "notUpdated": {
+    "message": "ยังไม่อัปเดต"
+  },
+  "updated": {
+    "message": "อัปเดตแล้ว"
+  },
+  "live": {
+    "message": "สด"
+  },
+  "matches": {
+    "message": "แมตช์"
+  },
+  "results": {
+    "message": "ผลแข่ง"
+  },
+  "upcoming": {
+    "message": "กำลังจะแข่ง"
+  },
+  "standings": {
+    "message": "ตารางคะแนน"
+  },
+  "bracket": {
+    "message": "รอบน็อกเอาต์"
+  },
+  "loadingBracket": {
+    "message": "กำลังโหลดสายการแข่ง…"
+  },
+  "noBracket": {
+    "message": "ยังไม่มีสายการแข่ง"
+  },
+  "bracketUnavailable": {
+    "message": "สายการแข่งไม่พร้อมใช้งาน"
+  },
+  "tbd": {
+    "message": "รอประกาศ"
+  },
+  "roundOf32": {
+    "message": "รอบ 32 ทีมสุดท้าย"
+  },
+  "roundOf16": {
+    "message": "รอบ 16 ทีมสุดท้าย"
+  },
+  "quarterfinals": {
+    "message": "รอบก่อนรองชนะเลิศ"
+  },
+  "semifinals": {
+    "message": "รอบรองชนะเลิศ"
+  },
+  "thirdPlace": {
+    "message": "นัดชิงที่ 3"
+  },
+  "final": {
+    "message": "รอบชิงชนะเลิศ"
+  },
+  "played": {
+    "message": "แข่ง"
+  },
+  "wins": {
+    "message": "ชนะ"
+  },
+  "draws": {
+    "message": "เสมอ"
+  },
+  "losses": {
+    "message": "แพ้"
+  },
+  "goalsFor": {
+    "message": "ได้"
+  },
+  "goalsAgainst": {
+    "message": "เสีย"
+  },
+  "goalDifference": {
+    "message": "+/-"
+  },
+  "points": {
+    "message": "แต้ม"
+  },
+  "paused": {
+    "message": "หยุดชั่วคราว"
+  },
+  "autoPaused": {
+    "message": "หยุดรีเฟรชอัตโนมัติเพื่อประหยัดคำขอ"
+  },
+  "idlePaused": {
+    "message": "หยุดชั่วคราวเมื่อไม่มีการใช้งาน"
+  },
+  "requestLimitReached": {
+    "message": "ถึงขีดจำกัดคำขอรายวันแล้ว แสดงข้อมูลแคช"
+  },
+  "refreshFailed": {
+    "message": "รีเฟรชไม่สำเร็จ แสดงข้อมูลล่าสุด"
+  },
+  "club": {
+    "message": "สโมสร"
+  },
+  "backToLeagues": {
+    "message": "← ลีก"
+  },
+  "selectLeague": {
+    "message": "เลือกลีก"
+  },
+  "noLiveMatches": {
+    "message": "ไม่มีแมตช์สด"
+  },
+  "liveCount": {
+    "message": "$COUNT$ สด",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCount": {
+    "message": "$COUNT$ แมตช์",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fullTime": {
+    "message": "จบ"
+  },
+  "halfTime": {
+    "message": "ครึ่งแรก"
+  },
+  "scheduled": {
+    "message": "กำหนดการ"
+  },
+  "stats": {
+    "message": "สถิติ"
+  },
+  "favorite": {
+    "message": "รายการโปรด"
+  },
+  "removeFavorite": {
+    "message": "ลบออกจากรายการโปรด"
+  },
+  "turnOff": {
+    "message": "ปิดส่วนขยาย"
+  },
+  "turnOn": {
+    "message": "เปิดส่วนขยาย"
+  },
+  "favoriteLeague": {
+    "message": "เพิ่มลีกเป็นรายการโปรด"
+  },
+  "forceEnglishOn": {
+    "message": "แสดงป้ายภาษาอังกฤษ"
+  },
+  "forceEnglishOff": {
+    "message": "กลับไปภาษาเบราว์เซอร์"
+  },
+  "other": {
+    "message": "อื่นๆ"
+  },
+  "team": {
+    "message": "ทีม"
+  },
+  "unknownLeague": {
+    "message": "ลีกที่ไม่ทราบ"
+  },
+  "unknownTeam": {
+    "message": "ทีมที่ไม่ทราบ"
+  },
+  "matchDetails": {
+    "message": "รายละเอียดแมตช์"
+  },
+  "loadingDetails": {
+    "message": "กำลังโหลดรายละเอียดแมตช์…"
+  },
+  "loadingStandings": {
+    "message": "กำลังโหลดตารางคะแนน…"
+  },
+  "detailsUnavailable": {
+    "message": "ไม่มีรายละเอียด"
+  },
+  "noDetails": {
+    "message": "ไม่มีรายละเอียดเพิ่มเติมของแมตช์นี้"
+  },
+  "noSectionData": {
+    "message": "ไม่มีข้อมูล"
+  },
+  "noStats": {
+    "message": "ไม่มีสถิติแมตช์"
+  },
+  "noStandings": {
+    "message": "ไม่มีตารางคะแนนของลีกนี้"
+  },
+  "noNews": {
+    "message": "ไม่มีข่าว"
+  },
+  "noLinks": {
+    "message": "ไม่มีลิงก์"
+  },
+  "venue": {
+    "message": "สนาม"
+  },
+  "kickoff": {
+    "message": "เตะเริ่ม"
+  },
+  "broadcasts": {
+    "message": "ถ่ายทอด"
+  },
+  "timeline": {
+    "message": "ไทม์ไลน์"
+  },
+  "commentary": {
+    "message": "คำบรรยาย"
+  },
+  "lineups": {
+    "message": "รายชื่อผู้เล่น"
+  },
+  "headToHead": {
+    "message": "สถิติเจอกัน"
+  },
+  "news": {
+    "message": "ข่าว"
+  },
+  "highlights": {
+    "message": "ไฮไลต์"
+  },
+  "links": {
+    "message": "ลิงก์"
+  }
+}

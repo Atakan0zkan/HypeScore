@@ -1,0 +1,258 @@
+{
+  "extName": {
+    "message": "Hype - Живые футбольные счета"
+  },
+  "extDescription": {
+    "message": "Живые футбольные счета, матчи, результаты и турнирные таблицы."
+  },
+  "appTitle": {
+    "message": "Hype Scores"
+  },
+  "subtitle": {
+    "message": "Быстрые live-счета, результаты и таблицы."
+  },
+  "loading": {
+    "message": "Загрузка матчей…"
+  },
+  "error": {
+    "message": "Не удалось загрузить данные"
+  },
+  "extensionRuntimeRequired": {
+    "message": "Live-данные недоступны в предпросмотре файла. Откройте всплывающее окно расширения Chrome."
+  },
+  "empty": {
+    "message": "Сегодня матчей не найдено."
+  },
+  "ready": {
+    "message": "Готово"
+  },
+  "refreshing": {
+    "message": "Обновление"
+  },
+  "notUpdated": {
+    "message": "Ещё не обновлено"
+  },
+  "updated": {
+    "message": "Обновлено"
+  },
+  "live": {
+    "message": "Live"
+  },
+  "matches": {
+    "message": "Матчи"
+  },
+  "results": {
+    "message": "Результаты"
+  },
+  "upcoming": {
+    "message": "Предстоящие"
+  },
+  "standings": {
+    "message": "Таблица"
+  },
+  "bracket": {
+    "message": "Плей-офф"
+  },
+  "loadingBracket": {
+    "message": "Загрузка сетки…"
+  },
+  "noBracket": {
+    "message": "Сетка плей-офф недоступна."
+  },
+  "bracketUnavailable": {
+    "message": "Сетка недоступна."
+  },
+  "tbd": {
+    "message": "TBD"
+  },
+  "roundOf32": {
+    "message": "1/16 финала"
+  },
+  "roundOf16": {
+    "message": "1/8 финала"
+  },
+  "quarterfinals": {
+    "message": "1/4 финала"
+  },
+  "semifinals": {
+    "message": "1/2 финала"
+  },
+  "thirdPlace": {
+    "message": "Матч за 3-е место"
+  },
+  "final": {
+    "message": "Финал"
+  },
+  "played": {
+    "message": "И"
+  },
+  "wins": {
+    "message": "В"
+  },
+  "draws": {
+    "message": "Н"
+  },
+  "losses": {
+    "message": "П"
+  },
+  "goalsFor": {
+    "message": "ЗМ"
+  },
+  "goalsAgainst": {
+    "message": "ПМ"
+  },
+  "goalDifference": {
+    "message": "РМ"
+  },
+  "points": {
+    "message": "О"
+  },
+  "paused": {
+    "message": "Пауза"
+  },
+  "autoPaused": {
+    "message": "Автообновление приостановлено для экономии запросов."
+  },
+  "idlePaused": {
+    "message": "Пауза из-за бездействия."
+  },
+  "requestLimitReached": {
+    "message": "Дневной лимит запросов исчерпан. Показаны кэшированные данные."
+  },
+  "refreshFailed": {
+    "message": "Не удалось обновить. Показаны последние данные."
+  },
+  "club": {
+    "message": "Клуб"
+  },
+  "backToLeagues": {
+    "message": "← Лиги"
+  },
+  "selectLeague": {
+    "message": "Выберите лигу"
+  },
+  "noLiveMatches": {
+    "message": "Нет live-матчей"
+  },
+  "liveCount": {
+    "message": "$COUNT$ live",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCount": {
+    "message": "$COUNT$ матчей",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fullTime": {
+    "message": "FT"
+  },
+  "halfTime": {
+    "message": "HT"
+  },
+  "scheduled": {
+    "message": "Запланирован"
+  },
+  "stats": {
+    "message": "Статистика"
+  },
+  "favorite": {
+    "message": "Избранное"
+  },
+  "removeFavorite": {
+    "message": "Убрать из избранного"
+  },
+  "turnOff": {
+    "message": "Выключить расширение"
+  },
+  "turnOn": {
+    "message": "Включить расширение"
+  },
+  "favoriteLeague": {
+    "message": "Добавить лигу в избранное"
+  },
+  "forceEnglishOn": {
+    "message": "Показать английские подписи"
+  },
+  "forceEnglishOff": {
+    "message": "Вернуться к языку браузера"
+  },
+  "other": {
+    "message": "Другое"
+  },
+  "team": {
+    "message": "Команда"
+  },
+  "unknownLeague": {
+    "message": "Неизвестная лига"
+  },
+  "unknownTeam": {
+    "message": "Неизвестная команда"
+  },
+  "matchDetails": {
+    "message": "Детали матча"
+  },
+  "loadingDetails": {
+    "message": "Загрузка деталей матча…"
+  },
+  "loadingStandings": {
+    "message": "Загрузка таблицы…"
+  },
+  "detailsUnavailable": {
+    "message": "Детали недоступны"
+  },
+  "noDetails": {
+    "message": "Для этого матча нет дополнительных деталей."
+  },
+  "noSectionData": {
+    "message": "Нет доступных данных."
+  },
+  "noStats": {
+    "message": "Статистика матча недоступна."
+  },
+  "noStandings": {
+    "message": "Для этой лиги нет таблицы."
+  },
+  "noNews": {
+    "message": "Нет новостей."
+  },
+  "noLinks": {
+    "message": "Нет ссылок."
+  },
+  "venue": {
+    "message": "Стадион"
+  },
+  "kickoff": {
+    "message": "Начало"
+  },
+  "broadcasts": {
+    "message": "Трансляции"
+  },
+  "timeline": {
+    "message": "Хронология"
+  },
+  "commentary": {
+    "message": "Комментарии"
+  },
+  "lineups": {
+    "message": "Составы"
+  },
+  "headToHead": {
+    "message": "Очные встречи"
+  },
+  "news": {
+    "message": "Новости"
+  },
+  "highlights": {
+    "message": "Обзоры"
+  },
+  "links": {
+    "message": "Ссылки"
+  }
+}

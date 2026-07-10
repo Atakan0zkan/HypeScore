@@ -1,0 +1,258 @@
+{
+  "extName": {
+    "message": "Hype - ライブサッカー速報"
+  },
+  "extDescription": {
+    "message": "サッカーのライブスコア、試合、結果、順位表。"
+  },
+  "appTitle": {
+    "message": "Hype Scores"
+  },
+  "subtitle": {
+    "message": "ライブスコア、結果、順位表をすばやく確認。"
+  },
+  "loading": {
+    "message": "試合を読み込み中…"
+  },
+  "error": {
+    "message": "データを読み込めませんでした"
+  },
+  "extensionRuntimeRequired": {
+    "message": "ファイルプレビューではライブデータを読み込めません。Chrome 拡張機能のポップアップを開いてください。"
+  },
+  "empty": {
+    "message": "本日の試合はありません。"
+  },
+  "ready": {
+    "message": "準備完了"
+  },
+  "refreshing": {
+    "message": "更新中"
+  },
+  "notUpdated": {
+    "message": "まだ更新されていません"
+  },
+  "updated": {
+    "message": "更新済み"
+  },
+  "live": {
+    "message": "ライブ"
+  },
+  "matches": {
+    "message": "試合"
+  },
+  "results": {
+    "message": "結果"
+  },
+  "upcoming": {
+    "message": "予定"
+  },
+  "standings": {
+    "message": "順位表"
+  },
+  "bracket": {
+    "message": "トーナメント"
+  },
+  "loadingBracket": {
+    "message": "トーナメント表を読み込み中…"
+  },
+  "noBracket": {
+    "message": "トーナメント表はありません。"
+  },
+  "bracketUnavailable": {
+    "message": "トーナメント表を利用できません。"
+  },
+  "tbd": {
+    "message": "未定"
+  },
+  "roundOf32": {
+    "message": "ラウンド32"
+  },
+  "roundOf16": {
+    "message": "ラウンド16"
+  },
+  "quarterfinals": {
+    "message": "準々決勝"
+  },
+  "semifinals": {
+    "message": "準決勝"
+  },
+  "thirdPlace": {
+    "message": "3位決定戦"
+  },
+  "final": {
+    "message": "決勝"
+  },
+  "played": {
+    "message": "試"
+  },
+  "wins": {
+    "message": "勝"
+  },
+  "draws": {
+    "message": "分"
+  },
+  "losses": {
+    "message": "敗"
+  },
+  "goalsFor": {
+    "message": "得"
+  },
+  "goalsAgainst": {
+    "message": "失"
+  },
+  "goalDifference": {
+    "message": "差"
+  },
+  "points": {
+    "message": "点"
+  },
+  "paused": {
+    "message": "一時停止"
+  },
+  "autoPaused": {
+    "message": "リクエスト節約のため自動更新を一時停止しました。"
+  },
+  "idlePaused": {
+    "message": "非アクティブのため一時停止中。"
+  },
+  "requestLimitReached": {
+    "message": "1日のリクエスト上限に達しました。キャッシュを表示しています。"
+  },
+  "refreshFailed": {
+    "message": "更新に失敗しました。最新データを表示しています。"
+  },
+  "club": {
+    "message": "クラブ"
+  },
+  "backToLeagues": {
+    "message": "← リーグ"
+  },
+  "selectLeague": {
+    "message": "リーグを選択"
+  },
+  "noLiveMatches": {
+    "message": "ライブ試合はありません"
+  },
+  "liveCount": {
+    "message": "ライブ $COUNT$",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCount": {
+    "message": "$COUNT$ 試合",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fullTime": {
+    "message": "終了"
+  },
+  "halfTime": {
+    "message": "前半終了"
+  },
+  "scheduled": {
+    "message": "予定"
+  },
+  "stats": {
+    "message": "スタッツ"
+  },
+  "favorite": {
+    "message": "お気に入り"
+  },
+  "removeFavorite": {
+    "message": "お気に入りを解除"
+  },
+  "turnOff": {
+    "message": "拡張機能をオフ"
+  },
+  "turnOn": {
+    "message": "拡張機能をオン"
+  },
+  "favoriteLeague": {
+    "message": "リーグをお気に入りに追加"
+  },
+  "forceEnglishOn": {
+    "message": "英語ラベルを表示"
+  },
+  "forceEnglishOff": {
+    "message": "ブラウザ言語に戻す"
+  },
+  "other": {
+    "message": "その他"
+  },
+  "team": {
+    "message": "チーム"
+  },
+  "unknownLeague": {
+    "message": "不明なリーグ"
+  },
+  "unknownTeam": {
+    "message": "不明なチーム"
+  },
+  "matchDetails": {
+    "message": "試合詳細"
+  },
+  "loadingDetails": {
+    "message": "試合詳細を読み込み中…"
+  },
+  "loadingStandings": {
+    "message": "順位表を読み込み中…"
+  },
+  "detailsUnavailable": {
+    "message": "詳細を利用できません"
+  },
+  "noDetails": {
+    "message": "この試合の追加詳細はありません。"
+  },
+  "noSectionData": {
+    "message": "データがありません。"
+  },
+  "noStats": {
+    "message": "試合スタッツはありません。"
+  },
+  "noStandings": {
+    "message": "このリーグの順位表はありません。"
+  },
+  "noNews": {
+    "message": "ニュースはありません。"
+  },
+  "noLinks": {
+    "message": "リンクはありません。"
+  },
+  "venue": {
+    "message": "会場"
+  },
+  "kickoff": {
+    "message": "キックオフ"
+  },
+  "broadcasts": {
+    "message": "放送"
+  },
+  "timeline": {
+    "message": "タイムライン"
+  },
+  "commentary": {
+    "message": "実況"
+  },
+  "lineups": {
+    "message": "スタメン"
+  },
+  "headToHead": {
+    "message": "対戦成績"
+  },
+  "news": {
+    "message": "ニュース"
+  },
+  "highlights": {
+    "message": "ハイライト"
+  },
+  "links": {
+    "message": "リンク"
+  }
+}

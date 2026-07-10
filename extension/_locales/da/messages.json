@@ -1,0 +1,258 @@
+{
+  "extName": {
+    "message": "Hype - Live fodboldresultater"
+  },
+  "extDescription": {
+    "message": "Live fodboldresultater, kampe, resultater og stillinger."
+  },
+  "appTitle": {
+    "message": "Hype Scores"
+  },
+  "subtitle": {
+    "message": "Hurtige live scoringer, resultater og stillinger."
+  },
+  "loading": {
+    "message": "Indlæser kampe…"
+  },
+  "error": {
+    "message": "Kunne ikke indlæse data"
+  },
+  "extensionRuntimeRequired": {
+    "message": "Livedata blokeres i filforhåndsvisning. Åbn Chrome-udvidelsens popup for at indlæse scoringer."
+  },
+  "empty": {
+    "message": "Ingen kampe fundet i dag."
+  },
+  "ready": {
+    "message": "Klar"
+  },
+  "refreshing": {
+    "message": "Opdaterer"
+  },
+  "notUpdated": {
+    "message": "Ikke opdateret endnu"
+  },
+  "updated": {
+    "message": "Opdateret"
+  },
+  "live": {
+    "message": "Live"
+  },
+  "matches": {
+    "message": "Kampe"
+  },
+  "results": {
+    "message": "Resultater"
+  },
+  "upcoming": {
+    "message": "Kommende"
+  },
+  "standings": {
+    "message": "Stilling"
+  },
+  "bracket": {
+    "message": "Knockout"
+  },
+  "loadingBracket": {
+    "message": "Indlæser knockout-træ…"
+  },
+  "noBracket": {
+    "message": "Intet knockout-træ tilgængeligt."
+  },
+  "bracketUnavailable": {
+    "message": "Knockout-træ utilgængeligt."
+  },
+  "tbd": {
+    "message": "TBD"
+  },
+  "roundOf32": {
+    "message": "1/16-finaler"
+  },
+  "roundOf16": {
+    "message": "Ottendedelsfinaler"
+  },
+  "quarterfinals": {
+    "message": "Kvartfinaler"
+  },
+  "semifinals": {
+    "message": "Semifinaler"
+  },
+  "thirdPlace": {
+    "message": "Bronzekamp"
+  },
+  "final": {
+    "message": "Finale"
+  },
+  "played": {
+    "message": "K"
+  },
+  "wins": {
+    "message": "V"
+  },
+  "draws": {
+    "message": "U"
+  },
+  "losses": {
+    "message": "T"
+  },
+  "goalsFor": {
+    "message": "M+"
+  },
+  "goalsAgainst": {
+    "message": "M-"
+  },
+  "goalDifference": {
+    "message": "MF"
+  },
+  "points": {
+    "message": "P"
+  },
+  "paused": {
+    "message": "Pauset"
+  },
+  "autoPaused": {
+    "message": "Automatisk opdatering pauset for at spare forespørgsler."
+  },
+  "idlePaused": {
+    "message": "Pauset under inaktivitet."
+  },
+  "requestLimitReached": {
+    "message": "Daglig forespørgselsgrænse nået. Viser cachede data."
+  },
+  "refreshFailed": {
+    "message": "Opdatering mislykkedes. Viser seneste data."
+  },
+  "club": {
+    "message": "Klub"
+  },
+  "backToLeagues": {
+    "message": "← Ligaer"
+  },
+  "selectLeague": {
+    "message": "Vælg en liga"
+  },
+  "noLiveMatches": {
+    "message": "Ingen livekampe"
+  },
+  "liveCount": {
+    "message": "$COUNT$ live",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCount": {
+    "message": "$COUNT$ kampe",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fullTime": {
+    "message": "FT"
+  },
+  "halfTime": {
+    "message": "Pause"
+  },
+  "scheduled": {
+    "message": "Planlagt"
+  },
+  "stats": {
+    "message": "Statistik"
+  },
+  "favorite": {
+    "message": "Favorit"
+  },
+  "removeFavorite": {
+    "message": "Fjern favorit"
+  },
+  "turnOff": {
+    "message": "Slå udvidelse fra"
+  },
+  "turnOn": {
+    "message": "Slå udvidelse til"
+  },
+  "favoriteLeague": {
+    "message": "Gør liga til favorit"
+  },
+  "forceEnglishOn": {
+    "message": "Vis engelske labels"
+  },
+  "forceEnglishOff": {
+    "message": "Tilbage til browsersprog"
+  },
+  "other": {
+    "message": "Andet"
+  },
+  "team": {
+    "message": "Hold"
+  },
+  "unknownLeague": {
+    "message": "Ukendt liga"
+  },
+  "unknownTeam": {
+    "message": "Ukendt hold"
+  },
+  "matchDetails": {
+    "message": "Kampdetaljer"
+  },
+  "loadingDetails": {
+    "message": "Indlæser kampdetaljer…"
+  },
+  "loadingStandings": {
+    "message": "Indlæser stilling…"
+  },
+  "detailsUnavailable": {
+    "message": "Detaljer utilgængelige"
+  },
+  "noDetails": {
+    "message": "Ingen ekstra detaljer for denne kamp."
+  },
+  "noSectionData": {
+    "message": "Ingen data tilgængelige."
+  },
+  "noStats": {
+    "message": "Ingen kampstatistik tilgængelig."
+  },
+  "noStandings": {
+    "message": "Ingen stilling for denne liga."
+  },
+  "noNews": {
+    "message": "Ingen nyheder tilgængelige."
+  },
+  "noLinks": {
+    "message": "Ingen links tilgængelige."
+  },
+  "venue": {
+    "message": "Stadion"
+  },
+  "kickoff": {
+    "message": "Afspark"
+  },
+  "broadcasts": {
+    "message": "Transmissioner"
+  },
+  "timeline": {
+    "message": "Tidslinje"
+  },
+  "commentary": {
+    "message": "Kommentar"
+  },
+  "lineups": {
+    "message": "Opstillinger"
+  },
+  "headToHead": {
+    "message": "Indbyrdes opgør"
+  },
+  "news": {
+    "message": "Nyheder"
+  },
+  "highlights": {
+    "message": "Highlights"
+  },
+  "links": {
+    "message": "Links"
+  }
+}

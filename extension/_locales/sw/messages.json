@@ -1,0 +1,258 @@
+{
+  "extName": {
+    "message": "Hype - Matokeo ya mpira wa miguu moja kwa moja"
+  },
+  "extDescription": {
+    "message": "Matokeo ya mpira wa miguu moja kwa moja, mechi, matokeo na meza."
+  },
+  "appTitle": {
+    "message": "Hype Scores"
+  },
+  "subtitle": {
+    "message": "Alama za live haraka, matokeo na meza."
+  },
+  "loading": {
+    "message": "Inapakia mechi…"
+  },
+  "error": {
+    "message": "Imeshindwa kupakia data"
+  },
+  "extensionRuntimeRequired": {
+    "message": "Data ya live imezuiwa katika onyesho la faili. Fungua dirisha la kiendelezi cha Chrome."
+  },
+  "empty": {
+    "message": "Hakuna mechi zilizopatikana leo."
+  },
+  "ready": {
+    "message": "Tayari"
+  },
+  "refreshing": {
+    "message": "Inasasisha"
+  },
+  "notUpdated": {
+    "message": "Bado haijasasishwa"
+  },
+  "updated": {
+    "message": "Imesasishwa"
+  },
+  "live": {
+    "message": "Moja kwa moja"
+  },
+  "matches": {
+    "message": "Mechi"
+  },
+  "results": {
+    "message": "Matokeo"
+  },
+  "upcoming": {
+    "message": "Zinazokuja"
+  },
+  "standings": {
+    "message": "Meza"
+  },
+  "bracket": {
+    "message": "Mchujo"
+  },
+  "loadingBracket": {
+    "message": "Inapakia chati ya mchujo…"
+  },
+  "noBracket": {
+    "message": "Hakuna chati ya mchujo."
+  },
+  "bracketUnavailable": {
+    "message": "Chati ya mchujo haipatikani."
+  },
+  "tbd": {
+    "message": "TBD"
+  },
+  "roundOf32": {
+    "message": "Raundi ya 32"
+  },
+  "roundOf16": {
+    "message": "Raundi ya 16"
+  },
+  "quarterfinals": {
+    "message": "Robo fainali"
+  },
+  "semifinals": {
+    "message": "Nusu fainali"
+  },
+  "thirdPlace": {
+    "message": "Mechi ya nafasi ya 3"
+  },
+  "final": {
+    "message": "Fainali"
+  },
+  "played": {
+    "message": "M"
+  },
+  "wins": {
+    "message": "U"
+  },
+  "draws": {
+    "message": "S"
+  },
+  "losses": {
+    "message": "K"
+  },
+  "goalsFor": {
+    "message": "MF"
+  },
+  "goalsAgainst": {
+    "message": "MK"
+  },
+  "goalDifference": {
+    "message": "TF"
+  },
+  "points": {
+    "message": "P"
+  },
+  "paused": {
+    "message": "Imesimamishwa"
+  },
+  "autoPaused": {
+    "message": "Usasishaji wa kiotomatiki umesimamishwa ili kuokoa maombi."
+  },
+  "idlePaused": {
+    "message": "Imesimamishwa wakati haipo shughuli."
+  },
+  "requestLimitReached": {
+    "message": "Kikomo cha maombi ya kila siku kimefikiwa. Inaonyesha data iliyohifadhiwa."
+  },
+  "refreshFailed": {
+    "message": "Usasishaji umeshindikana. Inaonyesha data ya hivi karibuni."
+  },
+  "club": {
+    "message": "Klabu"
+  },
+  "backToLeagues": {
+    "message": "← Ligi"
+  },
+  "selectLeague": {
+    "message": "Chagua ligi"
+  },
+  "noLiveMatches": {
+    "message": "Hakuna mechi moja kwa moja"
+  },
+  "liveCount": {
+    "message": "$COUNT$ moja kwa moja",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCount": {
+    "message": "$COUNT$ mechi",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fullTime": {
+    "message": "Mwisho"
+  },
+  "halfTime": {
+    "message": "Mapumziko"
+  },
+  "scheduled": {
+    "message": "Imepangwa"
+  },
+  "stats": {
+    "message": "Takwimu"
+  },
+  "favorite": {
+    "message": "Kipendwa"
+  },
+  "removeFavorite": {
+    "message": "Ondoa kipendwa"
+  },
+  "turnOff": {
+    "message": "Zima kiendelezi"
+  },
+  "turnOn": {
+    "message": "Washa kiendelezi"
+  },
+  "favoriteLeague": {
+    "message": "Ongeza ligi kwenye vipendwa"
+  },
+  "forceEnglishOn": {
+    "message": "Onyesha lebo za Kiingereza"
+  },
+  "forceEnglishOff": {
+    "message": "Rudi kwenye lugha ya kivinjari"
+  },
+  "other": {
+    "message": "Nyingine"
+  },
+  "team": {
+    "message": "Timu"
+  },
+  "unknownLeague": {
+    "message": "Ligi isiyojulikana"
+  },
+  "unknownTeam": {
+    "message": "Timu isiyojulikana"
+  },
+  "matchDetails": {
+    "message": "Maelezo ya mechi"
+  },
+  "loadingDetails": {
+    "message": "Inapakia maelezo ya mechi…"
+  },
+  "loadingStandings": {
+    "message": "Inapakia meza…"
+  },
+  "detailsUnavailable": {
+    "message": "Maelezo hayapatikani"
+  },
+  "noDetails": {
+    "message": "Hakuna maelezo ya ziada ya mechi hii."
+  },
+  "noSectionData": {
+    "message": "Hakuna data inayopatikana."
+  },
+  "noStats": {
+    "message": "Hakuna takwimu za mechi."
+  },
+  "noStandings": {
+    "message": "Hakuna meza ya ligi hii."
+  },
+  "noNews": {
+    "message": "Hakuna habari."
+  },
+  "noLinks": {
+    "message": "Hakuna viungo."
+  },
+  "venue": {
+    "message": "Uwanja"
+  },
+  "kickoff": {
+    "message": "Anza"
+  },
+  "broadcasts": {
+    "message": "Matangazo"
+  },
+  "timeline": {
+    "message": "Mfululizo"
+  },
+  "commentary": {
+    "message": "Ufafanuzi"
+  },
+  "lineups": {
+    "message": "Orodha ya wachezaji"
+  },
+  "headToHead": {
+    "message": "Uso kwa uso"
+  },
+  "news": {
+    "message": "Habari"
+  },
+  "highlights": {
+    "message": "Vivutio"
+  },
+  "links": {
+    "message": "Viungo"
+  }
+}

@@ -1,0 +1,258 @@
+{
+  "extName": {
+    "message": "Hype - نتائج كرة القدم المباشرة"
+  },
+  "extDescription": {
+    "message": "نتائج كرة القدم المباشرة والمباريات والنتائج وترتيب الدوريات."
+  },
+  "appTitle": {
+    "message": "Hype Scores"
+  },
+  "subtitle": {
+    "message": "نتائج مباشرة سريعة ونتائج وترتيب الدوريات."
+  },
+  "loading": {
+    "message": "جارٍ تحميل المباريات…"
+  },
+  "error": {
+    "message": "تعذّر تحميل البيانات"
+  },
+  "extensionRuntimeRequired": {
+    "message": "البيانات المباشرة محظورة في معاينة الملف. افتح نافذة إضافة Chrome لتحميل النتائج."
+  },
+  "empty": {
+    "message": "لا توجد مباريات اليوم."
+  },
+  "ready": {
+    "message": "جاهز"
+  },
+  "refreshing": {
+    "message": "جارٍ التحديث"
+  },
+  "notUpdated": {
+    "message": "لم يُحدَّث بعد"
+  },
+  "updated": {
+    "message": "تم التحديث"
+  },
+  "live": {
+    "message": "مباشر"
+  },
+  "matches": {
+    "message": "مباريات"
+  },
+  "results": {
+    "message": "نتائج"
+  },
+  "upcoming": {
+    "message": "قادمة"
+  },
+  "standings": {
+    "message": "الترتيب"
+  },
+  "bracket": {
+    "message": "خروج المغلوب"
+  },
+  "loadingBracket": {
+    "message": "جارٍ تحميل شبكة خروج المغلوب…"
+  },
+  "noBracket": {
+    "message": "لا تتوفر شبكة خروج المغلوب."
+  },
+  "bracketUnavailable": {
+    "message": "شبكة خروج المغلوب غير متاحة."
+  },
+  "tbd": {
+    "message": "يُحدد لاحقًا"
+  },
+  "roundOf32": {
+    "message": "دور الـ 32"
+  },
+  "roundOf16": {
+    "message": "دور الـ 16"
+  },
+  "quarterfinals": {
+    "message": "ربع النهائي"
+  },
+  "semifinals": {
+    "message": "نصف النهائي"
+  },
+  "thirdPlace": {
+    "message": "مباراة المركز الثالث"
+  },
+  "final": {
+    "message": "النهائي"
+  },
+  "played": {
+    "message": "ل"
+  },
+  "wins": {
+    "message": "ف"
+  },
+  "draws": {
+    "message": "ت"
+  },
+  "losses": {
+    "message": "خ"
+  },
+  "goalsFor": {
+    "message": "له"
+  },
+  "goalsAgainst": {
+    "message": "عليه"
+  },
+  "goalDifference": {
+    "message": "±"
+  },
+  "points": {
+    "message": "ن"
+  },
+  "paused": {
+    "message": "متوقف مؤقتًا"
+  },
+  "autoPaused": {
+    "message": "تم إيقاف التحديث التلقائي لتوفير الطلبات."
+  },
+  "idlePaused": {
+    "message": "متوقف أثناء عدم النشاط."
+  },
+  "requestLimitReached": {
+    "message": "تم بلوغ الحد اليومي للطلبات. يتم عرض البيانات المخزّنة."
+  },
+  "refreshFailed": {
+    "message": "فشل التحديث. يتم عرض أحدث البيانات."
+  },
+  "club": {
+    "message": "النادي"
+  },
+  "backToLeagues": {
+    "message": "← الدوريات"
+  },
+  "selectLeague": {
+    "message": "اختر دوريًا"
+  },
+  "noLiveMatches": {
+    "message": "لا توجد مباريات مباشرة"
+  },
+  "liveCount": {
+    "message": "$COUNT$ مباشر",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCount": {
+    "message": "$COUNT$ مباراة",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fullTime": {
+    "message": "نهاية"
+  },
+  "halfTime": {
+    "message": "استراحة"
+  },
+  "scheduled": {
+    "message": "مجدولة"
+  },
+  "stats": {
+    "message": "إحصائيات"
+  },
+  "favorite": {
+    "message": "مفضلة"
+  },
+  "removeFavorite": {
+    "message": "إزالة من المفضلة"
+  },
+  "turnOff": {
+    "message": "إيقاف الإضافة"
+  },
+  "turnOn": {
+    "message": "تشغيل الإضافة"
+  },
+  "favoriteLeague": {
+    "message": "إضافة الدوري إلى المفضلة"
+  },
+  "forceEnglishOn": {
+    "message": "عرض التسميات بالإنجليزية"
+  },
+  "forceEnglishOff": {
+    "message": "العودة إلى لغة المتصفح"
+  },
+  "other": {
+    "message": "أخرى"
+  },
+  "team": {
+    "message": "فريق"
+  },
+  "unknownLeague": {
+    "message": "دوري غير معروف"
+  },
+  "unknownTeam": {
+    "message": "فريق غير معروف"
+  },
+  "matchDetails": {
+    "message": "تفاصيل المباراة"
+  },
+  "loadingDetails": {
+    "message": "جارٍ تحميل تفاصيل المباراة…"
+  },
+  "loadingStandings": {
+    "message": "جارٍ تحميل الترتيب…"
+  },
+  "detailsUnavailable": {
+    "message": "التفاصيل غير متاحة"
+  },
+  "noDetails": {
+    "message": "لا توجد تفاصيل إضافية لهذه المباراة."
+  },
+  "noSectionData": {
+    "message": "لا توجد بيانات متاحة."
+  },
+  "noStats": {
+    "message": "لا توجد إحصائيات للمباراة."
+  },
+  "noStandings": {
+    "message": "لا يوجد ترتيب لهذا الدوري."
+  },
+  "noNews": {
+    "message": "لا توجد أخبار."
+  },
+  "noLinks": {
+    "message": "لا توجد روابط."
+  },
+  "venue": {
+    "message": "الملعب"
+  },
+  "kickoff": {
+    "message": "صافرة البداية"
+  },
+  "broadcasts": {
+    "message": "البث"
+  },
+  "timeline": {
+    "message": "الأحداث"
+  },
+  "commentary": {
+    "message": "التعليق"
+  },
+  "lineups": {
+    "message": "التشكيلة"
+  },
+  "headToHead": {
+    "message": "المواجهات المباشرة"
+  },
+  "news": {
+    "message": "أخبار"
+  },
+  "highlights": {
+    "message": "ملخصات"
+  },
+  "links": {
+    "message": "روابط"
+  }
+}

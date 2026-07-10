@@ -1,0 +1,258 @@
+{
+  "extName": {
+    "message": "Hype - ಲೈವ್ ಫುಟ್‌ಬಾಲ್ ಸ್ಕೋರ್‌ಗಳು"
+  },
+  "extDescription": {
+    "message": "ಲೈವ್ ಫುಟ್‌ಬಾಲ್ ಸ್ಕೋರ್‌ಗಳು, ಪಂದ್ಯಗಳು, ಫಲಿತಾಂಶಗಳು ಮತ್ತು ಲೀಗ್ ಕೋಷ್ಟಕಗಳು."
+  },
+  "appTitle": {
+    "message": "Hype Scores"
+  },
+  "subtitle": {
+    "message": "ವೇಗದ ಲೈವ್ ಸ್ಕೋರ್‌ಗಳು, ಫಲಿತಾಂಶಗಳು ಮತ್ತು ಕೋಷ್ಟಕಗಳು."
+  },
+  "loading": {
+    "message": "ಪಂದ್ಯಗಳನ್ನು ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ…"
+  },
+  "error": {
+    "message": "ಡೇಟಾ ಲೋಡ್ ಮಾಡಲಾಗಲಿಲ್ಲ"
+  },
+  "extensionRuntimeRequired": {
+    "message": "ಫೈಲ್ ಪೂರ್ವವೀಕ್ಷಣೆಯಲ್ಲಿ ಲೈವ್ ಡೇಟಾ ನಿರ್ಬಂಧಿತ. ಸ್ಕೋರ್‌ಗಳಿಗಾಗಿ Chrome ವಿಸ್ತರಣೆ ಪಾಪ್‌ಅಪ್ ತೆರೆಯಿರಿ."
+  },
+  "empty": {
+    "message": "ಇಂದು ಪಂದ್ಯಗಳು ಕಂಡುಬಂದಿಲ್ಲ."
+  },
+  "ready": {
+    "message": "ಸಿದ್ಧ"
+  },
+  "refreshing": {
+    "message": "ರಿಫ್ರೆಶ್ ಆಗುತ್ತಿದೆ"
+  },
+  "notUpdated": {
+    "message": "ಇನ್ನೂ ಅಪ್‌ಡೇಟ್ ಆಗಿಲ್ಲ"
+  },
+  "updated": {
+    "message": "ಅಪ್‌ಡೇಟ್ ಆಯಿತು"
+  },
+  "live": {
+    "message": "ಲೈವ್"
+  },
+  "matches": {
+    "message": "ಪಂದ್ಯಗಳು"
+  },
+  "results": {
+    "message": "ಫಲಿತಾಂಶಗಳು"
+  },
+  "upcoming": {
+    "message": "ಮುಂಬರುವ"
+  },
+  "standings": {
+    "message": "ಕೋಷ್ಟಕ"
+  },
+  "bracket": {
+    "message": "ನಾಕ್‌ಔಟ್"
+  },
+  "loadingBracket": {
+    "message": "ನಾಕ್‌ಔಟ್ ಬ್ರಾಕೆಟ್ ಲೋಡ್ ಆಗುತ್ತಿದೆ…"
+  },
+  "noBracket": {
+    "message": "ನಾಕ್‌ಔಟ್ ಬ್ರಾಕೆಟ್ ಲಭ್ಯವಿಲ್ಲ."
+  },
+  "bracketUnavailable": {
+    "message": "ನಾಕ್‌ಔಟ್ ಬ್ರಾಕೆಟ್ ಲಭ್ಯವಿಲ್ಲ."
+  },
+  "tbd": {
+    "message": "TBD"
+  },
+  "roundOf32": {
+    "message": "ರೌಂಡ್ ಆಫ್ 32"
+  },
+  "roundOf16": {
+    "message": "ರೌಂಡ್ ಆಫ್ 16"
+  },
+  "quarterfinals": {
+    "message": "ಕ್ವಾರ್ಟರ್ ಫೈನಲ್"
+  },
+  "semifinals": {
+    "message": "ಸೆಮಿ ಫೈನಲ್"
+  },
+  "thirdPlace": {
+    "message": "ಮೂರನೇ ಸ್ಥಾನದ ಪಂದ್ಯ"
+  },
+  "final": {
+    "message": "ಫೈನಲ್"
+  },
+  "played": {
+    "message": "ಪಂ"
+  },
+  "wins": {
+    "message": "ಗೆ"
+  },
+  "draws": {
+    "message": "ಡ್ರಾ"
+  },
+  "losses": {
+    "message": "ಸೋ"
+  },
+  "goalsFor": {
+    "message": "ಹೊಡೆ"
+  },
+  "goalsAgainst": {
+    "message": "ಒಪ್ಪಿ"
+  },
+  "goalDifference": {
+    "message": "ವ್ಯತ್ಯಾಸ"
+  },
+  "points": {
+    "message": "ಅಂಕ"
+  },
+  "paused": {
+    "message": "ವಿರಾಮ"
+  },
+  "autoPaused": {
+    "message": "ವಿನಂತಿಗಳನ್ನು ಉಳಿಸಲು ಸ್ವಯಂ ರಿಫ್ರೆಶ್ ವಿರಾಮಗೊಳಿಸಲಾಗಿದೆ."
+  },
+  "idlePaused": {
+    "message": "ನಿಷ್ಕ್ರಿಯವಾಗಿರುವಾಗ ವಿರಾಮ."
+  },
+  "requestLimitReached": {
+    "message": "ದೈನಂದಿನ ವಿನಂತಿ ಮಿತಿ ತಲುಪಿದೆ. ಕ್ಯಾಶ್ ಡೇಟಾ ತೋರಿಸಲಾಗುತ್ತಿದೆ."
+  },
+  "refreshFailed": {
+    "message": "ರಿಫ್ರೆಶ್ ವಿಫಲ. ಇತ್ತೀಚಿನ ಡೇಟಾ ತೋರಿಸಲಾಗುತ್ತಿದೆ."
+  },
+  "club": {
+    "message": "ಕ್ಲಬ್"
+  },
+  "backToLeagues": {
+    "message": "← ಲೀಗ್‌ಗಳು"
+  },
+  "selectLeague": {
+    "message": "ಲೀಗ್ ಆಯ್ಕೆಮಾಡಿ"
+  },
+  "noLiveMatches": {
+    "message": "ಲೈವ್ ಪಂದ್ಯಗಳಿಲ್ಲ"
+  },
+  "liveCount": {
+    "message": "$COUNT$ ಲೈವ್",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCount": {
+    "message": "$COUNT$ ಪಂದ್ಯಗಳು",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fullTime": {
+    "message": "ಮುಗಿದಿದೆ"
+  },
+  "halfTime": {
+    "message": "ಅರ್ಧ"
+  },
+  "scheduled": {
+    "message": "ನಿಗದಿ"
+  },
+  "stats": {
+    "message": "ಅಂಕಿಅಂಶಗಳು"
+  },
+  "favorite": {
+    "message": "ಮೆಚ್ಚಿನ"
+  },
+  "removeFavorite": {
+    "message": "ಮೆಚ್ಚಿನದಿಂದ ತೆಗೆ"
+  },
+  "turnOff": {
+    "message": "ವಿಸ್ತರಣೆ ಆಫ್ ಮಾಡಿ"
+  },
+  "turnOn": {
+    "message": "ವಿಸ್ತರಣೆ ಆನ್ ಮಾಡಿ"
+  },
+  "favoriteLeague": {
+    "message": "ಲೀಗ್ ಅನ್ನು ಮೆಚ್ಚಿನದಾಗಿ ಸೇರಿಸಿ"
+  },
+  "forceEnglishOn": {
+    "message": "ಇಂಗ್ಲಿಷ್ ಲೇಬಲ್‌ಗಳನ್ನು ತೋರಿಸಿ"
+  },
+  "forceEnglishOff": {
+    "message": "ಬ್ರೌಸರ್ ಭಾಷೆಗೆ ಹಿಂತಿರುಗಿ"
+  },
+  "other": {
+    "message": "ಇತರೆ"
+  },
+  "team": {
+    "message": "ತಂಡ"
+  },
+  "unknownLeague": {
+    "message": "ಅಜ್ಞಾತ ಲೀಗ್"
+  },
+  "unknownTeam": {
+    "message": "ಅಜ್ಞಾತ ತಂಡ"
+  },
+  "matchDetails": {
+    "message": "ಪಂದ್ಯದ ವಿವರಗಳು"
+  },
+  "loadingDetails": {
+    "message": "ಪಂದ್ಯದ ವಿವರಗಳನ್ನು ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ…"
+  },
+  "loadingStandings": {
+    "message": "ಕೋಷ್ಟಕ ಲೋಡ್ ಆಗುತ್ತಿದೆ…"
+  },
+  "detailsUnavailable": {
+    "message": "ವಿವರಗಳು ಲಭ್ಯವಿಲ್ಲ"
+  },
+  "noDetails": {
+    "message": "ಈ ಪಂದ್ಯಕ್ಕೆ ಹೆಚ್ಚುವರಿ ವಿವರಗಳಿಲ್ಲ."
+  },
+  "noSectionData": {
+    "message": "ಡೇಟಾ ಲಭ್ಯವಿಲ್ಲ."
+  },
+  "noStats": {
+    "message": "ಪಂದ್ಯದ ಅಂಕಿಅಂಶಗಳಿಲ್ಲ."
+  },
+  "noStandings": {
+    "message": "ಈ ಲೀಗ್‌ಗೆ ಕೋಷ್ಟಕವಿಲ್ಲ."
+  },
+  "noNews": {
+    "message": "ಸುದ್ದಿ ಇಲ್ಲ."
+  },
+  "noLinks": {
+    "message": "ಲಿಂಕ್‌ಗಳಿಲ್ಲ."
+  },
+  "venue": {
+    "message": "ಮೈದಾನ"
+  },
+  "kickoff": {
+    "message": "ಕಿಕ್‌ಆಫ್"
+  },
+  "broadcasts": {
+    "message": "ಪ್ರಸಾರ"
+  },
+  "timeline": {
+    "message": "ಟೈಮ್‌ಲೈನ್"
+  },
+  "commentary": {
+    "message": "ವ್ಯಾಖ್ಯಾನ"
+  },
+  "lineups": {
+    "message": "ಲೈನಪ್"
+  },
+  "headToHead": {
+    "message": "ಹೆಡ್ ಟು ಹೆಡ್"
+  },
+  "news": {
+    "message": "ಸುದ್ದಿ"
+  },
+  "highlights": {
+    "message": "ಹೈಲೈಟ್‌ಗಳು"
+  },
+  "links": {
+    "message": "ಲಿಂಕ್‌ಗಳು"
+  }
+}

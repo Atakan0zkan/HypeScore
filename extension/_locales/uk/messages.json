@@ -1,0 +1,258 @@
+{
+  "extName": {
+    "message": "Hype - Живі футбольні рахунки"
+  },
+  "extDescription": {
+    "message": "Живі футбольні рахунки, матчі, результати та турнірні таблиці."
+  },
+  "appTitle": {
+    "message": "Hype Scores"
+  },
+  "subtitle": {
+    "message": "Швидкі live-рахунки, результати та таблиці."
+  },
+  "loading": {
+    "message": "Завантаження матчів…"
+  },
+  "error": {
+    "message": "Не вдалося завантажити дані"
+  },
+  "extensionRuntimeRequired": {
+    "message": "Live-дані заблоковано в попередньому перегляді файлу. Відкрийте спливаюче вікно розширення Chrome."
+  },
+  "empty": {
+    "message": "Сьогодні матчів не знайдено."
+  },
+  "ready": {
+    "message": "Готово"
+  },
+  "refreshing": {
+    "message": "Оновлення"
+  },
+  "notUpdated": {
+    "message": "Ще не оновлено"
+  },
+  "updated": {
+    "message": "Оновлено"
+  },
+  "live": {
+    "message": "Live"
+  },
+  "matches": {
+    "message": "Матчі"
+  },
+  "results": {
+    "message": "Результати"
+  },
+  "upcoming": {
+    "message": "Найближчі"
+  },
+  "standings": {
+    "message": "Таблиця"
+  },
+  "bracket": {
+    "message": "Плей-офф"
+  },
+  "loadingBracket": {
+    "message": "Завантаження сітки…"
+  },
+  "noBracket": {
+    "message": "Сітка плей-офф недоступна."
+  },
+  "bracketUnavailable": {
+    "message": "Сітка недоступна."
+  },
+  "tbd": {
+    "message": "TBD"
+  },
+  "roundOf32": {
+    "message": "1/16 фіналу"
+  },
+  "roundOf16": {
+    "message": "1/8 фіналу"
+  },
+  "quarterfinals": {
+    "message": "1/4 фіналу"
+  },
+  "semifinals": {
+    "message": "1/2 фіналу"
+  },
+  "thirdPlace": {
+    "message": "Матч за 3-тє місце"
+  },
+  "final": {
+    "message": "Фінал"
+  },
+  "played": {
+    "message": "І"
+  },
+  "wins": {
+    "message": "В"
+  },
+  "draws": {
+    "message": "Н"
+  },
+  "losses": {
+    "message": "П"
+  },
+  "goalsFor": {
+    "message": "ЗМ"
+  },
+  "goalsAgainst": {
+    "message": "ПМ"
+  },
+  "goalDifference": {
+    "message": "РМ"
+  },
+  "points": {
+    "message": "О"
+  },
+  "paused": {
+    "message": "Пауза"
+  },
+  "autoPaused": {
+    "message": "Автооновлення призупинено для економії запитів."
+  },
+  "idlePaused": {
+    "message": "Пауза через бездіяльність."
+  },
+  "requestLimitReached": {
+    "message": "Досягнуто денний ліміт запитів. Показано кешовані дані."
+  },
+  "refreshFailed": {
+    "message": "Не вдалося оновити. Показано останні дані."
+  },
+  "club": {
+    "message": "Клуб"
+  },
+  "backToLeagues": {
+    "message": "← Ліги"
+  },
+  "selectLeague": {
+    "message": "Оберіть лігу"
+  },
+  "noLiveMatches": {
+    "message": "Немає live-матчів"
+  },
+  "liveCount": {
+    "message": "$COUNT$ live",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCount": {
+    "message": "$COUNT$ матчів",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fullTime": {
+    "message": "FT"
+  },
+  "halfTime": {
+    "message": "HT"
+  },
+  "scheduled": {
+    "message": "Заплановано"
+  },
+  "stats": {
+    "message": "Статистика"
+  },
+  "favorite": {
+    "message": "Улюблене"
+  },
+  "removeFavorite": {
+    "message": "Прибрати з улюблених"
+  },
+  "turnOff": {
+    "message": "Вимкнути розширення"
+  },
+  "turnOn": {
+    "message": "Увімкнути розширення"
+  },
+  "favoriteLeague": {
+    "message": "Додати лігу до улюблених"
+  },
+  "forceEnglishOn": {
+    "message": "Показати англійські підписи"
+  },
+  "forceEnglishOff": {
+    "message": "Повернутися до мови браузера"
+  },
+  "other": {
+    "message": "Інше"
+  },
+  "team": {
+    "message": "Команда"
+  },
+  "unknownLeague": {
+    "message": "Невідома ліга"
+  },
+  "unknownTeam": {
+    "message": "Невідома команда"
+  },
+  "matchDetails": {
+    "message": "Деталі матчу"
+  },
+  "loadingDetails": {
+    "message": "Завантаження деталей матчу…"
+  },
+  "loadingStandings": {
+    "message": "Завантаження таблиці…"
+  },
+  "detailsUnavailable": {
+    "message": "Деталі недоступні"
+  },
+  "noDetails": {
+    "message": "Для цього матчу немає додаткових деталей."
+  },
+  "noSectionData": {
+    "message": "Немає доступних даних."
+  },
+  "noStats": {
+    "message": "Статистика матчу недоступна."
+  },
+  "noStandings": {
+    "message": "Для цієї ліги немає таблиці."
+  },
+  "noNews": {
+    "message": "Немає новин."
+  },
+  "noLinks": {
+    "message": "Немає посилань."
+  },
+  "venue": {
+    "message": "Стадіон"
+  },
+  "kickoff": {
+    "message": "Початок"
+  },
+  "broadcasts": {
+    "message": "Трансляції"
+  },
+  "timeline": {
+    "message": "Хронологія"
+  },
+  "commentary": {
+    "message": "Коментарі"
+  },
+  "lineups": {
+    "message": "Склади"
+  },
+  "headToHead": {
+    "message": "Очні зустрічі"
+  },
+  "news": {
+    "message": "Новини"
+  },
+  "highlights": {
+    "message": "Огляди"
+  },
+  "links": {
+    "message": "Посилання"
+  }
+}

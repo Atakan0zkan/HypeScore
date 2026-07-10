@@ -206,6 +206,7 @@ document.addEventListener("DOMContentLoaded", () => {
   backBtn = document.getElementById("backBtn");
 
   restoreEnglishOverride();
+  applyDocumentDirection();
   applyI18n();
   restoreFavorites();
   restoreEnabledState();
@@ -245,13 +246,43 @@ function formatMessage(template, substitutions) {
   );
 }
 
+function getUiLanguage() {
+  if (typeof chrome !== "undefined" && chrome.i18n && chrome.i18n.getUILanguage) {
+    return chrome.i18n.getUILanguage() || "en";
+  }
+  return navigator.language || "en";
+}
+
+function isRtlLanguage(lang) {
+  const base = String(lang || "")
+    .toLowerCase()
+    .split(/[-_]/)[0];
+  return base === "ar" || base === "he" || base === "fa" || base === "iw";
+}
+
+function applyDocumentDirection() {
+  const lang = isEnglishOverride ? "en" : getUiLanguage();
+  const rtl = isRtlLanguage(lang);
+  const html = document.documentElement;
+  html.lang = String(lang).replace("_", "-");
+  html.dir = rtl ? "rtl" : "ltr";
+  document.body.classList.toggle("is-rtl", rtl);
+}
+
+function formatBackLabel() {
+  const raw = msg("backToLeagues").replace(/^[←→]\s*/, "").trim();
+  const arrow = document.documentElement.dir === "rtl" ? "→" : "←";
+  return arrow + " " + raw;
+}
+
 function applyI18n() {
+  applyDocumentDirection();
   appTitle.textContent = msg("appTitle");
   subtitle.textContent = msg("subtitle");
   loadingState.textContent = msg("loading");
   errorState.textContent = msg("error");
   emptyState.textContent = msg("empty");
-  backBtn.textContent = msg("backToLeagues");
+  backBtn.textContent = formatBackLabel();
   updateEnglishToggleLabel();
   setStatus(msg("notUpdated"));
 }

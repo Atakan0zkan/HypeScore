@@ -1,0 +1,258 @@
+{
+  "extName": {
+    "message": "Hype - লাইভ ফুটবল স্কোর"
+  },
+  "extDescription": {
+    "message": "লাইভ ফুটবল স্কোর, ম্যাচ, ফলাফল ও লিগ টেবিল।"
+  },
+  "appTitle": {
+    "message": "Hype Scores"
+  },
+  "subtitle": {
+    "message": "দ্রুত লাইভ স্কোর, ফলাফল ও টেবিল।"
+  },
+  "loading": {
+    "message": "ম্যাচ লোড হচ্ছে…"
+  },
+  "error": {
+    "message": "ডেটা লোড করা যায়নি"
+  },
+  "extensionRuntimeRequired": {
+    "message": "ফাইল প্রিভিউতে লাইভ ডেটা ব্লক। স্কোরের জন্য Chrome এক্সটেনশন পপআপ খুলুন।"
+  },
+  "empty": {
+    "message": "আজ কোনো ম্যাচ পাওয়া যায়নি।"
+  },
+  "ready": {
+    "message": "প্রস্তুত"
+  },
+  "refreshing": {
+    "message": "রিফ্রেশ হচ্ছে"
+  },
+  "notUpdated": {
+    "message": "এখনও আপডেট হয়নি"
+  },
+  "updated": {
+    "message": "আপডেট হয়েছে"
+  },
+  "live": {
+    "message": "লাইভ"
+  },
+  "matches": {
+    "message": "ম্যাচ"
+  },
+  "results": {
+    "message": "ফলাফল"
+  },
+  "upcoming": {
+    "message": "আসন্ন"
+  },
+  "standings": {
+    "message": "পয়েন্ট টেবিল"
+  },
+  "bracket": {
+    "message": "নকআউট"
+  },
+  "loadingBracket": {
+    "message": "নকআউট ব্র্যাকেট লোড হচ্ছে…"
+  },
+  "noBracket": {
+    "message": "কোনো নকআউট ব্র্যাকেট নেই।"
+  },
+  "bracketUnavailable": {
+    "message": "নকআউট ব্র্যাকেট অনুপলব্ধ।"
+  },
+  "tbd": {
+    "message": "TBD"
+  },
+  "roundOf32": {
+    "message": "রাউন্ড অফ ৩২"
+  },
+  "roundOf16": {
+    "message": "রাউন্ড অফ ১৬"
+  },
+  "quarterfinals": {
+    "message": "কোয়ার্টার ফাইনাল"
+  },
+  "semifinals": {
+    "message": "সেমিফাইনাল"
+  },
+  "thirdPlace": {
+    "message": "তৃতীয় স্থান নির্ধারণী"
+  },
+  "final": {
+    "message": "ফাইনাল"
+  },
+  "played": {
+    "message": "ম্যা"
+  },
+  "wins": {
+    "message": "জ"
+  },
+  "draws": {
+    "message": "ড্র"
+  },
+  "losses": {
+    "message": "প"
+  },
+  "goalsFor": {
+    "message": "করেছে"
+  },
+  "goalsAgainst": {
+    "message": "খেয়েছে"
+  },
+  "goalDifference": {
+    "message": "পার্থক্য"
+  },
+  "points": {
+    "message": "পয়েন্ট"
+  },
+  "paused": {
+    "message": "থামানো"
+  },
+  "autoPaused": {
+    "message": "অনুরোধ বাঁচাতে অটো রিফ্রেশ থামানো হয়েছে।"
+  },
+  "idlePaused": {
+    "message": "নিষ্ক্রিয় থাকায় থামানো।"
+  },
+  "requestLimitReached": {
+    "message": "দৈনিক অনুরোধ সীমা পূর্ণ। ক্যাশ ডেটা দেখানো হচ্ছে।"
+  },
+  "refreshFailed": {
+    "message": "রিফ্রেশ ব্যর্থ। সর্বশেষ ডেটা দেখানো হচ্ছে।"
+  },
+  "club": {
+    "message": "ক্লাব"
+  },
+  "backToLeagues": {
+    "message": "← লিগ"
+  },
+  "selectLeague": {
+    "message": "একটি লিগ বেছে নিন"
+  },
+  "noLiveMatches": {
+    "message": "কোনো লাইভ ম্যাচ নেই"
+  },
+  "liveCount": {
+    "message": "$COUNT$ লাইভ",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCount": {
+    "message": "$COUNT$ ম্যাচ",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fullTime": {
+    "message": "শেষ"
+  },
+  "halfTime": {
+    "message": "হাফ"
+  },
+  "scheduled": {
+    "message": "নির্ধারিত"
+  },
+  "stats": {
+    "message": "পরিসংখ্যান"
+  },
+  "favorite": {
+    "message": "পছন্দ"
+  },
+  "removeFavorite": {
+    "message": "পছন্দ থেকে সরান"
+  },
+  "turnOff": {
+    "message": "এক্সটেনশন বন্ধ করুন"
+  },
+  "turnOn": {
+    "message": "এক্সটেনশন চালু করুন"
+  },
+  "favoriteLeague": {
+    "message": "লিগ পছন্দে যোগ করুন"
+  },
+  "forceEnglishOn": {
+    "message": "ইংরেজি লেবেল দেখান"
+  },
+  "forceEnglishOff": {
+    "message": "ব্রাউজারের ভাষায় ফিরুন"
+  },
+  "other": {
+    "message": "অন্যান্য"
+  },
+  "team": {
+    "message": "দল"
+  },
+  "unknownLeague": {
+    "message": "অজানা লিগ"
+  },
+  "unknownTeam": {
+    "message": "অজানা দল"
+  },
+  "matchDetails": {
+    "message": "ম্যাচের বিবরণ"
+  },
+  "loadingDetails": {
+    "message": "ম্যাচের বিবরণ লোড হচ্ছে…"
+  },
+  "loadingStandings": {
+    "message": "টেবিল লোড হচ্ছে…"
+  },
+  "detailsUnavailable": {
+    "message": "বিবরণ নেই"
+  },
+  "noDetails": {
+    "message": "এই ম্যাচের অতিরিক্ত বিবরণ নেই।"
+  },
+  "noSectionData": {
+    "message": "কোনো ডেটা নেই।"
+  },
+  "noStats": {
+    "message": "ম্যাচ পরিসংখ্যান নেই।"
+  },
+  "noStandings": {
+    "message": "এই লিগের টেবিল নেই।"
+  },
+  "noNews": {
+    "message": "কোনো খবর নেই।"
+  },
+  "noLinks": {
+    "message": "কোনো লিঙ্ক নেই।"
+  },
+  "venue": {
+    "message": "ভেন্যু"
+  },
+  "kickoff": {
+    "message": "কিকঅফ"
+  },
+  "broadcasts": {
+    "message": "সম্প্রচার"
+  },
+  "timeline": {
+    "message": "টাইমলাইন"
+  },
+  "commentary": {
+    "message": "ধারাভাষ্য"
+  },
+  "lineups": {
+    "message": "লাইনআপ"
+  },
+  "headToHead": {
+    "message": "হেড টু হেড"
+  },
+  "news": {
+    "message": "খবর"
+  },
+  "highlights": {
+    "message": "হাইলাইট"
+  },
+  "links": {
+    "message": "লিঙ্ক"
+  }
+}

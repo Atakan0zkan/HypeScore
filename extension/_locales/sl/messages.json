@@ -1,0 +1,258 @@
+{
+  "extName": {
+    "message": "Hype - Nogometni rezultati v živo"
+  },
+  "extDescription": {
+    "message": "Nogometni rezultati v živo, tekme, izidi in lestvice."
+  },
+  "appTitle": {
+    "message": "Hype Scores"
+  },
+  "subtitle": {
+    "message": "Hitri live rezultati, izidi in lestvice."
+  },
+  "loading": {
+    "message": "Nalaganje tekem…"
+  },
+  "error": {
+    "message": "Podatkov ni bilo mogoče naložiti"
+  },
+  "extensionRuntimeRequired": {
+    "message": "Live podatki so v predogledu datoteke blokirani. Odprite pojavno okno razširitve Chrome."
+  },
+  "empty": {
+    "message": "Danes ni najdenih tekem."
+  },
+  "ready": {
+    "message": "Pripravljeno"
+  },
+  "refreshing": {
+    "message": "Osveževanje"
+  },
+  "notUpdated": {
+    "message": "Še ni posodobljeno"
+  },
+  "updated": {
+    "message": "Posodobljeno"
+  },
+  "live": {
+    "message": "V živo"
+  },
+  "matches": {
+    "message": "Tekme"
+  },
+  "results": {
+    "message": "Rezultati"
+  },
+  "upcoming": {
+    "message": "Prihajajoče"
+  },
+  "standings": {
+    "message": "Lestvica"
+  },
+  "bracket": {
+    "message": "Izločilni del"
+  },
+  "loadingBracket": {
+    "message": "Nalaganje sheme…"
+  },
+  "noBracket": {
+    "message": "Shema ni na voljo."
+  },
+  "bracketUnavailable": {
+    "message": "Shema ni dosegljiva."
+  },
+  "tbd": {
+    "message": "TBD"
+  },
+  "roundOf32": {
+    "message": "Šestnajstina finala"
+  },
+  "roundOf16": {
+    "message": "Osminka finala"
+  },
+  "quarterfinals": {
+    "message": "Četrtfinale"
+  },
+  "semifinals": {
+    "message": "Polfinale"
+  },
+  "thirdPlace": {
+    "message": "Tekma za 3. mesto"
+  },
+  "final": {
+    "message": "Finale"
+  },
+  "played": {
+    "message": "T"
+  },
+  "wins": {
+    "message": "Z"
+  },
+  "draws": {
+    "message": "N"
+  },
+  "losses": {
+    "message": "P"
+  },
+  "goalsFor": {
+    "message": "DG"
+  },
+  "goalsAgainst": {
+    "message": "PG"
+  },
+  "goalDifference": {
+    "message": "GR"
+  },
+  "points": {
+    "message": "T"
+  },
+  "paused": {
+    "message": "Zaustavljeno"
+  },
+  "autoPaused": {
+    "message": "Samodejno osveževanje je zaustavljeno zaradi varčevanja z zahtevami."
+  },
+  "idlePaused": {
+    "message": "Zaustavljeno zaradi nedejavnosti."
+  },
+  "requestLimitReached": {
+    "message": "Dosežena dnevna omejitev zahtev. Prikazani so predpomnjeni podatki."
+  },
+  "refreshFailed": {
+    "message": "Osveževanje ni uspelo. Prikazani so najnovejši podatki."
+  },
+  "club": {
+    "message": "Klub"
+  },
+  "backToLeagues": {
+    "message": "← Lige"
+  },
+  "selectLeague": {
+    "message": "Izberite ligo"
+  },
+  "noLiveMatches": {
+    "message": "Ni tekem v živo"
+  },
+  "liveCount": {
+    "message": "$COUNT$ v živo",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCount": {
+    "message": "$COUNT$ tekem",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fullTime": {
+    "message": "Konec"
+  },
+  "halfTime": {
+    "message": "Polčas"
+  },
+  "scheduled": {
+    "message": "Načrtovano"
+  },
+  "stats": {
+    "message": "Statistika"
+  },
+  "favorite": {
+    "message": "Priljubljeno"
+  },
+  "removeFavorite": {
+    "message": "Odstrani iz priljubljenih"
+  },
+  "turnOff": {
+    "message": "Izklopi razširitev"
+  },
+  "turnOn": {
+    "message": "Vklopi razširitev"
+  },
+  "favoriteLeague": {
+    "message": "Dodaj ligo med priljubljene"
+  },
+  "forceEnglishOn": {
+    "message": "Prikaži angleške oznake"
+  },
+  "forceEnglishOff": {
+    "message": "Vrni jezik brskalnika"
+  },
+  "other": {
+    "message": "Drugo"
+  },
+  "team": {
+    "message": "Ekipa"
+  },
+  "unknownLeague": {
+    "message": "Neznana liga"
+  },
+  "unknownTeam": {
+    "message": "Neznana ekipa"
+  },
+  "matchDetails": {
+    "message": "Podrobnosti tekme"
+  },
+  "loadingDetails": {
+    "message": "Nalaganje podrobnosti tekme…"
+  },
+  "loadingStandings": {
+    "message": "Nalaganje lestvice…"
+  },
+  "detailsUnavailable": {
+    "message": "Podrobnosti niso na voljo"
+  },
+  "noDetails": {
+    "message": "Za to tekmo ni dodatnih podrobnosti."
+  },
+  "noSectionData": {
+    "message": "Ni razpoložljivih podatkov."
+  },
+  "noStats": {
+    "message": "Statistika tekme ni na voljo."
+  },
+  "noStandings": {
+    "message": "Za to ligo ni lestvice."
+  },
+  "noNews": {
+    "message": "Ni novic."
+  },
+  "noLinks": {
+    "message": "Ni povezav."
+  },
+  "venue": {
+    "message": "Stadion"
+  },
+  "kickoff": {
+    "message": "Začetek"
+  },
+  "broadcasts": {
+    "message": "Prenosi"
+  },
+  "timeline": {
+    "message": "Potek"
+  },
+  "commentary": {
+    "message": "Komentar"
+  },
+  "lineups": {
+    "message": "Postave"
+  },
+  "headToHead": {
+    "message": "Medsebojne tekme"
+  },
+  "news": {
+    "message": "Novice"
+  },
+  "highlights": {
+    "message": "Povzetki"
+  },
+  "links": {
+    "message": "Povezave"
+  }
+}

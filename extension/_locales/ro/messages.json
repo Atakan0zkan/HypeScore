@@ -1,0 +1,258 @@
+{
+  "extName": {
+    "message": "Hype - Scoruri de fotbal live"
+  },
+  "extDescription": {
+    "message": "Scoruri de fotbal live, meciuri, rezultate și clasamente."
+  },
+  "appTitle": {
+    "message": "Hype Scores"
+  },
+  "subtitle": {
+    "message": "Scoruri live rapide, rezultate și clasamente."
+  },
+  "loading": {
+    "message": "Se încarcă meciurile…"
+  },
+  "error": {
+    "message": "Nu s-au putut încărca datele"
+  },
+  "extensionRuntimeRequired": {
+    "message": "Datele live sunt blocate în previzualizarea fișierului. Deschide popup-ul extensiei Chrome pentru scoruri."
+  },
+  "empty": {
+    "message": "Niciun meci găsit astăzi."
+  },
+  "ready": {
+    "message": "Gata"
+  },
+  "refreshing": {
+    "message": "Se actualizează"
+  },
+  "notUpdated": {
+    "message": "Neactualizat încă"
+  },
+  "updated": {
+    "message": "Actualizat"
+  },
+  "live": {
+    "message": "Live"
+  },
+  "matches": {
+    "message": "Meciuri"
+  },
+  "results": {
+    "message": "Rezultate"
+  },
+  "upcoming": {
+    "message": "Urmează"
+  },
+  "standings": {
+    "message": "Clasament"
+  },
+  "bracket": {
+    "message": "Eliminare directă"
+  },
+  "loadingBracket": {
+    "message": "Se încarcă tabloul…"
+  },
+  "noBracket": {
+    "message": "Niciun tablou disponibil."
+  },
+  "bracketUnavailable": {
+    "message": "Tablou indisponibil."
+  },
+  "tbd": {
+    "message": "TBD"
+  },
+  "roundOf32": {
+    "message": "Șaisprezecimi"
+  },
+  "roundOf16": {
+    "message": "Optimi"
+  },
+  "quarterfinals": {
+    "message": "Sferturi"
+  },
+  "semifinals": {
+    "message": "Semifinale"
+  },
+  "thirdPlace": {
+    "message": "Meciul pentru locul 3"
+  },
+  "final": {
+    "message": "Finală"
+  },
+  "played": {
+    "message": "J"
+  },
+  "wins": {
+    "message": "V"
+  },
+  "draws": {
+    "message": "E"
+  },
+  "losses": {
+    "message": "Î"
+  },
+  "goalsFor": {
+    "message": "GM"
+  },
+  "goalsAgainst": {
+    "message": "GP"
+  },
+  "goalDifference": {
+    "message": "G"
+  },
+  "points": {
+    "message": "Pct"
+  },
+  "paused": {
+    "message": "Pauză"
+  },
+  "autoPaused": {
+    "message": "Actualizarea automată e în pauză pentru a economisi cereri."
+  },
+  "idlePaused": {
+    "message": "Pauză din cauza inactivității."
+  },
+  "requestLimitReached": {
+    "message": "Limita zilnică de cereri a fost atinsă. Se afișează datele din cache."
+  },
+  "refreshFailed": {
+    "message": "Actualizarea a eșuat. Se afișează cele mai recente date."
+  },
+  "club": {
+    "message": "Club"
+  },
+  "backToLeagues": {
+    "message": "← Ligi"
+  },
+  "selectLeague": {
+    "message": "Selectează o ligă"
+  },
+  "noLiveMatches": {
+    "message": "Niciun meci live"
+  },
+  "liveCount": {
+    "message": "$COUNT$ live",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCount": {
+    "message": "$COUNT$ meciuri",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fullTime": {
+    "message": "Final"
+  },
+  "halfTime": {
+    "message": "Pauză"
+  },
+  "scheduled": {
+    "message": "Programat"
+  },
+  "stats": {
+    "message": "Statistici"
+  },
+  "favorite": {
+    "message": "Favorit"
+  },
+  "removeFavorite": {
+    "message": "Elimină favoritul"
+  },
+  "turnOff": {
+    "message": "Oprește extensia"
+  },
+  "turnOn": {
+    "message": "Pornește extensia"
+  },
+  "favoriteLeague": {
+    "message": "Adaugă liga la favorite"
+  },
+  "forceEnglishOn": {
+    "message": "Afișează etichete în engleză"
+  },
+  "forceEnglishOff": {
+    "message": "Revino la limba browserului"
+  },
+  "other": {
+    "message": "Altele"
+  },
+  "team": {
+    "message": "Echipă"
+  },
+  "unknownLeague": {
+    "message": "Ligă necunoscută"
+  },
+  "unknownTeam": {
+    "message": "Echipă necunoscută"
+  },
+  "matchDetails": {
+    "message": "Detalii meci"
+  },
+  "loadingDetails": {
+    "message": "Se încarcă detaliile meciului…"
+  },
+  "loadingStandings": {
+    "message": "Se încarcă clasamentul…"
+  },
+  "detailsUnavailable": {
+    "message": "Detalii indisponibile"
+  },
+  "noDetails": {
+    "message": "Nu există detalii suplimentare pentru acest meci."
+  },
+  "noSectionData": {
+    "message": "Nu există date disponibile."
+  },
+  "noStats": {
+    "message": "Nu există statistici pentru acest meci."
+  },
+  "noStandings": {
+    "message": "Nu există clasament pentru această ligă."
+  },
+  "noNews": {
+    "message": "Nu există știri."
+  },
+  "noLinks": {
+    "message": "Nu există linkuri."
+  },
+  "venue": {
+    "message": "Stadion"
+  },
+  "kickoff": {
+    "message": "Lovitura de start"
+  },
+  "broadcasts": {
+    "message": "Transmisiuni"
+  },
+  "timeline": {
+    "message": "Cronologie"
+  },
+  "commentary": {
+    "message": "Comentariu"
+  },
+  "lineups": {
+    "message": "Echipele de start"
+  },
+  "headToHead": {
+    "message": "Confruntări directe"
+  },
+  "news": {
+    "message": "Știri"
+  },
+  "highlights": {
+    "message": "Rezumate"
+  },
+  "links": {
+    "message": "Linkuri"
+  }
+}

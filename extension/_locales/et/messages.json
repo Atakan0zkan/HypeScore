@@ -1,0 +1,258 @@
+{
+  "extName": {
+    "message": "Hype - Jalgpalli live-tulemused"
+  },
+  "extDescription": {
+    "message": "Jalgpalli live-tulemused, mängud, skoorid ja tabelid."
+  },
+  "appTitle": {
+    "message": "Hype Scores"
+  },
+  "subtitle": {
+    "message": "Kiired live-skoorid, tulemused ja tabelid."
+  },
+  "loading": {
+    "message": "Mängude laadimine…"
+  },
+  "error": {
+    "message": "Andmeid ei saanud laadida"
+  },
+  "extensionRuntimeRequired": {
+    "message": "Live-andmed on faili eelvaates blokeeritud. Ava Chrome’i laienduse hüpik skooride jaoks."
+  },
+  "empty": {
+    "message": "Täna mänge ei leitud."
+  },
+  "ready": {
+    "message": "Valmis"
+  },
+  "refreshing": {
+    "message": "Värskendamine"
+  },
+  "notUpdated": {
+    "message": "Pole veel uuendatud"
+  },
+  "updated": {
+    "message": "Uuendatud"
+  },
+  "live": {
+    "message": "Live"
+  },
+  "matches": {
+    "message": "Mängud"
+  },
+  "results": {
+    "message": "Tulemused"
+  },
+  "upcoming": {
+    "message": "Eesseisvad"
+  },
+  "standings": {
+    "message": "Tabel"
+  },
+  "bracket": {
+    "message": "Väljalangemismängud"
+  },
+  "loadingBracket": {
+    "message": "Võrgustiku laadimine…"
+  },
+  "noBracket": {
+    "message": "Võrgustik pole saadaval."
+  },
+  "bracketUnavailable": {
+    "message": "Võrgustik pole kättesaadav."
+  },
+  "tbd": {
+    "message": "TBD"
+  },
+  "roundOf32": {
+    "message": "32 paremat"
+  },
+  "roundOf16": {
+    "message": "Kaheksandikfinaal"
+  },
+  "quarterfinals": {
+    "message": "Veerandfinaal"
+  },
+  "semifinals": {
+    "message": "Poolfinaal"
+  },
+  "thirdPlace": {
+    "message": "3. koha mäng"
+  },
+  "final": {
+    "message": "Finaal"
+  },
+  "played": {
+    "message": "M"
+  },
+  "wins": {
+    "message": "V"
+  },
+  "draws": {
+    "message": "V"
+  },
+  "losses": {
+    "message": "K"
+  },
+  "goalsFor": {
+    "message": "V"
+  },
+  "goalsAgainst": {
+    "message": "L"
+  },
+  "goalDifference": {
+    "message": "VV"
+  },
+  "points": {
+    "message": "P"
+  },
+  "paused": {
+    "message": "Peatatud"
+  },
+  "autoPaused": {
+    "message": "Automaatne värskendus peatatud päringute säästmiseks."
+  },
+  "idlePaused": {
+    "message": "Peatatud tegevusetuse ajal."
+  },
+  "requestLimitReached": {
+    "message": "Päevane päringulimiit on täis. Kuvatakse vahemälu andmed."
+  },
+  "refreshFailed": {
+    "message": "Värskendamine ebaõnnestus. Kuvatakse viimased andmed."
+  },
+  "club": {
+    "message": "Klubi"
+  },
+  "backToLeagues": {
+    "message": "← Liigad"
+  },
+  "selectLeague": {
+    "message": "Vali liiga"
+  },
+  "noLiveMatches": {
+    "message": "Live-mänge pole"
+  },
+  "liveCount": {
+    "message": "$COUNT$ live",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCount": {
+    "message": "$COUNT$ mängu",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fullTime": {
+    "message": "Lõpp"
+  },
+  "halfTime": {
+    "message": "Poolaeg"
+  },
+  "scheduled": {
+    "message": "Planeeritud"
+  },
+  "stats": {
+    "message": "Statistika"
+  },
+  "favorite": {
+    "message": "Lemmik"
+  },
+  "removeFavorite": {
+    "message": "Eemalda lemmikutest"
+  },
+  "turnOff": {
+    "message": "Lülita laiendus välja"
+  },
+  "turnOn": {
+    "message": "Lülita laiendus sisse"
+  },
+  "favoriteLeague": {
+    "message": "Lisa liiga lemmikutesse"
+  },
+  "forceEnglishOn": {
+    "message": "Näita ingliskeelseid silte"
+  },
+  "forceEnglishOff": {
+    "message": "Tagasi brauseri keele juurde"
+  },
+  "other": {
+    "message": "Muu"
+  },
+  "team": {
+    "message": "Meeskond"
+  },
+  "unknownLeague": {
+    "message": "Tundmatu liiga"
+  },
+  "unknownTeam": {
+    "message": "Tundmatu meeskond"
+  },
+  "matchDetails": {
+    "message": "Mängu detailid"
+  },
+  "loadingDetails": {
+    "message": "Mängu detailide laadimine…"
+  },
+  "loadingStandings": {
+    "message": "Tabeli laadimine…"
+  },
+  "detailsUnavailable": {
+    "message": "Detailid pole saadaval"
+  },
+  "noDetails": {
+    "message": "Selle mängu kohta pole lisadetailid."
+  },
+  "noSectionData": {
+    "message": "Andmeid pole saadaval."
+  },
+  "noStats": {
+    "message": "Mängu statistikat pole saadaval."
+  },
+  "noStandings": {
+    "message": "Selle liiga tabelit pole."
+  },
+  "noNews": {
+    "message": "Uudiseid pole."
+  },
+  "noLinks": {
+    "message": "Linke pole."
+  },
+  "venue": {
+    "message": "Staadion"
+  },
+  "kickoff": {
+    "message": "Algus"
+  },
+  "broadcasts": {
+    "message": "Ülekanded"
+  },
+  "timeline": {
+    "message": "Ajajoon"
+  },
+  "commentary": {
+    "message": "Kommentaar"
+  },
+  "lineups": {
+    "message": "Koosseisud"
+  },
+  "headToHead": {
+    "message": "Omavahelised"
+  },
+  "news": {
+    "message": "Uudised"
+  },
+  "highlights": {
+    "message": "Kokkuvõtted"
+  },
+  "links": {
+    "message": "Lingid"
+  }
+}

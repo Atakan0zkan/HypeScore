@@ -1,0 +1,258 @@
+{
+  "extName": {
+    "message": "Hype - Risultati di calcio in diretta"
+  },
+  "extDescription": {
+    "message": "Risultati di calcio in diretta, partite, risultati e classifiche."
+  },
+  "appTitle": {
+    "message": "Hype Scores"
+  },
+  "subtitle": {
+    "message": "Risultati live, finali e classifiche in un attimo."
+  },
+  "loading": {
+    "message": "Caricamento partite…"
+  },
+  "error": {
+    "message": "Impossibile caricare i dati"
+  },
+  "extensionRuntimeRequired": {
+    "message": "I dati live non si caricano nell’anteprima file. Apri il popup dell’estensione Chrome per vedere i risultati."
+  },
+  "empty": {
+    "message": "Nessuna partita trovata oggi."
+  },
+  "ready": {
+    "message": "Pronto"
+  },
+  "refreshing": {
+    "message": "Aggiornamento"
+  },
+  "notUpdated": {
+    "message": "Non ancora aggiornato"
+  },
+  "updated": {
+    "message": "Aggiornato"
+  },
+  "live": {
+    "message": "Live"
+  },
+  "matches": {
+    "message": "Partite"
+  },
+  "results": {
+    "message": "Risultati"
+  },
+  "upcoming": {
+    "message": "In programma"
+  },
+  "standings": {
+    "message": "Classifica"
+  },
+  "bracket": {
+    "message": "Eliminazione diretta"
+  },
+  "loadingBracket": {
+    "message": "Caricamento tabellone…"
+  },
+  "noBracket": {
+    "message": "Nessun tabellone disponibile."
+  },
+  "bracketUnavailable": {
+    "message": "Tabellone non disponibile."
+  },
+  "tbd": {
+    "message": "Da definire"
+  },
+  "roundOf32": {
+    "message": "Trentaduesimi di finale"
+  },
+  "roundOf16": {
+    "message": "Ottavi di finale"
+  },
+  "quarterfinals": {
+    "message": "Quarti di finale"
+  },
+  "semifinals": {
+    "message": "Semifinali"
+  },
+  "thirdPlace": {
+    "message": "Finale 3º posto"
+  },
+  "final": {
+    "message": "Finale"
+  },
+  "played": {
+    "message": "G"
+  },
+  "wins": {
+    "message": "V"
+  },
+  "draws": {
+    "message": "N"
+  },
+  "losses": {
+    "message": "P"
+  },
+  "goalsFor": {
+    "message": "GF"
+  },
+  "goalsAgainst": {
+    "message": "GS"
+  },
+  "goalDifference": {
+    "message": "DR"
+  },
+  "points": {
+    "message": "Pt"
+  },
+  "paused": {
+    "message": "In pausa"
+  },
+  "autoPaused": {
+    "message": "Aggiornamento automatico in pausa per risparmiare richieste."
+  },
+  "idlePaused": {
+    "message": "In pausa per inattività."
+  },
+  "requestLimitReached": {
+    "message": "Limite giornaliero di richieste raggiunto. Mostro i dati in cache."
+  },
+  "refreshFailed": {
+    "message": "Aggiornamento non riuscito. Mostro gli ultimi dati."
+  },
+  "club": {
+    "message": "Club"
+  },
+  "backToLeagues": {
+    "message": "← Campionati"
+  },
+  "selectLeague": {
+    "message": "Seleziona un campionato"
+  },
+  "noLiveMatches": {
+    "message": "Nessuna partita live"
+  },
+  "liveCount": {
+    "message": "$COUNT$ live",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCount": {
+    "message": "$COUNT$ partite",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fullTime": {
+    "message": "FT"
+  },
+  "halfTime": {
+    "message": "HT"
+  },
+  "scheduled": {
+    "message": "In programma"
+  },
+  "stats": {
+    "message": "Statistiche"
+  },
+  "favorite": {
+    "message": "Preferito"
+  },
+  "removeFavorite": {
+    "message": "Rimuovi dai preferiti"
+  },
+  "turnOff": {
+    "message": "Disattiva estensione"
+  },
+  "turnOn": {
+    "message": "Attiva estensione"
+  },
+  "favoriteLeague": {
+    "message": "Aggiungi campionato ai preferiti"
+  },
+  "forceEnglishOn": {
+    "message": "Mostra in inglese"
+  },
+  "forceEnglishOff": {
+    "message": "Torna alla lingua del browser"
+  },
+  "other": {
+    "message": "Altri"
+  },
+  "team": {
+    "message": "Squadra"
+  },
+  "unknownLeague": {
+    "message": "Campionato sconosciuto"
+  },
+  "unknownTeam": {
+    "message": "Squadra sconosciuta"
+  },
+  "matchDetails": {
+    "message": "Dettagli partita"
+  },
+  "loadingDetails": {
+    "message": "Caricamento dettagli partita…"
+  },
+  "loadingStandings": {
+    "message": "Caricamento classifica…"
+  },
+  "detailsUnavailable": {
+    "message": "Dettagli non disponibili"
+  },
+  "noDetails": {
+    "message": "Nessun dettaglio extra per questa partita."
+  },
+  "noSectionData": {
+    "message": "Nessun dato disponibile."
+  },
+  "noStats": {
+    "message": "Nessuna statistica disponibile."
+  },
+  "noStandings": {
+    "message": "Nessuna classifica per questo campionato."
+  },
+  "noNews": {
+    "message": "Nessuna notizia disponibile."
+  },
+  "noLinks": {
+    "message": "Nessun link disponibile."
+  },
+  "venue": {
+    "message": "Stadio"
+  },
+  "kickoff": {
+    "message": "Calcio d’inizio"
+  },
+  "broadcasts": {
+    "message": "Trasmissioni"
+  },
+  "timeline": {
+    "message": "Cronologia"
+  },
+  "commentary": {
+    "message": "Commento"
+  },
+  "lineups": {
+    "message": "Formazioni"
+  },
+  "headToHead": {
+    "message": "Scontri diretti"
+  },
+  "news": {
+    "message": "Notizie"
+  },
+  "highlights": {
+    "message": "Highlight"
+  },
+  "links": {
+    "message": "Link"
+  }
+}

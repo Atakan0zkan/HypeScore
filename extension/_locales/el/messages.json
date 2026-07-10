@@ -1,0 +1,258 @@
+{
+  "extName": {
+    "message": "Hype - Ζωντανά σκορ ποδοσφαίρου"
+  },
+  "extDescription": {
+    "message": "Ζωντανά σκορ ποδοσφαίρου, αγώνες, αποτελέσματα και βαθμολογίες."
+  },
+  "appTitle": {
+    "message": "Hype Scores"
+  },
+  "subtitle": {
+    "message": "Γρήγορα live σκορ, αποτελέσματα και βαθμολογίες."
+  },
+  "loading": {
+    "message": "Φόρτωση αγώνων…"
+  },
+  "error": {
+    "message": "Δεν ήταν δυνατή η φόρτωση δεδομένων"
+  },
+  "extensionRuntimeRequired": {
+    "message": "Τα live δεδομένα αποκλείονται στην προεπισκόπηση αρχείου. Άνοιξε το popup της επέκτασης Chrome για σκορ."
+  },
+  "empty": {
+    "message": "Δεν βρέθηκαν αγώνες σήμερα."
+  },
+  "ready": {
+    "message": "Έτοιμο"
+  },
+  "refreshing": {
+    "message": "Ανανέωση"
+  },
+  "notUpdated": {
+    "message": "Δεν ενημερώθηκε ακόμη"
+  },
+  "updated": {
+    "message": "Ενημερώθηκε"
+  },
+  "live": {
+    "message": "Ζωντανά"
+  },
+  "matches": {
+    "message": "Αγώνες"
+  },
+  "results": {
+    "message": "Αποτελέσματα"
+  },
+  "upcoming": {
+    "message": "Επερχόμενοι"
+  },
+  "standings": {
+    "message": "Βαθμολογία"
+  },
+  "bracket": {
+    "message": "Νοκ-άουτ"
+  },
+  "loadingBracket": {
+    "message": "Φόρτωση πίνακα νοκ-άουτ…"
+  },
+  "noBracket": {
+    "message": "Δεν υπάρχει πίνακας νοκ-άουτ."
+  },
+  "bracketUnavailable": {
+    "message": "Ο πίνακας νοκ-άουτ δεν είναι διαθέσιμος."
+  },
+  "tbd": {
+    "message": "TBD"
+  },
+  "roundOf32": {
+    "message": "Φάση των 32"
+  },
+  "roundOf16": {
+    "message": "Φάση των 16"
+  },
+  "quarterfinals": {
+    "message": "Προημιτελικά"
+  },
+  "semifinals": {
+    "message": "Ημιτελικά"
+  },
+  "thirdPlace": {
+    "message": "Μικρός τελικός"
+  },
+  "final": {
+    "message": "Τελικός"
+  },
+  "played": {
+    "message": "Α"
+  },
+  "wins": {
+    "message": "Ν"
+  },
+  "draws": {
+    "message": "Ι"
+  },
+  "losses": {
+    "message": "Η"
+  },
+  "goalsFor": {
+    "message": "Υ"
+  },
+  "goalsAgainst": {
+    "message": "Κ"
+  },
+  "goalDifference": {
+    "message": "Δ"
+  },
+  "points": {
+    "message": "Β"
+  },
+  "paused": {
+    "message": "Σε παύση"
+  },
+  "autoPaused": {
+    "message": "Η αυτόματη ανανέωση τέθηκε σε παύση για εξοικονόμηση αιτημάτων."
+  },
+  "idlePaused": {
+    "message": "Σε παύση λόγω αδράνειας."
+  },
+  "requestLimitReached": {
+    "message": "Συμπληρώθηκε το ημερήσιο όριο αιτημάτων. Εμφάνιση δεδομένων cache."
+  },
+  "refreshFailed": {
+    "message": "Η ανανέωση απέτυχε. Εμφάνιση τελευταίων δεδομένων."
+  },
+  "club": {
+    "message": "Ομάδα"
+  },
+  "backToLeagues": {
+    "message": "← Πρωταθλήματα"
+  },
+  "selectLeague": {
+    "message": "Επίλεξε πρωτάθλημα"
+  },
+  "noLiveMatches": {
+    "message": "Δεν υπάρχουν ζωντανοί αγώνες"
+  },
+  "liveCount": {
+    "message": "$COUNT$ ζωντανά",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCount": {
+    "message": "$COUNT$ αγώνες",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fullTime": {
+    "message": "Τελικό"
+  },
+  "halfTime": {
+    "message": "Ημίχρονο"
+  },
+  "scheduled": {
+    "message": "Προγραμματισμένος"
+  },
+  "stats": {
+    "message": "Στατιστικά"
+  },
+  "favorite": {
+    "message": "Αγαπημένο"
+  },
+  "removeFavorite": {
+    "message": "Αφαίρεση αγαπημένου"
+  },
+  "turnOff": {
+    "message": "Απενεργοποίηση επέκτασης"
+  },
+  "turnOn": {
+    "message": "Ενεργοποίηση επέκτασης"
+  },
+  "favoriteLeague": {
+    "message": "Προσθήκη πρωταθλήματος στα αγαπημένα"
+  },
+  "forceEnglishOn": {
+    "message": "Εμφάνιση αγγλικών ετικετών"
+  },
+  "forceEnglishOff": {
+    "message": "Επιστροφή στη γλώσσα του προγράμματος περιήγησης"
+  },
+  "other": {
+    "message": "Άλλα"
+  },
+  "team": {
+    "message": "Ομάδα"
+  },
+  "unknownLeague": {
+    "message": "Άγνωστο πρωτάθλημα"
+  },
+  "unknownTeam": {
+    "message": "Άγνωστη ομάδα"
+  },
+  "matchDetails": {
+    "message": "Λεπτομέρειες αγώνα"
+  },
+  "loadingDetails": {
+    "message": "Φόρτωση λεπτομερειών αγώνα…"
+  },
+  "loadingStandings": {
+    "message": "Φόρτωση βαθμολογίας…"
+  },
+  "detailsUnavailable": {
+    "message": "Οι λεπτομέρειες δεν είναι διαθέσιμες"
+  },
+  "noDetails": {
+    "message": "Δεν υπάρχουν επιπλέον λεπτομέρειες για αυτόν τον αγώνα."
+  },
+  "noSectionData": {
+    "message": "Δεν υπάρχουν διαθέσιμα δεδομένα."
+  },
+  "noStats": {
+    "message": "Δεν υπάρχουν στατιστικά αγώνα."
+  },
+  "noStandings": {
+    "message": "Δεν υπάρχει βαθμολογία για αυτό το πρωτάθλημα."
+  },
+  "noNews": {
+    "message": "Δεν υπάρχουν νέα."
+  },
+  "noLinks": {
+    "message": "Δεν υπάρχουν σύνδεσμοι."
+  },
+  "venue": {
+    "message": "Γήπεδο"
+  },
+  "kickoff": {
+    "message": "Έναρξη"
+  },
+  "broadcasts": {
+    "message": "Μεταδόσεις"
+  },
+  "timeline": {
+    "message": "Χρονολόγιο"
+  },
+  "commentary": {
+    "message": "Σχολιασμός"
+  },
+  "lineups": {
+    "message": "Ενδεκάδες"
+  },
+  "headToHead": {
+    "message": "Πρόσωπο με πρόσωπο"
+  },
+  "news": {
+    "message": "Νέα"
+  },
+  "highlights": {
+    "message": "Στιγμιότυπα"
+  },
+  "links": {
+    "message": "Σύνδεσμοι"
+  }
+}

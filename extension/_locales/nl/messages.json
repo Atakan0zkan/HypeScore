@@ -1,0 +1,258 @@
+{
+  "extName": {
+    "message": "Hype - Live voetbaluitslagen"
+  },
+  "extDescription": {
+    "message": "Live voetbaluitslagen, wedstrijden, resultaten en standen."
+  },
+  "appTitle": {
+    "message": "Hype Scores"
+  },
+  "subtitle": {
+    "message": "Snelle live scores, uitslagen en standen."
+  },
+  "loading": {
+    "message": "Wedstrijden laden…"
+  },
+  "error": {
+    "message": "Kon gegevens niet laden"
+  },
+  "extensionRuntimeRequired": {
+    "message": "Livedata wordt geblokkeerd in bestandsvoorbeeld. Open de Chrome-extensiepopup om scores te laden."
+  },
+  "empty": {
+    "message": "Geen wedstrijden gevonden vandaag."
+  },
+  "ready": {
+    "message": "Klaar"
+  },
+  "refreshing": {
+    "message": "Vernieuwen"
+  },
+  "notUpdated": {
+    "message": "Nog niet bijgewerkt"
+  },
+  "updated": {
+    "message": "Bijgewerkt"
+  },
+  "live": {
+    "message": "Live"
+  },
+  "matches": {
+    "message": "Wedstrijden"
+  },
+  "results": {
+    "message": "Uitslagen"
+  },
+  "upcoming": {
+    "message": "Binnenkort"
+  },
+  "standings": {
+    "message": "Stand"
+  },
+  "bracket": {
+    "message": "Knock-out"
+  },
+  "loadingBracket": {
+    "message": "Knock-outschema laden…"
+  },
+  "noBracket": {
+    "message": "Geen knock-outschema beschikbaar."
+  },
+  "bracketUnavailable": {
+    "message": "Knock-outschema niet beschikbaar."
+  },
+  "tbd": {
+    "message": "Nog niet bekend"
+  },
+  "roundOf32": {
+    "message": "Laatste 32"
+  },
+  "roundOf16": {
+    "message": "Achtste finales"
+  },
+  "quarterfinals": {
+    "message": "Kwartfinales"
+  },
+  "semifinals": {
+    "message": "Halve finales"
+  },
+  "thirdPlace": {
+    "message": "Wedstrijd om de 3e plaats"
+  },
+  "final": {
+    "message": "Finale"
+  },
+  "played": {
+    "message": "G"
+  },
+  "wins": {
+    "message": "W"
+  },
+  "draws": {
+    "message": "G"
+  },
+  "losses": {
+    "message": "V"
+  },
+  "goalsFor": {
+    "message": "DV"
+  },
+  "goalsAgainst": {
+    "message": "DT"
+  },
+  "goalDifference": {
+    "message": "DS"
+  },
+  "points": {
+    "message": "Pnt"
+  },
+  "paused": {
+    "message": "Gepauzeerd"
+  },
+  "autoPaused": {
+    "message": "Automatisch verversen gepauzeerd om requests te sparen."
+  },
+  "idlePaused": {
+    "message": "Gepauzeerd bij inactiviteit."
+  },
+  "requestLimitReached": {
+    "message": "Dagelijkse requestlimiet bereikt. Gecachte data wordt getoond."
+  },
+  "refreshFailed": {
+    "message": "Vernieuwen mislukt. Laatste data wordt getoond."
+  },
+  "club": {
+    "message": "Club"
+  },
+  "backToLeagues": {
+    "message": "← Competities"
+  },
+  "selectLeague": {
+    "message": "Kies een competitie"
+  },
+  "noLiveMatches": {
+    "message": "Geen live wedstrijden"
+  },
+  "liveCount": {
+    "message": "$COUNT$ live",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCount": {
+    "message": "$COUNT$ wedstrijden",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fullTime": {
+    "message": "Eind"
+  },
+  "halfTime": {
+    "message": "Rust"
+  },
+  "scheduled": {
+    "message": "Gepland"
+  },
+  "stats": {
+    "message": "Statistieken"
+  },
+  "favorite": {
+    "message": "Favoriet"
+  },
+  "removeFavorite": {
+    "message": "Favoriet verwijderen"
+  },
+  "turnOff": {
+    "message": "Extensie uitschakelen"
+  },
+  "turnOn": {
+    "message": "Extensie inschakelen"
+  },
+  "favoriteLeague": {
+    "message": "Competitie favoriet maken"
+  },
+  "forceEnglishOn": {
+    "message": "Engelse labels tonen"
+  },
+  "forceEnglishOff": {
+    "message": "Terug naar browsertaal"
+  },
+  "other": {
+    "message": "Overig"
+  },
+  "team": {
+    "message": "Team"
+  },
+  "unknownLeague": {
+    "message": "Onbekende competitie"
+  },
+  "unknownTeam": {
+    "message": "Onbekend team"
+  },
+  "matchDetails": {
+    "message": "Wedstrijddetails"
+  },
+  "loadingDetails": {
+    "message": "Wedstrijddetails laden…"
+  },
+  "loadingStandings": {
+    "message": "Stand laden…"
+  },
+  "detailsUnavailable": {
+    "message": "Details niet beschikbaar"
+  },
+  "noDetails": {
+    "message": "Geen extra details voor deze wedstrijd."
+  },
+  "noSectionData": {
+    "message": "Geen gegevens beschikbaar."
+  },
+  "noStats": {
+    "message": "Geen wedstrijdstatistieken beschikbaar."
+  },
+  "noStandings": {
+    "message": "Geen stand beschikbaar voor deze competitie."
+  },
+  "noNews": {
+    "message": "Geen nieuws beschikbaar."
+  },
+  "noLinks": {
+    "message": "Geen links beschikbaar."
+  },
+  "venue": {
+    "message": "Stadion"
+  },
+  "kickoff": {
+    "message": "Aftrap"
+  },
+  "broadcasts": {
+    "message": "Uitzendingen"
+  },
+  "timeline": {
+    "message": "Tijdlijn"
+  },
+  "commentary": {
+    "message": "Commentaar"
+  },
+  "lineups": {
+    "message": "Opstellingen"
+  },
+  "headToHead": {
+    "message": "Onderlinge duels"
+  },
+  "news": {
+    "message": "Nieuws"
+  },
+  "highlights": {
+    "message": "Highlights"
+  },
+  "links": {
+    "message": "Links"
+  }
+}

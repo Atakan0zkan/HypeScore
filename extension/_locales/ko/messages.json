@@ -1,0 +1,258 @@
+{
+  "extName": {
+    "message": "Hype - 라이브 축구 스코어"
+  },
+  "extDescription": {
+    "message": "라이브 축구 스코어, 경기, 결과 및 순위표."
+  },
+  "appTitle": {
+    "message": "Hype Scores"
+  },
+  "subtitle": {
+    "message": "빠른 라이브 스코어, 결과, 순위표."
+  },
+  "loading": {
+    "message": "경기 불러오는 중…"
+  },
+  "error": {
+    "message": "데이터를 불러올 수 없습니다"
+  },
+  "extensionRuntimeRequired": {
+    "message": "파일 미리보기에서는 라이브 데이터가 차단됩니다. Chrome 확장 프로그램 팝업을 여세요."
+  },
+  "empty": {
+    "message": "오늘 경기가 없습니다."
+  },
+  "ready": {
+    "message": "준비됨"
+  },
+  "refreshing": {
+    "message": "새로고침 중"
+  },
+  "notUpdated": {
+    "message": "아직 업데이트되지 않음"
+  },
+  "updated": {
+    "message": "업데이트됨"
+  },
+  "live": {
+    "message": "라이브"
+  },
+  "matches": {
+    "message": "경기"
+  },
+  "results": {
+    "message": "결과"
+  },
+  "upcoming": {
+    "message": "예정"
+  },
+  "standings": {
+    "message": "순위"
+  },
+  "bracket": {
+    "message": "토너먼트"
+  },
+  "loadingBracket": {
+    "message": "토너먼트표 불러오는 중…"
+  },
+  "noBracket": {
+    "message": "토너먼트표가 없습니다."
+  },
+  "bracketUnavailable": {
+    "message": "토너먼트표를 사용할 수 없습니다."
+  },
+  "tbd": {
+    "message": "미정"
+  },
+  "roundOf32": {
+    "message": "32강"
+  },
+  "roundOf16": {
+    "message": "16강"
+  },
+  "quarterfinals": {
+    "message": "8강"
+  },
+  "semifinals": {
+    "message": "4강"
+  },
+  "thirdPlace": {
+    "message": "3·4위전"
+  },
+  "final": {
+    "message": "결승"
+  },
+  "played": {
+    "message": "경기"
+  },
+  "wins": {
+    "message": "승"
+  },
+  "draws": {
+    "message": "무"
+  },
+  "losses": {
+    "message": "패"
+  },
+  "goalsFor": {
+    "message": "득"
+  },
+  "goalsAgainst": {
+    "message": "실"
+  },
+  "goalDifference": {
+    "message": "득실"
+  },
+  "points": {
+    "message": "승점"
+  },
+  "paused": {
+    "message": "일시 중지"
+  },
+  "autoPaused": {
+    "message": "요청을 아끼기 위해 자동 새로고침이 일시 중지되었습니다."
+  },
+  "idlePaused": {
+    "message": "비활성 상태로 일시 중지됨."
+  },
+  "requestLimitReached": {
+    "message": "일일 요청 한도에 도달했습니다. 캐시된 데이터를 표시합니다."
+  },
+  "refreshFailed": {
+    "message": "새로고침에 실패했습니다. 최신 데이터를 표시합니다."
+  },
+  "club": {
+    "message": "클럽"
+  },
+  "backToLeagues": {
+    "message": "← 리그"
+  },
+  "selectLeague": {
+    "message": "리그 선택"
+  },
+  "noLiveMatches": {
+    "message": "라이브 경기 없음"
+  },
+  "liveCount": {
+    "message": "라이브 $COUNT$",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCount": {
+    "message": "경기 $COUNT$",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fullTime": {
+    "message": "종료"
+  },
+  "halfTime": {
+    "message": "전반 종료"
+  },
+  "scheduled": {
+    "message": "예정"
+  },
+  "stats": {
+    "message": "통계"
+  },
+  "favorite": {
+    "message": "즐겨찾기"
+  },
+  "removeFavorite": {
+    "message": "즐겨찾기 해제"
+  },
+  "turnOff": {
+    "message": "확장 프로그램 끄기"
+  },
+  "turnOn": {
+    "message": "확장 프로그램 켜기"
+  },
+  "favoriteLeague": {
+    "message": "리그를 즐겨찾기에 추가"
+  },
+  "forceEnglishOn": {
+    "message": "영어 라벨 표시"
+  },
+  "forceEnglishOff": {
+    "message": "브라우저 언어로 돌아가기"
+  },
+  "other": {
+    "message": "기타"
+  },
+  "team": {
+    "message": "팀"
+  },
+  "unknownLeague": {
+    "message": "알 수 없는 리그"
+  },
+  "unknownTeam": {
+    "message": "알 수 없는 팀"
+  },
+  "matchDetails": {
+    "message": "경기 상세"
+  },
+  "loadingDetails": {
+    "message": "경기 상세 불러오는 중…"
+  },
+  "loadingStandings": {
+    "message": "순위 불러오는 중…"
+  },
+  "detailsUnavailable": {
+    "message": "상세 정보 없음"
+  },
+  "noDetails": {
+    "message": "이 경기의 추가 상세 정보가 없습니다."
+  },
+  "noSectionData": {
+    "message": "사용 가능한 데이터가 없습니다."
+  },
+  "noStats": {
+    "message": "경기 통계가 없습니다."
+  },
+  "noStandings": {
+    "message": "이 리그의 순위가 없습니다."
+  },
+  "noNews": {
+    "message": "뉴스가 없습니다."
+  },
+  "noLinks": {
+    "message": "링크가 없습니다."
+  },
+  "venue": {
+    "message": "경기장"
+  },
+  "kickoff": {
+    "message": "킥오프"
+  },
+  "broadcasts": {
+    "message": "중계"
+  },
+  "timeline": {
+    "message": "타임라인"
+  },
+  "commentary": {
+    "message": "중계 해설"
+  },
+  "lineups": {
+    "message": "라인업"
+  },
+  "headToHead": {
+    "message": "상대 전적"
+  },
+  "news": {
+    "message": "뉴스"
+  },
+  "highlights": {
+    "message": "하이라이트"
+  },
+  "links": {
+    "message": "링크"
+  }
+}

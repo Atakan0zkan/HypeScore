@@ -1,0 +1,258 @@
+{
+  "extName": {
+    "message": "Hype - Élő futball eredmények"
+  },
+  "extDescription": {
+    "message": "Élő futball eredmények, meccsek, eredmények és tabellák."
+  },
+  "appTitle": {
+    "message": "Hype Scores"
+  },
+  "subtitle": {
+    "message": "Gyors élő állások, eredmények és tabellák."
+  },
+  "loading": {
+    "message": "Meccsek betöltése…"
+  },
+  "error": {
+    "message": "Nem sikerült betölteni az adatokat"
+  },
+  "extensionRuntimeRequired": {
+    "message": "Az élő adatok fájlelőnézetben blokkolva vannak. Nyisd meg a Chrome-bővítmény felugró ablakát az eredményekhez."
+  },
+  "empty": {
+    "message": "Ma nincs megjeleníthető meccs."
+  },
+  "ready": {
+    "message": "Kész"
+  },
+  "refreshing": {
+    "message": "Frissítés"
+  },
+  "notUpdated": {
+    "message": "Még nem frissült"
+  },
+  "updated": {
+    "message": "Frissítve"
+  },
+  "live": {
+    "message": "Élő"
+  },
+  "matches": {
+    "message": "Meccsek"
+  },
+  "results": {
+    "message": "Eredmények"
+  },
+  "upcoming": {
+    "message": "Következő"
+  },
+  "standings": {
+    "message": "Tabella"
+  },
+  "bracket": {
+    "message": "Egyenes kiesés"
+  },
+  "loadingBracket": {
+    "message": "Ágrajz betöltése…"
+  },
+  "noBracket": {
+    "message": "Nincs elérhető ágrajz."
+  },
+  "bracketUnavailable": {
+    "message": "Az ágrajz nem elérhető."
+  },
+  "tbd": {
+    "message": "TBD"
+  },
+  "roundOf32": {
+    "message": "32 közé jutás"
+  },
+  "roundOf16": {
+    "message": "Nyolcaddöntő"
+  },
+  "quarterfinals": {
+    "message": "Negyeddöntő"
+  },
+  "semifinals": {
+    "message": "Elődöntő"
+  },
+  "thirdPlace": {
+    "message": "Bronzmérkőzés"
+  },
+  "final": {
+    "message": "Döntő"
+  },
+  "played": {
+    "message": "M"
+  },
+  "wins": {
+    "message": "Gy"
+  },
+  "draws": {
+    "message": "D"
+  },
+  "losses": {
+    "message": "V"
+  },
+  "goalsFor": {
+    "message": "RG"
+  },
+  "goalsAgainst": {
+    "message": "KG"
+  },
+  "goalDifference": {
+    "message": "GK"
+  },
+  "points": {
+    "message": "P"
+  },
+  "paused": {
+    "message": "Szüneteltetve"
+  },
+  "autoPaused": {
+    "message": "Az automatikus frissítés szünetel a kérések takarékoskodása miatt."
+  },
+  "idlePaused": {
+    "message": "Inaktivitás miatt szünetel."
+  },
+  "requestLimitReached": {
+    "message": "Elérted a napi kéréskorlátot. Gyorsítótárazott adatok jelennek meg."
+  },
+  "refreshFailed": {
+    "message": "A frissítés sikertelen. A legfrissebb adatok jelennek meg."
+  },
+  "club": {
+    "message": "Klub"
+  },
+  "backToLeagues": {
+    "message": "← Ligák"
+  },
+  "selectLeague": {
+    "message": "Válassz ligát"
+  },
+  "noLiveMatches": {
+    "message": "Nincs élő meccs"
+  },
+  "liveCount": {
+    "message": "$COUNT$ élő",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCount": {
+    "message": "$COUNT$ meccs",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fullTime": {
+    "message": "Végeredmény"
+  },
+  "halfTime": {
+    "message": "Félidő"
+  },
+  "scheduled": {
+    "message": "Ütemezett"
+  },
+  "stats": {
+    "message": "Statisztikák"
+  },
+  "favorite": {
+    "message": "Kedvenc"
+  },
+  "removeFavorite": {
+    "message": "Kedvenc eltávolítása"
+  },
+  "turnOff": {
+    "message": "Bővítmény kikapcsolása"
+  },
+  "turnOn": {
+    "message": "Bővítmény bekapcsolása"
+  },
+  "favoriteLeague": {
+    "message": "Liga kedvencekhez adása"
+  },
+  "forceEnglishOn": {
+    "message": "Angol feliratok mutatása"
+  },
+  "forceEnglishOff": {
+    "message": "Vissza a böngésző nyelvéhez"
+  },
+  "other": {
+    "message": "Egyéb"
+  },
+  "team": {
+    "message": "Csapat"
+  },
+  "unknownLeague": {
+    "message": "Ismeretlen liga"
+  },
+  "unknownTeam": {
+    "message": "Ismeretlen csapat"
+  },
+  "matchDetails": {
+    "message": "Meccsrészletek"
+  },
+  "loadingDetails": {
+    "message": "Meccsrészletek betöltése…"
+  },
+  "loadingStandings": {
+    "message": "Tabella betöltése…"
+  },
+  "detailsUnavailable": {
+    "message": "Részletek nem elérhetők"
+  },
+  "noDetails": {
+    "message": "Ehhez a meccshez nincs extra részlet."
+  },
+  "noSectionData": {
+    "message": "Nincs elérhető adat."
+  },
+  "noStats": {
+    "message": "Nincs elérhető meccsstatisztika."
+  },
+  "noStandings": {
+    "message": "Ehhez a ligához nincs tabella."
+  },
+  "noNews": {
+    "message": "Nincs hír."
+  },
+  "noLinks": {
+    "message": "Nincs link."
+  },
+  "venue": {
+    "message": "Stadion"
+  },
+  "kickoff": {
+    "message": "Kezdés"
+  },
+  "broadcasts": {
+    "message": "Közvetítések"
+  },
+  "timeline": {
+    "message": "Idővonal"
+  },
+  "commentary": {
+    "message": "Kommentár"
+  },
+  "lineups": {
+    "message": "Felállások"
+  },
+  "headToHead": {
+    "message": "Egymás elleni"
+  },
+  "news": {
+    "message": "Hírek"
+  },
+  "highlights": {
+    "message": "Összefoglalók"
+  },
+  "links": {
+    "message": "Linkek"
+  }
+}

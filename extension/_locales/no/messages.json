@@ -1,0 +1,258 @@
+{
+  "extName": {
+    "message": "Hype - Live fotballresultater"
+  },
+  "extDescription": {
+    "message": "Live fotballresultater, kamper, resultater og tabeller."
+  },
+  "appTitle": {
+    "message": "Hype Scores"
+  },
+  "subtitle": {
+    "message": "Raske livesifre, resultater og tabeller."
+  },
+  "loading": {
+    "message": "Laster kamper…"
+  },
+  "error": {
+    "message": "Kunne ikke laste data"
+  },
+  "extensionRuntimeRequired": {
+    "message": "Livedata blokkeres i filforhåndsvisning. Åpne Chrome-utvidelsens popup for å laste resultater."
+  },
+  "empty": {
+    "message": "Ingen kamper funnet i dag."
+  },
+  "ready": {
+    "message": "Klar"
+  },
+  "refreshing": {
+    "message": "Oppdaterer"
+  },
+  "notUpdated": {
+    "message": "Ikke oppdatert ennå"
+  },
+  "updated": {
+    "message": "Oppdatert"
+  },
+  "live": {
+    "message": "Live"
+  },
+  "matches": {
+    "message": "Kamper"
+  },
+  "results": {
+    "message": "Resultater"
+  },
+  "upcoming": {
+    "message": "Kommende"
+  },
+  "standings": {
+    "message": "Tabell"
+  },
+  "bracket": {
+    "message": "Utslagsspill"
+  },
+  "loadingBracket": {
+    "message": "Laster utslagstre…"
+  },
+  "noBracket": {
+    "message": "Ingen utslagstre tilgjengelig."
+  },
+  "bracketUnavailable": {
+    "message": "Utslagstre utilgjengelig."
+  },
+  "tbd": {
+    "message": "TBD"
+  },
+  "roundOf32": {
+    "message": "32-delsfinale"
+  },
+  "roundOf16": {
+    "message": "Åttendedelsfinale"
+  },
+  "quarterfinals": {
+    "message": "Kvartfinale"
+  },
+  "semifinals": {
+    "message": "Semifinale"
+  },
+  "thirdPlace": {
+    "message": "Bronsefinale"
+  },
+  "final": {
+    "message": "Finale"
+  },
+  "played": {
+    "message": "K"
+  },
+  "wins": {
+    "message": "S"
+  },
+  "draws": {
+    "message": "U"
+  },
+  "losses": {
+    "message": "T"
+  },
+  "goalsFor": {
+    "message": "MF"
+  },
+  "goalsAgainst": {
+    "message": "MM"
+  },
+  "goalDifference": {
+    "message": "MD"
+  },
+  "points": {
+    "message": "P"
+  },
+  "paused": {
+    "message": "Satt på pause"
+  },
+  "autoPaused": {
+    "message": "Automatisk oppdatering satt på pause for å spare forespørsler."
+  },
+  "idlePaused": {
+    "message": "Satt på pause ved inaktivitet."
+  },
+  "requestLimitReached": {
+    "message": "Daglig forespørselsgrense nådd. Viser bufrede data."
+  },
+  "refreshFailed": {
+    "message": "Oppdatering mislyktes. Viser nyeste data."
+  },
+  "club": {
+    "message": "Klubb"
+  },
+  "backToLeagues": {
+    "message": "← Ligaer"
+  },
+  "selectLeague": {
+    "message": "Velg en liga"
+  },
+  "noLiveMatches": {
+    "message": "Ingen livekamper"
+  },
+  "liveCount": {
+    "message": "$COUNT$ live",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCount": {
+    "message": "$COUNT$ kamper",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fullTime": {
+    "message": "FT"
+  },
+  "halfTime": {
+    "message": "HT"
+  },
+  "scheduled": {
+    "message": "Planlagt"
+  },
+  "stats": {
+    "message": "Statistikk"
+  },
+  "favorite": {
+    "message": "Favoritt"
+  },
+  "removeFavorite": {
+    "message": "Fjern favoritt"
+  },
+  "turnOff": {
+    "message": "Slå av utvidelsen"
+  },
+  "turnOn": {
+    "message": "Slå på utvidelsen"
+  },
+  "favoriteLeague": {
+    "message": "Favorittmerk liga"
+  },
+  "forceEnglishOn": {
+    "message": "Vis engelske etiketter"
+  },
+  "forceEnglishOff": {
+    "message": "Tilbake til nettleserspråk"
+  },
+  "other": {
+    "message": "Annet"
+  },
+  "team": {
+    "message": "Lag"
+  },
+  "unknownLeague": {
+    "message": "Ukjent liga"
+  },
+  "unknownTeam": {
+    "message": "Ukjent lag"
+  },
+  "matchDetails": {
+    "message": "Kampdetaljer"
+  },
+  "loadingDetails": {
+    "message": "Laster kampdetaljer…"
+  },
+  "loadingStandings": {
+    "message": "Laster tabell…"
+  },
+  "detailsUnavailable": {
+    "message": "Detaljer utilgjengelige"
+  },
+  "noDetails": {
+    "message": "Ingen ekstra detaljer for denne kampen."
+  },
+  "noSectionData": {
+    "message": "Ingen data tilgjengelig."
+  },
+  "noStats": {
+    "message": "Ingen kampstatistikk tilgjengelig."
+  },
+  "noStandings": {
+    "message": "Ingen tabell for denne ligaen."
+  },
+  "noNews": {
+    "message": "Ingen nyheter tilgjengelig."
+  },
+  "noLinks": {
+    "message": "Ingen lenker tilgjengelig."
+  },
+  "venue": {
+    "message": "Arena"
+  },
+  "kickoff": {
+    "message": "Avspark"
+  },
+  "broadcasts": {
+    "message": "Sendinger"
+  },
+  "timeline": {
+    "message": "Tidslinje"
+  },
+  "commentary": {
+    "message": "Referat"
+  },
+  "lineups": {
+    "message": "Lagoppstillinger"
+  },
+  "headToHead": {
+    "message": "Innbyrdes oppgjør"
+  },
+  "news": {
+    "message": "Nyheter"
+  },
+  "highlights": {
+    "message": "Høydepunkter"
+  },
+  "links": {
+    "message": "Lenker"
+  }
+}

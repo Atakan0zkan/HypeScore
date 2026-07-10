@@ -1,0 +1,258 @@
+{
+  "extName": {
+    "message": "Hype - लाइव फ़ुटबॉल स्कोर"
+  },
+  "extDescription": {
+    "message": "लाइव फ़ुटबॉल स्कोर, मैच, नतीजे और लीग तालिकाएँ।"
+  },
+  "appTitle": {
+    "message": "Hype Scores"
+  },
+  "subtitle": {
+    "message": "तेज़ लाइव स्कोर, नतीजे और तालिकाएँ।"
+  },
+  "loading": {
+    "message": "मैच लोड हो रहे हैं…"
+  },
+  "error": {
+    "message": "डेटा लोड नहीं हो सका"
+  },
+  "extensionRuntimeRequired": {
+    "message": "फ़ाइल प्रीव्यू में लाइव डेटा ब्लॉक है। स्कोर के लिए Chrome एक्सटेंशन पॉपअप खोलें।"
+  },
+  "empty": {
+    "message": "आज कोई मैच नहीं मिला।"
+  },
+  "ready": {
+    "message": "तैयार"
+  },
+  "refreshing": {
+    "message": "रीफ़्रेश हो रहा है"
+  },
+  "notUpdated": {
+    "message": "अभी अपडेट नहीं हुआ"
+  },
+  "updated": {
+    "message": "अपडेट हो गया"
+  },
+  "live": {
+    "message": "लाइव"
+  },
+  "matches": {
+    "message": "मैच"
+  },
+  "results": {
+    "message": "नतीजे"
+  },
+  "upcoming": {
+    "message": "आगामी"
+  },
+  "standings": {
+    "message": "तालिका"
+  },
+  "bracket": {
+    "message": "नॉकआउट"
+  },
+  "loadingBracket": {
+    "message": "नॉकआउट ब्रैकेट लोड हो रहा है…"
+  },
+  "noBracket": {
+    "message": "कोई नॉकआउट ब्रैकेट उपलब्ध नहीं।"
+  },
+  "bracketUnavailable": {
+    "message": "नॉकआउट ब्रैकेट उपलब्ध नहीं।"
+  },
+  "tbd": {
+    "message": "TBD"
+  },
+  "roundOf32": {
+    "message": "राउंड ऑफ़ 32"
+  },
+  "roundOf16": {
+    "message": "राउंड ऑफ़ 16"
+  },
+  "quarterfinals": {
+    "message": "क्वार्टर फ़ाइनल"
+  },
+  "semifinals": {
+    "message": "सेमीफ़ाइनल"
+  },
+  "thirdPlace": {
+    "message": "तीसरे स्थान का मैच"
+  },
+  "final": {
+    "message": "फ़ाइनल"
+  },
+  "played": {
+    "message": "मै"
+  },
+  "wins": {
+    "message": "जी"
+  },
+  "draws": {
+    "message": "ड्रॉ"
+  },
+  "losses": {
+    "message": "हा"
+  },
+  "goalsFor": {
+    "message": "के"
+  },
+  "goalsAgainst": {
+    "message": "खि"
+  },
+  "goalDifference": {
+    "message": "अंतर"
+  },
+  "points": {
+    "message": "अंक"
+  },
+  "paused": {
+    "message": "रोका गया"
+  },
+  "autoPaused": {
+    "message": "अनुरोध बचाने के लिए ऑटो रीफ़्रेश रोका गया।"
+  },
+  "idlePaused": {
+    "message": "निष्क्रिय होने पर रोका गया।"
+  },
+  "requestLimitReached": {
+    "message": "दैनिक अनुरोध सीमा पूरी। कैश डेटा दिखाया जा रहा है।"
+  },
+  "refreshFailed": {
+    "message": "रीफ़्रेश विफल। नवीनतम डेटा दिखाया जा रहा है।"
+  },
+  "club": {
+    "message": "क्लब"
+  },
+  "backToLeagues": {
+    "message": "← लीग"
+  },
+  "selectLeague": {
+    "message": "लीग चुनें"
+  },
+  "noLiveMatches": {
+    "message": "कोई लाइव मैच नहीं"
+  },
+  "liveCount": {
+    "message": "$COUNT$ लाइव",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCount": {
+    "message": "$COUNT$ मैच",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fullTime": {
+    "message": "समाप्त"
+  },
+  "halfTime": {
+    "message": "हाफ़"
+  },
+  "scheduled": {
+    "message": "निर्धारित"
+  },
+  "stats": {
+    "message": "आँकड़े"
+  },
+  "favorite": {
+    "message": "पसंदीदा"
+  },
+  "removeFavorite": {
+    "message": "पसंदीदा हटाएँ"
+  },
+  "turnOff": {
+    "message": "एक्सटेंशन बंद करें"
+  },
+  "turnOn": {
+    "message": "एक्सटेंशन चालू करें"
+  },
+  "favoriteLeague": {
+    "message": "लीग को पसंदीदा बनाएँ"
+  },
+  "forceEnglishOn": {
+    "message": "अंग्रेज़ी लेबल दिखाएँ"
+  },
+  "forceEnglishOff": {
+    "message": "ब्राउज़र भाषा पर लौटें"
+  },
+  "other": {
+    "message": "अन्य"
+  },
+  "team": {
+    "message": "टीम"
+  },
+  "unknownLeague": {
+    "message": "अज्ञात लीग"
+  },
+  "unknownTeam": {
+    "message": "अज्ञात टीम"
+  },
+  "matchDetails": {
+    "message": "मैच विवरण"
+  },
+  "loadingDetails": {
+    "message": "मैच विवरण लोड हो रहा है…"
+  },
+  "loadingStandings": {
+    "message": "तालिका लोड हो रही है…"
+  },
+  "detailsUnavailable": {
+    "message": "विवरण उपलब्ध नहीं"
+  },
+  "noDetails": {
+    "message": "इस मैच के लिए अतिरिक्त विवरण नहीं।"
+  },
+  "noSectionData": {
+    "message": "कोई डेटा उपलब्ध नहीं।"
+  },
+  "noStats": {
+    "message": "मैच आँकड़े उपलब्ध नहीं।"
+  },
+  "noStandings": {
+    "message": "इस लीग की तालिका उपलब्ध नहीं।"
+  },
+  "noNews": {
+    "message": "कोई समाचार नहीं।"
+  },
+  "noLinks": {
+    "message": "कोई लिंक नहीं।"
+  },
+  "venue": {
+    "message": "मैदान"
+  },
+  "kickoff": {
+    "message": "किकऑफ़"
+  },
+  "broadcasts": {
+    "message": "प्रसारण"
+  },
+  "timeline": {
+    "message": "टाइमलाइन"
+  },
+  "commentary": {
+    "message": "कमेंट्री"
+  },
+  "lineups": {
+    "message": "लाइनअप"
+  },
+  "headToHead": {
+    "message": "आमने-सामने"
+  },
+  "news": {
+    "message": "समाचार"
+  },
+  "highlights": {
+    "message": "हाइलाइट"
+  },
+  "links": {
+    "message": "लिंक"
+  }
+}

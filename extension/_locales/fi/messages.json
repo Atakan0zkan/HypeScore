@@ -1,0 +1,258 @@
+{
+  "extName": {
+    "message": "Hype - Live-jalkapallotulokset"
+  },
+  "extDescription": {
+    "message": "Live-jalkapallotulokset, ottelut, tulokset ja sarjataulukot."
+  },
+  "appTitle": {
+    "message": "Hype Scores"
+  },
+  "subtitle": {
+    "message": "Nopeat livescoret, tulokset ja taulukot."
+  },
+  "loading": {
+    "message": "Ladataan otteluita…"
+  },
+  "error": {
+    "message": "Tietoja ei voitu ladata"
+  },
+  "extensionRuntimeRequired": {
+    "message": "Livedata on estetty tiedostoesikatselussa. Avaa Chrome-laajennuksen ponnahdusikkuna ladataksesi tulokset."
+  },
+  "empty": {
+    "message": "Ei otteluita tänään."
+  },
+  "ready": {
+    "message": "Valmis"
+  },
+  "refreshing": {
+    "message": "Päivitetään"
+  },
+  "notUpdated": {
+    "message": "Ei vielä päivitetty"
+  },
+  "updated": {
+    "message": "Päivitetty"
+  },
+  "live": {
+    "message": "Live"
+  },
+  "matches": {
+    "message": "Ottelut"
+  },
+  "results": {
+    "message": "Tulokset"
+  },
+  "upcoming": {
+    "message": "Tulossa"
+  },
+  "standings": {
+    "message": "Sarjataulukko"
+  },
+  "bracket": {
+    "message": "Cup-kaavio"
+  },
+  "loadingBracket": {
+    "message": "Ladataan cup-kaaviota…"
+  },
+  "noBracket": {
+    "message": "Cup-kaaviota ei ole saatavilla."
+  },
+  "bracketUnavailable": {
+    "message": "Cup-kaavio ei ole saatavilla."
+  },
+  "tbd": {
+    "message": "TBD"
+  },
+  "roundOf32": {
+    "message": "1/16-finaalit"
+  },
+  "roundOf16": {
+    "message": "Neljännesvälierät"
+  },
+  "quarterfinals": {
+    "message": "Puolivälierät"
+  },
+  "semifinals": {
+    "message": "Välierät"
+  },
+  "thirdPlace": {
+    "message": "Pronssiottelu"
+  },
+  "final": {
+    "message": "Finaali"
+  },
+  "played": {
+    "message": "O"
+  },
+  "wins": {
+    "message": "V"
+  },
+  "draws": {
+    "message": "T"
+  },
+  "losses": {
+    "message": "H"
+  },
+  "goalsFor": {
+    "message": "TM"
+  },
+  "goalsAgainst": {
+    "message": "PM"
+  },
+  "goalDifference": {
+    "message": "ME"
+  },
+  "points": {
+    "message": "P"
+  },
+  "paused": {
+    "message": "Keskeytetty"
+  },
+  "autoPaused": {
+    "message": "Automaattinen päivitys keskeytetty pyyntöjen säästämiseksi."
+  },
+  "idlePaused": {
+    "message": "Keskeytetty toimettomuuden ajaksi."
+  },
+  "requestLimitReached": {
+    "message": "Päivittäinen pyyntöraja täynnä. Näytetään välimuistin tiedot."
+  },
+  "refreshFailed": {
+    "message": "Päivitys epäonnistui. Näytetään viimeisimmät tiedot."
+  },
+  "club": {
+    "message": "Seura"
+  },
+  "backToLeagues": {
+    "message": "← Liigat"
+  },
+  "selectLeague": {
+    "message": "Valitse liiga"
+  },
+  "noLiveMatches": {
+    "message": "Ei live-otteluita"
+  },
+  "liveCount": {
+    "message": "$COUNT$ live",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCount": {
+    "message": "$COUNT$ ottelua",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fullTime": {
+    "message": "LP"
+  },
+  "halfTime": {
+    "message": "HT"
+  },
+  "scheduled": {
+    "message": "Ajastettu"
+  },
+  "stats": {
+    "message": "Tilastot"
+  },
+  "favorite": {
+    "message": "Suosikki"
+  },
+  "removeFavorite": {
+    "message": "Poista suosikki"
+  },
+  "turnOff": {
+    "message": "Poista laajennus käytöstä"
+  },
+  "turnOn": {
+    "message": "Ota laajennus käyttöön"
+  },
+  "favoriteLeague": {
+    "message": "Lisää liiga suosikkeihin"
+  },
+  "forceEnglishOn": {
+    "message": "Näytä englanninkieliset tekstit"
+  },
+  "forceEnglishOff": {
+    "message": "Palaa selaimen kieleen"
+  },
+  "other": {
+    "message": "Muut"
+  },
+  "team": {
+    "message": "Joukkue"
+  },
+  "unknownLeague": {
+    "message": "Tuntematon liiga"
+  },
+  "unknownTeam": {
+    "message": "Tuntematon joukkue"
+  },
+  "matchDetails": {
+    "message": "Ottelun tiedot"
+  },
+  "loadingDetails": {
+    "message": "Ladataan ottelun tietoja…"
+  },
+  "loadingStandings": {
+    "message": "Ladataan sarjataulukkoa…"
+  },
+  "detailsUnavailable": {
+    "message": "Tiedot eivät ole saatavilla"
+  },
+  "noDetails": {
+    "message": "Tälle ottelulle ei ole lisätietoja."
+  },
+  "noSectionData": {
+    "message": "Ei tietoja saatavilla."
+  },
+  "noStats": {
+    "message": "Ottelutilastoja ei ole saatavilla."
+  },
+  "noStandings": {
+    "message": "Tälle liigalle ei ole sarjataulukkoa."
+  },
+  "noNews": {
+    "message": "Ei uutisia saatavilla."
+  },
+  "noLinks": {
+    "message": "Ei linkkejä saatavilla."
+  },
+  "venue": {
+    "message": "Stadion"
+  },
+  "kickoff": {
+    "message": "Aloitus"
+  },
+  "broadcasts": {
+    "message": "Lähetykset"
+  },
+  "timeline": {
+    "message": "Tapahtumat"
+  },
+  "commentary": {
+    "message": "Selostus"
+  },
+  "lineups": {
+    "message": "Kokoonpanot"
+  },
+  "headToHead": {
+    "message": "Keskinäiset"
+  },
+  "news": {
+    "message": "Uutiset"
+  },
+  "highlights": {
+    "message": "Kohokohdat"
+  },
+  "links": {
+    "message": "Linkit"
+  }
+}

@@ -1,0 +1,258 @@
+{
+  "extName": {
+    "message": "Hype - Live Football Scores"
+  },
+  "extDescription": {
+    "message": "Live football scores, fixtures, results and league tables."
+  },
+  "appTitle": {
+    "message": "Hype Scores"
+  },
+  "subtitle": {
+    "message": "Fast live scores, results and league tables."
+  },
+  "loading": {
+    "message": "Loading matches…"
+  },
+  "error": {
+    "message": "Could not load data"
+  },
+  "extensionRuntimeRequired": {
+    "message": "Live data is blocked in file preview. Open the Chrome extension popup to load scores."
+  },
+  "empty": {
+    "message": "No matches found today."
+  },
+  "ready": {
+    "message": "Ready"
+  },
+  "refreshing": {
+    "message": "Refreshing"
+  },
+  "notUpdated": {
+    "message": "Not updated yet"
+  },
+  "updated": {
+    "message": "Updated"
+  },
+  "live": {
+    "message": "Live"
+  },
+  "matches": {
+    "message": "Matches"
+  },
+  "results": {
+    "message": "Results"
+  },
+  "upcoming": {
+    "message": "Upcoming"
+  },
+  "standings": {
+    "message": "Standings"
+  },
+  "bracket": {
+    "message": "Knockout"
+  },
+  "loadingBracket": {
+    "message": "Loading knockout bracket…"
+  },
+  "noBracket": {
+    "message": "No knockout bracket available."
+  },
+  "bracketUnavailable": {
+    "message": "Knockout bracket unavailable."
+  },
+  "tbd": {
+    "message": "TBD"
+  },
+  "roundOf32": {
+    "message": "Round of 32"
+  },
+  "roundOf16": {
+    "message": "Round of 16"
+  },
+  "quarterfinals": {
+    "message": "Quarter-finals"
+  },
+  "semifinals": {
+    "message": "Semi-finals"
+  },
+  "thirdPlace": {
+    "message": "Third-place match"
+  },
+  "final": {
+    "message": "Final"
+  },
+  "played": {
+    "message": "P"
+  },
+  "wins": {
+    "message": "W"
+  },
+  "draws": {
+    "message": "D"
+  },
+  "losses": {
+    "message": "L"
+  },
+  "goalsFor": {
+    "message": "F"
+  },
+  "goalsAgainst": {
+    "message": "A"
+  },
+  "goalDifference": {
+    "message": "GD"
+  },
+  "points": {
+    "message": "Pts"
+  },
+  "paused": {
+    "message": "Paused"
+  },
+  "autoPaused": {
+    "message": "Auto refresh paused to save requests."
+  },
+  "idlePaused": {
+    "message": "Paused while inactive."
+  },
+  "requestLimitReached": {
+    "message": "Daily request limit reached. Showing cached data."
+  },
+  "refreshFailed": {
+    "message": "Refresh failed. Showing latest data."
+  },
+  "club": {
+    "message": "Club"
+  },
+  "backToLeagues": {
+    "message": "← Leagues"
+  },
+  "selectLeague": {
+    "message": "Select a league"
+  },
+  "noLiveMatches": {
+    "message": "No live matches"
+  },
+  "liveCount": {
+    "message": "$COUNT$ live",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCount": {
+    "message": "$COUNT$ matches",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fullTime": {
+    "message": "FT"
+  },
+  "halfTime": {
+    "message": "HT"
+  },
+  "scheduled": {
+    "message": "Scheduled"
+  },
+  "stats": {
+    "message": "Stats"
+  },
+  "favorite": {
+    "message": "Favourite"
+  },
+  "removeFavorite": {
+    "message": "Remove favourite"
+  },
+  "turnOff": {
+    "message": "Turn extension off"
+  },
+  "turnOn": {
+    "message": "Turn extension on"
+  },
+  "favoriteLeague": {
+    "message": "Favourite league"
+  },
+  "forceEnglishOn": {
+    "message": "Show English labels"
+  },
+  "forceEnglishOff": {
+    "message": "Return to browser language"
+  },
+  "other": {
+    "message": "Other"
+  },
+  "team": {
+    "message": "Team"
+  },
+  "unknownLeague": {
+    "message": "Unknown League"
+  },
+  "unknownTeam": {
+    "message": "Unknown Team"
+  },
+  "matchDetails": {
+    "message": "Match details"
+  },
+  "loadingDetails": {
+    "message": "Loading match details…"
+  },
+  "loadingStandings": {
+    "message": "Loading standings…"
+  },
+  "detailsUnavailable": {
+    "message": "Details unavailable"
+  },
+  "noDetails": {
+    "message": "No extra details available for this match."
+  },
+  "noSectionData": {
+    "message": "No data available."
+  },
+  "noStats": {
+    "message": "No match stats available."
+  },
+  "noStandings": {
+    "message": "No standings available for this league."
+  },
+  "noNews": {
+    "message": "No news available."
+  },
+  "noLinks": {
+    "message": "No links available."
+  },
+  "venue": {
+    "message": "Venue"
+  },
+  "kickoff": {
+    "message": "Kickoff"
+  },
+  "broadcasts": {
+    "message": "Broadcasts"
+  },
+  "timeline": {
+    "message": "Timeline"
+  },
+  "commentary": {
+    "message": "Commentary"
+  },
+  "lineups": {
+    "message": "Lineups"
+  },
+  "headToHead": {
+    "message": "Head to head"
+  },
+  "news": {
+    "message": "News"
+  },
+  "highlights": {
+    "message": "Highlights"
+  },
+  "links": {
+    "message": "Links"
+  }
+}

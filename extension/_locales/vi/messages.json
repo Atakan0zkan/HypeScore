@@ -1,0 +1,258 @@
+{
+  "extName": {
+    "message": "Hype - Tỷ số bóng đá trực tiếp"
+  },
+  "extDescription": {
+    "message": "Tỷ số bóng đá trực tiếp, lịch thi đấu, kết quả và bảng xếp hạng."
+  },
+  "appTitle": {
+    "message": "Hype Scores"
+  },
+  "subtitle": {
+    "message": "Tỷ số live nhanh, kết quả và bảng xếp hạng."
+  },
+  "loading": {
+    "message": "Đang tải trận đấu…"
+  },
+  "error": {
+    "message": "Không thể tải dữ liệu"
+  },
+  "extensionRuntimeRequired": {
+    "message": "Dữ liệu live bị chặn ở chế độ xem trước tệp. Mở popup tiện ích Chrome để tải tỷ số."
+  },
+  "empty": {
+    "message": "Hôm nay không có trận đấu."
+  },
+  "ready": {
+    "message": "Sẵn sàng"
+  },
+  "refreshing": {
+    "message": "Đang làm mới"
+  },
+  "notUpdated": {
+    "message": "Chưa cập nhật"
+  },
+  "updated": {
+    "message": "Đã cập nhật"
+  },
+  "live": {
+    "message": "Trực tiếp"
+  },
+  "matches": {
+    "message": "Trận đấu"
+  },
+  "results": {
+    "message": "Kết quả"
+  },
+  "upcoming": {
+    "message": "Sắp diễn ra"
+  },
+  "standings": {
+    "message": "Bảng xếp hạng"
+  },
+  "bracket": {
+    "message": "Loại trực tiếp"
+  },
+  "loadingBracket": {
+    "message": "Đang tải nhánh đấu…"
+  },
+  "noBracket": {
+    "message": "Chưa có nhánh đấu."
+  },
+  "bracketUnavailable": {
+    "message": "Không có nhánh đấu."
+  },
+  "tbd": {
+    "message": "Chưa xác định"
+  },
+  "roundOf32": {
+    "message": "Vòng 32 đội"
+  },
+  "roundOf16": {
+    "message": "Vòng 16 đội"
+  },
+  "quarterfinals": {
+    "message": "Tứ kết"
+  },
+  "semifinals": {
+    "message": "Bán kết"
+  },
+  "thirdPlace": {
+    "message": "Tranh hạng ba"
+  },
+  "final": {
+    "message": "Chung kết"
+  },
+  "played": {
+    "message": "Tr"
+  },
+  "wins": {
+    "message": "T"
+  },
+  "draws": {
+    "message": "H"
+  },
+  "losses": {
+    "message": "B"
+  },
+  "goalsFor": {
+    "message": "BT"
+  },
+  "goalsAgainst": {
+    "message": "BB"
+  },
+  "goalDifference": {
+    "message": "HS"
+  },
+  "points": {
+    "message": "Đ"
+  },
+  "paused": {
+    "message": "Tạm dừng"
+  },
+  "autoPaused": {
+    "message": "Tự làm mới đã tạm dừng để tiết kiệm yêu cầu."
+  },
+  "idlePaused": {
+    "message": "Tạm dừng khi không hoạt động."
+  },
+  "requestLimitReached": {
+    "message": "Đã đạt giới hạn yêu cầu hằng ngày. Đang hiện dữ liệu đã lưu."
+  },
+  "refreshFailed": {
+    "message": "Làm mới thất bại. Đang hiện dữ liệu mới nhất."
+  },
+  "club": {
+    "message": "CLB"
+  },
+  "backToLeagues": {
+    "message": "← Giải đấu"
+  },
+  "selectLeague": {
+    "message": "Chọn giải đấu"
+  },
+  "noLiveMatches": {
+    "message": "Không có trận trực tiếp"
+  },
+  "liveCount": {
+    "message": "$COUNT$ trực tiếp",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCount": {
+    "message": "$COUNT$ trận",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fullTime": {
+    "message": "Hết"
+  },
+  "halfTime": {
+    "message": "H1"
+  },
+  "scheduled": {
+    "message": "Đã lên lịch"
+  },
+  "stats": {
+    "message": "Thống kê"
+  },
+  "favorite": {
+    "message": "Yêu thích"
+  },
+  "removeFavorite": {
+    "message": "Bỏ yêu thích"
+  },
+  "turnOff": {
+    "message": "Tắt tiện ích"
+  },
+  "turnOn": {
+    "message": "Bật tiện ích"
+  },
+  "favoriteLeague": {
+    "message": "Thêm giải vào yêu thích"
+  },
+  "forceEnglishOn": {
+    "message": "Hiện nhãn tiếng Anh"
+  },
+  "forceEnglishOff": {
+    "message": "Quay lại ngôn ngữ trình duyệt"
+  },
+  "other": {
+    "message": "Khác"
+  },
+  "team": {
+    "message": "Đội"
+  },
+  "unknownLeague": {
+    "message": "Giải không xác định"
+  },
+  "unknownTeam": {
+    "message": "Đội không xác định"
+  },
+  "matchDetails": {
+    "message": "Chi tiết trận"
+  },
+  "loadingDetails": {
+    "message": "Đang tải chi tiết trận…"
+  },
+  "loadingStandings": {
+    "message": "Đang tải bảng xếp hạng…"
+  },
+  "detailsUnavailable": {
+    "message": "Không có chi tiết"
+  },
+  "noDetails": {
+    "message": "Không có chi tiết thêm cho trận này."
+  },
+  "noSectionData": {
+    "message": "Không có dữ liệu."
+  },
+  "noStats": {
+    "message": "Không có thống kê trận."
+  },
+  "noStandings": {
+    "message": "Không có bảng xếp hạng cho giải này."
+  },
+  "noNews": {
+    "message": "Không có tin tức."
+  },
+  "noLinks": {
+    "message": "Không có liên kết."
+  },
+  "venue": {
+    "message": "Sân"
+  },
+  "kickoff": {
+    "message": "Giờ bóng lăn"
+  },
+  "broadcasts": {
+    "message": "Phát sóng"
+  },
+  "timeline": {
+    "message": "Diễn biến"
+  },
+  "commentary": {
+    "message": "Bình luận"
+  },
+  "lineups": {
+    "message": "Đội hình"
+  },
+  "headToHead": {
+    "message": "Đối đầu"
+  },
+  "news": {
+    "message": "Tin tức"
+  },
+  "highlights": {
+    "message": "Highlight"
+  },
+  "links": {
+    "message": "Liên kết"
+  }
+}

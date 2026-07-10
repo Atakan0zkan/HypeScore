@@ -1,0 +1,258 @@
+{
+  "extName": {
+    "message": "Hype - ലൈവ് ഫുട്ബോൾ സ്കോറുകൾ"
+  },
+  "extDescription": {
+    "message": "ലൈവ് ഫുട്ബോൾ സ്കോറുകൾ, മത്സരങ്ങൾ, ഫലങ്ങൾ, ലീഗ് പട്ടികകൾ."
+  },
+  "appTitle": {
+    "message": "Hype Scores"
+  },
+  "subtitle": {
+    "message": "വേഗത്തിലുള്ള ലൈവ് സ്കോറുകൾ, ഫലങ്ങൾ, പട്ടികകൾ."
+  },
+  "loading": {
+    "message": "മത്സരങ്ങൾ ലോഡ് ചെയ്യുന്നു…"
+  },
+  "error": {
+    "message": "ഡാറ്റ ലോഡ് ചെയ്യാനായില്ല"
+  },
+  "extensionRuntimeRequired": {
+    "message": "ഫയൽ പ്രിവ്യൂവിൽ ലൈവ് ഡാറ്റ തടഞ്ഞിരിക്കുന്നു. സ്കോറുകൾക്കായി Chrome എക്സ്റ്റൻഷൻ പോപ്പപ്പ് തുറക്കുക."
+  },
+  "empty": {
+    "message": "ഇന്ന് മത്സരങ്ങൾ ഇല്ല."
+  },
+  "ready": {
+    "message": "തയ്യാർ"
+  },
+  "refreshing": {
+    "message": "പുതുക്കുന്നു"
+  },
+  "notUpdated": {
+    "message": "ഇതുവരെ അപ്ഡേറ്റ് ആയിട്ടില്ല"
+  },
+  "updated": {
+    "message": "അപ്ഡേറ്റ് ആയി"
+  },
+  "live": {
+    "message": "ലൈവ്"
+  },
+  "matches": {
+    "message": "മത്സരങ്ങൾ"
+  },
+  "results": {
+    "message": "ഫലങ്ങൾ"
+  },
+  "upcoming": {
+    "message": "വരാനിരിക്കുന്നത്"
+  },
+  "standings": {
+    "message": "പട്ടിക"
+  },
+  "bracket": {
+    "message": "നോക്കൗട്ട്"
+  },
+  "loadingBracket": {
+    "message": "നോക്കൗട്ട് ബ്രാക്കറ്റ് ലോഡ് ചെയ്യുന്നു…"
+  },
+  "noBracket": {
+    "message": "നോക്കൗട്ട് ബ്രാക്കറ്റ് ലഭ്യമല്ല."
+  },
+  "bracketUnavailable": {
+    "message": "നോക്കൗട്ട് ബ്രാക്കറ്റ് ലഭ്യമല്ല."
+  },
+  "tbd": {
+    "message": "TBD"
+  },
+  "roundOf32": {
+    "message": "റൗണ്ട് ഓഫ് 32"
+  },
+  "roundOf16": {
+    "message": "റൗണ്ട് ഓഫ് 16"
+  },
+  "quarterfinals": {
+    "message": "ക്വാർട്ടർ ഫൈനൽ"
+  },
+  "semifinals": {
+    "message": "സെമി ഫൈനൽ"
+  },
+  "thirdPlace": {
+    "message": "മൂന്നാം സ്ഥാന മത്സരം"
+  },
+  "final": {
+    "message": "ഫൈനൽ"
+  },
+  "played": {
+    "message": "മ"
+  },
+  "wins": {
+    "message": "ജ"
+  },
+  "draws": {
+    "message": "സമ"
+  },
+  "losses": {
+    "message": "തോ"
+  },
+  "goalsFor": {
+    "message": "നേടി"
+  },
+  "goalsAgainst": {
+    "message": "വഴങ്ങി"
+  },
+  "goalDifference": {
+    "message": "വ്യത്യാസം"
+  },
+  "points": {
+    "message": "പോയിന്റ്"
+  },
+  "paused": {
+    "message": "താൽക്കാലികമായി നിർത്തി"
+  },
+  "autoPaused": {
+    "message": "അഭ്യർത്ഥനകൾ ലാഭിക്കാൻ ഓട്ടോ റിഫ്രഷ് നിർത്തി."
+  },
+  "idlePaused": {
+    "message": "നിഷ്‌ക്രിയതയിൽ നിർത്തി."
+  },
+  "requestLimitReached": {
+    "message": "ദൈനംദിന അഭ്യർത്ഥന പരിധി എത്തി. കാഷ് ഡാറ്റ കാണിക്കുന്നു."
+  },
+  "refreshFailed": {
+    "message": "പുതുക്കൽ പരാജയപ്പെട്ടു. ഏറ്റവും പുതിയ ഡാറ്റ കാണിക്കുന്നു."
+  },
+  "club": {
+    "message": "ക്ലബ്"
+  },
+  "backToLeagues": {
+    "message": "← ലീഗുകൾ"
+  },
+  "selectLeague": {
+    "message": "ഒരു ലീഗ് തിരഞ്ഞെടുക്കുക"
+  },
+  "noLiveMatches": {
+    "message": "ലൈവ് മത്സരങ്ങളില്ല"
+  },
+  "liveCount": {
+    "message": "$COUNT$ ലൈവ്",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCount": {
+    "message": "$COUNT$ മത്സരങ്ങൾ",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fullTime": {
+    "message": "അവസാനം"
+  },
+  "halfTime": {
+    "message": "ഹാഫ്"
+  },
+  "scheduled": {
+    "message": "ഷെഡ്യൂൾ"
+  },
+  "stats": {
+    "message": "സ്ഥിതിവിവരക്കണക്കുകൾ"
+  },
+  "favorite": {
+    "message": "പ്രിയപ്പെട്ടത്"
+  },
+  "removeFavorite": {
+    "message": "പ്രിയപ്പെട്ടതിൽ നിന്ന് നീക്കം ചെയ്യുക"
+  },
+  "turnOff": {
+    "message": "എക്സ്റ്റൻഷൻ ഓഫ് ചെയ്യുക"
+  },
+  "turnOn": {
+    "message": "എക്സ്റ്റൻഷൻ ഓൺ ചെയ്യുക"
+  },
+  "favoriteLeague": {
+    "message": "ലീഗ് പ്രിയപ്പെട്ടതാക്കുക"
+  },
+  "forceEnglishOn": {
+    "message": "ഇംഗ്ലീഷ് ലേബലുകൾ കാണിക്കുക"
+  },
+  "forceEnglishOff": {
+    "message": "ബ്രൗസർ ഭാഷയിലേക്ക് മടങ്ങുക"
+  },
+  "other": {
+    "message": "മറ്റുള്ളവ"
+  },
+  "team": {
+    "message": "ടീം"
+  },
+  "unknownLeague": {
+    "message": "അജ്ഞാത ലീഗ്"
+  },
+  "unknownTeam": {
+    "message": "അജ്ഞാത ടീം"
+  },
+  "matchDetails": {
+    "message": "മത്സര വിശദാംശങ്ങൾ"
+  },
+  "loadingDetails": {
+    "message": "മത്സര വിശദാംശങ്ങൾ ലോഡ് ചെയ്യുന്നു…"
+  },
+  "loadingStandings": {
+    "message": "പട്ടിക ലോഡ് ചെയ്യുന്നു…"
+  },
+  "detailsUnavailable": {
+    "message": "വിശദാംശങ്ങൾ ലഭ്യമല്ല"
+  },
+  "noDetails": {
+    "message": "ഈ മത്സരത്തിന് അധിക വിശദാംശങ്ങളില്ല."
+  },
+  "noSectionData": {
+    "message": "ഡാറ്റ ലഭ്യമല്ല."
+  },
+  "noStats": {
+    "message": "മത്സര സ്ഥിതിവിവരക്കണക്കുകളില്ല."
+  },
+  "noStandings": {
+    "message": "ഈ ലീഗിന് പട്ടികയില്ല."
+  },
+  "noNews": {
+    "message": "വാർത്തകളില്ല."
+  },
+  "noLinks": {
+    "message": "ലിങ്കുകളില്ല."
+  },
+  "venue": {
+    "message": "വേദി"
+  },
+  "kickoff": {
+    "message": "കിക്കോഫ്"
+  },
+  "broadcasts": {
+    "message": "സംപ്രേഷണങ്ങൾ"
+  },
+  "timeline": {
+    "message": "ടൈംലൈൻ"
+  },
+  "commentary": {
+    "message": "കമന്ററി"
+  },
+  "lineups": {
+    "message": "ലൈനപ്പുകൾ"
+  },
+  "headToHead": {
+    "message": "ഹെഡ് ടു ഹെഡ്"
+  },
+  "news": {
+    "message": "വാർത്തകൾ"
+  },
+  "highlights": {
+    "message": "ഹൈലൈറ്റുകൾ"
+  },
+  "links": {
+    "message": "ലിങ്കുകൾ"
+  }
+}

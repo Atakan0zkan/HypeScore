@@ -1,0 +1,258 @@
+{
+  "extName": {
+    "message": "Hype - Live na score sa football"
+  },
+  "extDescription": {
+    "message": "Live na score sa football, laban, resulta, at standings."
+  },
+  "appTitle": {
+    "message": "Hype Scores"
+  },
+  "subtitle": {
+    "message": "Mabilis na live scores, resulta, at standings."
+  },
+  "loading": {
+    "message": "Nilo-load ang mga laban…"
+  },
+  "error": {
+    "message": "Hindi ma-load ang data"
+  },
+  "extensionRuntimeRequired": {
+    "message": "Naka-block ang live data sa file preview. Buksan ang Chrome extension popup para sa scores."
+  },
+  "empty": {
+    "message": "Walang laban ngayon."
+  },
+  "ready": {
+    "message": "Handa"
+  },
+  "refreshing": {
+    "message": "Nire-refresh"
+  },
+  "notUpdated": {
+    "message": "Hindi pa na-update"
+  },
+  "updated": {
+    "message": "Na-update"
+  },
+  "live": {
+    "message": "Live"
+  },
+  "matches": {
+    "message": "Mga laban"
+  },
+  "results": {
+    "message": "Mga resulta"
+  },
+  "upcoming": {
+    "message": "Paparating"
+  },
+  "standings": {
+    "message": "Standings"
+  },
+  "bracket": {
+    "message": "Knockout"
+  },
+  "loadingBracket": {
+    "message": "Nilo-load ang knockout bracket…"
+  },
+  "noBracket": {
+    "message": "Walang available na knockout bracket."
+  },
+  "bracketUnavailable": {
+    "message": "Hindi available ang knockout bracket."
+  },
+  "tbd": {
+    "message": "TBD"
+  },
+  "roundOf32": {
+    "message": "Round of 32"
+  },
+  "roundOf16": {
+    "message": "Round of 16"
+  },
+  "quarterfinals": {
+    "message": "Quarter-finals"
+  },
+  "semifinals": {
+    "message": "Semi-finals"
+  },
+  "thirdPlace": {
+    "message": "Laban para sa ikatlong puwesto"
+  },
+  "final": {
+    "message": "Final"
+  },
+  "played": {
+    "message": "P"
+  },
+  "wins": {
+    "message": "W"
+  },
+  "draws": {
+    "message": "D"
+  },
+  "losses": {
+    "message": "L"
+  },
+  "goalsFor": {
+    "message": "F"
+  },
+  "goalsAgainst": {
+    "message": "A"
+  },
+  "goalDifference": {
+    "message": "GD"
+  },
+  "points": {
+    "message": "Pts"
+  },
+  "paused": {
+    "message": "Naka-pause"
+  },
+  "autoPaused": {
+    "message": "Naka-pause ang auto refresh para makatipid sa requests."
+  },
+  "idlePaused": {
+    "message": "Naka-pause habang inactive."
+  },
+  "requestLimitReached": {
+    "message": "Naabot na ang arawang limit ng request. Ipinapakita ang naka-cache na data."
+  },
+  "refreshFailed": {
+    "message": "Hindi na-refresh. Ipinapakita ang pinakabagong data."
+  },
+  "club": {
+    "message": "Club"
+  },
+  "backToLeagues": {
+    "message": "← Mga liga"
+  },
+  "selectLeague": {
+    "message": "Pumili ng liga"
+  },
+  "noLiveMatches": {
+    "message": "Walang live na laban"
+  },
+  "liveCount": {
+    "message": "$COUNT$ live",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCount": {
+    "message": "$COUNT$ laban",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fullTime": {
+    "message": "FT"
+  },
+  "halfTime": {
+    "message": "HT"
+  },
+  "scheduled": {
+    "message": "Naka-iskedyul"
+  },
+  "stats": {
+    "message": "Stats"
+  },
+  "favorite": {
+    "message": "Paborito"
+  },
+  "removeFavorite": {
+    "message": "Alisin sa paborito"
+  },
+  "turnOff": {
+    "message": "I-off ang extension"
+  },
+  "turnOn": {
+    "message": "I-on ang extension"
+  },
+  "favoriteLeague": {
+    "message": "Gawing paborito ang liga"
+  },
+  "forceEnglishOn": {
+    "message": "Ipakita ang English labels"
+  },
+  "forceEnglishOff": {
+    "message": "Bumalik sa wika ng browser"
+  },
+  "other": {
+    "message": "Iba pa"
+  },
+  "team": {
+    "message": "Koponan"
+  },
+  "unknownLeague": {
+    "message": "Hindi kilalang liga"
+  },
+  "unknownTeam": {
+    "message": "Hindi kilalang koponan"
+  },
+  "matchDetails": {
+    "message": "Detalye ng laban"
+  },
+  "loadingDetails": {
+    "message": "Nilo-load ang detalye ng laban…"
+  },
+  "loadingStandings": {
+    "message": "Nilo-load ang standings…"
+  },
+  "detailsUnavailable": {
+    "message": "Hindi available ang detalye"
+  },
+  "noDetails": {
+    "message": "Walang dagdag na detalye para sa laban na ito."
+  },
+  "noSectionData": {
+    "message": "Walang available na data."
+  },
+  "noStats": {
+    "message": "Walang stats ng laban."
+  },
+  "noStandings": {
+    "message": "Walang standings para sa ligang ito."
+  },
+  "noNews": {
+    "message": "Walang balita."
+  },
+  "noLinks": {
+    "message": "Walang link."
+  },
+  "venue": {
+    "message": "Venue"
+  },
+  "kickoff": {
+    "message": "Kickoff"
+  },
+  "broadcasts": {
+    "message": "Mga broadcast"
+  },
+  "timeline": {
+    "message": "Timeline"
+  },
+  "commentary": {
+    "message": "Komentaryo"
+  },
+  "lineups": {
+    "message": "Lineups"
+  },
+  "headToHead": {
+    "message": "Head to head"
+  },
+  "news": {
+    "message": "Balita"
+  },
+  "highlights": {
+    "message": "Highlights"
+  },
+  "links": {
+    "message": "Mga link"
+  }
+}

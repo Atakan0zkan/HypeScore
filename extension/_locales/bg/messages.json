@@ -1,0 +1,258 @@
+{
+  "extName": {
+    "message": "Hype - Резултати от футбол на живо"
+  },
+  "extDescription": {
+    "message": "Резултати от футбол на живо, мачове, резултати и класирания."
+  },
+  "appTitle": {
+    "message": "Hype Scores"
+  },
+  "subtitle": {
+    "message": "Бързи live резултати, изходи и класирания."
+  },
+  "loading": {
+    "message": "Зареждане на мачове…"
+  },
+  "error": {
+    "message": "Данните не можаха да бъдат заредени"
+  },
+  "extensionRuntimeRequired": {
+    "message": "Live данните са блокирани в преглед на файл. Отворете изскачащия прозорец на разширението Chrome."
+  },
+  "empty": {
+    "message": "Няма намерени мачове днес."
+  },
+  "ready": {
+    "message": "Готово"
+  },
+  "refreshing": {
+    "message": "Обновяване"
+  },
+  "notUpdated": {
+    "message": "Още не е обновено"
+  },
+  "updated": {
+    "message": "Обновено"
+  },
+  "live": {
+    "message": "На живо"
+  },
+  "matches": {
+    "message": "Мачове"
+  },
+  "results": {
+    "message": "Резултати"
+  },
+  "upcoming": {
+    "message": "Предстоящи"
+  },
+  "standings": {
+    "message": "Класиране"
+  },
+  "bracket": {
+    "message": "Елиминации"
+  },
+  "loadingBracket": {
+    "message": "Зареждане на схема…"
+  },
+  "noBracket": {
+    "message": "Няма налична схема."
+  },
+  "bracketUnavailable": {
+    "message": "Схемата е недостъпна."
+  },
+  "tbd": {
+    "message": "TBD"
+  },
+  "roundOf32": {
+    "message": "1/16-финали"
+  },
+  "roundOf16": {
+    "message": "1/8-финали"
+  },
+  "quarterfinals": {
+    "message": "Четвъртфинали"
+  },
+  "semifinals": {
+    "message": "Полуфинали"
+  },
+  "thirdPlace": {
+    "message": "Мач за 3-то място"
+  },
+  "final": {
+    "message": "Финал"
+  },
+  "played": {
+    "message": "М"
+  },
+  "wins": {
+    "message": "П"
+  },
+  "draws": {
+    "message": "Р"
+  },
+  "losses": {
+    "message": "З"
+  },
+  "goalsFor": {
+    "message": "ВГ"
+  },
+  "goalsAgainst": {
+    "message": "ДГ"
+  },
+  "goalDifference": {
+    "message": "ГР"
+  },
+  "points": {
+    "message": "Т"
+  },
+  "paused": {
+    "message": "На пауза"
+  },
+  "autoPaused": {
+    "message": "Автоматичното обновяване е на пауза за пестене на заявки."
+  },
+  "idlePaused": {
+    "message": "На пауза поради неактивност."
+  },
+  "requestLimitReached": {
+    "message": "Достигнат е дневният лимит на заявки. Показват се кеширани данни."
+  },
+  "refreshFailed": {
+    "message": "Обновяването неуспешно. Показват се последните данни."
+  },
+  "club": {
+    "message": "Клуб"
+  },
+  "backToLeagues": {
+    "message": "← Лиги"
+  },
+  "selectLeague": {
+    "message": "Изберете лига"
+  },
+  "noLiveMatches": {
+    "message": "Няма мачове на живо"
+  },
+  "liveCount": {
+    "message": "$COUNT$ на живо",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCount": {
+    "message": "$COUNT$ мача",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fullTime": {
+    "message": "Край"
+  },
+  "halfTime": {
+    "message": "Полувреме"
+  },
+  "scheduled": {
+    "message": "Планиран"
+  },
+  "stats": {
+    "message": "Статистика"
+  },
+  "favorite": {
+    "message": "Любимо"
+  },
+  "removeFavorite": {
+    "message": "Премахни от любими"
+  },
+  "turnOff": {
+    "message": "Изключи разширението"
+  },
+  "turnOn": {
+    "message": "Включи разширението"
+  },
+  "favoriteLeague": {
+    "message": "Добави лигата към любими"
+  },
+  "forceEnglishOn": {
+    "message": "Покажи английски етикети"
+  },
+  "forceEnglishOff": {
+    "message": "Обратно към езика на браузъра"
+  },
+  "other": {
+    "message": "Други"
+  },
+  "team": {
+    "message": "Отбор"
+  },
+  "unknownLeague": {
+    "message": "Неизвестна лига"
+  },
+  "unknownTeam": {
+    "message": "Неизвестен отбор"
+  },
+  "matchDetails": {
+    "message": "Детайли за мача"
+  },
+  "loadingDetails": {
+    "message": "Зареждане на детайли…"
+  },
+  "loadingStandings": {
+    "message": "Зареждане на класиране…"
+  },
+  "detailsUnavailable": {
+    "message": "Детайлите са недостъпни"
+  },
+  "noDetails": {
+    "message": "Няма допълнителни детайли за този мач."
+  },
+  "noSectionData": {
+    "message": "Няма налични данни."
+  },
+  "noStats": {
+    "message": "Няма статистика за мача."
+  },
+  "noStandings": {
+    "message": "Няма класиране за тази лига."
+  },
+  "noNews": {
+    "message": "Няма новини."
+  },
+  "noLinks": {
+    "message": "Няма връзки."
+  },
+  "venue": {
+    "message": "Стадион"
+  },
+  "kickoff": {
+    "message": "Начало"
+  },
+  "broadcasts": {
+    "message": "Предавания"
+  },
+  "timeline": {
+    "message": "Хронология"
+  },
+  "commentary": {
+    "message": "Коментар"
+  },
+  "lineups": {
+    "message": "Състави"
+  },
+  "headToHead": {
+    "message": "Директни двубои"
+  },
+  "news": {
+    "message": "Новини"
+  },
+  "highlights": {
+    "message": "Обобщения"
+  },
+  "links": {
+    "message": "Връзки"
+  }
+}

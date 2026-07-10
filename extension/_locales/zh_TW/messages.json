@@ -1,0 +1,258 @@
+{
+  "extName": {
+    "message": "Hype - 足球即時比分"
+  },
+  "extDescription": {
+    "message": "足球即時比分、賽程、賽果與積分榜。"
+  },
+  "appTitle": {
+    "message": "Hype Scores"
+  },
+  "subtitle": {
+    "message": "快速查看即時比分、賽果與積分榜。"
+  },
+  "loading": {
+    "message": "正在載入比賽…"
+  },
+  "error": {
+    "message": "無法載入資料"
+  },
+  "extensionRuntimeRequired": {
+    "message": "檔案預覽中無法載入即時資料。請開啟 Chrome 擴充功能彈出視窗查看比分。"
+  },
+  "empty": {
+    "message": "今天沒有比賽。"
+  },
+  "ready": {
+    "message": "就緒"
+  },
+  "refreshing": {
+    "message": "重新整理中"
+  },
+  "notUpdated": {
+    "message": "尚未更新"
+  },
+  "updated": {
+    "message": "已更新"
+  },
+  "live": {
+    "message": "進行中"
+  },
+  "matches": {
+    "message": "比賽"
+  },
+  "results": {
+    "message": "賽果"
+  },
+  "upcoming": {
+    "message": "即將開始"
+  },
+  "standings": {
+    "message": "積分榜"
+  },
+  "bracket": {
+    "message": "淘汰賽"
+  },
+  "loadingBracket": {
+    "message": "正在載入對陣圖…"
+  },
+  "noBracket": {
+    "message": "暫無淘汰賽對陣圖。"
+  },
+  "bracketUnavailable": {
+    "message": "無法取得淘汰賽對陣圖。"
+  },
+  "tbd": {
+    "message": "待定"
+  },
+  "roundOf32": {
+    "message": "三十二強"
+  },
+  "roundOf16": {
+    "message": "十六強"
+  },
+  "quarterfinals": {
+    "message": "四分之一決賽"
+  },
+  "semifinals": {
+    "message": "半決賽"
+  },
+  "thirdPlace": {
+    "message": "三四名決賽"
+  },
+  "final": {
+    "message": "決賽"
+  },
+  "played": {
+    "message": "賽"
+  },
+  "wins": {
+    "message": "勝"
+  },
+  "draws": {
+    "message": "平"
+  },
+  "losses": {
+    "message": "負"
+  },
+  "goalsFor": {
+    "message": "進"
+  },
+  "goalsAgainst": {
+    "message": "失"
+  },
+  "goalDifference": {
+    "message": "淨"
+  },
+  "points": {
+    "message": "積分"
+  },
+  "paused": {
+    "message": "已暫停"
+  },
+  "autoPaused": {
+    "message": "為節省請求，已暫停自動重新整理。"
+  },
+  "idlePaused": {
+    "message": "閒置時已暫停。"
+  },
+  "requestLimitReached": {
+    "message": "已達每日請求上限。正在顯示快取資料。"
+  },
+  "refreshFailed": {
+    "message": "重新整理失敗。正在顯示最新資料。"
+  },
+  "club": {
+    "message": "俱樂部"
+  },
+  "backToLeagues": {
+    "message": "← 聯賽"
+  },
+  "selectLeague": {
+    "message": "選擇聯賽"
+  },
+  "noLiveMatches": {
+    "message": "暫無進行中比賽"
+  },
+  "liveCount": {
+    "message": "$COUNT$ 場進行中",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCount": {
+    "message": "$COUNT$ 場比賽",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fullTime": {
+    "message": "完場"
+  },
+  "halfTime": {
+    "message": "半場"
+  },
+  "scheduled": {
+    "message": "未開始"
+  },
+  "stats": {
+    "message": "數據"
+  },
+  "favorite": {
+    "message": "收藏"
+  },
+  "removeFavorite": {
+    "message": "取消收藏"
+  },
+  "turnOff": {
+    "message": "關閉擴充功能"
+  },
+  "turnOn": {
+    "message": "開啟擴充功能"
+  },
+  "favoriteLeague": {
+    "message": "收藏聯賽"
+  },
+  "forceEnglishOn": {
+    "message": "顯示英文標籤"
+  },
+  "forceEnglishOff": {
+    "message": "返回瀏覽器語言"
+  },
+  "other": {
+    "message": "其他"
+  },
+  "team": {
+    "message": "球隊"
+  },
+  "unknownLeague": {
+    "message": "未知聯賽"
+  },
+  "unknownTeam": {
+    "message": "未知球隊"
+  },
+  "matchDetails": {
+    "message": "比賽詳情"
+  },
+  "loadingDetails": {
+    "message": "正在載入比賽詳情…"
+  },
+  "loadingStandings": {
+    "message": "正在載入積分榜…"
+  },
+  "detailsUnavailable": {
+    "message": "詳情不可用"
+  },
+  "noDetails": {
+    "message": "本場比賽暫無更多詳情。"
+  },
+  "noSectionData": {
+    "message": "暫無資料。"
+  },
+  "noStats": {
+    "message": "暫無比賽數據。"
+  },
+  "noStandings": {
+    "message": "此聯賽暫無積分榜。"
+  },
+  "noNews": {
+    "message": "暫無新聞。"
+  },
+  "noLinks": {
+    "message": "暫無連結。"
+  },
+  "venue": {
+    "message": "球場"
+  },
+  "kickoff": {
+    "message": "開球"
+  },
+  "broadcasts": {
+    "message": "轉播"
+  },
+  "timeline": {
+    "message": "賽況"
+  },
+  "commentary": {
+    "message": "文字直播"
+  },
+  "lineups": {
+    "message": "陣容"
+  },
+  "headToHead": {
+    "message": "交鋒紀錄"
+  },
+  "news": {
+    "message": "新聞"
+  },
+  "highlights": {
+    "message": "精華"
+  },
+  "links": {
+    "message": "連結"
+  }
+}

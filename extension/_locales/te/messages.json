@@ -1,0 +1,258 @@
+{
+  "extName": {
+    "message": "Hype - లైవ్ ఫుట్‌బాల్ స్కోర్లు"
+  },
+  "extDescription": {
+    "message": "లైవ్ ఫుట్‌బాల్ స్కోర్లు, మ్యాచ్‌లు, ఫలితాలు మరియు లీగ్ పట్టికలు."
+  },
+  "appTitle": {
+    "message": "Hype Scores"
+  },
+  "subtitle": {
+    "message": "వేగవంతమైన లైవ్ స్కోర్లు, ఫలితాలు మరియు పట్టికలు."
+  },
+  "loading": {
+    "message": "మ్యాచ్‌లు లోడ్ అవుతున్నాయి…"
+  },
+  "error": {
+    "message": "డేటా లోడ్ కాలేదు"
+  },
+  "extensionRuntimeRequired": {
+    "message": "ఫైల్ ప్రివ్యూలో లైవ్ డేటా బ్లాక్ చేయబడింది. స్కోర్ల కోసం Chrome ఎక్స్‌టెన్షన్ పాపప్ తెరవండి."
+  },
+  "empty": {
+    "message": "ఈరోజు మ్యాచ్‌లు లేవు."
+  },
+  "ready": {
+    "message": "సిద్ధం"
+  },
+  "refreshing": {
+    "message": "రిఫ్రెష్ అవుతోంది"
+  },
+  "notUpdated": {
+    "message": "ఇంకా అప్‌డేట్ కాలేదు"
+  },
+  "updated": {
+    "message": "అప్‌డేట్ అయింది"
+  },
+  "live": {
+    "message": "లైవ్"
+  },
+  "matches": {
+    "message": "మ్యాచ్‌లు"
+  },
+  "results": {
+    "message": "ఫలితాలు"
+  },
+  "upcoming": {
+    "message": "రాబోయేవి"
+  },
+  "standings": {
+    "message": "పట్టిక"
+  },
+  "bracket": {
+    "message": "నాకౌట్"
+  },
+  "loadingBracket": {
+    "message": "నాకౌట్ బ్రాకెట్ లోడ్ అవుతోంది…"
+  },
+  "noBracket": {
+    "message": "నాకౌట్ బ్రాకెట్ అందుబాటులో లేదు."
+  },
+  "bracketUnavailable": {
+    "message": "నాకౌట్ బ్రాకెట్ అందుబాటులో లేదు."
+  },
+  "tbd": {
+    "message": "TBD"
+  },
+  "roundOf32": {
+    "message": "రౌండ్ ఆఫ్ 32"
+  },
+  "roundOf16": {
+    "message": "రౌండ్ ఆఫ్ 16"
+  },
+  "quarterfinals": {
+    "message": "క్వార్టర్ ఫైనల్"
+  },
+  "semifinals": {
+    "message": "సెమీ ఫైనల్"
+  },
+  "thirdPlace": {
+    "message": "మూడో స్థానం మ్యాచ్"
+  },
+  "final": {
+    "message": "ఫైనల్"
+  },
+  "played": {
+    "message": "మ్యా"
+  },
+  "wins": {
+    "message": "గె"
+  },
+  "draws": {
+    "message": "డ్రా"
+  },
+  "losses": {
+    "message": "ఓ"
+  },
+  "goalsFor": {
+    "message": "చేసిన"
+  },
+  "goalsAgainst": {
+    "message": "కోల్పోయిన"
+  },
+  "goalDifference": {
+    "message": "తేడా"
+  },
+  "points": {
+    "message": "పాయింట్లు"
+  },
+  "paused": {
+    "message": "నిలిపివేయబడింది"
+  },
+  "autoPaused": {
+    "message": "అభ్యర్థనలు ఆదా చేయడానికి ఆటో రిఫ్రెష్ నిలిపివేయబడింది."
+  },
+  "idlePaused": {
+    "message": "నిష్క్రియంగా ఉన్నప్పుడు నిలిపివేయబడింది."
+  },
+  "requestLimitReached": {
+    "message": "రోజువారీ అభ్యర్థన పరిమితి నిండింది. కాష్ డేటా చూపిస్తోంది."
+  },
+  "refreshFailed": {
+    "message": "రిఫ్రెష్ విఫలమైంది. తాజా డేటా చూపిస్తోంది."
+  },
+  "club": {
+    "message": "క్లబ్"
+  },
+  "backToLeagues": {
+    "message": "← లీగ్‌లు"
+  },
+  "selectLeague": {
+    "message": "లీగ్ ఎంచుకోండి"
+  },
+  "noLiveMatches": {
+    "message": "లైవ్ మ్యాచ్‌లు లేవు"
+  },
+  "liveCount": {
+    "message": "$COUNT$ లైవ్",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCount": {
+    "message": "$COUNT$ మ్యాచ్‌లు",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fullTime": {
+    "message": "ముగిసింది"
+  },
+  "halfTime": {
+    "message": "హాఫ్"
+  },
+  "scheduled": {
+    "message": "షెడ్యూల్"
+  },
+  "stats": {
+    "message": "గణాంకాలు"
+  },
+  "favorite": {
+    "message": "ఇష్టమైనది"
+  },
+  "removeFavorite": {
+    "message": "ఇష్టమైనవాటి నుంచి తొలగించు"
+  },
+  "turnOff": {
+    "message": "ఎక్స్‌టెన్షన్ ఆఫ్ చేయి"
+  },
+  "turnOn": {
+    "message": "ఎక్స్‌టెన్షన్ ఆన్ చేయి"
+  },
+  "favoriteLeague": {
+    "message": "లీగ్‌ను ఇష్టాలకు జోడించు"
+  },
+  "forceEnglishOn": {
+    "message": "ఇంగ్లీష్ లేబుల్స్ చూపించు"
+  },
+  "forceEnglishOff": {
+    "message": "బ్రౌజర్ భాషకు తిరిగి వెళ్ళు"
+  },
+  "other": {
+    "message": "ఇతర"
+  },
+  "team": {
+    "message": "జట్టు"
+  },
+  "unknownLeague": {
+    "message": "తెలియని లీగ్"
+  },
+  "unknownTeam": {
+    "message": "తెలియని జట్టు"
+  },
+  "matchDetails": {
+    "message": "మ్యాచ్ వివరాలు"
+  },
+  "loadingDetails": {
+    "message": "మ్యాచ్ వివరాలు లోడ్ అవుతున్నాయి…"
+  },
+  "loadingStandings": {
+    "message": "పట్టిక లోడ్ అవుతోంది…"
+  },
+  "detailsUnavailable": {
+    "message": "వివరాలు అందుబాటులో లేవు"
+  },
+  "noDetails": {
+    "message": "ఈ మ్యాచ్‌కు అదనపు వివరాలు లేవు."
+  },
+  "noSectionData": {
+    "message": "డేటా అందుబాటులో లేదు."
+  },
+  "noStats": {
+    "message": "మ్యాచ్ గణాంకాలు లేవు."
+  },
+  "noStandings": {
+    "message": "ఈ లీగ్‌కు పట్టిక లేదు."
+  },
+  "noNews": {
+    "message": "వార్తలు లేవు."
+  },
+  "noLinks": {
+    "message": "లింకులు లేవు."
+  },
+  "venue": {
+    "message": "వేదిక"
+  },
+  "kickoff": {
+    "message": "కికాఫ్"
+  },
+  "broadcasts": {
+    "message": "ప్రసారాలు"
+  },
+  "timeline": {
+    "message": "టైమ్‌లైన్"
+  },
+  "commentary": {
+    "message": "కామెంటరీ"
+  },
+  "lineups": {
+    "message": "లైనప్‌లు"
+  },
+  "headToHead": {
+    "message": "హెడ్ టు హెడ్"
+  },
+  "news": {
+    "message": "వార్తలు"
+  },
+  "highlights": {
+    "message": "హైలైట్స్"
+  },
+  "links": {
+    "message": "లింకులు"
+  }
+}

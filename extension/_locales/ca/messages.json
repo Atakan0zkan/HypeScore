@@ -1,0 +1,258 @@
+{
+  "extName": {
+    "message": "Hype - Resultats de futbol en directe"
+  },
+  "extDescription": {
+    "message": "Resultats de futbol en directe, partits, resultats i classificacions."
+  },
+  "appTitle": {
+    "message": "Hype Scores"
+  },
+  "subtitle": {
+    "message": "Resultats en directe, finals i classificacions al moment."
+  },
+  "loading": {
+    "message": "S’estan carregant els partits…"
+  },
+  "error": {
+    "message": "No s’han pogut carregar les dades"
+  },
+  "extensionRuntimeRequired": {
+    "message": "Les dades en directe estan bloquejades a la previsualització del fitxer. Obre la finestra emergent de l’extensió de Chrome."
+  },
+  "empty": {
+    "message": "No s’han trobat partits avui."
+  },
+  "ready": {
+    "message": "A punt"
+  },
+  "refreshing": {
+    "message": "S’està actualitzant"
+  },
+  "notUpdated": {
+    "message": "Encara no actualitzat"
+  },
+  "updated": {
+    "message": "Actualitzat"
+  },
+  "live": {
+    "message": "En directe"
+  },
+  "matches": {
+    "message": "Partits"
+  },
+  "results": {
+    "message": "Resultats"
+  },
+  "upcoming": {
+    "message": "Propers"
+  },
+  "standings": {
+    "message": "Classificació"
+  },
+  "bracket": {
+    "message": "Eliminatòries"
+  },
+  "loadingBracket": {
+    "message": "S’està carregant el quadre…"
+  },
+  "noBracket": {
+    "message": "No hi ha cap quadre disponible."
+  },
+  "bracketUnavailable": {
+    "message": "Quadre no disponible."
+  },
+  "tbd": {
+    "message": "Per definir"
+  },
+  "roundOf32": {
+    "message": "Setzens de final"
+  },
+  "roundOf16": {
+    "message": "Vuitens de final"
+  },
+  "quarterfinals": {
+    "message": "Quarts de final"
+  },
+  "semifinals": {
+    "message": "Semifinals"
+  },
+  "thirdPlace": {
+    "message": "Partit pel tercer lloc"
+  },
+  "final": {
+    "message": "Final"
+  },
+  "played": {
+    "message": "J"
+  },
+  "wins": {
+    "message": "G"
+  },
+  "draws": {
+    "message": "E"
+  },
+  "losses": {
+    "message": "P"
+  },
+  "goalsFor": {
+    "message": "GF"
+  },
+  "goalsAgainst": {
+    "message": "GC"
+  },
+  "goalDifference": {
+    "message": "DG"
+  },
+  "points": {
+    "message": "Pts"
+  },
+  "paused": {
+    "message": "En pausa"
+  },
+  "autoPaused": {
+    "message": "Actualització automàtica en pausa per estalviar sol·licituds."
+  },
+  "idlePaused": {
+    "message": "En pausa per inactivitat."
+  },
+  "requestLimitReached": {
+    "message": "S’ha assolit el límit diari de sol·licituds. Es mostren les dades en memòria cau."
+  },
+  "refreshFailed": {
+    "message": "L’actualització ha fallat. Es mostren les dades més recents."
+  },
+  "club": {
+    "message": "Club"
+  },
+  "backToLeagues": {
+    "message": "← Lligues"
+  },
+  "selectLeague": {
+    "message": "Selecciona una lliga"
+  },
+  "noLiveMatches": {
+    "message": "No hi ha partits en directe"
+  },
+  "liveCount": {
+    "message": "$COUNT$ en directe",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCount": {
+    "message": "$COUNT$ partits",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fullTime": {
+    "message": "Final"
+  },
+  "halfTime": {
+    "message": "Descans"
+  },
+  "scheduled": {
+    "message": "Programat"
+  },
+  "stats": {
+    "message": "Estadístiques"
+  },
+  "favorite": {
+    "message": "Preferit"
+  },
+  "removeFavorite": {
+    "message": "Treu dels preferits"
+  },
+  "turnOff": {
+    "message": "Desactiva l’extensió"
+  },
+  "turnOn": {
+    "message": "Activa l’extensió"
+  },
+  "favoriteLeague": {
+    "message": "Afegeix la lliga als preferits"
+  },
+  "forceEnglishOn": {
+    "message": "Mostra etiquetes en anglès"
+  },
+  "forceEnglishOff": {
+    "message": "Torna a l’idioma del navegador"
+  },
+  "other": {
+    "message": "Altres"
+  },
+  "team": {
+    "message": "Equip"
+  },
+  "unknownLeague": {
+    "message": "Lliga desconeguda"
+  },
+  "unknownTeam": {
+    "message": "Equip desconegut"
+  },
+  "matchDetails": {
+    "message": "Detalls del partit"
+  },
+  "loadingDetails": {
+    "message": "S’estan carregant els detalls del partit…"
+  },
+  "loadingStandings": {
+    "message": "S’està carregant la classificació…"
+  },
+  "detailsUnavailable": {
+    "message": "Detalls no disponibles"
+  },
+  "noDetails": {
+    "message": "No hi ha detalls addicionals per a aquest partit."
+  },
+  "noSectionData": {
+    "message": "No hi ha dades disponibles."
+  },
+  "noStats": {
+    "message": "No hi ha estadístiques del partit."
+  },
+  "noStandings": {
+    "message": "No hi ha classificació per a aquesta lliga."
+  },
+  "noNews": {
+    "message": "No hi ha notícies."
+  },
+  "noLinks": {
+    "message": "No hi ha enllaços."
+  },
+  "venue": {
+    "message": "Estadi"
+  },
+  "kickoff": {
+    "message": "Inici"
+  },
+  "broadcasts": {
+    "message": "Emissions"
+  },
+  "timeline": {
+    "message": "Cronologia"
+  },
+  "commentary": {
+    "message": "Comentari"
+  },
+  "lineups": {
+    "message": "Alineacions"
+  },
+  "headToHead": {
+    "message": "Cara a cara"
+  },
+  "news": {
+    "message": "Notícies"
+  },
+  "highlights": {
+    "message": "Resums"
+  },
+  "links": {
+    "message": "Enllaços"
+  }
+}

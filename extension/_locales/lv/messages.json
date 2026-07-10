@@ -1,0 +1,258 @@
+{
+  "extName": {
+    "message": "Hype - Futbola rezultāti tiešraidē"
+  },
+  "extDescription": {
+    "message": "Futbola rezultāti tiešraidē, spēles, iznākumi un tabulas."
+  },
+  "appTitle": {
+    "message": "Hype Scores"
+  },
+  "subtitle": {
+    "message": "Ātri live rezultāti, iznākumi un tabulas."
+  },
+  "loading": {
+    "message": "Ielādē spēles…"
+  },
+  "error": {
+    "message": "Neizdevās ielādēt datus"
+  },
+  "extensionRuntimeRequired": {
+    "message": "Live dati ir bloķēti faila priekšskatījumā. Atveriet Chrome paplašinājuma uznirstošo logu."
+  },
+  "empty": {
+    "message": "Šodien spēles nav atrastas."
+  },
+  "ready": {
+    "message": "Gatavs"
+  },
+  "refreshing": {
+    "message": "Atsvaidzina"
+  },
+  "notUpdated": {
+    "message": "Vēl nav atjaunināts"
+  },
+  "updated": {
+    "message": "Atjaunināts"
+  },
+  "live": {
+    "message": "Tiešraidē"
+  },
+  "matches": {
+    "message": "Spēles"
+  },
+  "results": {
+    "message": "Rezultāti"
+  },
+  "upcoming": {
+    "message": "Gaidāmās"
+  },
+  "standings": {
+    "message": "Tabula"
+  },
+  "bracket": {
+    "message": "Izslēgšanas spēles"
+  },
+  "loadingBracket": {
+    "message": "Ielādē shēmu…"
+  },
+  "noBracket": {
+    "message": "Shēma nav pieejama."
+  },
+  "bracketUnavailable": {
+    "message": "Shēma nav pieejama."
+  },
+  "tbd": {
+    "message": "TBD"
+  },
+  "roundOf32": {
+    "message": "1/16 fināls"
+  },
+  "roundOf16": {
+    "message": "1/8 fināls"
+  },
+  "quarterfinals": {
+    "message": "Ceturtdaļfināls"
+  },
+  "semifinals": {
+    "message": "Pusfināls"
+  },
+  "thirdPlace": {
+    "message": "Spēle par 3. vietu"
+  },
+  "final": {
+    "message": "Fināls"
+  },
+  "played": {
+    "message": "S"
+  },
+  "wins": {
+    "message": "U"
+  },
+  "draws": {
+    "message": "N"
+  },
+  "losses": {
+    "message": "Z"
+  },
+  "goalsFor": {
+    "message": "GV"
+  },
+  "goalsAgainst": {
+    "message": "ZI"
+  },
+  "goalDifference": {
+    "message": "St"
+  },
+  "points": {
+    "message": "P"
+  },
+  "paused": {
+    "message": "Apturēts"
+  },
+  "autoPaused": {
+    "message": "Automātiskā atsvaidzināšana apturēta, lai taupītu pieprasījumus."
+  },
+  "idlePaused": {
+    "message": "Apturēts dīkstāves dēļ."
+  },
+  "requestLimitReached": {
+    "message": "Sasniegts dienas pieprasījumu limits. Rāda kešatmiņas datus."
+  },
+  "refreshFailed": {
+    "message": "Atsvaidzināšana neizdevās. Rāda jaunākos datus."
+  },
+  "club": {
+    "message": "Klubs"
+  },
+  "backToLeagues": {
+    "message": "← Līgas"
+  },
+  "selectLeague": {
+    "message": "Izvēlieties līgu"
+  },
+  "noLiveMatches": {
+    "message": "Nav tiešraides spēļu"
+  },
+  "liveCount": {
+    "message": "$COUNT$ tiešraidē",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCount": {
+    "message": "$COUNT$ spēles",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fullTime": {
+    "message": "Beigas"
+  },
+  "halfTime": {
+    "message": "Pārtraukums"
+  },
+  "scheduled": {
+    "message": "Ieplānots"
+  },
+  "stats": {
+    "message": "Statistika"
+  },
+  "favorite": {
+    "message": "Izlase"
+  },
+  "removeFavorite": {
+    "message": "Noņemt no izlases"
+  },
+  "turnOff": {
+    "message": "Izslēgt paplašinājumu"
+  },
+  "turnOn": {
+    "message": "Ieslēgt paplašinājumu"
+  },
+  "favoriteLeague": {
+    "message": "Pievienot līgu izlasei"
+  },
+  "forceEnglishOn": {
+    "message": "Rādīt angļu etiķetes"
+  },
+  "forceEnglishOff": {
+    "message": "Atgriezties pie pārlūkprogrammas valodas"
+  },
+  "other": {
+    "message": "Citi"
+  },
+  "team": {
+    "message": "Komanda"
+  },
+  "unknownLeague": {
+    "message": "Nezināma līga"
+  },
+  "unknownTeam": {
+    "message": "Nezināma komanda"
+  },
+  "matchDetails": {
+    "message": "Spēles detaļas"
+  },
+  "loadingDetails": {
+    "message": "Ielādē spēles detaļas…"
+  },
+  "loadingStandings": {
+    "message": "Ielādē tabulu…"
+  },
+  "detailsUnavailable": {
+    "message": "Detaļas nav pieejamas"
+  },
+  "noDetails": {
+    "message": "Šai spēlei nav papildu detaļu."
+  },
+  "noSectionData": {
+    "message": "Nav pieejamu datu."
+  },
+  "noStats": {
+    "message": "Spēles statistika nav pieejama."
+  },
+  "noStandings": {
+    "message": "Šai līgai nav tabulas."
+  },
+  "noNews": {
+    "message": "Nav ziņu."
+  },
+  "noLinks": {
+    "message": "Nav saišu."
+  },
+  "venue": {
+    "message": "Stadions"
+  },
+  "kickoff": {
+    "message": "Sākums"
+  },
+  "broadcasts": {
+    "message": "Translācijas"
+  },
+  "timeline": {
+    "message": "Laika skala"
+  },
+  "commentary": {
+    "message": "Komentāri"
+  },
+  "lineups": {
+    "message": "Sastāvi"
+  },
+  "headToHead": {
+    "message": "Savstarpējās spēles"
+  },
+  "news": {
+    "message": "Ziņas"
+  },
+  "highlights": {
+    "message": "Kopsavilkumi"
+  },
+  "links": {
+    "message": "Saites"
+  }
+}

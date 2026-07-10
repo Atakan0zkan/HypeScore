@@ -1,0 +1,258 @@
+{
+  "extName": {
+    "message": "Hype - Skor bola sepak langsung"
+  },
+  "extDescription": {
+    "message": "Skor bola sepak langsung, perlawanan, keputusan dan carta kedudukan."
+  },
+  "appTitle": {
+    "message": "Hype Scores"
+  },
+  "subtitle": {
+    "message": "Skor live pantas, keputusan dan carta."
+  },
+  "loading": {
+    "message": "Memuatkan perlawanan…"
+  },
+  "error": {
+    "message": "Tidak dapat memuatkan data"
+  },
+  "extensionRuntimeRequired": {
+    "message": "Data live disekat dalam pratonton fail. Buka tetingkap timbul sambungan Chrome untuk skor."
+  },
+  "empty": {
+    "message": "Tiada perlawanan dijumpai hari ini."
+  },
+  "ready": {
+    "message": "Sedia"
+  },
+  "refreshing": {
+    "message": "Menyegarkan"
+  },
+  "notUpdated": {
+    "message": "Belum dikemas kini"
+  },
+  "updated": {
+    "message": "Dikemas kini"
+  },
+  "live": {
+    "message": "Langsung"
+  },
+  "matches": {
+    "message": "Perlawanan"
+  },
+  "results": {
+    "message": "Keputusan"
+  },
+  "upcoming": {
+    "message": "Akan datang"
+  },
+  "standings": {
+    "message": "Kedudukan"
+  },
+  "bracket": {
+    "message": "Kalah mati"
+  },
+  "loadingBracket": {
+    "message": "Memuatkan carta kalah mati…"
+  },
+  "noBracket": {
+    "message": "Tiada carta kalah mati."
+  },
+  "bracketUnavailable": {
+    "message": "Carta kalah mati tidak tersedia."
+  },
+  "tbd": {
+    "message": "TBD"
+  },
+  "roundOf32": {
+    "message": "Pusingan 32"
+  },
+  "roundOf16": {
+    "message": "Pusingan 16"
+  },
+  "quarterfinals": {
+    "message": "Suku akhir"
+  },
+  "semifinals": {
+    "message": "Separuh akhir"
+  },
+  "thirdPlace": {
+    "message": "Penentuan tempat ketiga"
+  },
+  "final": {
+    "message": "Akhir"
+  },
+  "played": {
+    "message": "P"
+  },
+  "wins": {
+    "message": "M"
+  },
+  "draws": {
+    "message": "S"
+  },
+  "losses": {
+    "message": "K"
+  },
+  "goalsFor": {
+    "message": "JG"
+  },
+  "goalsAgainst": {
+    "message": "GB"
+  },
+  "goalDifference": {
+    "message": "BG"
+  },
+  "points": {
+    "message": "Mt"
+  },
+  "paused": {
+    "message": "Dijeda"
+  },
+  "autoPaused": {
+    "message": "Muat semula automatik dijeda untuk menjimatkan permintaan."
+  },
+  "idlePaused": {
+    "message": "Dijeda semasa tidak aktif."
+  },
+  "requestLimitReached": {
+    "message": "Had permintaan harian dicapai. Menunjukkan data cache."
+  },
+  "refreshFailed": {
+    "message": "Muat semula gagal. Menunjukkan data terkini."
+  },
+  "club": {
+    "message": "Kelab"
+  },
+  "backToLeagues": {
+    "message": "← Liga"
+  },
+  "selectLeague": {
+    "message": "Pilih liga"
+  },
+  "noLiveMatches": {
+    "message": "Tiada perlawanan langsung"
+  },
+  "liveCount": {
+    "message": "$COUNT$ langsung",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCount": {
+    "message": "$COUNT$ perlawanan",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fullTime": {
+    "message": "Tamat"
+  },
+  "halfTime": {
+    "message": "Separuh masa"
+  },
+  "scheduled": {
+    "message": "Dijadualkan"
+  },
+  "stats": {
+    "message": "Statistik"
+  },
+  "favorite": {
+    "message": "Kegemaran"
+  },
+  "removeFavorite": {
+    "message": "Buang kegemaran"
+  },
+  "turnOff": {
+    "message": "Matikan sambungan"
+  },
+  "turnOn": {
+    "message": "Hidupkan sambungan"
+  },
+  "favoriteLeague": {
+    "message": "Jadikan liga kegemaran"
+  },
+  "forceEnglishOn": {
+    "message": "Tunjukkan label Bahasa Inggeris"
+  },
+  "forceEnglishOff": {
+    "message": "Kembali ke bahasa pelayar"
+  },
+  "other": {
+    "message": "Lain-lain"
+  },
+  "team": {
+    "message": "Pasukan"
+  },
+  "unknownLeague": {
+    "message": "Liga tidak diketahui"
+  },
+  "unknownTeam": {
+    "message": "Pasukan tidak diketahui"
+  },
+  "matchDetails": {
+    "message": "Butiran perlawanan"
+  },
+  "loadingDetails": {
+    "message": "Memuatkan butiran perlawanan…"
+  },
+  "loadingStandings": {
+    "message": "Memuatkan kedudukan…"
+  },
+  "detailsUnavailable": {
+    "message": "Butiran tidak tersedia"
+  },
+  "noDetails": {
+    "message": "Tiada butiran tambahan untuk perlawanan ini."
+  },
+  "noSectionData": {
+    "message": "Tiada data tersedia."
+  },
+  "noStats": {
+    "message": "Tiada statistik perlawanan."
+  },
+  "noStandings": {
+    "message": "Tiada kedudukan untuk liga ini."
+  },
+  "noNews": {
+    "message": "Tiada berita."
+  },
+  "noLinks": {
+    "message": "Tiada pautan."
+  },
+  "venue": {
+    "message": "Stadium"
+  },
+  "kickoff": {
+    "message": "Anjakan bola"
+  },
+  "broadcasts": {
+    "message": "Siaran"
+  },
+  "timeline": {
+    "message": "Garis masa"
+  },
+  "commentary": {
+    "message": "Ulasan"
+  },
+  "lineups": {
+    "message": "Barisan pemain"
+  },
+  "headToHead": {
+    "message": "Rekod bertemu"
+  },
+  "news": {
+    "message": "Berita"
+  },
+  "highlights": {
+    "message": "Sorotan"
+  },
+  "links": {
+    "message": "Pautan"
+  }
+}

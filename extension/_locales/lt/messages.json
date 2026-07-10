@@ -1,0 +1,258 @@
+{
+  "extName": {
+    "message": "Hype - Gyvi futbolo rezultatai"
+  },
+  "extDescription": {
+    "message": "Gyvi futbolo rezultatai, rungtynės, baigtys ir lentelės."
+  },
+  "appTitle": {
+    "message": "Hype Scores"
+  },
+  "subtitle": {
+    "message": "Greiti live rezultatai, baigtys ir lentelės."
+  },
+  "loading": {
+    "message": "Įkeliami mačai…"
+  },
+  "error": {
+    "message": "Nepavyko įkelti duomenų"
+  },
+  "extensionRuntimeRequired": {
+    "message": "Live duomenys blokuojami failo peržiūroje. Atidarykite Chrome plėtinio iššokantįjį langą."
+  },
+  "empty": {
+    "message": "Šiandien mačų nerasta."
+  },
+  "ready": {
+    "message": "Paruošta"
+  },
+  "refreshing": {
+    "message": "Atnaujinama"
+  },
+  "notUpdated": {
+    "message": "Dar neatnaujinta"
+  },
+  "updated": {
+    "message": "Atnaujinta"
+  },
+  "live": {
+    "message": "Gyvai"
+  },
+  "matches": {
+    "message": "Rungtynės"
+  },
+  "results": {
+    "message": "Rezultatai"
+  },
+  "upcoming": {
+    "message": "Artėjančios"
+  },
+  "standings": {
+    "message": "Lentelė"
+  },
+  "bracket": {
+    "message": "Atkrintamosios"
+  },
+  "loadingBracket": {
+    "message": "Įkeliamas tinklas…"
+  },
+  "noBracket": {
+    "message": "Tinklas nepasiekiamas."
+  },
+  "bracketUnavailable": {
+    "message": "Tinklas nepasiekiamas."
+  },
+  "tbd": {
+    "message": "TBD"
+  },
+  "roundOf32": {
+    "message": "1/16 finalo"
+  },
+  "roundOf16": {
+    "message": "Aštuntfinalis"
+  },
+  "quarterfinals": {
+    "message": "Ketvirtfinalis"
+  },
+  "semifinals": {
+    "message": "Pusfinalis"
+  },
+  "thirdPlace": {
+    "message": "Mačas dėl 3 vietos"
+  },
+  "final": {
+    "message": "Finalas"
+  },
+  "played": {
+    "message": "R"
+  },
+  "wins": {
+    "message": "L"
+  },
+  "draws": {
+    "message": "L"
+  },
+  "losses": {
+    "message": "Pr"
+  },
+  "goalsFor": {
+    "message": "Įv"
+  },
+  "goalsAgainst": {
+    "message": "Pr"
+  },
+  "goalDifference": {
+    "message": "Skirt."
+  },
+  "points": {
+    "message": "Tšk"
+  },
+  "paused": {
+    "message": "Pristabdyta"
+  },
+  "autoPaused": {
+    "message": "Automatinis atnaujinimas pristabdytas taupant užklausas."
+  },
+  "idlePaused": {
+    "message": "Pristabdyta dėl neaktyvumo."
+  },
+  "requestLimitReached": {
+    "message": "Pasiektas dienos užklausų limitas. Rodomi podėlio duomenys."
+  },
+  "refreshFailed": {
+    "message": "Atnaujinti nepavyko. Rodomi naujausi duomenys."
+  },
+  "club": {
+    "message": "Klubas"
+  },
+  "backToLeagues": {
+    "message": "← Lygos"
+  },
+  "selectLeague": {
+    "message": "Pasirinkite lygą"
+  },
+  "noLiveMatches": {
+    "message": "Nėra gyvų mačų"
+  },
+  "liveCount": {
+    "message": "$COUNT$ gyvai",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCount": {
+    "message": "$COUNT$ mačų",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fullTime": {
+    "message": "Pab."
+  },
+  "halfTime": {
+    "message": "Pertrauka"
+  },
+  "scheduled": {
+    "message": "Suplanuota"
+  },
+  "stats": {
+    "message": "Statistika"
+  },
+  "favorite": {
+    "message": "Mėgstama"
+  },
+  "removeFavorite": {
+    "message": "Pašalinti iš mėgstamų"
+  },
+  "turnOff": {
+    "message": "Išjungti plėtinį"
+  },
+  "turnOn": {
+    "message": "Įjungti plėtinį"
+  },
+  "favoriteLeague": {
+    "message": "Pridėti lygą prie mėgstamų"
+  },
+  "forceEnglishOn": {
+    "message": "Rodyti angliškas etiketes"
+  },
+  "forceEnglishOff": {
+    "message": "Grįžti prie naršyklės kalbos"
+  },
+  "other": {
+    "message": "Kita"
+  },
+  "team": {
+    "message": "Komanda"
+  },
+  "unknownLeague": {
+    "message": "Nežinoma lyga"
+  },
+  "unknownTeam": {
+    "message": "Nežinoma komanda"
+  },
+  "matchDetails": {
+    "message": "Mačo detalės"
+  },
+  "loadingDetails": {
+    "message": "Įkeliamos mačo detalės…"
+  },
+  "loadingStandings": {
+    "message": "Įkeliama lentelė…"
+  },
+  "detailsUnavailable": {
+    "message": "Detalės nepasiekiamos"
+  },
+  "noDetails": {
+    "message": "Šiam mačui nėra papildomų detalių."
+  },
+  "noSectionData": {
+    "message": "Nėra pasiekiamų duomenų."
+  },
+  "noStats": {
+    "message": "Mačo statistikos nėra."
+  },
+  "noStandings": {
+    "message": "Šiai lygai lentelės nėra."
+  },
+  "noNews": {
+    "message": "Nėra naujienų."
+  },
+  "noLinks": {
+    "message": "Nėra nuorodų."
+  },
+  "venue": {
+    "message": "Stadionas"
+  },
+  "kickoff": {
+    "message": "Pradžia"
+  },
+  "broadcasts": {
+    "message": "Transliacijos"
+  },
+  "timeline": {
+    "message": "Eiga"
+  },
+  "commentary": {
+    "message": "Komentarai"
+  },
+  "lineups": {
+    "message": "Sudėtys"
+  },
+  "headToHead": {
+    "message": "Tarpusavio mačai"
+  },
+  "news": {
+    "message": "Naujienos"
+  },
+  "highlights": {
+    "message": "Santraukos"
+  },
+  "links": {
+    "message": "Nuorodos"
+  }
+}

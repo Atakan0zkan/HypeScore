@@ -1,0 +1,258 @@
+{
+  "extName": {
+    "message": "Hype - نتایج زنده فوتبال"
+  },
+  "extDescription": {
+    "message": "نتایج زنده فوتبال، بازی‌ها، نتایج و جدول لیگ‌ها."
+  },
+  "appTitle": {
+    "message": "Hype Scores"
+  },
+  "subtitle": {
+    "message": "امتیاز زنده سریع، نتایج و جداول."
+  },
+  "loading": {
+    "message": "در حال بارگذاری بازی‌ها…"
+  },
+  "error": {
+    "message": "بارگذاری داده‌ها ممکن نشد"
+  },
+  "extensionRuntimeRequired": {
+    "message": "داده زنده در پیش‌نمایش فایل مسدود است. برای امتیازها پنجره افزونه کروم را باز کنید."
+  },
+  "empty": {
+    "message": "امروز بازی‌ای پیدا نشد."
+  },
+  "ready": {
+    "message": "آماده"
+  },
+  "refreshing": {
+    "message": "در حال به‌روزرسانی"
+  },
+  "notUpdated": {
+    "message": "هنوز به‌روز نشده"
+  },
+  "updated": {
+    "message": "به‌روز شد"
+  },
+  "live": {
+    "message": "زنده"
+  },
+  "matches": {
+    "message": "بازی‌ها"
+  },
+  "results": {
+    "message": "نتایج"
+  },
+  "upcoming": {
+    "message": "آتی"
+  },
+  "standings": {
+    "message": "جدول"
+  },
+  "bracket": {
+    "message": "حذفی"
+  },
+  "loadingBracket": {
+    "message": "در حال بارگذاری جدول حذفی…"
+  },
+  "noBracket": {
+    "message": "جدول حذفی در دسترس نیست."
+  },
+  "bracketUnavailable": {
+    "message": "جدول حذفی در دسترس نیست."
+  },
+  "tbd": {
+    "message": "نامشخص"
+  },
+  "roundOf32": {
+    "message": "یک‌سی‌ودوم"
+  },
+  "roundOf16": {
+    "message": "یک‌هشتم"
+  },
+  "quarterfinals": {
+    "message": "یک‌چهارم"
+  },
+  "semifinals": {
+    "message": "نیمه‌نهایی"
+  },
+  "thirdPlace": {
+    "message": "بازی رده‌بندی"
+  },
+  "final": {
+    "message": "فینال"
+  },
+  "played": {
+    "message": "ب"
+  },
+  "wins": {
+    "message": "ب"
+  },
+  "draws": {
+    "message": "ت"
+  },
+  "losses": {
+    "message": "ش"
+  },
+  "goalsFor": {
+    "message": "گل‌زده"
+  },
+  "goalsAgainst": {
+    "message": "گل‌خورده"
+  },
+  "goalDifference": {
+    "message": "تفاضل"
+  },
+  "points": {
+    "message": "امتیاز"
+  },
+  "paused": {
+    "message": "متوقف"
+  },
+  "autoPaused": {
+    "message": "به‌روزرسانی خودکار برای صرفه‌جویی در درخواست‌ها متوقف شد."
+  },
+  "idlePaused": {
+    "message": "در زمان غیرفعال بودن متوقف شد."
+  },
+  "requestLimitReached": {
+    "message": "سقف درخواست روزانه پر شد. داده ذخیره‌شده نمایش داده می‌شود."
+  },
+  "refreshFailed": {
+    "message": "به‌روزرسانی ناموفق بود. آخرین داده نمایش داده می‌شود."
+  },
+  "club": {
+    "message": "باشگاه"
+  },
+  "backToLeagues": {
+    "message": "← لیگ‌ها"
+  },
+  "selectLeague": {
+    "message": "یک لیگ انتخاب کنید"
+  },
+  "noLiveMatches": {
+    "message": "بازی زنده‌ای نیست"
+  },
+  "liveCount": {
+    "message": "$COUNT$ زنده",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCount": {
+    "message": "$COUNT$ بازی",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fullTime": {
+    "message": "پایان"
+  },
+  "halfTime": {
+    "message": "نیمه‌وقت"
+  },
+  "scheduled": {
+    "message": "زمان‌بندی‌شده"
+  },
+  "stats": {
+    "message": "آمار"
+  },
+  "favorite": {
+    "message": "علاقه‌مندی"
+  },
+  "removeFavorite": {
+    "message": "حذف از علاقه‌مندی‌ها"
+  },
+  "turnOff": {
+    "message": "خاموش کردن افزونه"
+  },
+  "turnOn": {
+    "message": "روشن کردن افزونه"
+  },
+  "favoriteLeague": {
+    "message": "افزودن لیگ به علاقه‌مندی‌ها"
+  },
+  "forceEnglishOn": {
+    "message": "نمایش برچسب‌های انگلیسی"
+  },
+  "forceEnglishOff": {
+    "message": "بازگشت به زبان مرورگر"
+  },
+  "other": {
+    "message": "سایر"
+  },
+  "team": {
+    "message": "تیم"
+  },
+  "unknownLeague": {
+    "message": "لیگ ناشناس"
+  },
+  "unknownTeam": {
+    "message": "تیم ناشناس"
+  },
+  "matchDetails": {
+    "message": "جزئیات بازی"
+  },
+  "loadingDetails": {
+    "message": "در حال بارگذاری جزئیات بازی…"
+  },
+  "loadingStandings": {
+    "message": "در حال بارگذاری جدول…"
+  },
+  "detailsUnavailable": {
+    "message": "جزئیات در دسترس نیست"
+  },
+  "noDetails": {
+    "message": "جزئیات بیشتری برای این بازی نیست."
+  },
+  "noSectionData": {
+    "message": "داده‌ای در دسترس نیست."
+  },
+  "noStats": {
+    "message": "آمار بازی در دسترس نیست."
+  },
+  "noStandings": {
+    "message": "جدولی برای این لیگ نیست."
+  },
+  "noNews": {
+    "message": "خبری نیست."
+  },
+  "noLinks": {
+    "message": "پیوندی نیست."
+  },
+  "venue": {
+    "message": "ورزشگاه"
+  },
+  "kickoff": {
+    "message": "شروع"
+  },
+  "broadcasts": {
+    "message": "پخش‌ها"
+  },
+  "timeline": {
+    "message": "خط زمانی"
+  },
+  "commentary": {
+    "message": "گزارش"
+  },
+  "lineups": {
+    "message": "ترکیب"
+  },
+  "headToHead": {
+    "message": "رودررو"
+  },
+  "news": {
+    "message": "اخبار"
+  },
+  "highlights": {
+    "message": "خلاصه"
+  },
+  "links": {
+    "message": "پیوندها"
+  }
+}

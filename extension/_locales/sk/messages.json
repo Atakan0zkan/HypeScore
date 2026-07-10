@@ -1,0 +1,258 @@
+{
+  "extName": {
+    "message": "Hype - Živé futbalové výsledky"
+  },
+  "extDescription": {
+    "message": "Živé futbalové výsledky, zápasy, výsledky a tabuľky."
+  },
+  "appTitle": {
+    "message": "Hype Scores"
+  },
+  "subtitle": {
+    "message": "Rýchle live skóre, výsledky a tabuľky."
+  },
+  "loading": {
+    "message": "Načítavanie zápasov…"
+  },
+  "error": {
+    "message": "Dáta sa nepodarilo načítať"
+  },
+  "extensionRuntimeRequired": {
+    "message": "Live dáta sú v náhľade súboru blokované. Otvorte popup rozšírenia Chrome pre skóre."
+  },
+  "empty": {
+    "message": "Dnes neboli nájdené žiadne zápasy."
+  },
+  "ready": {
+    "message": "Pripravené"
+  },
+  "refreshing": {
+    "message": "Obnovovanie"
+  },
+  "notUpdated": {
+    "message": "Zatiaľ neaktualizované"
+  },
+  "updated": {
+    "message": "Aktualizované"
+  },
+  "live": {
+    "message": "Naživo"
+  },
+  "matches": {
+    "message": "Zápasy"
+  },
+  "results": {
+    "message": "Výsledky"
+  },
+  "upcoming": {
+    "message": "Nadchádzajúce"
+  },
+  "standings": {
+    "message": "Tabuľka"
+  },
+  "bracket": {
+    "message": "Vyradenie"
+  },
+  "loadingBracket": {
+    "message": "Načítavanie pavúka…"
+  },
+  "noBracket": {
+    "message": "Pavúk nie je k dispozícii."
+  },
+  "bracketUnavailable": {
+    "message": "Pavúk je nedostupný."
+  },
+  "tbd": {
+    "message": "TBD"
+  },
+  "roundOf32": {
+    "message": "32 najlepších"
+  },
+  "roundOf16": {
+    "message": "Osemfinále"
+  },
+  "quarterfinals": {
+    "message": "Štvrťfinále"
+  },
+  "semifinals": {
+    "message": "Semifinále"
+  },
+  "thirdPlace": {
+    "message": "O 3. miesto"
+  },
+  "final": {
+    "message": "Finále"
+  },
+  "played": {
+    "message": "Z"
+  },
+  "wins": {
+    "message": "V"
+  },
+  "draws": {
+    "message": "R"
+  },
+  "losses": {
+    "message": "P"
+  },
+  "goalsFor": {
+    "message": "GS"
+  },
+  "goalsAgainst": {
+    "message": "GI"
+  },
+  "goalDifference": {
+    "message": "RO"
+  },
+  "points": {
+    "message": "B"
+  },
+  "paused": {
+    "message": "Pozastavené"
+  },
+  "autoPaused": {
+    "message": "Automatické obnovenie pozastavené kvôli úspore požiadaviek."
+  },
+  "idlePaused": {
+    "message": "Pozastavené pri nečinnosti."
+  },
+  "requestLimitReached": {
+    "message": "Dosiahnutý denný limit požiadaviek. Zobrazujú sa dáta z vyrovnávacej pamäte."
+  },
+  "refreshFailed": {
+    "message": "Obnovenie zlyhalo. Zobrazujú sa najnovšie dáta."
+  },
+  "club": {
+    "message": "Klub"
+  },
+  "backToLeagues": {
+    "message": "← Ligy"
+  },
+  "selectLeague": {
+    "message": "Vyberte ligu"
+  },
+  "noLiveMatches": {
+    "message": "Žiadne zápasy naživo"
+  },
+  "liveCount": {
+    "message": "$COUNT$ naživo",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCount": {
+    "message": "$COUNT$ zápasov",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "fullTime": {
+    "message": "Koniec"
+  },
+  "halfTime": {
+    "message": "Polčas"
+  },
+  "scheduled": {
+    "message": "Naplánované"
+  },
+  "stats": {
+    "message": "Štatistiky"
+  },
+  "favorite": {
+    "message": "Obľúbené"
+  },
+  "removeFavorite": {
+    "message": "Odstrániť z obľúbených"
+  },
+  "turnOff": {
+    "message": "Vypnúť rozšírenie"
+  },
+  "turnOn": {
+    "message": "Zapnúť rozšírenie"
+  },
+  "favoriteLeague": {
+    "message": "Pridať ligu do obľúbených"
+  },
+  "forceEnglishOn": {
+    "message": "Zobraziť anglické popisky"
+  },
+  "forceEnglishOff": {
+    "message": "Vrátiť jazyk prehliadača"
+  },
+  "other": {
+    "message": "Ostatné"
+  },
+  "team": {
+    "message": "Tím"
+  },
+  "unknownLeague": {
+    "message": "Neznáma liga"
+  },
+  "unknownTeam": {
+    "message": "Neznámy tím"
+  },
+  "matchDetails": {
+    "message": "Detail zápasu"
+  },
+  "loadingDetails": {
+    "message": "Načítavanie detailu zápasu…"
+  },
+  "loadingStandings": {
+    "message": "Načítavanie tabuľky…"
+  },
+  "detailsUnavailable": {
+    "message": "Detaily nie sú k dispozícii"
+  },
+  "noDetails": {
+    "message": "Pre tento zápas nie sú ďalšie detaily."
+  },
+  "noSectionData": {
+    "message": "Nie sú k dispozícii žiadne dáta."
+  },
+  "noStats": {
+    "message": "Štatistiky zápasu nie sú k dispozícii."
+  },
+  "noStandings": {
+    "message": "Pre túto ligu nie je tabuľka."
+  },
+  "noNews": {
+    "message": "Žiadne novinky."
+  },
+  "noLinks": {
+    "message": "Žiadne odkazy."
+  },
+  "venue": {
+    "message": "Štadión"
+  },
+  "kickoff": {
+    "message": "Úvodný výkop"
+  },
+  "broadcasts": {
+    "message": "Prenosy"
+  },
+  "timeline": {
+    "message": "Priebeh"
+  },
+  "commentary": {
+    "message": "Komentár"
+  },
+  "lineups": {
+    "message": "Zostavy"
+  },
+  "headToHead": {
+    "message": "Vzájomné zápasy"
+  },
+  "news": {
+    "message": "Novinky"
+  },
+  "highlights": {
+    "message": "Súhrny"
+  },
+  "links": {
+    "message": "Odkazy"
+  }
+}

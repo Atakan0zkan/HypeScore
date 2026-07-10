@@ -228,6 +228,9 @@
   "venue": {
     "message": "Stadion"
   },
+  "vs": {
+    "message": "mod"
+  },
   "kickoff": {
     "message": "Afspark"
   },

@@ -228,6 +228,9 @@
   "venue": {
     "message": "Γήπεδο"
   },
+  "vs": {
+    "message": "εναντίον"
+  },
   "kickoff": {
     "message": "Έναρξη"
   },

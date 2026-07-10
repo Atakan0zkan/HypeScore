@@ -228,6 +228,9 @@
   "venue": {
     "message": "Arena"
   },
+  "vs": {
+    "message": "mot"
+  },
   "kickoff": {
     "message": "Avspark"
   },

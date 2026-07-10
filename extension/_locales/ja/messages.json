@@ -228,6 +228,9 @@
   "venue": {
     "message": "会場"
   },
+  "vs": {
+    "message": "対"
+  },
   "kickoff": {
     "message": "キックオフ"
   },

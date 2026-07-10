@@ -228,6 +228,9 @@
   "venue": {
     "message": "球场"
   },
+  "vs": {
+    "message": "对"
+  },
   "kickoff": {
     "message": "开球"
   },

@@ -228,6 +228,9 @@
   "venue": {
     "message": "球場"
   },
+  "vs": {
+    "message": "對"
+  },
   "kickoff": {
     "message": "開球"
   },

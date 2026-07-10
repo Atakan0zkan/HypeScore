@@ -228,6 +228,9 @@
   "venue": {
     "message": "Стадіон"
   },
+  "vs": {
+    "message": "проти"
+  },
   "kickoff": {
     "message": "Початок"
   },

@@ -228,6 +228,9 @@
   "venue": {
     "message": "Stadium"
   },
+  "vs": {
+    "message": "lwn"
+  },
   "kickoff": {
     "message": "Anjakan bola"
   },

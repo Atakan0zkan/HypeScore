@@ -228,6 +228,9 @@
   "venue": {
     "message": "Stadions"
   },
+  "vs": {
+    "message": "pret"
+  },
   "kickoff": {
     "message": "Sākums"
   },

@@ -228,6 +228,9 @@
   "venue": {
     "message": "Stadion"
   },
+  "vs": {
+    "message": "vs"
+  },
   "kickoff": {
     "message": "Tendangan awal"
   },

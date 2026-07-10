@@ -228,6 +228,9 @@
   "venue": {
     "message": "경기장"
   },
+  "vs": {
+    "message": "대"
+  },
   "kickoff": {
     "message": "킥오프"
   },

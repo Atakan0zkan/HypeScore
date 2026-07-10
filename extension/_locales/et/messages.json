@@ -228,6 +228,9 @@
   "venue": {
     "message": "Staadion"
   },
+  "vs": {
+    "message": "vs"
+  },
   "kickoff": {
     "message": "Algus"
   },

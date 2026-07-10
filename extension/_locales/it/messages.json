@@ -228,6 +228,9 @@
   "venue": {
     "message": "Stadio"
   },
+  "vs": {
+    "message": "vs"
+  },
   "kickoff": {
     "message": "Calcio d’inizio"
   },

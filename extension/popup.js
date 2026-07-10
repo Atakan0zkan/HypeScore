@@ -85,6 +85,8 @@ const FALLBACK_MESSAGES = {
   draws: "D",
   empty: "No matches found today.",
   error: "Could not load data",
+  extDescription: "Live football scores, fixtures, results and league tables.",
+  extName: "Hype - Live Football Scores",
   extensionRuntimeRequired:
     "Live data is blocked in file preview. Open the Chrome extension popup to load scores.",
   favorite: "Favorite",
@@ -103,18 +105,21 @@ const FALLBACK_MESSAGES = {
   lineups: "Lineups",
   links: "Links",
   live: "Live",
+  liveCount: "$1 live",
   loading: "Loading matches…",
   loadingDetails: "Loading match details…",
   loadingBracket: "Loading knockout bracket…",
   loadingStandings: "Loading standings…",
   losses: "L",
+  matchCount: "$1 matches",
   matchDetails: "Match details",
   matches: "Matches",
   news: "News",
+  noDetails: "No extra details available for this match.",
   noLinks: "No links available.",
+  noLiveMatches: "No live matches",
   noNews: "No news available.",
   noBracket: "No knockout bracket available.",
-  noDetails: "No extra details available for this match.",
   noSectionData: "No data available.",
   noStats: "No match stats available.",
   noStandings: "No standings available for this league.",
@@ -130,6 +135,7 @@ const FALLBACK_MESSAGES = {
   removeFavorite: "Remove favorite",
   results: "Results",
   scheduled: "Scheduled",
+  selectLeague: "Select a league",
   stats: "Stats",
   standings: "Standings",
   subtitle: "Fast live scores, results and league tables.",
@@ -141,7 +147,9 @@ const FALLBACK_MESSAGES = {
   unknownLeague: "Unknown League",
   unknownTeam: "Unknown Team",
   upcoming: "Upcoming",
+  updated: "Updated",
   venue: "Venue",
+  vs: "vs",
   wins: "W",
   roundOf32: "Round of 32",
   roundOf16: "Round of 16",
@@ -240,10 +248,15 @@ function msg(key, substitutions) {
 function formatMessage(template, substitutions) {
   if (!substitutions) return template;
   const values = Array.isArray(substitutions) ? substitutions : [substitutions];
-  return values.reduce(
-    (text, value, index) => text.replaceAll("$" + (index + 1), String(value)),
-    template,
-  );
+  let text = String(template || "");
+  values.forEach((value, index) => {
+    text = text.replaceAll("$" + (index + 1), String(value));
+  });
+  // Locale files use $COUNT$ for liveCount/matchCount; keep English override working.
+  if (values[0] != null) {
+    text = text.replaceAll("$COUNT$", String(values[0]));
+  }
+  return text;
 }
 
 function getUiLanguage() {
@@ -269,14 +282,27 @@ function applyDocumentDirection() {
   document.body.classList.toggle("is-rtl", rtl);
 }
 
-function formatBackLabel() {
-  const raw = msg("backToLeagues").replace(/^[←→]\s*/, "").trim();
+function formatBackLabel(label) {
+  const raw = String(label || msg("backToLeagues"))
+    .replace(/^[←→]\s*/, "")
+    .trim();
   const arrow = document.documentElement.dir === "rtl" ? "→" : "←";
   return arrow + " " + raw;
 }
 
+function formatMatchAriaLabel(homeTeam, awayTeam) {
+  return (
+    (homeTeam || msg("unknownTeam")) +
+    " " +
+    msg("vs") +
+    " " +
+    (awayTeam || msg("unknownTeam"))
+  );
+}
+
 function applyI18n() {
   applyDocumentDirection();
+  document.title = msg("extName");
   appTitle.textContent = msg("appTitle");
   subtitle.textContent = msg("subtitle");
   loadingState.textContent = msg("loading");
@@ -742,7 +768,7 @@ function renderLeaguePickList(leagues) {
         createTextElement(
           "span",
           "league-pick-badge",
-          msg("live").toUpperCase() + " " + liveCount,
+          msg("liveCount", [String(liveCount)]),
         ),
       );
     }
@@ -751,6 +777,7 @@ function renderLeaguePickList(leagues) {
     leaguePickList.appendChild(card);
   }
 
+  leaguePickList.setAttribute("aria-label", msg("selectLeague"));
   showOnly("pick");
 }
 
@@ -797,6 +824,7 @@ function renderLeagueDetail(league) {
     (match) => !["live", "finished", "scheduled"].includes(match.state),
   );
 
+  card.setAttribute("aria-label", (league.name || msg("unknownLeague")) + " · " + msg("matches"));
   appendMatchSection(card, "● " + msg("live"), liveMatches, league);
   appendMatchSection(card, msg("results"), finishedMatches, league);
   appendMatchSection(card, msg("upcoming"), upcomingMatches, league);
@@ -807,15 +835,18 @@ function renderLeagueDetail(league) {
 
   leagueDetailContent.appendChild(card);
   leagueDetailContent.scrollTop = scrollTop;
-  backBtn.textContent = msg("backToLeagues");
+  backBtn.textContent = formatBackLabel();
   showOnly("detail");
 }
 
 function buildLeagueMetaText(league, liveCount, upcomingCount) {
   const metaParts = [];
+  const totalMatches = Array.isArray(league?.matches) ? league.matches.length : 0;
 
+  if (totalMatches > 0) metaParts.push(msg("matchCount", [String(totalMatches)]));
   if (upcomingCount > 0) metaParts.push(upcomingCount + " " + msg("upcoming"));
-  if (liveCount > 0) metaParts.push(liveCount + " " + msg("live"));
+  if (liveCount > 0) metaParts.push(msg("liveCount", [String(liveCount)]));
+  if (liveCount === 0 && totalMatches === 0) metaParts.push(msg("noLiveMatches"));
 
   return metaParts.join(" · ");
 }
@@ -842,7 +873,10 @@ function createMatchCard(match, league) {
   card.className = "match-card match-card--clickable";
   card.tabIndex = 0;
   card.setAttribute("role", "button");
-  card.setAttribute("aria-label", match.homeTeam + " vs " + match.awayTeam);
+  card.setAttribute(
+    "aria-label",
+    formatMatchAriaLabel(match.homeTeam, match.awayTeam),
+  );
   card.addEventListener("click", () => openMatchDetail(league, match));
   card.addEventListener("keydown", (event) => {
     if (event.key === "Enter" || event.key === " ") {
@@ -905,7 +939,7 @@ function openMatchDetail(league, match) {
 
 function renderMatchDetail(league, match) {
   leagueDetailContent.replaceChildren();
-  backBtn.textContent = "← " + league.name;
+  backBtn.textContent = formatBackLabel(league.name);
 
   const meta = document.createElement("section");
   meta.className = "detail-meta-grid";
@@ -1003,6 +1037,8 @@ async function loadMatchDetail(match) {
 }
 
 function renderLoadedMatchDetail(detail) {
+  const beforeCount = leagueDetailContent.childElementCount;
+
   if (Array.isArray(detail.broadcasts) && detail.broadcasts.length > 0) {
     const meta = document.createElement("section");
     meta.className = "detail-meta-grid detail-meta-grid--secondary detail-meta-grid--single";
@@ -1019,6 +1055,9 @@ function renderLoadedMatchDetail(detail) {
   appendVideoSection(detail.videos);
   appendLinkSection(msg("links"), detail.links, msg("noLinks"), true);
 
+  if (leagueDetailContent.childElementCount === beforeCount) {
+    leagueDetailContent.appendChild(createStatePanel(msg("noDetails")));
+  }
 }
 
 function appendDetailListSection(title, rows, renderer, emptyText = "", alwaysRender = false) {
@@ -1322,7 +1361,10 @@ function createBracketMatchCard(match, league) {
     card.classList.add("bracket-match-card--clickable");
     card.tabIndex = 0;
     card.setAttribute("role", "button");
-    card.setAttribute("aria-label", match.homeTeam + " vs " + match.awayTeam);
+    card.setAttribute(
+    "aria-label",
+    formatMatchAriaLabel(match.homeTeam, match.awayTeam),
+  );
     const openDetail = () => openMatchDetail(league, normalizeBracketMatchForDetail(match));
     card.addEventListener("click", openDetail);
     card.addEventListener("keydown", (event) => {

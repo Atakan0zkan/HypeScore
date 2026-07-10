@@ -228,6 +228,9 @@
   "venue": {
     "message": "Sân"
   },
+  "vs": {
+    "message": "vs"
+  },
   "kickoff": {
     "message": "Giờ bóng lăn"
   },

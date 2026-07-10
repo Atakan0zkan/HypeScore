@@ -228,6 +228,9 @@
   "venue": {
     "message": "மைதானம்"
   },
+  "vs": {
+    "message": "எதிர்"
+  },
   "kickoff": {
     "message": "தொடக்கம்"
   },

@@ -228,6 +228,9 @@
   "venue": {
     "message": "मैदान"
   },
+  "vs": {
+    "message": "बनाम"
+  },
   "kickoff": {
     "message": "किकऑफ़"
   },

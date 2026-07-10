@@ -228,6 +228,9 @@
   "venue": {
     "message": "ስታዲየም"
   },
+  "vs": {
+    "message": "በ"
+  },
   "kickoff": {
     "message": "መጀመሪያ"
   },

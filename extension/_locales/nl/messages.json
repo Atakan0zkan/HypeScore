@@ -228,6 +228,9 @@
   "venue": {
     "message": "Stadion"
   },
+  "vs": {
+    "message": "tegen"
+  },
   "kickoff": {
     "message": "Aftrap"
   },

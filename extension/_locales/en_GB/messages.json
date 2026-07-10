@@ -228,6 +228,9 @@
   "venue": {
     "message": "Venue"
   },
+  "vs": {
+    "message": "vs"
+  },
   "kickoff": {
     "message": "Kickoff"
   },

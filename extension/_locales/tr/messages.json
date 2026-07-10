@@ -228,6 +228,9 @@
   "venue": {
     "message": "Stadyum"
   },
+  "vs": {
+    "message": "karşı"
+  },
   "kickoff": {
     "message": "Başlama saati"
   },

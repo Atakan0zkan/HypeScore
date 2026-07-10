@@ -228,6 +228,9 @@
   "venue": {
     "message": "ورزشگاه"
   },
+  "vs": {
+    "message": "در برابر"
+  },
   "kickoff": {
     "message": "شروع"
   },

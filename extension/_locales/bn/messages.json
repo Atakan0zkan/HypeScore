@@ -228,6 +228,9 @@
   "venue": {
     "message": "ভেন্যু"
   },
+  "vs": {
+    "message": "বনাম"
+  },
   "kickoff": {
     "message": "কিকঅফ"
   },

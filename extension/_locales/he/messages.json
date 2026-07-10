@@ -228,6 +228,9 @@
   "venue": {
     "message": "אצטדיון"
   },
+  "vs": {
+    "message": "נגד"
+  },
   "kickoff": {
     "message": "שריקת פתיחה"
   },

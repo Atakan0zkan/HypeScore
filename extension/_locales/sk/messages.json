@@ -228,6 +228,9 @@
   "venue": {
     "message": "Štadión"
   },
+  "vs": {
+    "message": "vs"
+  },
   "kickoff": {
     "message": "Úvodný výkop"
   },

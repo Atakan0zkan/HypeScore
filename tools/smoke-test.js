@@ -3,6 +3,12 @@
 const DEFAULT_WORKER_URL = "https://api.atakanozkan.com";
 const EXTENSION_ORIGIN = "chrome-extension://cdnpjnmhmagmiefkleefgchgffeaacaa";
 const REQUEST_TIMEOUT_MS = 10000;
+const REQUIRED_LEAGUE_CODES = [
+  "fifa.world",
+  "uefa.nations",
+  "uefa.euro",
+  "conmebol.america",
+];
 
 const baseUrl = (process.env.HYPE_WORKER_URL || DEFAULT_WORKER_URL).replace(/\/+$/, "");
 
@@ -108,8 +114,15 @@ function assertLivePayload(payload) {
   assertArray(payload.matches, "live payload matches");
   assertArray(payload.leagues, "live payload leagues");
 
-  if (payload.leagues.length < 20) {
-    throw new Error(`Expected curated league list, got only ${payload.leagues.length} leagues`);
+  if (payload.leagues.length < 32) {
+    throw new Error(`Expected 32 curated leagues, got only ${payload.leagues.length} leagues`);
+  }
+
+  const leagueCodes = new Set(payload.leagues.map((league) => league?.code));
+  for (const code of REQUIRED_LEAGUE_CODES) {
+    if (!leagueCodes.has(code)) {
+      throw new Error(`Missing required league code: ${code}`);
+    }
   }
 
   for (const league of payload.leagues.slice(0, 5)) {

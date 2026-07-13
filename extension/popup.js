@@ -13,10 +13,16 @@ const STALE_VISIBLE_REFRESH_MS = 30000;
 const DETAIL_RETURN_REFRESH_MIN_INTERVAL_MS = 60000;
 const AUTO_PAUSE_AFTER_MS = 10 * 60 * 1000;
 const INACTIVITY_PAUSE_AFTER_MS = 3 * 60 * 1000;
+const ACTIVITY_TIMER_RESET_THROTTLE_MS = 1000;
 const ERROR_RETRY_DELAYS_MS = [120000, 300000, 600000];
 const DAILY_REQUEST_LIMIT = 2000;
-const CLIENT_LIVE_CACHE_VERSION = "v9";
-const REQUIRED_CLIENT_CACHE_LEAGUE_CODES = ["fifa.world"];
+const CLIENT_LIVE_CACHE_VERSION = "v10";
+const REQUIRED_CLIENT_CACHE_LEAGUE_CODES = [
+  "fifa.world",
+  "uefa.nations",
+  "uefa.euro",
+  "conmebol.america",
+];
 const FIFA_WORLD_CUP_LEAGUE_CODE = "fifa.world";
 const CLIENT_LIVE_CACHE_MAX_AGE_LIVE_MS = 30000;
 const CLIENT_LIVE_CACHE_MAX_AGE_IDLE_MS = 120000;
@@ -35,6 +41,7 @@ const LOCAL_LEAGUE_LOGOS = {
   "aus.1": "icons/leagues/aus-1.png",
   "aut.1": "icons/leagues/aut-1.png",
   "bel.1": "icons/leagues/bel-1.png",
+  "conmebol.america": "icons/leagues/conmebol-america.png",
   "den.1": "icons/leagues/den-1.png",
   "eng.1": "icons/leagues/eng-1.png",
   "eng.2": "icons/leagues/eng-2.png",
@@ -58,6 +65,8 @@ const LOCAL_LEAGUE_LOGOS = {
   "uefa.champions": "icons/leagues/uefa-champions.png",
   "uefa.europa": "icons/leagues/uefa-europa.png",
   "uefa.europa.conf": "icons/leagues/uefa-europa-conf.png",
+  "uefa.euro": "icons/leagues/uefa-euro.png",
+  "uefa.nations": "icons/leagues/uefa-nations.png",
   "usa.1": "icons/leagues/usa-1.png",
   "usa.usl.1": "icons/leagues/usa-usl-1.png",
 };
@@ -181,6 +190,7 @@ let sessionAutoPauseTimer = null;
 let inactivityTimer = null;
 let sessionStartedAt = Date.now();
 let lastInteractionAt = Date.now();
+let lastActivityTimerResetAt = lastInteractionAt;
 let autoPausedForSession = false;
 let inactivePaused = false;
 let dailyLimitReached = false;
@@ -192,6 +202,7 @@ let isEnabled = true;
 let isEnglishOverride = false;
 let contentOverlay = null;
 let detailAbortController = null;
+let liveLoadPromise = null;
 let favoriteLeagues = new Set();
 const matchDetailCache = new Map();
 const leagueStandingsCache = new Map();
@@ -477,12 +488,25 @@ function guardScrollBoundary(event) {
 }
 
 function recordActivity() {
-  lastInteractionAt = Date.now();
-  resetInactivityTimer();
+  const now = Date.now();
+  lastInteractionAt = now;
 
+  if (
+    !inactivePaused &&
+    now - lastActivityTimerResetAt < ACTIVITY_TIMER_RESET_THROTTLE_MS
+  ) {
+    return;
+  }
+
+  resetInactivityTimer();
   if (!inactivePaused) return;
+
   inactivePaused = false;
-  setStatus(lastFetchCompletedAt ? `${msg("updated")} ${formatClockTime(lastFetchCompletedAt)}` : msg("ready"));
+  setStatus(
+    lastFetchCompletedAt
+      ? `${msg("updated")} ${formatClockTime(lastFetchCompletedAt)}`
+      : msg("ready"),
+  );
   refreshIfStaleOrSchedule({ minAgeMs: STALE_VISIBLE_REFRESH_MS });
 }
 
@@ -503,6 +527,7 @@ function handleSessionAutoPause() {
 
 function resetInactivityTimer() {
   clearTimeout(inactivityTimer);
+  lastActivityTimerResetAt = Date.now();
   if (!isEnabled || dailyLimitReached) return;
   inactivityTimer = setTimeout(handleInactivityPause, INACTIVITY_PAUSE_AFTER_MS);
 }
@@ -532,7 +557,17 @@ function hydrateFromClientCache() {
   return true;
 }
 
-async function loadMatches({ force = false } = {}) {
+function loadMatches(options = {}) {
+  if (!liveLoadPromise) {
+    liveLoadPromise = performLoadMatches(options).finally(() => {
+      liveLoadPromise = null;
+    });
+  }
+
+  return liveLoadPromise;
+}
+
+async function performLoadMatches({ force = false } = {}) {
   clearTimeout(refreshTimer);
 
   refreshDailyRequestLimitState();

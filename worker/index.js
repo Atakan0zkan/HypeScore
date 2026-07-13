@@ -13,15 +13,18 @@ const MATCH_DETAIL_CACHE_TTL_SECONDS = 60;
 const TOURNAMENT_BRACKET_CACHE_TTL_SECONDS = 900;
 const UPSTREAM_FETCH_TIMEOUT_MS = 8000;
 const UPCOMING_MATCH_WINDOW_MS = 24 * 60 * 60 * 1000;
-const LIVE_MATCHES_CACHE_KEY_VERSION = "v13";
+const MAX_EVENT_ID_LENGTH = 20;
+const MAX_REMEMBERED_EVENT_KEYS = 1024;
+const LIVE_MATCHES_CACHE_KEY_VERSION = "v14";
 const STANDINGS_CACHE_KEY_VERSION = "v4";
-const MATCH_DETAIL_CACHE_KEY_VERSION = "v4";
+const MATCH_DETAIL_CACHE_KEY_VERSION = "v5";
 const TOURNAMENT_BRACKET_CACHE_KEY_VERSION = "v1";
 const CACHE_KEY_URL = `https://live-score-extension.internal/live-matches/${LIVE_MATCHES_CACHE_KEY_VERSION}`;
 let liveMatchesRefreshPromise = null;
 const standingsRefreshPromises = new Map();
 const matchDetailRefreshPromises = new Map();
 const tournamentBracketRefreshPromises = new Map();
+const rememberedEventKeys = new Set();
 const ALLOWED_ORIGINS = new Set([
   "chrome-extension://cdnpjnmhmagmiefkleefgchgffeaacaa",
 ]);
@@ -30,7 +33,13 @@ const ESPN_LEAGUE_LOGO_BASE = "https://a.espncdn.com/i/leaguelogos/soccer";
 const ESPN_LINK_HOST_SUFFIXES = ["espn.com"];
 const ESPN_MEDIA_HOST_SUFFIXES = ["espncdn.com"];
 const TEAM_LOGO_OVERRIDE_HOST_SUFFIXES = ["cancunfc.mx"];
-const EXTRA_ESPN_SCOREBOARD_LEAGUES = ["uefa.europa.conf", "fifa.world"];
+const EXTRA_ESPN_SCOREBOARD_LEAGUES = [
+  "uefa.europa.conf",
+  "fifa.world",
+  "uefa.nations",
+  "uefa.euro",
+  "conmebol.america",
+];
 const FIFA_WORLD_CUP_LEAGUE_CODE = "fifa.world";
 const FIFA_WORLD_CUP_KNOCKOUT_DATES = "20260628-20260719";
 const DANISH_SUPERLIGA_LOGO_URL =
@@ -66,6 +75,16 @@ const ESPN_LEAGUES_BY_ID = {
     name: "UEFA Champions League",
     logoId: "2",
     logoStyle: "dark",
+  },
+  "780": {
+    code: "conmebol.america",
+    name: "Copa América",
+    logoId: "83",
+  },
+  "781": {
+    code: "uefa.euro",
+    name: "UEFA European Championship",
+    logoId: "74",
   },
   "700": { code: "eng.1", name: "English Premier League", logoId: "23" },
   "710": { code: "fra.1", name: "Ligue 1", logoId: "9" },
@@ -144,7 +163,16 @@ const ESPN_LEAGUES_BY_ID = {
     logoId: "2292",
     logoTone: "light",
   },
+  "2395": {
+    code: "uefa.nations",
+    name: "UEFA Nations League",
+    logoId: "2395",
+  },
 };
+
+const ESPN_LEAGUES_BY_CODE = new Map(
+  Object.values(ESPN_LEAGUES_BY_ID).map((league) => [league.code, league]),
+);
 
 const securityHeaders = {
   "Access-Control-Allow-Methods": "GET, OPTIONS",
@@ -278,6 +306,13 @@ async function handleMatchDetailRequest(request, url) {
         cacheControl: `public, max-age=${MATCH_DETAIL_CACHE_TTL_SECONDS}`,
       }),
     });
+  }
+
+  if (!(await isKnownMatchDetailEvent(cache, eventId, leagueCode))) {
+    return jsonResponse(
+      { error: "Match detail is not available for this event" },
+      { status: 404, cache: "BYPASS", source: "none", request },
+    );
   }
 
   try {
@@ -415,18 +450,15 @@ async function handleTournamentBracketRequest(request, url) {
 
 async function getFreshLiveMatchesResponse(env, cache, cacheKey, request) {
   if (!liveMatchesRefreshPromise) {
-    liveMatchesRefreshPromise = refreshLiveMatches(
-      env,
-      cache,
-      cacheKey,
-      request,
-    ).finally(() => {
-      liveMatchesRefreshPromise = null;
-    });
+    liveMatchesRefreshPromise = refreshLiveMatches(env, cache, cacheKey).finally(
+      () => {
+        liveMatchesRefreshPromise = null;
+      },
+    );
   }
 
   const response = await liveMatchesRefreshPromise;
-  return response.clone();
+  return responseForRequest(response, request);
 }
 
 async function getFreshMatchDetailResponse(
@@ -441,7 +473,7 @@ async function getFreshMatchDetailResponse(
   if (!matchDetailRefreshPromises.has(promiseKey)) {
     matchDetailRefreshPromises.set(
       promiseKey,
-      refreshMatchDetail(eventId, leagueCode, cache, cacheKey, request).finally(
+      refreshMatchDetail(eventId, leagueCode, cache, cacheKey).finally(
         () => {
           matchDetailRefreshPromises.delete(promiseKey);
         },
@@ -450,7 +482,7 @@ async function getFreshMatchDetailResponse(
   }
 
   const response = await matchDetailRefreshPromises.get(promiseKey);
-  return response.clone();
+  return responseForRequest(response, request);
 }
 
 async function getFreshStandingsForLeague(leagueCode, cache, cacheKey) {
@@ -475,7 +507,7 @@ async function getFreshTournamentBracketResponse(
   if (!tournamentBracketRefreshPromises.has(leagueCode)) {
     tournamentBracketRefreshPromises.set(
       leagueCode,
-      refreshTournamentBracket(leagueCode, cache, cacheKey, request).finally(
+      refreshTournamentBracket(leagueCode, cache, cacheKey).finally(
         () => {
           tournamentBracketRefreshPromises.delete(leagueCode);
         },
@@ -484,10 +516,10 @@ async function getFreshTournamentBracketResponse(
   }
 
   const response = await tournamentBracketRefreshPromises.get(leagueCode);
-  return response.clone();
+  return responseForRequest(response, request);
 }
 
-async function refreshLiveMatches(env, cache, cacheKey, request) {
+async function refreshLiveMatches(env, cache, cacheKey) {
   const { matches, source } = await getLiveMatches(env);
   const cacheTtl = countLiveMatches(matches) > 0
     ? LIVE_CACHE_TTL_SECONDS
@@ -496,8 +528,8 @@ async function refreshLiveMatches(env, cache, cacheKey, request) {
     matches,
     leagues: groupMatchesByLeague(matches),
   };
+  rememberKnownMatches(matches);
   const response = jsonResponse(data, {
-    request,
     cache: "MISS",
     source,
     cacheControl: `public, max-age=${cacheTtl}`,
@@ -519,13 +551,12 @@ async function refreshStandingsForLeague(leagueCode) {
   return normalizeEspnStandings(payload);
 }
 
-async function refreshMatchDetail(eventId, leagueCode, cache, cacheKey, request) {
+async function refreshMatchDetail(eventId, leagueCode, cache, cacheKey) {
   const payload = await fetchJson(
     `${ESPN_SUMMARY_BASE_URL}/${leagueCode}/summary?event=${eventId}`,
   );
   const data = normalizeEspnMatchDetail(payload, { eventId, leagueCode });
   const response = jsonResponse(data, {
-    request,
     cache: "MISS",
     source: "espn-summary",
     cacheControl: `public, max-age=${MATCH_DETAIL_CACHE_TTL_SECONDS}`,
@@ -540,13 +571,13 @@ async function refreshMatchDetail(eventId, leagueCode, cache, cacheKey, request)
   return response;
 }
 
-async function refreshTournamentBracket(leagueCode, cache, cacheKey, request) {
+async function refreshTournamentBracket(leagueCode, cache, cacheKey) {
   const payload = await fetchJson(
     `${ESPN_SUMMARY_BASE_URL}/${leagueCode}/scoreboard?dates=${FIFA_WORLD_CUP_KNOCKOUT_DATES}`,
   );
   const data = normalizeTournamentBracket(payload, leagueCode);
+  rememberKnownBracketRounds(data.rounds);
   const response = jsonResponse(data, {
-    request,
     cache: "MISS",
     source: "espn-tournament-bracket",
     cacheControl: `public, max-age=${TOURNAMENT_BRACKET_CACHE_TTL_SECONDS}`,
@@ -591,12 +622,18 @@ async function getLiveMatches(env) {
 }
 
 async function fetchEspnScoreboardPayloads() {
-  const payloads = [await fetchJson(ESPN_SCOREBOARD_URL)];
-  const extraResults = await Promise.allSettled(
-    EXTRA_ESPN_SCOREBOARD_LEAGUES.map((leagueCode) =>
+  const [primaryResult, ...extraResults] = await Promise.allSettled([
+    fetchJson(ESPN_SCOREBOARD_URL),
+    ...EXTRA_ESPN_SCOREBOARD_LEAGUES.map((leagueCode) =>
       fetchJson(`${ESPN_SUMMARY_BASE_URL}/${leagueCode}/scoreboard`),
     ),
-  );
+  ]);
+
+  if (primaryResult.status === "rejected") {
+    throw primaryResult.reason;
+  }
+
+  const payloads = [primaryResult.value];
 
   for (const result of extraResults) {
     if (result.status === "fulfilled") {
@@ -1676,9 +1713,7 @@ function getLeagueMetadataByCode(leagueCode) {
     return null;
   }
 
-  return Object.values(ESPN_LEAGUES_BY_ID).find(
-    (league) => league.code === leagueCode,
-  ) || null;
+  return ESPN_LEAGUES_BY_CODE.get(leagueCode) || null;
 }
 
 function buildLeagueLogoUrl(logoId, logoStyle = "default") {
@@ -1694,13 +1729,90 @@ function sanitizeEspnAssetId(value) {
 }
 
 function isSafeEventId(eventId) {
-  return /^\d{3,}$/.test(eventId);
+  return new RegExp(`^\\d{3,${MAX_EVENT_ID_LENGTH}}$`).test(eventId);
 }
 
 function isSupportedLeagueCode(leagueCode) {
-  return Object.values(ESPN_LEAGUES_BY_ID).some(
-    (league) => league.code === leagueCode,
+  return ESPN_LEAGUES_BY_CODE.has(leagueCode);
+}
+
+async function isKnownMatchDetailEvent(cache, eventId, leagueCode) {
+  const eventKey = getEventKey(eventId, leagueCode);
+  if (rememberedEventKeys.has(eventKey)) {
+    return true;
+  }
+
+  const liveResponse = await cache.match(
+    new Request(CACHE_KEY_URL, { method: "GET" }),
   );
+  if (liveResponse) {
+    const livePayload = await safeReadJsonResponse(liveResponse);
+    rememberKnownMatches(livePayload?.matches);
+    if (rememberedEventKeys.has(eventKey)) {
+      return true;
+    }
+  }
+
+  if (leagueCode === FIFA_WORLD_CUP_LEAGUE_CODE) {
+    const bracketResponse = await cache.match(
+      getTournamentBracketCacheKey(leagueCode),
+    );
+    if (bracketResponse) {
+      const bracketPayload = await safeReadJsonResponse(bracketResponse);
+      rememberKnownBracketRounds(bracketPayload?.rounds);
+    }
+  }
+
+  return rememberedEventKeys.has(eventKey);
+}
+
+function rememberKnownMatches(matches) {
+  if (!Array.isArray(matches)) {
+    return;
+  }
+
+  for (const match of matches) {
+    rememberEventKey(match?.id, match?.leagueCode);
+  }
+}
+
+function rememberKnownBracketRounds(rounds) {
+  if (!Array.isArray(rounds)) {
+    return;
+  }
+
+  for (const round of rounds) {
+    rememberKnownMatches(round?.matches);
+  }
+}
+
+function rememberEventKey(eventId, leagueCode) {
+  if (
+    !isSafeEventId(String(eventId || "")) ||
+    !isSupportedLeagueCode(leagueCode)
+  ) {
+    return;
+  }
+
+  const eventKey = getEventKey(eventId, leagueCode);
+  rememberedEventKeys.delete(eventKey);
+  rememberedEventKeys.add(eventKey);
+
+  while (rememberedEventKeys.size > MAX_REMEMBERED_EVENT_KEYS) {
+    rememberedEventKeys.delete(rememberedEventKeys.values().next().value);
+  }
+}
+
+function getEventKey(eventId, leagueCode) {
+  return `${leagueCode}:${eventId}`;
+}
+
+async function safeReadJsonResponse(response) {
+  try {
+    return await response.json();
+  } catch {
+    return null;
+  }
 }
 
 function getStandingsCacheKey(leagueCode) {
@@ -2019,6 +2131,19 @@ function responseHeaders(options = {}) {
     "X-Cache": options.cache || "BYPASS",
     "X-Data-Source": options.source || "none",
   };
+}
+
+async function responseForRequest(response, request) {
+  const headers = new Headers(response.headers);
+  for (const [name, value] of Object.entries(corsHeadersForRequest(request))) {
+    headers.set(name, value);
+  }
+
+  return new Response(await response.clone().text(), {
+    status: response.status,
+    statusText: response.statusText,
+    headers,
+  });
 }
 
 function getErrorMessage(error) {

@@ -17,10 +17,11 @@ shown when the upstream API supports that data.
 - Chrome Web Store listing: `https://chromewebstore.google.com/detail/hype-live-football-scores/cdnpjnmhmagmiefkleefgchgffeaacaa`
 - GitHub repository: `https://github.com/Atakan0zkan/HypeScore.git`
 - Published extension ID: `cdnpjnmhmagmiefkleefgchgffeaacaa`
-- Extension manifest version: `1.4.0`
+- Extension manifest version: `1.5.0`
 - Current store package: rebuild from `extension/` after locale packaging
 - Worker URL: `https://api.atakanozkan.com`
 - Latest deployed Worker version recorded in the memory bank: `c6d3f8cb-03c0-4828-abe2-2ef367231ace`
+- The v1.5 Worker source is validated locally; production deployment requires a valid `CLOUDFLARE_API_TOKEN` in non-interactive environments.
 
 ## Open-source notes
 
@@ -37,7 +38,7 @@ shown when the upstream API supports that data.
 
 ## Main features
 
-- Curated football league list with local packaged league logos.
+- Curated 32-competition list with local packaged league logos, including UEFA Nations League, UEFA EURO, and Copa America.
 - Live match, result, and upcoming-within-24h sections.
 - League favorites stored locally and pinned above regular leagues.
 - Full league standings loaded only when a league is opened.
@@ -87,7 +88,9 @@ LiveScoreFootball/
     capture-store-sources.ps1
     download-league-logos.ps1
     generate-store-assets.ps1
+    smoke-extension-cdp.ps1
     smoke-test.js
+    worker-regression-test.mjs
   worker/
     index.js
 ```
@@ -211,7 +214,14 @@ detail view with ESPN summary data:
 - highlights/videos
 - ESPN links
 
-Match detail responses are cached for 60 seconds.
+Match detail responses are cached for 60 seconds. A cache miss is accepted only
+for a bounded event identifier recently issued by the Worker's live or World Cup
+bracket payload, which prevents arbitrary high-cardinality upstream requests.
+
+UEFA Nations League (`uefa.nations`), UEFA EURO (`uefa.euro`), and Copa
+America (`conmebol.america`) use their per-league ESPN scoreboards as direct
+probes. These optional probes start concurrently with the primary scoreboard so
+seasonal tournaments remain visible without adding serial refresh latency.
 
 FIFA World Cup knockout data is intentionally lazy-loaded only when the user opens
 the World Cup league detail section and expands the knockout bracket. It uses
@@ -233,6 +243,10 @@ You can deploy with Wrangler without adding project dependencies:
 ```bash
 npx wrangler deploy worker/index.js --name live-score-football
 ```
+
+For non-interactive deployment, export a scoped `CLOUDFLARE_API_TOKEN` before
+running Wrangler. Deploy the Worker before publishing an extension build that
+expects newly added competition codes.
 
 Optional TheSportsDB fallback secret:
 
@@ -332,13 +346,13 @@ Create the Chrome Web Store zip from the project root:
 
 ```powershell
 New-Item -ItemType Directory -Force dist
-Compress-Archive -Path extension\* -DestinationPath dist\hype-live-football-scores-v1.4.0-chrome-web-store.zip -Force
+Compress-Archive -Path extension\* -DestinationPath dist\hype-live-football-scores-v1.5.0-chrome-web-store.zip -Force
 ```
 
 The command creates:
 
 ```text
-dist/hype-live-football-scores-v1.4.0-chrome-web-store.zip
+dist/hype-live-football-scores-v1.5.0-chrome-web-store.zip
 ```
 
 Only extension runtime files are included. The zip root contains
@@ -347,21 +361,29 @@ are excluded.
 
 ## Smoke test
 
-Run the Worker/API shape smoke test from the project root:
+Run the local mocked Worker regression suite, the unpacked Chromium UI test,
+and then the deployed API shape smoke test from the project root:
 
 ```bash
+node tools/worker-regression-test.mjs
+powershell -NoProfile -ExecutionPolicy Bypass -File .\tools\smoke-extension-cdp.ps1
 node tools/smoke-test.js
 ```
 
-The script checks `/live-matches`, `/league-standings`, `/tournament-bracket`,
+The Chromium script copies the unpacked extension to a temporary path without
+spaces, launches it with an isolated profile, and checks popup DOM/CSS, storage,
+and restricted-page behavior over CDP. It uses a test-context live payload
+fixture so UI verification remains independent from production deployment state.
+
+The deployed API script checks `/live-matches`, `/league-standings`, `/tournament-bracket`,
 and `/match-detail`
 against the deployed Worker. It is useful after ESPN response changes, Worker
 deploys, or before packaging a Chrome Web Store update.
 
-Latest recorded smoke result:
+Expected deployed API result after the v1.5 Worker is deployed:
 
 ```text
-PASS GET /live-matches - 2 matches, 29 leagues
+PASS GET /live-matches - 2 matches, 32 leagues
 PASS GET /league-standings?leagueCode=esp.1 - 0 rows
 PASS GET /tournament-bracket?leagueCode=fifa.world - 6 rounds, 32 matches
 PASS GET /match-detail?eventId=760486&leagueCode=fifa.world - South Africa vs Canada
@@ -452,7 +474,7 @@ See `SECURITY.md` for the vulnerability reporting policy.
 ## Known production notes
 
 - ESPN APIs used here are unofficial and can change without notice.
-- `tools/smoke-test.js` is the quick guard against silent response-shape breakage.
+- `tools/smoke-test.js` is the quick guard against silent response-shape breakage; it intentionally expects 32 competitions and therefore fails against the previous 29-competition Worker until v1.5 is deployed.
 - CORS blocks normal web pages and raw no-Origin calls, but server-to-server
   clients can still spoof request headers. If traffic grows, add Cloudflare WAF
   or rate limiting.

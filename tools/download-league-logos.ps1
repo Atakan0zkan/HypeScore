@@ -14,6 +14,7 @@ $downloads = @(
   @{ File = "aus-1.png"; Source = "https://a.espncdn.com/i/leaguelogos/soccer/500-dark/1308.png" },
   @{ File = "aut-1.png"; Source = "https://a.espncdn.com/i/leaguelogos/soccer/500/5.png" },
   @{ File = "bel-1.png"; Source = "https://a.espncdn.com/i/leaguelogos/soccer/500/6.png" },
+  @{ File = "conmebol-america.png"; Source = "https://a.espncdn.com/i/leaguelogos/soccer/500/83.png" },
   @{ File = "den-1.png"; Source = "https://commons.wikimedia.org/wiki/Special:Redirect/file/Superliga_2010.svg?width=512&type=png" },
   @{ File = "eng-1.png"; Source = "https://a.espncdn.com/i/leaguelogos/soccer/500/23.png" },
   @{ File = "eng-2.png"; Source = "https://a.espncdn.com/i/leaguelogos/soccer/500/24.png" },
@@ -36,6 +37,8 @@ $downloads = @(
   @{ File = "tur-1.png"; Source = "https://a.espncdn.com/i/leaguelogos/soccer/500/18.png" },
   @{ File = "uefa-champions.png"; Source = "https://a.espncdn.com/i/leaguelogos/soccer/500-dark/2.png" },
   @{ File = "uefa-europa.png"; Source = "https://a.espncdn.com/i/leaguelogos/soccer/500-dark/2310.png" },
+  @{ File = "uefa-euro.png"; Source = "https://a.espncdn.com/i/leaguelogos/soccer/500/74.png" },
+  @{ File = "uefa-nations.png"; Source = "https://a.espncdn.com/i/leaguelogos/soccer/500/2395.png" },
   @{
     File = "uefa-europa-conf.png"
     Source = $uefaConferenceSource

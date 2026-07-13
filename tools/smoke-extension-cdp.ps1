@@ -11,10 +11,10 @@ $ProfileDir = Join-Path $TempRoot "hype-profile-$RunId"
 
 $ChromeCandidates = @(
   $ChromeBinary,
-  "$env:ProgramFiles\BraveSoftware\Brave-Browser\Application\brave.exe",
-  "${env:ProgramFiles(x86)}\BraveSoftware\Brave-Browser\Application\brave.exe",
   "$env:ProgramFiles\Google\Chrome\Application\chrome.exe",
-  "${env:ProgramFiles(x86)}\Google\Chrome\Application\chrome.exe"
+  "${env:ProgramFiles(x86)}\Google\Chrome\Application\chrome.exe",
+  "$env:ProgramFiles\BraveSoftware\Brave-Browser\Application\brave.exe",
+  "${env:ProgramFiles(x86)}\BraveSoftware\Brave-Browser\Application\brave.exe"
 )
 $ChromePath = $ChromeCandidates | Where-Object { $_ -and (Test-Path -LiteralPath $_) } |
   Select-Object -First 1
@@ -93,9 +93,9 @@ function Wait-ForExpression {
     Start-Sleep -Milliseconds 100
   }
   if ($lastError) {
-    throw "Timed out waiting for expression. Last error: $lastError"
+    throw "Timed out waiting for expression: $Expression. Last error: $lastError"
   }
-  throw "Timed out waiting for expression."
+  throw "Timed out waiting for expression: $Expression"
 }
 
 $fixtureOrigin = "chrome-extension://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
@@ -276,7 +276,7 @@ fetch("https://api.atakanozkan.com/live-matches")
 })()
 "@
 
-  if ($popupResult.manifestVersion -ne "1.5.0") { throw "Unexpected manifest version." }
+  if ($popupResult.manifestVersion -ne "1.4.5") { throw "Unexpected manifest version." }
   if ($popupResult.permissions.Count -ne 0) { throw "Unexpected Chrome permissions." }
   if ($popupResult.hostPermissions.Count -ne 1) { throw "Unexpected host permission count." }
   if ($popupResult.cardCount -lt 20 -or -not $popupResult.listVisible) { throw "Popup league list did not render." }

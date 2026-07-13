@@ -17,11 +17,11 @@ shown when the upstream API supports that data.
 - Chrome Web Store listing: `https://chromewebstore.google.com/detail/hype-live-football-scores/cdnpjnmhmagmiefkleefgchgffeaacaa`
 - GitHub repository: `https://github.com/Atakan0zkan/HypeScore.git`
 - Published extension ID: `cdnpjnmhmagmiefkleefgchgffeaacaa`
-- Extension manifest version: `1.5.0`
-- Current store package: rebuild from `extension/` after locale packaging
+- Extension manifest version: `1.4.5`
+- Current store package: `dist/hype-live-football-scores-v1.4.5-chrome-web-store.zip`
 - Worker URL: `https://api.atakanozkan.com`
-- Latest deployed Worker version recorded in the memory bank: `c6d3f8cb-03c0-4828-abe2-2ef367231ace`
-- The v1.5 Worker source is validated locally; production deployment requires a valid `CLOUDFLARE_API_TOKEN` in non-interactive environments.
+- Latest deployed Worker version: `5394c8c3-5f38-45cd-b5fe-50d794f83f1a`
+- The v1.4.5 Worker is deployed to production and the live 32-competition API smoke test passes.
 
 ## Open-source notes
 
@@ -346,13 +346,13 @@ Create the Chrome Web Store zip from the project root:
 
 ```powershell
 New-Item -ItemType Directory -Force dist
-Compress-Archive -Path extension\* -DestinationPath dist\hype-live-football-scores-v1.5.0-chrome-web-store.zip -Force
+Compress-Archive -Path extension\* -DestinationPath dist\hype-live-football-scores-v1.4.5-chrome-web-store.zip -Force
 ```
 
 The command creates:
 
 ```text
-dist/hype-live-football-scores-v1.5.0-chrome-web-store.zip
+dist/hype-live-football-scores-v1.4.5-chrome-web-store.zip
 ```
 
 Only extension runtime files are included. The zip root contains
@@ -380,13 +380,13 @@ and `/match-detail`
 against the deployed Worker. It is useful after ESPN response changes, Worker
 deploys, or before packaging a Chrome Web Store update.
 
-Expected deployed API result after the v1.5 Worker is deployed:
+Latest deployed API result for v1.4.5:
 
 ```text
-PASS GET /live-matches - 2 matches, 32 leagues
-PASS GET /league-standings?leagueCode=esp.1 - 0 rows
+PASS GET /live-matches - 5 matches, 32 leagues
+PASS GET /league-standings?leagueCode=esp.1 - 20 rows
 PASS GET /tournament-bracket?leagueCode=fifa.world - 6 rounds, 32 matches
-PASS GET /match-detail?eventId=760486&leagueCode=fifa.world - South Africa vs Canada
+PASS GET /match-detail?eventId=401842751&leagueCode=swe.1 - Djurgården vs Halmstads BK
 ```
 
 The standings row count can be `0` for a league at a given moment and still be
@@ -474,7 +474,7 @@ See `SECURITY.md` for the vulnerability reporting policy.
 ## Known production notes
 
 - ESPN APIs used here are unofficial and can change without notice.
-- `tools/smoke-test.js` is the quick guard against silent response-shape breakage; it intentionally expects 32 competitions and therefore fails against the previous 29-competition Worker until v1.5 is deployed.
+- `tools/smoke-test.js` is the quick guard against silent response-shape breakage; production currently passes its 32-competition expectation.
 - CORS blocks normal web pages and raw no-Origin calls, but server-to-server
   clients can still spoof request headers. If traffic grows, add Cloudflare WAF
   or rate limiting.

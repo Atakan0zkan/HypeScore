@@ -22,7 +22,7 @@ globalThis.fetch = async (input) => {
   const url = String(input);
   upstreamCalls.push(url);
 
-  if (url.endsWith("/eng.1/scoreboard")) {
+  if (url.endsWith("/all/scoreboard") || url.endsWith("/eng.1/scoreboard")) {
     await delay(25);
     return jsonResponse(createScoreboardPayload());
   }

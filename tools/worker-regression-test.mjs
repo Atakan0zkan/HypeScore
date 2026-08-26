@@ -22,7 +22,7 @@ globalThis.fetch = async (input) => {
   const url = String(input);
   upstreamCalls.push(url);
 
-  if (url.endsWith("/all/scoreboard")) {
+  if (url.endsWith("/eng.1/scoreboard")) {
     await delay(25);
     return jsonResponse(createScoreboardPayload());
   }
@@ -42,6 +42,10 @@ globalThis.fetch = async (input) => {
 
   if (url.endsWith("/conmebol.america/scoreboard")) {
     return jsonResponse(createEmptyLeaguePayload("780", "conmebol.america", "Copa America"));
+  }
+
+  if (url.includes("/scoreboard")) {
+    return jsonResponse({ leagues: [], events: [] });
   }
 
   return jsonResponse({ leagues: [], events: [] });

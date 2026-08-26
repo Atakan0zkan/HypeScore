@@ -1,5 +1,8 @@
-const ESPN_SCOREBOARD_URL =
-  "https://site.api.espn.com/apis/site/v2/sports/soccer/all/scoreboard";
+const DEFAULT_FETCH_HEADERS = {
+  Accept: "application/json",
+  "User-Agent":
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+};
 const THESPORTSDB_LIVE_SCORE_URL =
   "https://www.thesportsdb.com/api/v2/json/livescore/soccer";
 const ESPN_STANDINGS_BASE_URL =
@@ -15,7 +18,7 @@ const UPSTREAM_FETCH_TIMEOUT_MS = 8000;
 const UPCOMING_MATCH_WINDOW_MS = 24 * 60 * 60 * 1000;
 const MAX_EVENT_ID_LENGTH = 20;
 const MAX_REMEMBERED_EVENT_KEYS = 1024;
-const LIVE_MATCHES_CACHE_KEY_VERSION = "v14";
+const LIVE_MATCHES_CACHE_KEY_VERSION = "v15";
 const STANDINGS_CACHE_KEY_VERSION = "v4";
 const MATCH_DETAIL_CACHE_KEY_VERSION = "v5";
 const TOURNAMENT_BRACKET_CACHE_KEY_VERSION = "v1";
@@ -33,12 +36,39 @@ const ESPN_LEAGUE_LOGO_BASE = "https://a.espncdn.com/i/leaguelogos/soccer";
 const ESPN_LINK_HOST_SUFFIXES = ["espn.com"];
 const ESPN_MEDIA_HOST_SUFFIXES = ["espncdn.com"];
 const TEAM_LOGO_OVERRIDE_HOST_SUFFIXES = ["cancunfc.mx"];
-const EXTRA_ESPN_SCOREBOARD_LEAGUES = [
-  "uefa.europa.conf",
+const CURATED_SCOREBOARD_LEAGUE_CODES = [
   "fifa.world",
-  "uefa.nations",
-  "uefa.euro",
+  "uefa.champions",
   "conmebol.america",
+  "uefa.euro",
+  "eng.1",
+  "fra.1",
+  "por.1",
+  "ger.1",
+  "ned.1",
+  "ita.1",
+  "sco.1",
+  "esp.1",
+  "arg.1",
+  "mex.1",
+  "usa.1",
+  "uefa.europa",
+  "bel.1",
+  "aus.1",
+  "aut.1",
+  "den.1",
+  "eng.2",
+  "eng.fa",
+  "ger.2",
+  "mex.2",
+  "rus.1",
+  "swe.1",
+  "tur.1",
+  "gre.1",
+  "eng.w.1",
+  "uefa.europa.conf",
+  "usa.usl.1",
+  "uefa.nations",
 ];
 const FIFA_WORLD_CUP_LEAGUE_CODE = "fifa.world";
 const FIFA_WORLD_CUP_KNOCKOUT_DATES = "20260628-20260719";
@@ -622,27 +652,26 @@ async function getLiveMatches(env) {
 }
 
 async function fetchEspnScoreboardPayloads() {
-  const [primaryResult, ...extraResults] = await Promise.allSettled([
-    fetchJson(ESPN_SCOREBOARD_URL),
-    ...EXTRA_ESPN_SCOREBOARD_LEAGUES.map((leagueCode) =>
+  const results = await Promise.allSettled(
+    CURATED_SCOREBOARD_LEAGUE_CODES.map((leagueCode) =>
       fetchJson(`${ESPN_SUMMARY_BASE_URL}/${leagueCode}/scoreboard`),
     ),
-  ]);
+  );
 
-  if (primaryResult.status === "rejected") {
-    throw primaryResult.reason;
-  }
+  const payloads = [];
 
-  const payloads = [primaryResult.value];
-
-  for (const result of extraResults) {
-    if (result.status === "fulfilled") {
+  for (const result of results) {
+    if (result.status === "fulfilled" && result.value) {
       payloads.push(result.value);
-    } else {
+    } else if (result.status === "rejected") {
       console.warn(
-        `Extra ESPN scoreboard failed: ${getErrorMessage(result.reason)}`,
+        `ESPN league scoreboard failed: ${getErrorMessage(result.reason)}`,
       );
     }
+  }
+
+  if (payloads.length === 0) {
+    throw new Error("All ESPN league scoreboard requests failed");
   }
 
   return payloads;
@@ -671,7 +700,7 @@ async function fetchJson(url, init = {}) {
       ...init,
       signal: init.signal || controller.signal,
       headers: {
-        Accept: "application/json",
+        ...DEFAULT_FETCH_HEADERS,
         ...(init.headers || {}),
       },
     });

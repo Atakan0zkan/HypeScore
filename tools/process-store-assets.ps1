@@ -9,10 +9,10 @@ $mappings = @(
   @{ Source = "store_screenshot_1_live_scores_1787759957908.jpg"; Target = "screenshot-1-live-scores-1280x800.png"; W = 1280; H = 800 },
   @{ Source = "store_screenshot_2_standings_1787759986558.jpg"; Target = "screenshot-2-standings-1280x800.png"; W = 1280; H = 800 },
   @{ Source = "store_screenshot_3_match_details_1787760011762.jpg"; Target = "screenshot-3-match-detail-1280x800.png"; W = 1280; H = 800 },
-  @{ Source = "store_screenshot_4_tournaments_1787760035146.jpg"; Target = "screenshot-4-tournaments-1280x800.png"; W = 1280; H = 800 },
-  @{ Source = "store_screenshot_5_global_leagues_1787760096007.jpg"; Target = "screenshot-5-multi-league-1280x800.png"; W = 1280; H = 800 },
-  @{ Source = "store_promo_small_440x280_1787760117107.jpg"; Target = "promo-small-440x280.png"; W = 440; H = 280 },
-  @{ Source = "store_promo_marquee_1400x560_1787760137740.jpg"; Target = "promo-marquee-1400x560.png"; W = 1400; H = 560 }
+  @{ Source = "screenshot_4_schedules_v3_1787785760813.jpg"; Target = "screenshot-4-tournaments-1280x800.png"; W = 1280; H = 800 },
+  @{ Source = "screenshot_5_global_v3_1787785783756.jpg"; Target = "screenshot-5-multi-league-1280x800.png"; W = 1280; H = 800 },
+  @{ Source = "promo_small_440x280_v2_1787785714075.jpg"; Target = "promo-small-440x280.png"; W = 440; H = 280 },
+  @{ Source = "promo_marquee_1400x560_v2_1787785691081.jpg"; Target = "promo-marquee-1400x560.png"; W = 1400; H = 560 }
 )
 
 foreach ($item in $mappings) {

@@ -292,9 +292,10 @@ async function handleLiveMatchesRequest(request, env) {
   try {
     return await getFreshLiveMatchesResponse(env, cache, cacheKey, request);
   } catch (error) {
-    console.warn(`Live match refresh failed: ${getErrorMessage(error)}`);
+    const message = getErrorMessage(error);
+    console.warn(`Live match refresh failed: ${message}`);
     return jsonResponse(
-      { error: "Live match data could not be fetched" },
+      { error: "Live match data could not be fetched", details: message },
       { status: 502, cache: "BYPASS", source: "none", request },
     );
   }
@@ -2159,6 +2160,7 @@ function responseHeaders(options = {}) {
     "Cache-Control": options.cacheControl || "no-store",
     "X-Cache": options.cache || "BYPASS",
     "X-Data-Source": options.source || "none",
+    "X-Worker-Revision": "v15-20260826",
   };
 }
 

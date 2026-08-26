@@ -348,29 +348,55 @@ $screens = @(
   @{
     File = "screenshot-1-live-scores-1280x800.png"
     Source = $SourceLive
-    Title = "Live Scores"
-    Body = "Curated leagues, clear live badges, team and league logos, and a clean scrollable popup."
+    Title = "Live Football Scores"
+    Body = "Curated world leagues, live match minutes, real-time score updates, and a responsive dark popup."
+    Pills = @("Live Updates", "Match Timers", "Curated Leagues")
   },
   @{
     File = "screenshot-2-standings-1280x800.png"
     Source = $SourceLeague
-    Title = "League Tables"
-    Body = "Open a league to see live matches, results, and full standings loaded only when needed."
+    Title = "League Tables & Standings"
+    Body = "Full league standings with points, form, goal differences, and fixtures loaded smoothly on demand."
+    Pills = @("Full Tables", "Points & Goal Diff", "On-Demand")
   },
   @{
     File = "screenshot-3-match-detail-1280x800.png"
     Source = $SourceMatch
-    Title = "Match Details"
-    Body = "Kickoff, venue, scoreline, stats, timeline, lineups, commentary, news and links stay one click away."
+    Title = "Deep Match Details"
+    Body = "Complete match lineups, live commentary, events timeline, head-to-head records, and venue info."
+    Pills = @("Lineups & Stats", "Live Timeline", "Head to Head")
+  },
+  @{
+    File = "screenshot-4-tournaments-1280x800.png"
+    Source = $SourceLeague
+    Title = "International Tournaments"
+    Body = "Full knockout tournament support for FIFA World Cup, UEFA Nations League, UEFA EURO, and Copa América."
+    Pills = @("FIFA World Cup", "UEFA EURO", "Copa América")
+  },
+  @{
+    File = "screenshot-5-multi-league-1280x800.png"
+    Source = $SourceLive
+    Title = "32 Leagues & 55 Languages"
+    Body = "Global coverage across 32 top football competitions, translated into 55 locales with zero tracking."
+    Pills = @("32 Top Leagues", "55 Languages", "Zero Bloat")
   }
 )
 
 foreach ($screen in $screens) {
   $canvas = New-Canvas 1280 800
   $g = $canvas.Graphics
-  Draw-Text $g $screen.Title "Georgia" 54 "Bold" "#fff0f0" 78 78 560 72
-  Draw-Text $g $screen.Body "Trebuchet MS" 23 "Regular" "#d4c4c4" 82 162 510 106
-  Draw-ScreenshotCard $g $screen.Source 616 78 580 600 34
+  Draw-AppIcon $g 78 68 64
+  Draw-Text $g $screen.Title "Georgia" 52 "Bold" "#fff0f0" 158 68 450 68
+  Draw-Text $g $screen.Body "Trebuchet MS" 22 "Regular" "#d4c4c4" 78 152 490 110
+
+  if ($screen.Pills) {
+    $pillY = 278
+    for ($i = 0; $i -lt $screen.Pills.Count; $i++) {
+      Draw-Pill $g $screen.Pills[$i] 78 ($pillY + ($i * 50)) 280 "#331212"
+    }
+  }
+
+  Draw-ScreenshotCard $g $screen.Source 596 74 600 620 32
   Complete-Canvas $canvas (Join-Path $OutDir $screen.File)
 }
 

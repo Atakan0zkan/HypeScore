@@ -11,7 +11,7 @@ $mappings = @(
   @{ Source = "store_screenshot_3_match_details_1787760011762.jpg"; Target = "screenshot-3-match-detail-1280x800.png"; W = 1280; H = 800 },
   @{ Source = "screenshot_4_schedules_v3_1787785760813.jpg"; Target = "screenshot-4-tournaments-1280x800.png"; W = 1280; H = 800 },
   @{ Source = "screenshot_5_global_v3_1787785783756.jpg"; Target = "screenshot-5-multi-league-1280x800.png"; W = 1280; H = 800 },
-  @{ Source = "promo_small_440x280_large_v3_1787786656458.jpg"; Target = "promo-small-440x280.png"; W = 440; H = 280 },
+  @{ Source = "promo_small_440x280_v6_perfect_1787786992366.jpg"; Target = "promo-small-440x280.png"; W = 440; H = 280 },
   @{ Source = "promo_marquee_1400x560_v2_1787785691081.jpg"; Target = "promo-marquee-1400x560.png"; W = 1400; H = 560 }
 )
 

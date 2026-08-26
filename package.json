@@ -1,0 +1,15 @@
+{
+  "name": "hype-score",
+  "version": "1.4.5",
+  "private": true,
+  "type": "module",
+  "description": "Hype - Live Football Scores Chrome Extension & Cloudflare Worker",
+  "scripts": {
+    "test": "node tools/worker-regression-test.mjs",
+    "smoke": "node tools/smoke-test.js",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^4.126.0"
+  }
+}

@@ -253,6 +253,10 @@ async function handleRequest(request, env) {
     return handleLeagueStandingsRequest(request, url);
   }
 
+  if (url.pathname === "/debug-espn") {
+    return handleDebugEspnRequest(request, url);
+  }
+
   if (url.pathname === "/tournament-bracket") {
     return handleTournamentBracketRequest(request, url);
   }
@@ -419,10 +423,51 @@ async function handleLeagueStandingsRequest(request, url) {
 
     return response;
   } catch (error) {
-    console.warn(`League standings failed: ${getErrorMessage(error)}`);
+    const message = getErrorMessage(error);
+    console.warn(`League standings failed: ${message}`);
     return jsonResponse(
-      { error: "League standings could not be fetched" },
+      { error: "League standings could not be fetched", details: message },
       { status: 502, cache: "BYPASS", source: "none", request },
+    );
+  }
+}
+
+async function handleDebugEspnRequest(request, url) {
+  const target =
+    url.searchParams.get("target") ||
+    "https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard";
+  const customUa = url.searchParams.get("ua");
+
+  try {
+    const headers = {
+      Accept: "application/json",
+      "User-Agent": customUa || DEFAULT_FETCH_HEADERS["User-Agent"],
+    };
+    const start = Date.now();
+    const res = await fetch(target, { headers });
+    const duration = Date.now() - start;
+    const ct = res.headers.get("content-type");
+    const text = await res.text();
+    return jsonResponse(
+      {
+        target,
+        status: res.status,
+        statusText: res.statusText,
+        durationMs: duration,
+        contentType: ct,
+        headers: Object.fromEntries(res.headers.entries()),
+        preview: text.slice(0, 1000),
+      },
+      { request },
+    );
+  } catch (error) {
+    return jsonResponse(
+      {
+        target,
+        error: getErrorMessage(error),
+        stack: error?.stack,
+      },
+      { status: 500, request },
     );
   }
 }

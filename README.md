@@ -17,11 +17,11 @@ shown when the upstream API supports that data.
 - Chrome Web Store listing: `https://chromewebstore.google.com/detail/hype-live-football-scores/cdnpjnmhmagmiefkleefgchgffeaacaa`
 - GitHub repository: `https://github.com/Atakan0zkan/HypeScore.git`
 - Published extension ID: `cdnpjnmhmagmiefkleefgchgffeaacaa`
-- Extension manifest version: `1.4.5`
-- Current store package: `dist/hype-live-football-scores-v1.4.5-chrome-web-store.zip`
+- Extension manifest version: `1.5`
+- Current store package: `dist/hype-live-football-scores-v1.5.0-chrome-web-store.zip`
 - Worker URL: `https://api.atakanozkan.com`
 - Latest deployed Worker version: `5394c8c3-5f38-45cd-b5fe-50d794f83f1a`
-- The v1.4.5 Worker is deployed to production and the live 32-competition API smoke test passes.
+- The v1.5.0 Worker is deployed to production and the live 32-competition API smoke test passes.
 
 ## Open-source notes
 

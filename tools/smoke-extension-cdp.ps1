@@ -119,6 +119,17 @@ New-Item -ItemType Directory -Force -Path $ExtensionDir | Out-Null
 New-Item -ItemType Directory -Force -Path $ProfileDir | Out-Null
 Copy-Item -Path (Join-Path $SourceExtensionDir "*") -Destination $ExtensionDir -Recurse -Force
 
+# A public test-only manifest key gives the temporary unpacked copy a known id.
+# This lets the smoke test open the popup directly instead of depending on the
+# browser-owned extensions page, whose internal Shadow DOM changes frequently.
+$extensionId = "cacoohgieflaakhabaigiihppboeofgo"
+$testPublicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAoH7/hUrWCtbtQ1jN8sO41fsmxOdUyQewhY+sMvl5D6dEZFIVN5ZhGRwUqhCBYa1zlPoTgAGU0u895qAcO8maf0B03dZP3RjKKLmzmbC0F5ajJztICRnl6IkDDA1hqxE8w/vfWbYjRGoVAialYKSl8qOCuNRYWgEnXb0/SGNT+SvA4T3UuDNDf0/AHirrpAv3nJFmxprIaz0ZW0/rZj7O8jastiCjR9HvwXoet07hrnVciaMCdnS+K5GEJMQZgF41H+ohBxXb04IWlkP//FMFErcSWZaKQjrg71PfIUibTJ7/d6APmv+72BOO+wrVgO/AcTJkNWJ32QbIhyk75QgfjwIDAQAB"
+$manifestPath = Join-Path $ExtensionDir "manifest.json"
+$manifest = Get-Content -Raw -LiteralPath $manifestPath | ConvertFrom-Json
+$manifest | Add-Member -NotePropertyName "key" -NotePropertyValue $testPublicKey -Force
+$manifestJson = $manifest | ConvertTo-Json -Depth 20
+[IO.File]::WriteAllText($manifestPath, $manifestJson, [Text.UTF8Encoding]::new($false))
+
 
 $port = Get-Random -Minimum 9300 -Maximum 9700
 $chromeArgs = @(
@@ -163,37 +174,6 @@ try {
 
   Send-Cdp $client "Page.enable" | Out-Null
   Send-Cdp $client "Runtime.enable" | Out-Null
-  Send-Cdp $client "Page.navigate" @{ url = "chrome://extensions/" } | Out-Null
-  Wait-ForExpression $client @'
-document.querySelector("extensions-manager")?.shadowRoot
-  ?.querySelector("extensions-item-list")?.shadowRoot
-  ?.querySelectorAll("extensions-item").length > 0
-'@ 15000
-
-  $manifest = Get-Content -Raw -LiteralPath (Join-Path $ExtensionDir "manifest.json") |
-    ConvertFrom-Json
-  $expectedName = [string]$manifest.name
-  if ($expectedName -match '^__MSG_(.+)__$') {
-    $messageKey = $Matches[1]
-    $localePath = Join-Path $ExtensionDir "_locales\$($manifest.default_locale)\messages.json"
-    $localeMessages = Get-Content -Raw -LiteralPath $localePath | ConvertFrom-Json
-    $expectedName = [string]$localeMessages.$messageKey.message
-  }
-  $extensionItems = @(Invoke-CdpExpression $client @'
-(() => {
-  const manager = document.querySelector("extensions-manager");
-  const list = manager?.shadowRoot?.querySelector("extensions-item-list");
-  return Array.from(list?.shadowRoot?.querySelectorAll("extensions-item") || []).map((item) => ({
-    id: item.getAttribute("id") || item.id,
-    name: item.shadowRoot?.querySelector("#name")?.textContent?.trim() || "",
-  }));
-})()
-'@)
-  $extensionId = ($extensionItems | Where-Object { $_.name -eq $expectedName } |
-    Select-Object -First 1).id
-  if (-not $extensionId) {
-    throw "Unpacked extension id was not found in chrome://extensions."
-  }
   Send-Cdp $client "Page.addScriptToEvaluateOnNewDocument" @{
     source = @"
 window.__hypeSmokeErrors = [];
@@ -276,7 +256,7 @@ fetch("https://api.atakanozkan.com/live-matches")
 })()
 "@
 
-  if ($popupResult.manifestVersion -ne "1.4.5") { throw "Unexpected manifest version." }
+  if ($popupResult.manifestVersion -ne "1.5") { throw "Unexpected manifest version." }
   if ($popupResult.permissions.Count -ne 0) { throw "Unexpected Chrome permissions." }
   if ($popupResult.hostPermissions.Count -ne 1) { throw "Unexpected host permission count." }
   if ($popupResult.cardCount -lt 20 -or -not $popupResult.listVisible) { throw "Popup league list did not render." }
@@ -284,7 +264,7 @@ fetch("https://api.atakanozkan.com/live-matches")
   if ($popupResult.errors.Count -ne 0) { throw "Popup recorded runtime errors: $($popupResult.errors -join '; ')" }
 
   Send-Cdp $client "Page.navigate" @{ url = "chrome://settings/" } | Out-Null
-  Wait-ForExpression $client "location.href.startsWith('chrome://settings')" 10000
+  Wait-ForExpression $client "location.href.includes('://settings')" 10000
   $restrictedResult = Invoke-CdpExpression $client @"
 ({
   href: location.href,

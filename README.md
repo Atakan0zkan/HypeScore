@@ -54,6 +54,11 @@ shown when the upstream API supports that data.
 - Chrome Web Store long-description copy for the same language set lives in `store-assets/store-listing-copy.md`.
 - Dark Hype theme with muted red accents and fixed 580x600 popup sizing.
 - Cloudflare Free-plan-friendly refresh behavior with local cache, lazy endpoints, and a local daily request guard.
+- Privacy-preserving aggregate feature, version, country, browser, reliability,
+  and cache analytics through Workers Analytics Engine, with no persistent
+  user identifier or additional tracking request.
+- Localhost-only live analytics dashboard with 7/30/90-day charts and source
+  freshness warnings.
 
 ## Project structure
 
@@ -61,7 +66,14 @@ shown when the upstream API supports that data.
 LiveScoreFootball/
   .gitignore
   AGENTS.md
+  PRIVACY.md
   README.md
+  analytics-dashboard/
+    server.mjs
+    public/
+      index.html
+      styles.css
+      app.js
   extension/
     _locales/
       <55 locale codes>/messages.json
@@ -163,6 +175,52 @@ https://www.thesportsdb.com/api/v2/json/livescore/soccer
 ```
 
 TheSportsDB v2 livescore requires an API key, so fallback is optional by design.
+
+## Privacy-preserving product analytics
+
+The Worker writes one aggregate Analytics Engine data point for each existing
+functional API request. The event describes the Hype endpoint, static extension
+version, broad country/browser context, response status, cache result, response
+time, and league code when the requested feature already contains one. It does
+not add another popup-open tracking request.
+
+The Hype analytics dataset intentionally excludes raw IP addresses, persistent
+or random client IDs, accounts, favorites, event IDs, browsing history, and
+cross-site activity. Cloudflare hostname analytics can separately provide an
+approximate visit count; it must not be described as a unique person or device
+count. See [PRIVACY.md](PRIVACY.md) for the full disclosure.
+
+The Analytics Engine binding is configured as `USAGE_ANALYTICS` with dataset
+name `hype_usage`. Cloudflare creates the dataset after the first production
+data point is written.
+
+## Local analytics dashboard
+
+Start the localhost-only dashboard from the project root:
+
+```powershell
+npm run analytics
+```
+
+The launcher securely prompts for a scoped Cloudflare API token and keeps it in
+the current process environment. The token is never sent to the browser or
+stored in the repository. Open the printed `http://127.0.0.1:4173` address.
+The page refreshes every five minutes while visible and can be refreshed on
+demand.
+
+Required token permissions:
+
+- Account: `Workers Scripts Edit`, `Account Analytics Read`
+- Zone (`atakanozkan.com` only): `Analytics Read`, `Zone Read`
+
+Add `Workers Routes Edit` only when changing the Worker route or custom domain;
+the analytics dashboard itself does not need that permission.
+
+The dashboard shows estimated daily visits, functional request trend,
+feature usage, endpoint quality, country, version, browser, league interest,
+cache effectiveness, and extension-labelled versus other traffic. Feature
+history begins only after the instrumented Worker is deployed; the UI displays
+partial-source warnings rather than inventing missing values.
 
 ESPN standings are fetched from:
 
@@ -456,6 +514,10 @@ Expected UI states:
 - The extension has no broad Chrome permissions.
 - Host access is limited to the deployed Worker URL.
 - API keys are never stored in extension code; optional TheSportsDB access belongs in a Worker secret.
+- Cloudflare analytics credentials stay in the local dashboard server process
+  and are never exposed to dashboard JavaScript.
+- Product analytics excludes raw IP addresses and persistent device IDs; the
+  complete field list and retention disclosure live in `PRIVACY.md`.
 - Popup rendering uses `textContent` and does not inject upstream HTML.
 - ESPN external links are sanitized to HTTPS and restricted to ESPN-owned host suffixes before being returned to the popup.
 - Popup also re-checks match detail links against an HTTPS `espn.com` allowlist before rendering clickable links.

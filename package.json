@@ -7,7 +7,9 @@
   "scripts": {
     "test": "node tools/worker-regression-test.mjs",
     "smoke": "node tools/smoke-test.js",
-    "deploy": "wrangler deploy"
+    "deploy": "wrangler deploy",
+    "analytics": "powershell -NoProfile -ExecutionPolicy Bypass -File tools/start-analytics-dashboard.ps1",
+    "analytics:test": "node tools/analytics-dashboard-test.mjs"
   },
   "devDependencies": {
     "wrangler": "^4.126.0"

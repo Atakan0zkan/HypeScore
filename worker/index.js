@@ -190,7 +190,20 @@ const securityHeaders = {
 
 export default {
   async fetch(request, env) {
-    return handleRequest(request, env);
+    const startedAt = Date.now();
+    let response;
+
+    try {
+      response = await handleRequest(request, env);
+      return response;
+    } catch (error) {
+      recordUsageAnalytics(env, request, null, startedAt, error);
+      throw error;
+    } finally {
+      if (response) {
+        recordUsageAnalytics(env, request, response, startedAt);
+      }
+    }
   },
 };
 
@@ -2152,6 +2165,111 @@ async function responseForRequest(response, request) {
     statusText: response.statusText,
     headers,
   });
+}
+
+/*
+ * Privacy-preserving product analytics schema (Workers Analytics Engine):
+ * blob1 endpoint, blob2 country, blob3 client, blob4 client version,
+ * blob5 browser family, blob6 browser major, blob7 status class,
+ * blob8 cache result, blob9 data source, blob10 league code,
+ * blob11 origin policy, blob12 Cloudflare colo, blob13 method.
+ * double1 request count, double2 duration in milliseconds, double3 status.
+ *
+ * The dataset intentionally contains no IP address, persistent client ID,
+ * event ID, account ID, favorite, browsing history, or cross-site data.
+ */
+function recordUsageAnalytics(env, request, response, startedAt, error = null) {
+  const dataset = env?.USAGE_ANALYTICS;
+  if (!dataset || typeof dataset.writeDataPoint !== "function") {
+    return;
+  }
+
+  try {
+    const url = new URL(request.url);
+    const originPolicy = getRequestOriginPolicy(request);
+    const endpoint = normalizeAnalyticsEndpoint(url.pathname);
+    const client = normalizeAnalyticsClient(url.searchParams.get("client"));
+    const clientVersion = normalizeClientVersion(url.searchParams.get("version"));
+    const browser = parseBrowserFamily(request.headers.get("User-Agent") || "");
+    const status = response?.status || (error ? 500 : 0);
+    const leagueCode = normalizeLeagueCodeForAnalytics(
+      url.searchParams.get("leagueCode"),
+    );
+    const durationMs = Math.max(0, Date.now() - startedAt);
+
+    dataset.writeDataPoint({
+      blobs: [
+        endpoint,
+        sanitizeAnalyticsDimension(request.cf?.country || "unknown", 8),
+        client,
+        clientVersion,
+        browser.family,
+        browser.major,
+        status > 0 ? `${Math.floor(status / 100)}xx` : "unknown",
+        sanitizeAnalyticsDimension(response?.headers?.get("X-Cache") || "BYPASS", 16),
+        sanitizeAnalyticsDimension(response?.headers?.get("X-Data-Source") || "none", 48),
+        leagueCode,
+        originPolicy.reason,
+        sanitizeAnalyticsDimension(request.cf?.colo || "unknown", 8),
+        sanitizeAnalyticsDimension(request.method || "unknown", 12),
+      ],
+      doubles: [1, durationMs, status],
+      indexes: [`${endpoint}:${client}`],
+    });
+  } catch (analyticsError) {
+    console.warn(`Usage analytics write failed: ${getErrorMessage(analyticsError)}`);
+  }
+}
+
+function normalizeAnalyticsEndpoint(pathname) {
+  const knownEndpoints = new Set([
+    "/live-matches",
+    "/league-standings",
+    "/match-detail",
+    "/tournament-bracket",
+  ]);
+
+  return knownEndpoints.has(pathname) ? pathname : "/other";
+}
+
+function normalizeAnalyticsClient(value) {
+  return value === "extension" ? "extension" : "unknown";
+}
+
+function normalizeClientVersion(value) {
+  const version = String(value || "");
+  return /^\d+(?:\.\d+){0,3}$/.test(version) ? version : "unknown";
+}
+
+function normalizeLeagueCodeForAnalytics(value) {
+  const leagueCode = String(value || "");
+  return isSupportedLeagueCode(leagueCode) ? leagueCode : "none";
+}
+
+function parseBrowserFamily(userAgent) {
+  const patterns = [
+    ["Edge", /\bEdg\/(\d+)/],
+    ["Opera", /\bOPR\/(\d+)/],
+    ["Chrome", /\b(?:Chrome|Chromium)\/(\d+)/],
+    ["Firefox", /\bFirefox\/(\d+)/],
+    ["Safari", /\bVersion\/(\d+).+\bSafari\//],
+  ];
+
+  for (const [family, pattern] of patterns) {
+    const match = userAgent.match(pattern);
+    if (match) {
+      return { family, major: match[1] || "unknown" };
+    }
+  }
+
+  return { family: "Other", major: "unknown" };
+}
+
+function sanitizeAnalyticsDimension(value, maxLength = 64) {
+  const normalized = String(value || "unknown")
+    .replace(/[^a-zA-Z0-9._:/-]/g, "-")
+    .slice(0, maxLength);
+  return normalized || "unknown";
 }
 
 function getErrorMessage(error) {

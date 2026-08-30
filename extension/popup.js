@@ -3,8 +3,11 @@
  * Popup script — dependency-free Chrome MV3 UI.
  */
 
-const BACKEND_URL =
-  "https://api.atakanozkan.com/live-matches";
+const EXTENSION_VERSION =
+  globalThis.chrome?.runtime?.getManifest?.().version || "unknown";
+const BACKEND_URL = buildBackendUrl(
+  "https://api.atakanozkan.com/live-matches",
+);
 const LIVE_REFRESH_INTERVAL_MS = 60000;
 const IDLE_REFRESH_INTERVAL_MS = 300000;
 const QUIET_REFRESH_INTERVAL_MS = 30 * 60 * 1000;
@@ -80,6 +83,15 @@ const FALLBACK_LOGO_SVG = [
 ].join("");
 
 const FALLBACK_LOGO = "data:image/svg+xml," + encodeURIComponent(FALLBACK_LOGO_SVG);
+
+function buildBackendUrl(rawUrl) {
+  const url = new URL(rawUrl);
+  url.searchParams.set("client", "extension");
+  if (/^\d+(?:\.\d+){0,3}$/.test(EXTENSION_VERSION)) {
+    url.searchParams.set("version", EXTENSION_VERSION);
+  }
+  return url.href;
+}
 
 const FALLBACK_MESSAGES = {
   appTitle: "Hype Scores",

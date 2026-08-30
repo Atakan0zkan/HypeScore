@@ -6,6 +6,12 @@
   "placement": {
     "mode": "smart"
   },
+  "analytics_engine_datasets": [
+    {
+      "binding": "USAGE_ANALYTICS",
+      "dataset": "hype_usage"
+    }
+  ],
   "observability": {
     "enabled": false,
     "head_sampling_rate": 1,

@@ -2,8 +2,11 @@
  * Regenerates store-assets/store-listing-copy.md for all supported languages.
  * English source matches the Chrome Web Store long description master copy.
  */
-const fs = require("fs");
-const path = require("path");
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const OUT = path.join(__dirname, "..", "store-assets", "store-listing-copy.md");
 
@@ -433,6 +436,24 @@ Hype सरल रहता है: खोलें, स्कोर देख�
 
 मुफ़्त उपयोग।`,
 };
+
+const PRIVACY_DISCLOSURE =
+  "No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md";
+
+function applyPrivacyDisclosure(body) {
+  const bodyLines = body.split("\n");
+  const openSourceLine = bodyLines.findIndex((line) => line.trim().startsWith("⏭️"));
+  if (openSourceLine < 0) return body;
+
+  let priorContentLine = openSourceLine - 1;
+  while (priorContentLine >= 0 && !bodyLines[priorContentLine].trim()) {
+    priorContentLine -= 1;
+  }
+  if (priorContentLine >= 0) {
+    bodyLines[priorContentLine] = PRIVACY_DISCLOSURE;
+  }
+  return bodyLines.join("\n");
+}
 
 // Additional locales with full store text
 Object.assign(LISTINGS, {
@@ -1163,7 +1184,7 @@ const lines = [
 for (const [name, body] of Object.entries(LISTINGS)) {
   lines.push(`## ${name}`);
   lines.push("");
-  lines.push(body.trim());
+  lines.push(applyPrivacyDisclosure(body).trim());
   lines.push("");
 }
 

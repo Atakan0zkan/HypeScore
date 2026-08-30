@@ -15,7 +15,15 @@ const REQUIRED_LEAGUE_CODES = [
 ];
 
 const upstreamCalls = [];
+const analyticsPoints = [];
 const cache = createMemoryCache();
+const TEST_ENV = {
+  USAGE_ANALYTICS: {
+    writeDataPoint(point) {
+      analyticsPoints.push(point);
+    },
+  },
+};
 
 globalThis.caches = { default: cache };
 globalThis.fetch = async (input) => {
@@ -55,11 +63,17 @@ const workerSource = await readFile(WORKER_SOURCE_URL, "utf8");
 const workerModuleUrl = `data:text/javascript;base64,${Buffer.from(workerSource).toString("base64")}`;
 const { default: worker } = await import(workerModuleUrl);
 
-const liveRequestA = createApiRequest("/live-matches", ALLOWED_ORIGIN_A);
-const liveRequestB = createApiRequest("/live-matches", ALLOWED_ORIGIN_B);
+const liveRequestA = createApiRequest(
+  "/live-matches?client=extension&version=1.5",
+  ALLOWED_ORIGIN_A,
+);
+const liveRequestB = createApiRequest(
+  "/live-matches?client=extension&version=1.5",
+  ALLOWED_ORIGIN_B,
+);
 const [liveResponseA, liveResponseB] = await Promise.all([
-  worker.fetch(liveRequestA, {}),
-  worker.fetch(liveRequestB, {}),
+  worker.fetch(liveRequestA, TEST_ENV),
+  worker.fetch(liveRequestB, TEST_ENV),
 ]);
 
 assert.equal(liveResponseA.status, 200);
@@ -89,8 +103,8 @@ for (const code of [
 
 const detailCallsBefore = countSummaryCalls();
 const [detailResponseA, detailResponseB] = await Promise.all([
-  worker.fetch(createDetailRequest(KNOWN_EVENT_ID, ALLOWED_ORIGIN_A), {}),
-  worker.fetch(createDetailRequest(KNOWN_EVENT_ID, ALLOWED_ORIGIN_B), {}),
+  worker.fetch(createDetailRequest(KNOWN_EVENT_ID, ALLOWED_ORIGIN_A), TEST_ENV),
+  worker.fetch(createDetailRequest(KNOWN_EVENT_ID, ALLOWED_ORIGIN_B), TEST_ENV),
 ]);
 
 assert.equal(detailResponseA.status, 200);
@@ -101,40 +115,55 @@ assert.equal(countSummaryCalls() - detailCallsBefore, 1, "same-event requests mu
 
 const cachedDetailResponse = await worker.fetch(
   createDetailRequest(KNOWN_EVENT_ID, ALLOWED_ORIGIN_A),
-  {},
+  TEST_ENV,
 );
 assert.equal(cachedDetailResponse.status, 200);
 assert.equal(countSummaryCalls() - detailCallsBefore, 1, "cached detail must not refetch");
 
 const unknownResponse = await worker.fetch(
   createDetailRequest("999999", ALLOWED_ORIGIN_A),
-  {},
+  TEST_ENV,
 );
 assert.equal(unknownResponse.status, 404);
 assert.equal(countSummaryCalls() - detailCallsBefore, 1, "unknown event must not reach upstream");
 
 const overlongResponse = await worker.fetch(
   createDetailRequest("1".repeat(21), ALLOWED_ORIGIN_A),
-  {},
+  TEST_ENV,
 );
 assert.equal(overlongResponse.status, 400);
 assert.equal(countSummaryCalls() - detailCallsBefore, 1, "overlong event id must not reach upstream");
+
+assert.ok(analyticsPoints.length >= 7, "every Worker request should emit analytics");
+const liveAnalyticsPoint = analyticsPoints.find(
+  (point) => point.blobs?.[0] === "/live-matches",
+);
+assert.ok(liveAnalyticsPoint, "live endpoint analytics point must exist");
+assert.equal(liveAnalyticsPoint.blobs[2], "extension");
+assert.equal(liveAnalyticsPoint.blobs[3], "1.5");
+assert.equal(liveAnalyticsPoint.blobs[4], "Chrome");
+assert.equal(liveAnalyticsPoint.doubles[0], 1);
+assert.equal(liveAnalyticsPoint.blobs.length, 13);
 
 console.log("PASS worker regression tests");
 console.log("- 32 curated leagues include UEFA Nations League, UEFA EURO, and Copa America");
 console.log("- direct scoreboard probes are present and start within one live refresh");
 console.log("- coalesced live/detail responses retain each request's CORS origin");
 console.log("- known match detail is cached/coalesced; unknown and overlong ids fail closed");
+console.log("- privacy-preserving endpoint/version analytics is emitted without a user ID");
 
 function createApiRequest(path, origin) {
   return new Request(`https://worker.test${path}`, {
-    headers: { Origin: origin },
+    headers: {
+      Origin: origin,
+      "User-Agent": "Mozilla/5.0 Chrome/124.0.0.0 Safari/537.36",
+    },
   });
 }
 
 function createDetailRequest(eventId, origin) {
   return createApiRequest(
-    `/match-detail?eventId=${encodeURIComponent(eventId)}&leagueCode=eng.1`,
+    `/match-detail?eventId=${encodeURIComponent(eventId)}&leagueCode=eng.1&client=extension&version=1.5`,
     origin,
   );
 }

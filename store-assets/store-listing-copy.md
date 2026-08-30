@@ -18,7 +18,7 @@ What you get:
 4️⃣ Lineups, timeline, commentary, news and links for supported matches
 5️⃣ Favorite leagues pinned to the top
 
-No account, no unnecessary permissions, no personal data collection.
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ This extension is 100% open source and designed to be fully privacy-focused. ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -41,7 +41,7 @@ What you get:
 4️⃣ Lineups, timeline, commentary, news and links for supported matches
 5️⃣ Favorite leagues pinned to the top
 
-No account, no unnecessary permissions, no personal data collection.
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ This extension is 100% open source and designed to be fully privacy-focused. ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -64,7 +64,7 @@ What you get:
 4️⃣ Line-ups, timeline, commentary, news and links for supported matches
 5️⃣ Favourite leagues pinned to the top
 
-No account, no unnecessary permissions, no personal data collection.
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ This extension is 100% open source and designed to be fully privacy-focused. ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -87,7 +87,7 @@ What you get:
 4️⃣ Line-ups, timeline, commentary, news and links for supported matches
 5️⃣ Favourite leagues pinned to the top
 
-No account, no unnecessary permissions, no personal data collection.
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ This extension is 100% open source and designed to be fully privacy-focused. ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -110,7 +110,7 @@ Das bekommst du:
 4️⃣ Aufstellungen, Spielverlauf, Kommentar, News und Links für unterstützte Spiele
 5️⃣ Favorisierte Ligen ganz oben
 
-Kein Konto, keine unnötigen Berechtigungen, keine Erfassung persönlicher Daten.
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ Diese Erweiterung ist 100 % Open Source und konsequent datenschutzfreundlich. ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -133,7 +133,7 @@ Neler sunar:
 4️⃣ Desteklenen maçlarda kadrolar, olaylar, anlatım, haberler ve bağlantılar
 5️⃣ Favori liglerini en üste sabitleme
 
-Hesap yok, gereksiz izin yok, kişisel veri toplama yok.
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ Bu eklenti %100 açık kaynaklıdır ve tamamen gizlilik odaklı tasarlanmıştır. ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -156,7 +156,7 @@ Qué incluye:
 4️⃣ Alineaciones, cronología, narración, noticias y enlaces en partidos compatibles
 5️⃣ Ligas favoritas fijadas arriba
 
-Sin cuenta, sin permisos innecesarios y sin recopilación de datos personales.
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ Esta extensión es 100 % de código abierto y está pensada para la privacidad. ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -179,7 +179,7 @@ Qué incluye:
 4️⃣ Alineaciones, cronología, narración, noticias y enlaces en partidos compatibles
 5️⃣ Ligas favoritas fijadas arriba
 
-Sin cuenta, sin permisos innecesarios y sin recolección de datos personales.
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ Esta extensión es 100 % de código abierto y está diseñada con foco total en la privacidad. ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -202,7 +202,7 @@ Ce que vous obtenez :
 4️⃣ Compositions, chronologie, commentaire, actualités et liens pour les matchs pris en charge
 5️⃣ Ligues favorites épinglées en haut
 
-Pas de compte, pas d’autorisations inutiles, aucune collecte de données personnelles.
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ Cette extension est 100 % open source et conçue pour la confidentialité. ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -225,7 +225,7 @@ O que você encontra:
 4️⃣ Escalações, linha do tempo, comentários, notícias e links em jogos compatíveis
 5️⃣ Ligas favoritas fixadas no topo
 
-Sem conta, sem permissões desnecessárias e sem coleta de dados pessoais.
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ Esta extensão é 100% open source e feita com foco total em privacidade. ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -248,7 +248,7 @@ O que inclui:
 4️⃣ Formações, cronologia, comentários, notícias e ligações nos jogos suportados
 5️⃣ Ligas favoritas fixadas no topo
 
-Sem conta, sem permissões desnecessárias e sem recolha de dados pessoais.
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ Esta extensão é 100% open source e pensada para a privacidade. ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -271,7 +271,7 @@ Cosa ottieni:
 4️⃣ Formazioni, cronologia, commento, notizie e link per le partite supportate
 5️⃣ Campionati preferiti in cima
 
-Niente account, niente permessi inutili, nessuna raccolta di dati personali.
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ Questa estensione è open source al 100% e pensata per la privacy. ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -294,7 +294,7 @@ Dit krijg je:
 4️⃣ Opstellingen, tijdlijn, commentaar, nieuws en links voor ondersteunde wedstrijden
 5️⃣ Favoriete competities bovenaan vastgezet
 
-Geen account, geen onnodige rechten, geen verzameling van persoonsgegevens.
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ Deze extensie is 100% open source en volledig privacygericht. ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -317,7 +317,7 @@ Co dostajesz:
 4️⃣ Składy, przebieg, komentarz, newsy i linki dla obsługiwanych meczów
 5️⃣ Ulubione ligi przypięte na górze
 
-Bez konta, bez zbędnych uprawnień, bez zbierania danych osobowych.
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ To rozszerzenie jest w 100% open source i zaprojektowane z myślą o prywatności. ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -340,7 +340,7 @@ Darmowe.
 4️⃣ Составы, хронологию, комментарии, новости и ссылки для поддерживаемых матчей
 5️⃣ Избранные лиги закреплены сверху
 
-Без аккаунта, без лишних разрешений, без сбора персональных данных.
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ Это расширение на 100% open source и создано с акцентом на приватность. ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -363,7 +363,7 @@ Hype остаётся простым: открой, проверь счёт, в�
 4️⃣ 対応試合のスタメン、タイムライン、実況、ニュース、リンク
 5️⃣ お気に入りリーグを上部に固定
 
-アカウント不要、不要な権限なし、個人データの収集なし。
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ この拡張機能は 100% オープンソースで、プライバシー重視に設計されています。 ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -386,7 +386,7 @@ Hype はシンプル: 開いて、スコアを見て、元の作業に戻る。
 4️⃣ 지원 경기의 라인업, 타임라인, 해설, 뉴스, 링크
 5️⃣ 즐겨찾기 리그를 맨 위에 고정
 
-계정 없음, 불필요한 권한 없음, 개인정보 수집 없음.
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ 이 확장 프로그램은 100% 오픈 소스이며 프라이버시에 중점을 두고 설계되었습니다. ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -409,7 +409,7 @@ Hype는 단순합니다: 열고, 스코어를 확인하고, 하던 일로 돌아
 4️⃣ 支持比赛的阵容、赛况、文字直播、新闻与链接
 5️⃣ 收藏联赛置顶
 
-无需账号，无多余权限，不收集个人数据。
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ 本扩展 100% 开源，并完全以隐私为先设计。 ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -432,7 +432,7 @@ Hype 很简单：打开，看分，回到你正在做的事。
 4️⃣ 支援比賽的陣容、賽況、文字直播、新聞與連結
 5️⃣ 收藏聯賽置頂
 
-免帳號、無多餘權限、不收集個人資料。
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ 本擴充功能 100% 開源，並以隱私為核心設計。 ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -455,7 +455,7 @@ Hype 很簡單：打開、看比分、回到你正在做的事。
 4️⃣ التشكيلة والخط الزمني والتعليق والأخبار والروابط للمباريات المدعومة
 5️⃣ الدوريات المفضلة مثبتة في الأعلى
 
-بدون حساب، وبدون أذونات غير ضرورية، وبدون جمع بيانات شخصية.
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ هذه الإضافة مفتوحة المصدر بنسبة 100٪ ومصممة مع التركيز الكامل على الخصوصية. ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -478,7 +478,7 @@ Hype يبقي الأمر بسيطًا: افتح، تحقق من النتيجة،
 4️⃣ समर्थित मैचों के लिए लाइनअप, टाइमलाइन, कमेंट्री, समाचार और लिंक
 5️⃣ पसंदीदा लीग ऊपर पिन
 
-कोई खाता नहीं, अनावश्यक अनुमतियाँ नहीं, कोई व्यक्तिगत डेटा संग्रह नहीं।
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ यह एक्सटेंशन 100% ओपन सोर्स है और पूरी तरह प्राइवेसी-केंद्रित है। ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -501,7 +501,7 @@ Det får du:
 4️⃣ Opstillinger, tidslinje, kommentar, nyheder og links for understøttede kampe
 5️⃣ Favoritligaer øverst
 
-Ingen konto, ingen unødvendige tilladelser, ingen indsamling af persondata.
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ Denne udvidelse er 100 % open source og designet med fokus på privatliv. ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -524,7 +524,7 @@ Det här får du:
 4️⃣ Laguppställningar, tidslinje, referat, nyheter och länkar för stödda matcher
 5️⃣ Favoritligor högst upp
 
-Inget konto, inga onödiga behörigheter, ingen insamling av personuppgifter.
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ Detta tillägg är 100 % open source och byggt med integritet i fokus. ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -547,7 +547,7 @@ Dette får du:
 4️⃣ Lagoppstillinger, tidslinje, referat, nyheter og lenker for støttede kamper
 5️⃣ Favorittligaer festet øverst
 
-Ingen konto, ingen unødvendige tillatelser, ingen innsamling av persondata.
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ Denne utvidelsen er 100 % open source og laget med personvern i fokus. ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -570,7 +570,7 @@ Saat:
 4️⃣ Kokoonpanot, tapahtumat, selostus, uutiset ja linkit tuetuille otteluille
 5️⃣ Suosikkiliigat ylhäällä
 
-Ei tiliä, ei turhia oikeuksia, ei henkilötietojen keräämistä.
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ Tämä laajennus on 100 % avointa lähdekoodia ja suunniteltu yksityisyyttä ajatellen. ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -593,7 +593,7 @@ Què t’ofereix:
 4️⃣ Alineacions, cronologia, comentari, notícies i enllaços en partits compatibles
 5️⃣ Lligues preferides fixades a dalt
 
-Sense compte, sense permisos innecessaris i sense recollida de dades personals.
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ Aquesta extensió és 100 % de codi obert i pensada per a la privadesa. ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -616,7 +616,7 @@ Saad:
 4️⃣ Koosseisud, ajajoon, kommentaar, uudised ja lingid toetatud mängudele
 5️⃣ Lemmikliigad üleval
 
-Pole kontot, pole tarbetuid õigusi, pole isikuandmete kogumist.
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ See laiendus on 100% avatud lähtekoodiga ja loodud privaatsust silmas pidades. ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -639,7 +639,7 @@ Otvori skočni prozor za brzi pregled live rezultata, ishoda, nadolazećih utakm
 4️⃣ Sastave, tijek, komentar, vijesti i poveznice za podržane utakmice
 5️⃣ Omiljene lige pri vrhu
 
-Bez računa, bez nepotrebnih dopuštenja, bez prikupljanja osobnih podataka.
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ Ovo proširenje je 100 % open source i osmišljeno s naglaskom na privatnost. ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -662,7 +662,7 @@ Ko tu iegūsti:
 4️⃣ Sastāvus, laika skalu, komentārus, ziņas un saites atbalstītajām spēlēm
 5️⃣ Izlases līgas augšā
 
-Bez konta, bez liekām atļaujām, bez personas datu vākšanas.
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ Šis paplašinājums ir 100 % atvērtā koda un veidots ar privātumu prātā. ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -685,7 +685,7 @@ Ką gaunate:
 4️⃣ Sudėtis, eigą, komentarus, naujienas ir nuorodas palaikomoms rungtynėms
 5️⃣ Mėgstamas lygas viršuje
 
-Be paskyros, be nereikalingų leidimų, be asmens duomenų rinkimo.
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ Šis plėtinys yra 100 % atvirojo kodo ir sukurtas privatumo labui. ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -708,7 +708,7 @@ Mit kapsz:
 4️⃣ Felállások, idővonal, kommentár, hírek és linkek a támogatott meccseknél
 5️⃣ Kedvenc ligák a tetején
 
-Nincs fiók, nincsenek felesleges engedélyek, nincs személyesadat-gyűjtés.
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ Ez a bővítmény 100% open source, és a magánélet védelmére készült. ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -731,7 +731,7 @@ Ce primești:
 4️⃣ Echipele de start, cronologie, comentariu, știri și linkuri pentru meciurile suportate
 5️⃣ Ligi favorite fixate sus
 
-Fără cont, fără permisiuni inutile, fără colectare de date personale.
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ Această extensie este 100% open source și proiectată pentru confidențialitate. ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -754,7 +754,7 @@ Otvorte vyskakovacie okno a rýchlo skontrolujte live skóre, výsledky, nadchá
 4️⃣ Zostavy, priebeh, komentár, novinky a odkazy pre podporované zápasy
 5️⃣ Obľúbené ligy navrchu
 
-Bez účtu, bez zbytočných oprávnení, bez zberu osobných údajov.
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ Toto rozšírenie je 100 % open source a navrhnuté s dôrazom na súkromie. ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -777,7 +777,7 @@ Kaj dobite:
 4️⃣ Postave, potek, komentar, novice in povezave za podprte tekme
 5️⃣ Priljubljene lige na vrhu
 
-Brez računa, brez nepotrebnih dovoljenj, brez zbiranja osebnih podatkov.
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ Ta razširitev je 100 % odprtokodna in zasnovana zasebnostno usmerjeno. ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -800,7 +800,7 @@ Co získáte:
 4️⃣ Sestavy, průběh, komentář, novinky a odkazy pro podporované zápasy
 5️⃣ Oblíbené ligy nahoře
 
-Bez účtu, bez zbytečných oprávnění, bez sběru osobních údajů.
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ Toto rozšíření je 100% open source a navržené s důrazem na soukromí. ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -823,7 +823,7 @@ Zdarma k použití.
 4️⃣ Ενδεκάδες, χρονολόγιο, σχολιασμό, νέα και συνδέσμους για υποστηριζόμενους αγώνες
 5️⃣ Αγαπημένα πρωταθλήματα καρφιτσωμένα πάνω
 
-Χωρίς λογαριασμό, χωρίς περιττά δικαιώματα, χωρίς συλλογή προσωπικών δεδομένων.
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ Αυτή η επέκταση είναι 100% ανοιχτού κώδικα και σχεδιασμένη με επίκεντρο το απόρρητο. ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -846,7 +846,7 @@ https://github.com/Atakan0zkan/HypeScore
 4️⃣ Състави, хронология, коментар, новини и връзки за поддържани мачове
 5️⃣ Любими лиги най-отгоре
 
-Без акаунт, без ненужни разрешения, без събиране на лични данни.
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ Това разширение е 100% open source и проектирано с фокус върху поверителността. ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -869,7 +869,7 @@ Hype остава прост: отвори, провери резултата, �
 4️⃣ Саставе, ток, коментар, вести и линкове за подржане утакмице
 5️⃣ Омиљене лиге на врху
 
-Без налога, без непотребних дозвола, без прикупљања личних података.
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ Ово проширење је 100% open source и направљено са фокусом на приватност. ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -892,7 +892,7 @@ Hype остаје једноставан: отворите, проверите �
 4️⃣ Склади, хронологію, коментарі, новини та посилання для підтримуваних матчів
 5️⃣ Улюблені ліги закріплені зверху
 
-Без облікового запису, без зайвих дозволів, без збору персональних даних.
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ Це розширення на 100% open source і створене з акцентом на приватність. ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -915,7 +915,7 @@ Hype залишається простим: відкрий, перевір ра�
 4️⃣ הרכב, ציר זמן, פרשנות, חדשות וקישורים למשחקים נתמכים
 5️⃣ ליגות מועדפות בראש
 
-בלי חשבון, בלי הרשאות מיותרות, בלי איסוף נתונים אישיים.
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ התוסף הזה הוא 100% קוד פתוח ומעוצב עם דגש על פרטיות. ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -938,7 +938,7 @@ Hype נשאר פשוט: פתחו, בדקו את התוצאה, חזרו למה ש
 4️⃣ ترکیب، خط زمانی، گزارش، اخبار و پیوندها برای بازی‌های پشتیبانی‌شده
 5️⃣ لیگ‌های موردعلاقه در بالا
 
-بدون حساب، بدون مجوزهای غیرضروری، بدون جمع‌آوری داده شخصی.
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ این افزونه ۱۰۰٪ متن‌باز است و با تمرکز کامل بر حریم خصوصی طراحی شده. ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -961,7 +961,7 @@ Ano ang makukuha mo:
 4️⃣ Lineups, timeline, commentary, balita, at links para sa suportadong laban
 5️⃣ Paboritong liga na naka-pin sa itaas
 
-Walang account, walang hindi kailangang permission, walang personal data collection.
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ Ang extension na ito ay 100% open source at idinisenyo para sa privacy. ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -984,7 +984,7 @@ Yang Anda dapatkan:
 4️⃣ Susunan pemain, linimasa, komentar, berita, dan tautan untuk pertandingan yang didukung
 5️⃣ Liga favorit dipasang di atas
 
-Tanpa akun, tanpa izin yang tidak perlu, tanpa pengumpulan data pribadi.
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ Ekstensi ini 100% open source dan dirancang dengan fokus penuh pada privasi. ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -1007,7 +1007,7 @@ Unachopata:
 4️⃣ Orodha za wachezaji, mfululizo, ufafanuzi, habari na viungo kwa mechi zinazotumika
 5️⃣ Ligi unazopenda zimebandikwa juu
 
-Bila akaunti, bila ruhusa zisizohitajika, bila kukusanya data binafsi.
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ Kiendelezi hiki ni open source 100% na kimeundwa kwa kuzingatia faragha. ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -1030,7 +1030,7 @@ Apa yang anda dapat:
 4️⃣ Barisan pemain, garis masa, ulasan, berita dan pautan untuk perlawanan yang disokong
 5️⃣ Liga kegemaran dipinkan di atas
 
-Tiada akaun, tiada kebenaran yang tidak perlu, tiada pengumpulan data peribadi.
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ Sambungan ini 100% sumber terbuka dan direka dengan fokus privasi. ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -1053,7 +1053,7 @@ Bạn nhận được:
 4️⃣ Đội hình, diễn biến, bình luận, tin tức và liên kết cho các trận được hỗ trợ
 5️⃣ Giải yêu thích ghim trên cùng
 
-Không tài khoản, không quyền thừa, không thu thập dữ liệu cá nhân.
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ Tiện ích này 100% mã nguồn mở và được thiết kế hướng tới quyền riêng tư. ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -1076,7 +1076,7 @@ Miễn phí sử dụng.
 4️⃣ รายชื่อผู้เล่น ไทม์ไลน์ คำบรรยาย ข่าว และลิงก์สำหรับแมตช์ที่รองรับ
 5️⃣ ลีกโปรดปักหมุดด้านบน
 
-ไม่ต้องมีบัญชี ไม่ขอสิทธิ์เกินจำเป็น ไม่เก็บข้อมูลส่วนบุคคล
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ ส่วนขยายนี้เป็นโอเพนซอร์ส 100% และออกแบบโดยโฟกัสความเป็นส่วนตัว ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -1099,7 +1099,7 @@ Hype เรียบง่าย: เปิด ดูสกอร์ แล้�
 4️⃣ ለሚደገፉ ጨዋታዎች መስመሮች፣ ጊዜ መስመር፣ ትንታኔ፣ ዜና እና አገናኞች
 5️⃣ ተወዳጅ ሊጎች በላይ ተጣብቀዋል
 
-መለያ የለም፣ አላስፈላጊ ፈቃዶች የሉም፣ የግል መረጃ አይሰበሰብም።
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ ይህ ቅጥያ 100% ክፍት ምንጭ ነው እና ሙሉ በሙሉ በግላዊነት ላይ ያተኮረ ነው። ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -1122,7 +1122,7 @@ Hype ቀላል ይቆያል፦ ክፈት፣ ውጤቱን ተመልከት፣ ወ�
 4️⃣ समर्थित सामन्यांसाठी संघ रचना, टाइमलाइन, समालोचन, बातम्या आणि दुवे
 5️⃣ आवडत्या लीग वर पिन
 
-खाते नाही, अनावश्यक परवानग्या नाहीत, वैयक्तिक डेटा संकलन नाही.
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ हे विस्तार 100% ओपन सोर्स आहे आणि पूर्णपणे गोपनीयता-केंद्रित आहे. ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -1145,7 +1145,7 @@ Hype सोपे राहते: उघडा, स्कोअर तपास
 4️⃣ সমর্থিত ম্যাচের লাইনআপ, টাইমলাইন, ধারাভাষ্য, খবর ও লিঙ্ক
 5️⃣ প্রিয় লিগ উপরে পিন
 
-কোনো অ্যাকাউন্ট নেই, অপ্রয়োজনীয় অনুমতি নেই, ব্যক্তিগত ডেটা সংগ্রহ নেই।
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ এই এক্সটেনশন ১০০% ওপেন সোর্স এবং সম্পূর্ণ গোপনীয়তা-কেন্দ্রিক। ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -1168,7 +1168,7 @@ Hype সরল থাকে: খুলুন, স্কোর দেখুন, �
 4️⃣ સમર્થિત મેચો માટે લાઇનઅપ, ટાઇમલાઇન, કોમેન્ટ્રી, સમાચાર અને લિંક
 5️⃣ મનપસંદ લીગ ઉપર પિન
 
-એકાઉન્ટ નહીં, બિનજરૂરી પરવાનગીઓ નહીં, વ્યક્તિગત ડેટા સંગ્રહ નહીં.
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ આ એક્સટેન્શન 100% ઓપન સોર્સ છે અને સંપૂર્ણ ગોપનીયતા-કેન્દ્રિત છે. ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -1191,7 +1191,7 @@ Hype સરળ રહે છે: ખોલો, સ્કોર તપાસો, 
 4️⃣ ஆதரிக்கப்படும் போட்டிகளுக்கான அணி அமைப்பு, நேரக்கோடு, விளக்கம், செய்திகள், இணைப்புகள்
 5️⃣ பிடித்த லீக்குகள் மேலே பின்
 
-கணக்கு இல்லை, தேவையற்ற அனுமதிகள் இல்லை, தனிப்பட்ட தரவு சேகரிப்பு இல்லை.
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ இந்த நீட்டிப்பு 100% திறந்த மூலமும் முழுமையாக தனியுரிமை மையமாகவும் வடிவமைக்கப்பட்டுள்ளது. ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -1214,7 +1214,7 @@ Hype எளிமையாக இருக்கும்: திற, மதி�
 4️⃣ మద్దతు ఉన్న మ్యాచ్‌లకు లైనప్‌లు, టైమ్‌లైన్, కామెంటరీ, వార్తలు, లింకులు
 5️⃣ ఇష్టమైన లీగ్‌లు పైన పిన్
 
-ఖాతా లేదు, అనవసర అనుమతులు లేవు, వ్యక్తిగత డేటా సేకరణ లేదు.
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ ఈ ఎక్స్‌టెన్షన్ 100% ఓపెన్ సోర్స్ మరియు పూర్తిగా గోప్యతా-కేంద్రీకృతం. ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -1237,7 +1237,7 @@ Hype సరళంగా ఉంటుంది: తెరవండి, స్క�
 4️⃣ ಬೆಂಬಲಿತ ಪಂದ್ಯಗಳಿಗೆ ಲೈನಪ್, ಟೈಮ್‌ಲೈನ್, ವ್ಯಾಖ್ಯಾನ, ಸುದ್ದಿ ಮತ್ತು ಲಿಂಕ್‌ಗಳು
 5️⃣ ಮೆಚ್ಚಿನ ಲೀಗ್‌ಗಳು ಮೇಲೆ ಪಿನ್
 
-ಖಾತೆ ಇಲ್ಲ, ಅನಗತ್ಯ ಅನುಮತಿಗಳಿಲ್ಲ, ವೈಯಕ್ತಿಕ ಡೇಟಾ ಸಂಗ್ರಹವಿಲ್ಲ.
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ ಈ ವಿಸ್ತರಣೆ 100% ಓಪನ್ ಸೋರ್ಸ್ ಮತ್ತು ಸಂಪೂರ್ಣ ಗೌಪ್ಯತಾ-ಕೇಂದ್ರಿತ. ⏭️
 https://github.com/Atakan0zkan/HypeScore
@@ -1260,7 +1260,7 @@ Hype ಸರಳವಾಗಿರುತ್ತದೆ: ತೆರೆಯಿರಿ, ಸ�
 4️⃣ പിന്തുണയുള്ള മത്സരങ്ങൾക്ക് ലൈനപ്പ്, ടൈംലൈൻ, കമന്ററി, വാർത്തകൾ, ലിങ്കുകൾ
 5️⃣ പ്രിയപ്പെട്ട ലീഗുകൾ മുകളിൽ പിൻ
 
-അക്കൗണ്ട് ഇല്ല, അനാവശ്യ അനുമതികൾ ഇല്ല, വ്യക്തിഗത ഡാറ്റ ശേഖരണം ഇല്ല.
+No account and no advertising trackers. Hype processes limited, aggregate API request analytics (feature, extension version, country, browser family, response status and timing) to improve reliability. It does not store raw IP addresses or persistent device identifiers in its product analytics dataset. Privacy: https://github.com/Atakan0zkan/HypeScore/blob/main/PRIVACY.md
 
 ⏭️ ഈ എക്സ്റ്റൻഷൻ 100% ഓപ്പൺ സോഴ്സും പൂർണ്ണമായും സ്വകാര്യതാ-കേന്ദ്രീകൃതവുമാണ്. ⏭️
 https://github.com/Atakan0zkan/HypeScore

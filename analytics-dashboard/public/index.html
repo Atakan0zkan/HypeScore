@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <title>Hype Analytics</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Hype · Local analytics</p>
+          <h1>Product usage dashboard</h1>
+          <p class="subtitle">
+            Aggregate Cloudflare metrics with no persistent user identifier.
+          </p>
+        </div>
+        <div class="toolbar" aria-label="Dashboard controls">
+          <div class="range-control" role="group" aria-label="Date range">
+            <button type="button" data-days="7" class="is-active">7D</button>
+            <button type="button" data-days="30">30D</button>
+            <button type="button" data-days="90">90D</button>
+          </div>
+          <button type="button" id="refreshButton" class="refresh-button">
+            Refresh
+          </button>
+        </div>
+      </header>
+
+      <section id="statusBanner" class="status-banner" aria-live="polite">
+        Loading Cloudflare analytics…
+      </section>
+
+      <section class="metric-grid" aria-label="Key metrics">
+        <article class="metric-card">
+          <span>Latest daily visit estimate</span>
+          <strong id="metricActiveClients">—</strong>
+          <small>API-host visits, not unique people or devices</small>
+        </article>
+        <article class="metric-card">
+          <span>Functional requests</span>
+          <strong id="metricRequests">—</strong>
+          <small id="metricRequestRange">Selected period</small>
+        </article>
+        <article class="metric-card">
+          <span>Feature actions</span>
+          <strong id="metricFeatureRequests">—</strong>
+          <small>Standings, match detail and bracket loads</small>
+        </article>
+        <article class="metric-card">
+          <span>Successful responses</span>
+          <strong id="metricSuccessRate">—</strong>
+          <small>HTTP 2xx and 3xx share</small>
+        </article>
+        <article class="metric-card">
+          <span>Average Worker time</span>
+          <strong id="metricLatency">—</strong>
+          <small>End-to-end Worker response duration</small>
+        </article>
+        <article class="metric-card">
+          <span>Cache hit rate</span>
+          <strong id="metricCacheHitRate">—</strong>
+          <small>Responses served from Worker cache</small>
+        </article>
+      </section>
+
+      <main class="dashboard-grid">
+        <section class="panel panel-wide">
+          <div class="panel-heading">
+            <div>
+              <h2>Daily functional requests</h2>
+              <p>Actual calls made to the score API after analytics deployment.</p>
+            </div>
+          </div>
+          <div id="requestTrend" class="chart" role="img" aria-label="Daily request trend"></div>
+        </section>
+
+        <section class="panel panel-wide">
+          <div class="panel-heading">
+            <div>
+              <h2>Estimated daily visits</h2>
+              <p>Cloudflare hostname-filtered visits for api.atakanozkan.com.</p>
+            </div>
+          </div>
+          <div id="clientTrend" class="chart" role="img" aria-label="Estimated daily visit trend"></div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-heading">
+            <div>
+              <h2>Feature usage</h2>
+              <p>Existing server-backed actions; no extra tracking request.</p>
+            </div>
+          </div>
+          <div id="endpointBars" class="bar-chart"></div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-heading">
+            <div>
+              <h2>Country mix</h2>
+              <p>Aggregate request country derived by Cloudflare.</p>
+            </div>
+          </div>
+          <div id="countryBars" class="bar-chart"></div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-heading">
+            <div>
+              <h2>Extension versions</h2>
+              <p>Static manifest version, never a device identifier.</p>
+            </div>
+          </div>
+          <div id="versionBars" class="bar-chart"></div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-heading">
+            <div>
+              <h2>Browser families</h2>
+              <p>Broad browser family and major version only.</p>
+            </div>
+          </div>
+          <div id="browserBars" class="bar-chart"></div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-heading">
+            <div>
+              <h2>League interest</h2>
+              <p>League code on standings, match detail and bracket requests.</p>
+            </div>
+          </div>
+          <div id="leagueBars" class="bar-chart"></div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-heading">
+            <div>
+              <h2>Traffic classification</h2>
+              <p>Extension-labelled versus other API traffic.</p>
+            </div>
+          </div>
+          <div id="clientBars" class="bar-chart"></div>
+        </section>
+
+        <section class="panel panel-full">
+          <div class="panel-heading">
+            <div>
+              <h2>Endpoint quality</h2>
+              <p>Request volume, success rate and average response time.</p>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Feature</th>
+                  <th scope="col">Requests</th>
+                  <th scope="col">Success</th>
+                  <th scope="col">Failures</th>
+                  <th scope="col">Avg time</th>
+                </tr>
+              </thead>
+              <tbody id="endpointTable"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="panel panel-full methodology">
+          <div class="panel-heading">
+            <div>
+              <h2>Data coverage and privacy</h2>
+              <p id="coverageText">Waiting for source metadata…</p>
+            </div>
+          </div>
+          <div id="warningList" class="warning-list"></div>
+          <ul>
+            <li>No raw IP address is written to the Hype product dataset.</li>
+            <li>No persistent device ID, account, favorite or browsing history is collected.</li>
+            <li>Hostname visits are traffic estimates and should not be presented as unique people.</li>
+            <li>Analytics Engine feature history begins only after the instrumented Worker deployment.</li>
+          </ul>
+        </section>
+      </main>
+
+      <footer>
+        <span id="freshnessText">Not refreshed yet</span>
+        <span>Localhost only · Token stays in the Node process</span>
+      </footer>
+    </div>
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>

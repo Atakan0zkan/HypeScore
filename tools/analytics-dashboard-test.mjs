@@ -3,12 +3,21 @@
 import assert from "node:assert/strict";
 import {
   createUsageQueries,
+  getTokenVerificationUrl,
   shapeDashboardData,
 } from "../analytics-dashboard/server.mjs";
 
 const queries = createUsageQueries(7);
 assert.match(queries.coverage, /INTERVAL '7' DAY/);
 assert.doesNotMatch(JSON.stringify(queries), /client_ip|user_id|device_id/i);
+assert.equal(
+  getTokenVerificationUrl("cfat_example", "account-id"),
+  "https://api.cloudflare.com/client/v4/accounts/account-id/tokens/verify",
+);
+assert.equal(
+  getTokenVerificationUrl("legacy-user-token", "account-id"),
+  "https://api.cloudflare.com/client/v4/user/tokens/verify",
+);
 
 const payload = shapeDashboardData(
   {

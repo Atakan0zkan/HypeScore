@@ -22,9 +22,15 @@ $headers = @{
   Authorization = "Bearer $env:CLOUDFLARE_API_TOKEN"
 }
 
+$verificationUri = if ($env:CLOUDFLARE_API_TOKEN.StartsWith("cfat_")) {
+  "https://api.cloudflare.com/client/v4/accounts/$env:CLOUDFLARE_ACCOUNT_ID/tokens/verify"
+} else {
+  "https://api.cloudflare.com/client/v4/user/tokens/verify"
+}
+
 try {
   $verification = Invoke-RestMethod `
-    -Uri "https://api.cloudflare.com/client/v4/user/tokens/verify" `
+    -Uri $verificationUri `
     -Headers $headers
   if ($verification.result.status -ne "active") {
     throw "Cloudflare token is not active."

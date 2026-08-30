@@ -136,12 +136,16 @@ async function buildDashboardPayload(days) {
 }
 
 async function verifyApiToken() {
-  const result = await cloudflareFetch(
-    "https://api.cloudflare.com/client/v4/user/tokens/verify",
-  );
+  const result = await cloudflareFetch(getTokenVerificationUrl(API_TOKEN));
   if (result.result?.status !== "active") {
     throw new Error("Cloudflare API token is not active");
   }
+}
+
+function getTokenVerificationUrl(token, accountId = ACCOUNT_ID) {
+  return String(token || "").startsWith("cfat_")
+    ? `https://api.cloudflare.com/client/v4/accounts/${accountId}/tokens/verify`
+    : "https://api.cloudflare.com/client/v4/user/tokens/verify";
 }
 
 function createUsageQueries(days) {
@@ -433,7 +437,7 @@ function commonHeaders({ contentType, cacheControl }) {
   };
 }
 
-export { createUsageQueries, shapeDashboardData };
+export { createUsageQueries, getTokenVerificationUrl, shapeDashboardData };
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   if (!API_TOKEN) {

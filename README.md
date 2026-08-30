@@ -204,7 +204,8 @@ npm run analytics
 
 The launcher securely prompts for a scoped Cloudflare API token and keeps it in
 the current process environment. The token is never sent to the browser or
-stored in the repository. Open the printed `http://127.0.0.1:4173` address.
+stored in the repository. Both `cfat_` account-owned tokens and user API tokens
+are supported. Open the printed `http://127.0.0.1:4173` address.
 The page refreshes every five minutes while visible and can be refreshed on
 demand.
 

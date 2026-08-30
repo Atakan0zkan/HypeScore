@@ -223,6 +223,12 @@ cache effectiveness, and extension-labelled versus other traffic. Feature
 history begins only after the instrumented Worker is deployed; the UI displays
 partial-source warnings rather than inventing missing values.
 
+Google Analytics is technically possible through GA4 Measurement Protocol, but
+it is not enabled because the standard Chrome integration introduces a
+persistent installation identifier and different disclosure/consent
+requirements. See [ANALYTICS.md](ANALYTICS.md) for the official-source
+evaluation and the minimum design required for any future opt-in integration.
+
 ESPN standings are fetched from:
 
 ```text

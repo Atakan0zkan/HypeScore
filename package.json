@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "description": "Hype - Live Football Scores Chrome Extension & Cloudflare Worker",
+  "license": "SEE LICENSE IN LICENSE",
   "scripts": {
     "test": "node tools/worker-regression-test.mjs",
     "smoke": "node tools/smoke-test.js",

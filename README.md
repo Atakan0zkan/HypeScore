@@ -1,6 +1,6 @@
 # HypeScore
 
-HypeScore is the open-source project behind
+HypeScore is the source-available project behind
 [Hype - Live Football Scores](https://chromewebstore.google.com/detail/hype-live-football-scores/cdnpjnmhmagmiefkleefgchgffeaacaa),
 a lightweight Chrome Manifest V3 popup backed by a Cloudflare Worker.
 
@@ -29,8 +29,7 @@ The product analytics dataset excludes raw IP addresses, persistent device
 identifiers, accounts, favorites, event IDs, browsing history, and cross-site
 activity. It is not used for advertising or profiling.
 
-See [PRIVACY.md](PRIVACY.md) for the user-facing notice,
-[ANALYTICS.md](ANALYTICS.md) for the analytics design, and
+See [PRIVACY.md](PRIVACY.md) for the user-facing notice and
 [SECURITY.md](SECURITY.md) for responsible disclosure.
 
 ## Architecture
@@ -128,7 +127,6 @@ extension/             Chrome extension runtime and locales
 worker/                Cloudflare Worker
 analytics-dashboard/   localhost-only owner dashboard
 tools/                 regression, smoke, locale audit, and QA helpers
-ANALYTICS.md            analytics design decision
 PRIVACY.md              privacy notice
 SECURITY.md             vulnerability reporting
 wrangler.jsonc          canonical Worker configuration
@@ -144,4 +142,6 @@ root. Release archives belong in the ignored `dist/` directory.
 
 ## License
 
-[MIT](LICENSE)
+This project is licensed under the [PolyForm Strict License 1.0.0](LICENSE).
+Commercial use, redistribution, and creating modified versions are not
+permitted without a separate written license from the copyright holder.

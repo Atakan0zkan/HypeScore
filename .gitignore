@@ -31,6 +31,7 @@ dist/
 
 # Project-local private/release helpers
 memory-bank/
+ANALYTICS.md
 package-extension-store.bat
 crop.ps1
 store-assets/

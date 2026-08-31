@@ -1,6 +1,6 @@
 # HypeScore Privacy Notice
 
-Last updated: 2026-08-30
+Last updated: 2026-09-01
 
 Hype - Live Football Scores does not require an account and does not use
 advertising trackers, analytics cookies, or a persistent device identifier.
@@ -60,15 +60,3 @@ be searched or exported by a specific person or device.
 
 This notice should be read together with the disclosures in the Chrome Web
 Store Privacy practices section.
-
----
-
-## Türkçe Özet
-
-Hype hesap, reklam takipçisi, analitik çerez veya kalıcı cihaz kimliği
-kullanmaz. Uygulamanın zorunlu API isteklerinden; kullanılan özellik, uygulama
-sürümü, toplu ülke/tarayıcı bilgisi, cevap durumu ve süresi gibi sınırlı
-istatistikler üretilir. Hype analiz veri kümesine ham IP adresi, favoriler,
-tarama geçmişi veya siteler arası hareketler yazılmaz. Cloudflare ağ hizmetini
-sunabilmek için IP adresini işler ve API hostname'i için yaklaşık ziyaret
-istatistiği sağlayabilir; bu değer kesin kullanıcı veya cihaz sayısı değildir.

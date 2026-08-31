@@ -22,6 +22,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+*.log
+*.tmp
+*.bak
 coverage/
 dist/
 *.zip
@@ -30,5 +33,19 @@ dist/
 memory-bank/
 package-extension-store.bat
 crop.ps1
-store-assets/sources/
+store-assets/
 AGENTS.md
+
+# Generated translation/store maintenance inputs
+tools/i18n-source/
+tools/apply-locales.js
+tools/seed-locale-packs*.js
+tools/seed-locale-sources.js
+tools/seed-store-listing.js
+tools/build-large-promo.ps1
+tools/capture-store-sources.ps1
+tools/generate-store-assets.ps1
+tools/process-store-assets.ps1
+
+# Duplicate local Wrangler configuration; wrangler.jsonc is canonical
+wrangler.toml

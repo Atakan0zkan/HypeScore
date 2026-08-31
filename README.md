@@ -1,555 +1,147 @@
 # HypeScore
 
-HypeScore is the open-source codebase behind **Hype - Live Football Scores**,
-a dependency-free Chrome browser extension backed by a Cloudflare Worker. The
-extension uses adaptive refresh and cache-backed lazy detail endpoints to stay
-friendly to the Cloudflare Workers Free plan.
+HypeScore is the open-source project behind
+[Hype - Live Football Scores](https://chromewebstore.google.com/detail/hype-live-football-scores/cdnpjnmhmagmiefkleefgchgffeaacaa),
+a lightweight Chrome Manifest V3 popup backed by a Cloudflare Worker.
 
-The popup defaults to English and follows the browser language through Chrome
-locale files (`extension/_locales`), with `55` locales including regional
-English/Spanish/Portuguese variants. Arabic, Hebrew, and Persian use RTL layout.
-Matches are grouped by league, with live matches, results, upcoming fixtures,
-team logos, local favorites, full standings, and lazy-loaded match details
-shown when the upstream API supports that data.
+It shows live scores, results, upcoming fixtures, league tables, match details,
+and the FIFA World Cup knockout bracket without injecting scripts into websites.
 
-## Current release
+## Features
 
-- Chrome Web Store listing: `https://chromewebstore.google.com/detail/hype-live-football-scores/cdnpjnmhmagmiefkleefgchgffeaacaa`
-- GitHub repository: `https://github.com/Atakan0zkan/HypeScore.git`
-- Published extension ID: `cdnpjnmhmagmiefkleefgchgffeaacaa`
-- Extension manifest version: `1.5`
-- Current store package: `dist/hype-live-football-scores-v1.5.0-chrome-web-store.zip`
-- Worker URL: `https://api.atakanozkan.com`
-- Latest deployed Worker version: `5394c8c3-5f38-45cd-b5fe-50d794f83f1a`
-- The v1.5.0 Worker is deployed to production and the live 32-competition API smoke test passes.
+- 32 curated football competitions, including UEFA Nations League, UEFA EURO,
+  Copa América, FIFA World Cup, and major domestic and UEFA club competitions.
+- Live, completed, and upcoming matches in a compact popup.
+- Lazy-loaded standings, match statistics, lineups, timeline, commentary, news,
+  links, and World Cup knockout rounds.
+- Local favorite leagues, adaptive refresh, local score cache, and request
+  budget protection.
+- 55 interface locales with RTL support for Arabic, Hebrew, and Persian.
+- No account, advertisements, content scripts, or remote executable code.
 
-## Open-source notes
+## Privacy
 
-- License: MIT.
-- Runtime dependencies: none.
-- Build step: none.
-- Local/private files are excluded through `.gitignore`, including
-  `memory-bank/`, `.wrangler/`, `.dev.vars`, `.env*`, `dist/`, and raw store
-  capture sources.
-- The checked-in extension currently points to the production Worker used by
-  the published Chrome Web Store listing. If you fork this project, deploy your
-  own Worker and update both `extension/popup.js` and
-  `extension/manifest.json` before publishing your own extension.
+The extension sends functional football-data requests only to the Hype
+Cloudflare Worker. The Worker records limited aggregate usage and reliability
+metrics in Workers Analytics Engine.
 
-## Main features
+The product analytics dataset excludes raw IP addresses, persistent device
+identifiers, accounts, favorites, event IDs, browsing history, and cross-site
+activity. It is not used for advertising or profiling.
 
-- Curated 32-competition list with local packaged league logos, including UEFA Nations League, UEFA EURO, and Copa America.
-- Live match, result, and upcoming-within-24h sections.
-- League favorites stored locally and pinned above regular leagues.
-- Full league standings loaded only when a league is opened.
-- Match detail screen loaded only when a match is opened.
-- Match detail accordions for stats, timeline, lineups, commentary, news, and links.
-- ESPN team logos on match cards; known ESPN gaps can use curated HTTPS overrides such as Cancún FC.
-- FIFA World Cup is included in the curated league/cup roster when ESPN exposes current fixtures.
-- FIFA World Cup knockout rounds are available as a lazy World Cup-only section using ESPN date-range scoreboard data.
-- The popup live-payload cache is versioned so roster changes such as World Cup support invalidate older cached league lists.
-- `55` Chrome UI locales with automatic browser-language selection (`default_locale: en`).
-- RTL popup direction for Arabic, Hebrew, and Persian.
-- Header `ENG` toggle forces English labels for quick translation fallback, then returns to the browser/default locale when turned off.
-- Chrome Web Store long-description copy for the same language set lives in `store-assets/store-listing-copy.md`.
-- Dark Hype theme with muted red accents and fixed 580x600 popup sizing.
-- Cloudflare Free-plan-friendly refresh behavior with local cache, lazy endpoints, and a local daily request guard.
-- Privacy-preserving aggregate feature, version, country, browser, reliability,
-  and cache analytics through Workers Analytics Engine, with no persistent
-  user identifier or additional tracking request.
-- Localhost-only live analytics dashboard with 7/30/90-day charts and source
-  freshness warnings.
+See [PRIVACY.md](PRIVACY.md) for the user-facing notice,
+[ANALYTICS.md](ANALYTICS.md) for the analytics design, and
+[SECURITY.md](SECURITY.md) for responsible disclosure.
 
-## Project structure
+## Architecture
 
 ```text
-LiveScoreFootball/
-  .gitignore
-  AGENTS.md
-  PRIVACY.md
-  README.md
-  analytics-dashboard/
-    server.mjs
-    public/
-      index.html
-      styles.css
-      app.js
-  extension/
-    _locales/
-      <55 locale codes>/messages.json
-    icons/
-      icon16.png
-      icon32.png
-      icon48.png
-      icon128.png
-      leagues/
-        *.png
-    manifest.json
-    popup.css
-    popup.html
-    popup.js
-  store-assets/
-    promo-marquee-1400x560.png
-    promo-small-440x280.png
-    store-listing-copy.md
-    screenshot-*.png
-  tools/
-    apply-locales.js
-    seed-locale-sources.js
-    seed-store-listing.js
-    capture-store-sources.ps1
-    download-league-logos.ps1
-    generate-store-assets.ps1
-    smoke-extension-cdp.ps1
-    smoke-test.js
-    worker-regression-test.mjs
-  worker/
-    index.js
+Chrome MV3 popup
+       |
+       v
+Cloudflare Worker + Cache API
+       |
+       +--> ESPN public football endpoints
+       +--> optional TheSportsDB fallback
+       +--> Workers Analytics Engine
 ```
 
-Local-only files such as `memory-bank/`, `package-extension-store.bat`,
-`crop.ps1`, `dist/`, `.wrangler/`, `.dev.vars`, `.env*`, and raw capture files
-under `store-assets/sources/` are intentionally ignored and should not be
-pushed.
+The project has no frontend runtime dependencies and no build step. The
+extension source in `extension/` is the package loaded by Chrome.
 
-## Backend
+### Worker endpoints
 
-The Worker exposes:
+| Endpoint | Purpose |
+|---|---|
+| `GET /live-matches` | Curated live, result, and next-24-hour fixtures |
+| `GET /league-standings?leagueCode=...` | Lazy league table |
+| `GET /match-detail?eventId=...&leagueCode=...` | Lazy match detail |
+| `GET /tournament-bracket?leagueCode=fifa.world` | Lazy World Cup bracket |
 
-```text
-GET /live-matches
-GET /league-standings?leagueCode={leagueCode}
-GET /match-detail?eventId={eventId}&leagueCode={leagueCode}
-GET /tournament-bracket?leagueCode=fifa.world
+## Run the extension locally
+
+1. Clone the repository.
+2. Open `chrome://extensions`.
+3. Enable **Developer mode**.
+4. Select **Load unpacked** and choose the `extension/` directory.
+
+The extension connects to the production API configured in
+`extension/popup.js`. To use another Worker, update that URL and the matching
+`host_permissions` entry in `extension/manifest.json`.
+
+## Development
+
+Install the development dependency:
+
+```powershell
+npm install
 ```
 
-Response shape:
+Run the local checks:
 
-```json
-{
-  "matches": [
-    {
-      "id": "740912",
-      "league": "English Premier League",
-      "homeTeam": "Manchester United",
-      "awayTeam": "Leeds United",
-      "homeLogo": "https://...",
-      "awayLogo": "https://...",
-      "homeScore": 0,
-      "awayScore": 0,
-      "minute": "Scheduled",
-      "status": "Scheduled",
-      "kickoff": "2026-04-26T17:30Z",
-      "venue": "Old Trafford · Manchester, England"
-    }
-  ]
-}
+```powershell
+npm test
+npm run analytics:test
+npm run smoke
 ```
 
-The response also includes a grouped `leagues` array for the popup UI:
+- `npm test` runs the Worker regression suite.
+- `npm run analytics:test` validates dashboard queries and data shaping.
+- `npm run smoke` checks the deployed API and therefore requires internet
+  access.
 
-```json
-{
-  "leagues": [
-    {
-      "id": "740",
-      "code": "esp.1",
-      "name": "LaLiga",
-      "logo": "https://...",
-      "matches": []
-    }
-  ]
-}
+## Deploy the Worker
+
+`wrangler.jsonc` is the canonical Cloudflare configuration.
+
+```powershell
+npx wrangler login
+npm run deploy
 ```
 
-The primary source is ESPN's unofficial soccer scoreboard endpoint:
+For token-based automation, provide `CLOUDFLARE_API_TOKEN` through the process
+environment. Never save Cloudflare credentials in the repository.
 
-```text
-https://site.api.espn.com/apis/site/v2/sports/soccer/all/scoreboard
+The optional fallback key must be stored as a Worker secret:
+
+```powershell
+npx wrangler secret put THESPORTSDB_API_KEY
 ```
-
-If ESPN fails, the Worker uses TheSportsDB only when `THESPORTSDB_API_KEY` is configured:
-
-```text
-https://www.thesportsdb.com/api/v2/json/livescore/soccer
-```
-
-TheSportsDB v2 livescore requires an API key, so fallback is optional by design.
-
-## Privacy-preserving product analytics
-
-The Worker writes one aggregate Analytics Engine data point for each existing
-functional API request. The event describes the Hype endpoint, static extension
-version, broad country/browser context, response status, cache result, response
-time, and league code when the requested feature already contains one. It does
-not add another popup-open tracking request.
-
-The Hype analytics dataset intentionally excludes raw IP addresses, persistent
-or random client IDs, accounts, favorites, event IDs, browsing history, and
-cross-site activity. Cloudflare hostname analytics can separately provide an
-approximate visit count; it must not be described as a unique person or device
-count. See [PRIVACY.md](PRIVACY.md) for the full disclosure.
-
-The Analytics Engine binding is configured as `USAGE_ANALYTICS` with dataset
-name `hype_usage`. Cloudflare creates the dataset after the first production
-data point is written.
 
 ## Local analytics dashboard
 
-Start the localhost-only dashboard from the project root:
+The owner dashboard listens only on `127.0.0.1` and keeps Cloudflare
+credentials in the local server process.
 
 ```powershell
 npm run analytics
 ```
 
-The launcher securely prompts for a scoped Cloudflare API token and keeps it in
-the current process environment. The token is never sent to the browser or
-stored in the repository. Both `cfat_` account-owned tokens and user API tokens
-are supported. Open the printed `http://127.0.0.1:4173` address.
-The page refreshes every five minutes while visible and can be refreshed on
-demand.
+The launcher prompts for a Cloudflare account ID and a scoped API token, then
+prints the local dashboard URL. Use a read-only analytics token for routine
+dashboard access and a separate deployment token for Worker updates.
 
-Required token permissions:
-
-- Account: `Workers Scripts Edit`, `Account Analytics Read`
-- Zone (`atakanozkan.com` only): `Analytics Read`, `Zone Read`
-
-Add `Workers Routes Edit` only when changing the Worker route or custom domain;
-the analytics dashboard itself does not need that permission.
-
-The dashboard shows estimated daily visits, functional request trend,
-feature usage, endpoint quality, country, version, browser, league interest,
-cache effectiveness, and extension-labelled versus other traffic. Feature
-history begins only after the instrumented Worker is deployed; the UI displays
-partial-source warnings rather than inventing missing values.
-
-Google Analytics is technically possible through GA4 Measurement Protocol, but
-it is not enabled because the standard Chrome integration introduces a
-persistent installation identifier and different disclosure/consent
-requirements. See [ANALYTICS.md](ANALYTICS.md) for the official-source
-evaluation and the minimum design required for any future opt-in integration.
-
-ESPN standings are fetched from:
+## Project layout
 
 ```text
-https://site.api.espn.com/apis/v2/sports/soccer/{leagueCode}/standings
+extension/             Chrome extension runtime and locales
+worker/                Cloudflare Worker
+analytics-dashboard/   localhost-only owner dashboard
+tools/                 regression, smoke, locale audit, and QA helpers
+ANALYTICS.md            analytics design decision
+PRIVACY.md              privacy notice
+SECURITY.md             vulnerability reporting
+wrangler.jsonc          canonical Worker configuration
 ```
 
-Live match responses use dynamic cache TTLs: 30 seconds when live matches exist,
-120 seconds when there are no live matches. Standings are no longer fetched as
-part of `/live-matches`; they are loaded lazily through `/league-standings` when
-a user opens a league detail view.
-
-Standings are cached separately for 30 minutes and omitted when a league has no
-usable table. When ESPN returns a table, the Worker returns all available teams
-rather than limiting the table to five rows.
-
-Standings endpoint response:
-
-```json
-{
-  "leagueCode": "esp.1",
-  "standings": [
-    {
-      "position": 1,
-      "team": "Barcelona",
-      "played": 34,
-      "wins": 24,
-      "draws": 5,
-      "losses": 5,
-      "goalDifference": "+42",
-      "points": 77
-    }
-  ]
-}
-```
-
-Match details are intentionally lazy-loaded only after a user clicks a match.
-This keeps the adaptive main score refresh light while still allowing a richer
-detail view with ESPN summary data:
-
-- timeline/key events
-- venue and kickoff
-- broadcasts
-- match stats from ESPN boxscore when available
-- lineups/rosters
-- commentary
-- head-to-head
-- news
-- highlights/videos
-- ESPN links
-
-Match detail responses are cached for 60 seconds. A cache miss is accepted only
-for a bounded event identifier recently issued by the Worker's live or World Cup
-bracket payload, which prevents arbitrary high-cardinality upstream requests.
-
-UEFA Nations League (`uefa.nations`), UEFA EURO (`uefa.euro`), and Copa
-America (`conmebol.america`) use their per-league ESPN scoreboards as direct
-probes. These optional probes start concurrently with the primary scoreboard so
-seasonal tournaments remain visible without adding serial refresh latency.
-
-FIFA World Cup knockout data is intentionally lazy-loaded only when the user opens
-the World Cup league detail section and expands the knockout bracket. It uses
-ESPN's `fifa.world` date-range scoreboard rather than a second provider:
-
-```text
-https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/scoreboard?dates=20260628-20260719
-```
-
-The Worker normalizes the payload into grouped rounds such as round of 32,
-round of 16, quarter-finals, semi-finals, third-place match, and final. Bracket
-responses are cached separately for 15 minutes and are never fetched by the
-main `/live-matches` refresh loop.
-
-## Deploy the Worker
-
-You can deploy with Wrangler without adding project dependencies:
-
-```bash
-npx wrangler deploy worker/index.js --name live-score-football
-```
-
-For non-interactive deployment, export a scoped `CLOUDFLARE_API_TOKEN` before
-running Wrangler. Deploy the Worker before publishing an extension build that
-expects newly added competition codes.
-
-Optional TheSportsDB fallback secret:
-
-```bash
-npx wrangler secret put THESPORTSDB_API_KEY --name live-score-football
-```
-
-After deploy, your endpoint will look like:
-
-```text
-https://live-score-football.YOUR_ACCOUNT.workers.dev/live-matches
-```
-
-## Configure the extension
-
-The included Store build is configured to use:
-
-```text
-https://api.atakanozkan.com/live-matches
-```
-
-For your own Cloudflare account, open `extension/popup.js` and replace:
-
-```js
-const BACKEND_URL = "https://YOUR-WORKER-SUBDOMAIN.workers.dev/live-matches";
-```
-
-with your deployed Worker URL.
-
-Also update `extension/manifest.json` so `host_permissions` contains your
-Worker domain instead of the production HypeScore Worker domain.
-
-The Worker accepts valid Chrome extension origins and browser-like no-Origin
-Chrome/Edge extension fetches. It rejects normal web origins, raw no-Origin
-requests, and `file://` preview requests. The published Store ID is kept in
-`worker/index.js` as the fallback CORS origin, while local unpacked Chrome
-extension IDs also work because they use the same `chrome-extension://...`
-origin format:
-
-```js
-const ALLOWED_ORIGINS = new Set([
-  "chrome-extension://YOUR_EXTENSION_ID"
-]);
-```
-
-Direct `curl` smoke tests should include an extension origin. A local
-`file:///.../popup.html` preview is only for layout; live data should be tested
-from the real Chrome extension popup.
-
-## Load in Chrome
-
-1. Open `chrome://extensions`.
-2. Enable Developer mode.
-3. Click "Load unpacked".
-4. Select the `extension` folder.
-5. Open the extension popup.
-6. After local file changes, click the reload button on the extension card.
-
-The popup fetches scores on open and uses adaptive refresh:
-
-- Live matches present: refresh every 60 seconds.
-- No live matches but upcoming-within-24h exists: refresh every 5 minutes.
-- No live or upcoming-within-24h matches: refresh every 30 minutes.
-- Popup hidden, power off, league detail open, or match detail open: main refresh is paused.
-- Popup auto-refresh stops after 10 minutes of an open session.
-- Popup auto-refresh stops after 3 minutes of user inactivity.
-- When the popup becomes visible again, it refreshes once if the last request is older than 30 seconds.
-- Returning from detail to the main list refreshes only if the last successful score fetch is older than 60 seconds.
-- A local request guard and short-lived client cache help reduce repeated Worker requests.
-- The local daily guard records `attempted` and `successful` requests separately.
-  The 2,000/day pause is based on successful backend JSON responses, so
-  timeouts, aborts, failed responses, or invalid JSON do not prematurely consume
-  the success budget.
-
-Favorites are local-only:
-
-- Favorite leagues are pinned above regular leagues.
-- Favorite state is stored in Chrome popup `localStorage` and is not sent to the backend.
-
-League logos are packaged locally under `extension/icons/leagues/` so the main
-league list is less dependent on remote logo CDN rendering. Team logos still
-load from remote image URLs because bundling every team badge would make the
-extension much heavier and harder to maintain. Most team logos come from ESPN;
-targeted overrides can be kept in the Worker for teams whose ESPN ID has no
-image asset. Cancún FC is currently mapped to the club's official HTTPS logo
-URL because ESPN team ID `20724` does not expose a working ESPN CDN logo.
-
-To refresh the local league logo files:
-
-```bash
-powershell -NoProfile -ExecutionPolicy Bypass -File tools/download-league-logos.ps1
-```
+Generated store media, release archives, dependencies, local assistant context,
+and credentials are intentionally excluded from Git.
 
 ## Package for Chrome Web Store
 
-Create the Chrome Web Store zip from the project root:
-
-```powershell
-New-Item -ItemType Directory -Force dist
-Compress-Archive -Path extension\* -DestinationPath dist\hype-live-football-scores-v1.4.5-chrome-web-store.zip -Force
-```
-
-The command creates:
-
-```text
-dist/hype-live-football-scores-v1.4.5-chrome-web-store.zip
-```
-
-Only extension runtime files are included. The zip root contains
-`manifest.json`; backend, memory-bank, README, Wrangler files, and local tooling
-are excluded.
-
-## Smoke test
-
-Run the local mocked Worker regression suite, the unpacked Chromium UI test,
-and then the deployed API shape smoke test from the project root:
-
-```bash
-node tools/worker-regression-test.mjs
-powershell -NoProfile -ExecutionPolicy Bypass -File .\tools\smoke-extension-cdp.ps1
-node tools/smoke-test.js
-```
-
-The Chromium script copies the unpacked extension to a temporary path without
-spaces, launches it with an isolated profile, and checks popup DOM/CSS, storage,
-and restricted-page behavior over CDP. It uses a test-context live payload
-fixture so UI verification remains independent from production deployment state.
-
-The deployed API script checks `/live-matches`, `/league-standings`, `/tournament-bracket`,
-and `/match-detail`
-against the deployed Worker. It is useful after ESPN response changes, Worker
-deploys, or before packaging a Chrome Web Store update.
-
-Latest deployed API result for v1.4.5:
-
-```text
-PASS GET /live-matches - 5 matches, 32 leagues
-PASS GET /league-standings?leagueCode=esp.1 - 20 rows
-PASS GET /tournament-bracket?leagueCode=fifa.world - 6 rounds, 32 matches
-PASS GET /match-detail?eventId=401842751&leagueCode=swe.1 - Djurgården vs Halmstads BK
-```
-
-The standings row count can be `0` for a league at a given moment and still be
-valid when the response shape is correct.
-
-Latest backend-only logo smoke after the Cancún FC fix:
-
-```text
-PASS GET /live-matches - 5 matches, 28 leagues
-PASS GET /league-standings?leagueCode=esp.1 - 0 rows
-PASS GET /match-detail?eventId=401873711&leagueCode=bel.1 - KAA Gent vs Racing Genk
-PASS GET /match-detail?eventId=401870025&leagueCode=mex.2 - Cancún FC logo override returned official club PNG URL
-```
-
-## Local QA checklist
-
-Run these before a Chrome Web Store upload:
-
-```bash
-node --check extension/popup.js
-node --check worker/index.js
-node --check tools/smoke-test.js
-node tools/smoke-test.js
-```
-
-Validate JSON files in PowerShell:
-
-```powershell
-Get-Content -Raw extension/manifest.json | ConvertFrom-Json
-Get-ChildItem extension/_locales -Recurse -Filter messages.json |
-  ForEach-Object { Get-Content -Raw $_.FullName | ConvertFrom-Json | Out-Null }
-```
-
-Then reload the unpacked extension from `chrome://extensions` and test the real
-popup. A `file://` preview is useful for layout checks only; it cannot load live
-data because Worker CORS intentionally rejects `Origin: null`.
-
-## Manual checks
-
-```bash
-curl -i -H "Origin: chrome-extension://YOUR_EXTENSION_ID" https://YOUR-WORKER-SUBDOMAIN.workers.dev/live-matches
-curl -i -H "Origin: chrome-extension://YOUR_EXTENSION_ID" "https://YOUR-WORKER-SUBDOMAIN.workers.dev/league-standings?leagueCode=esp.1"
-curl -i -H "Origin: chrome-extension://YOUR_EXTENSION_ID" \
-  "https://YOUR-WORKER-SUBDOMAIN.workers.dev/match-detail?eventId=401867653&leagueCode=eng.fa"
-curl -i -X OPTIONS -H "Origin: chrome-extension://YOUR_EXTENSION_ID" https://YOUR-WORKER-SUBDOMAIN.workers.dev/live-matches
-curl -i -H "Origin: chrome-extension://YOUR_EXTENSION_ID" https://YOUR-WORKER-SUBDOMAIN.workers.dev/unknown
-```
-
-Expected live cache behavior:
-
-```text
-First request:  X-Cache: MISS
-Second request: X-Cache: HIT
-Live match TTL: Cache-Control: public, max-age=30
-No live match TTL: Cache-Control: public, max-age=120
-Standings TTL: Cache-Control: public, max-age=1800
-```
-
-Expected UI states:
-
-- Loading: shown during the first request.
-- Empty: shown when the backend returns an empty `matches` array.
-- Error: shown as "Veri alınamadı" when the backend fails or returns invalid JSON.
-
-## Security notes
-
-- The extension has no broad Chrome permissions.
-- Host access is limited to the deployed Worker URL.
-- API keys are never stored in extension code; optional TheSportsDB access belongs in a Worker secret.
-- Cloudflare analytics credentials stay in the local dashboard server process
-  and are never exposed to dashboard JavaScript.
-- Product analytics excludes raw IP addresses and persistent device IDs; the
-  complete field list and retention disclosure live in `PRIVACY.md`.
-- Popup rendering uses `textContent` and does not inject upstream HTML.
-- ESPN external links are sanitized to HTTPS and restricted to ESPN-owned host suffixes before being returned to the popup.
-- Popup also re-checks match detail links against an HTTPS `espn.com` allowlist before rendering clickable links.
-- Worker fallback ESPN logo asset IDs are sanitized before building CDN URLs.
-- Worker team-logo overrides are hardcoded HTTPS URLs and host-allowlisted separately from ESPN media URLs.
-- Worker upstream API requests have an 8 second timeout.
-- Worker CORS/origin policy is restricted to Chrome extension origins plus
-  browser-like no-Origin Chrome/Edge extension fetches; it rejects raw
-  no-Origin, `file://`, and normal web origins.
-- Worker JSON responses include `X-Content-Type-Options: nosniff`, `Referrer-Policy: no-referrer`, and `X-Robots-Tag: noindex`.
-- Match details are fetched lazily and cached to avoid amplifying upstream API traffic.
-- Public Worker errors are generic; detailed errors stay in Worker logs.
-
-See `SECURITY.md` for the vulnerability reporting policy.
-
-## Known production notes
-
-- ESPN APIs used here are unofficial and can change without notice.
-- `tools/smoke-test.js` is the quick guard against silent response-shape breakage; production currently passes its 32-competition expectation.
-- CORS blocks normal web pages and raw no-Origin calls, but server-to-server
-  clients can still spoof request headers. If traffic grows, add Cloudflare WAF
-  or rate limiting.
-- Team logos remain remote images; league logos are packaged locally in the extension.
-- If extension runtime files change, bump `extension/manifest.json`, create a new Chrome Web Store zip from `extension/`, and upload it.
+Zip the contents of `extension/` so that `manifest.json` is at the archive
+root. Release archives belong in the ignored `dist/` directory.
 
 ## License
 
-MIT. See `LICENSE`.
+[MIT](LICENSE)

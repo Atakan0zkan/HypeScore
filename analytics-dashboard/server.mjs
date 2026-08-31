@@ -8,8 +8,7 @@ import { dirname, join } from "node:path";
 const ROOT = dirname(fileURLToPath(import.meta.url));
 const HOST = "127.0.0.1";
 const PORT = Number.parseInt(process.env.HYPE_ANALYTICS_PORT || "4173", 10);
-const ACCOUNT_ID =
-  process.env.CLOUDFLARE_ACCOUNT_ID || "a0c8a7b71431f1ab7b86856e06ebc98a";
+const ACCOUNT_ID = String(process.env.CLOUDFLARE_ACCOUNT_ID || "").trim();
 const ZONE_ID = process.env.CLOUDFLARE_ZONE_ID || "";
 const ZONE_NAME = process.env.CLOUDFLARE_ZONE_NAME || "atakanozkan.com";
 const API_HOSTNAME = process.env.HYPE_API_HOSTNAME || "api.atakanozkan.com";
@@ -36,10 +35,11 @@ const server = createServer(async (request, response) => {
 
     if (requestUrl.pathname === "/api/health") {
       return sendJson(response, 200, {
-        ok: Boolean(API_TOKEN),
+        ok: Boolean(API_TOKEN && ACCOUNT_ID),
         dataset: DATASET,
         hostname: API_HOSTNAME,
         tokenConfigured: Boolean(API_TOKEN),
+        accountConfigured: Boolean(ACCOUNT_ID),
       });
     }
 
@@ -440,9 +440,9 @@ function commonHeaders({ contentType, cacheControl }) {
 export { createUsageQueries, getTokenVerificationUrl, shapeDashboardData };
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
-  if (!API_TOKEN) {
+  if (!API_TOKEN || !ACCOUNT_ID) {
     console.error(
-      "CLOUDFLARE_API_TOKEN is required. Run npm run analytics and enter a scoped token.",
+      "CLOUDFLARE_ACCOUNT_ID and CLOUDFLARE_API_TOKEN are required. Run npm run analytics and enter both values.",
     );
     process.exitCode = 1;
   } else {

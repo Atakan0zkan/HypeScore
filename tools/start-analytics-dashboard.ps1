@@ -5,6 +5,14 @@ param(
 
 $ErrorActionPreference = "Stop"
 
+if (-not $env:CLOUDFLARE_ACCOUNT_ID) {
+  $env:CLOUDFLARE_ACCOUNT_ID = (Read-Host "Cloudflare account ID").Trim()
+}
+
+if ($env:CLOUDFLARE_ACCOUNT_ID -notmatch '^[a-fA-F0-9]{32}$') {
+  throw "Cloudflare account ID must be a 32-character hexadecimal value."
+}
+
 if (-not $env:CLOUDFLARE_API_TOKEN) {
   $secureToken = Read-Host "Cloudflare API token" -AsSecureString
   $env:CLOUDFLARE_API_TOKEN = [System.Net.NetworkCredential]::new(
@@ -12,10 +20,6 @@ if (-not $env:CLOUDFLARE_API_TOKEN) {
     $secureToken
   ).Password
   Remove-Variable secureToken
-}
-
-if (-not $env:CLOUDFLARE_ACCOUNT_ID) {
-  $env:CLOUDFLARE_ACCOUNT_ID = "a0c8a7b71431f1ab7b86856e06ebc98a"
 }
 
 $headers = @{

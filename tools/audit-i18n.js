@@ -1,9 +1,11 @@
 /**
  * Audit popup.js/html against locale keys and hard-coded UI strings.
  */
-const fs = require("fs");
-const path = require("path");
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
 const popup = fs.readFileSync(path.join(ROOT, "extension/popup.js"), "utf8");
 const html = fs.readFileSync(path.join(ROOT, "extension/popup.html"), "utf8");

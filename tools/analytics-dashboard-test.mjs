@@ -40,7 +40,7 @@ const payload = shapeDashboardData(
       { endpoint: "/match-detail", status_class: "5xx", requests: 2, avg_duration_ms: 200 },
     ],
     countries: [{ country: "TR", requests: 14 }],
-    versions: [{ version: "1.5", requests: 14 }],
+    versions: [{ version: "1.5.1", requests: 14 }],
     browsers: [{ browser: "Chrome", major: "140", requests: 14 }],
     leagues: [{ league_code: "eng.1", requests: 8 }],
     cache: [

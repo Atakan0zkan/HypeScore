@@ -256,7 +256,7 @@ fetch("https://api.atakanozkan.com/live-matches")
 })()
 "@
 
-  if ($popupResult.manifestVersion -ne "1.5") { throw "Unexpected manifest version." }
+  if ($popupResult.manifestVersion -ne "1.5.1") { throw "Unexpected manifest version." }
   if ($popupResult.permissions.Count -ne 0) { throw "Unexpected Chrome permissions." }
   if ($popupResult.hostPermissions.Count -ne 1) { throw "Unexpected host permission count." }
   if ($popupResult.cardCount -lt 20 -or -not $popupResult.listVisible) { throw "Popup league list did not render." }

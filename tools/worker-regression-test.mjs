@@ -64,11 +64,11 @@ const workerModuleUrl = `data:text/javascript;base64,${Buffer.from(workerSource)
 const { default: worker } = await import(workerModuleUrl);
 
 const liveRequestA = createApiRequest(
-  "/live-matches?client=extension&version=1.5",
+  "/live-matches?client=extension&version=1.5.1",
   ALLOWED_ORIGIN_A,
 );
 const liveRequestB = createApiRequest(
-  "/live-matches?client=extension&version=1.5",
+  "/live-matches?client=extension&version=1.5.1",
   ALLOWED_ORIGIN_B,
 );
 const [liveResponseA, liveResponseB] = await Promise.all([
@@ -140,7 +140,7 @@ const liveAnalyticsPoint = analyticsPoints.find(
 );
 assert.ok(liveAnalyticsPoint, "live endpoint analytics point must exist");
 assert.equal(liveAnalyticsPoint.blobs[2], "extension");
-assert.equal(liveAnalyticsPoint.blobs[3], "1.5");
+assert.equal(liveAnalyticsPoint.blobs[3], "1.5.1");
 assert.equal(liveAnalyticsPoint.blobs[4], "Chrome");
 assert.equal(liveAnalyticsPoint.doubles[0], 1);
 assert.equal(liveAnalyticsPoint.blobs.length, 13);
@@ -163,7 +163,7 @@ function createApiRequest(path, origin) {
 
 function createDetailRequest(eventId, origin) {
   return createApiRequest(
-    `/match-detail?eventId=${encodeURIComponent(eventId)}&leagueCode=eng.1&client=extension&version=1.5`,
+    `/match-detail?eventId=${encodeURIComponent(eventId)}&leagueCode=eng.1&client=extension&version=1.5.1`,
     origin,
   );
 }

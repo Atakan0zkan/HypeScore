@@ -1,6 +1,6 @@
 # HypeScore Privacy Notice
 
-Last updated: 2026-09-01
+Last updated: 2026-09-13
 
 Hype - Live Football Scores does not require an account and does not use
 advertising trackers, analytics cookies, or a persistent device identifier.
@@ -31,6 +31,12 @@ The Hype product analytics dataset does **not** contain raw IP addresses,
 persistent or randomly generated client identifiers, event or match IDs,
 accounts, favorites, page URLs, browsing history, or cross-site activity.
 No additional analytics-only request is sent when the popup opens.
+
+League logos are bundled with the extension. Team logos and selected match
+images may load directly from ESPN image servers, Wikimedia, or a narrowly
+selected official club website. Those providers process the network request
+needed to deliver the image, including the IP address. The extension sets
+these image requests to send no referrer; they are not product analytics events.
 
 ## Purpose, sharing, and retention
 

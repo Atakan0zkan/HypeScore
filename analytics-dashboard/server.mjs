@@ -17,6 +17,7 @@ const API_TOKEN = process.env.CLOUDFLARE_API_TOKEN || "";
 const CACHE_TTL_MS = 4 * 60 * 1000;
 const ALLOWED_RANGES = new Set([7, 30, 90]);
 const responseCache = new Map();
+const pendingRefreshes = new Map();
 
 const STATIC_FILES = new Map([
   ["/", ["index.html", "text/html; charset=utf-8"]],
@@ -27,6 +28,10 @@ const STATIC_FILES = new Map([
 
 const server = createServer(async (request, response) => {
   try {
+    const port = server.address()?.port || PORT;
+    if (!isAllowedLocalRequest(request, port)) {
+      return sendJson(response, 403, { error: "Local same-origin requests only" });
+    }
     const requestUrl = new URL(request.url || "/", `http://${HOST}:${PORT}`);
 
     if (request.method !== "GET") {
@@ -53,16 +58,8 @@ const server = createServer(async (request, response) => {
       const requestedDays = Number.parseInt(requestUrl.searchParams.get("days") || "7", 10);
       const days = ALLOWED_RANGES.has(requestedDays) ? requestedDays : 7;
       const forceRefresh = requestUrl.searchParams.get("refresh") === "1";
-      const cacheKey = String(days);
-      const cached = responseCache.get(cacheKey);
-
-      if (!forceRefresh && cached && Date.now() - cached.createdAt < CACHE_TTL_MS) {
-        return sendJson(response, 200, { ...cached.payload, cache: "HIT" });
-      }
-
-      const payload = await buildDashboardPayload(days);
-      responseCache.set(cacheKey, { createdAt: Date.now(), payload });
-      return sendJson(response, 200, { ...payload, cache: "MISS" });
+      const payload = await getDashboardPayload(days, forceRefresh);
+      return sendJson(response, 200, payload);
     }
 
     const staticFile = STATIC_FILES.get(requestUrl.pathname);
@@ -81,6 +78,31 @@ const server = createServer(async (request, response) => {
   }
 });
 
+function isAllowedLocalRequest(request, port = PORT) {
+  const host = request.headers.host;
+  if (host !== `${HOST}:${port}` && host !== `localhost:${port}`) return false;
+  const origin = request.headers.origin;
+  if (origin && origin !== `http://${host}`) return false;
+  const site = request.headers["sec-fetch-site"];
+  return !site || site === "same-origin" || site === "none";
+}
+
+async function getDashboardPayload(days, forceRefresh = false, build = buildDashboardPayload) {
+  const key = String(days);
+  const cached = responseCache.get(key);
+  if (!forceRefresh && cached && Date.now() - cached.createdAt < CACHE_TTL_MS) {
+    return { ...cached.payload, cache: "HIT" };
+  }
+  if (!pendingRefreshes.has(key)) {
+    const pending = Promise.resolve().then(() => build(days)).then((payload) => {
+      responseCache.set(key, { createdAt: Date.now(), payload });
+      return payload;
+    }).finally(() => pendingRefreshes.delete(key));
+    pendingRefreshes.set(key, pending);
+  }
+  return { ...await pendingRefreshes.get(key), cache: "MISS" };
+}
+
 async function buildDashboardPayload(days) {
   await verifyApiToken();
   const warnings = [];
@@ -96,12 +118,11 @@ async function buildDashboardPayload(days) {
     if (result.status === "fulfilled") {
       usage[name] = result.value;
     } else {
-      usage[name] = [];
       warnings.push(`Analytics Engine ${name}: ${toErrorMessage(result.reason)}`);
     }
   });
 
-  let estimatedVisits = [];
+  let estimatedVisits = null;
   try {
     const visitDays = Math.min(days, 30);
     estimatedVisits = await queryEstimatedDailyVisits(visitDays);
@@ -326,11 +347,11 @@ function shapeDashboardData(usage, estimatedVisits, days) {
     .reduce((sum, row) => sum + row.requests, 0);
   const cacheRows = normalizeRankedRows(usage.cache, "cache_status");
   const cacheHits = cacheRows.find((row) => row.label === "HIT")?.value || 0;
-  const latestEstimatedVisits = estimatedVisits.at(-1)?.estimatedVisits || 0;
-  const averageEstimatedVisits = estimatedVisits.length
+  const latestEstimatedVisits = estimatedVisits?.at(-1)?.estimatedVisits ?? null;
+  const averageEstimatedVisits = estimatedVisits?.length
     ? estimatedVisits.reduce((sum, row) => sum + row.estimatedVisits, 0) /
       estimatedVisits.length
-    : 0;
+    : null;
 
   return {
     rangeDays: days,
@@ -341,14 +362,14 @@ function shapeDashboardData(usage, estimatedVisits, days) {
     summary: {
       latestEstimatedVisits,
       averageEstimatedVisits,
-      requests: totalRequests,
-      featureRequests,
-      successRate: totalRequests ? successfulRequests / totalRequests : 0,
-      avgDurationMs: toNumber(coverage.avg_duration_ms),
-      cacheHitRate: totalRequests ? cacheHits / totalRequests : 0,
+      requests: usage.coverage || usage.endpoints ? totalRequests : null,
+      featureRequests: usage.endpoints ? featureRequests : null,
+      successRate: usage.endpoints && totalRequests ? successfulRequests / totalRequests : null,
+      avgDurationMs: usage.coverage && totalRequests ? toNumber(coverage.avg_duration_ms) : null,
+      cacheHitRate: usage.cache && totalRequests ? cacheHits / totalRequests : null,
     },
     daily,
-    estimatedVisits,
+    estimatedVisits: estimatedVisits || [],
     endpoints,
     countries: normalizeRankedRows(usage.countries, "country"),
     versions: normalizeRankedRows(usage.versions, "version"),
@@ -437,7 +458,7 @@ function commonHeaders({ contentType, cacheControl }) {
   };
 }
 
-export { createUsageQueries, getTokenVerificationUrl, shapeDashboardData };
+export { createUsageQueries, getTokenVerificationUrl, shapeDashboardData, isAllowedLocalRequest, getDashboardPayload, server };
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   if (!API_TOKEN || !ACCOUNT_ID) {

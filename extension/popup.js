@@ -214,6 +214,7 @@ let isEnabled = true;
 let isEnglishOverride = false;
 let contentOverlay = null;
 let detailAbortController = null;
+let detailAbortKey = null;
 let liveLoadPromise = null;
 let favoriteLeagues = new Set();
 const matchDetailCache = new Map();
@@ -443,6 +444,7 @@ function startLiveDataFlow() {
   }
 
   if (!hydrated) {
+    if (lastPayload) renderPayload(lastPayload);
     loadMatches();
   }
 }
@@ -595,7 +597,7 @@ async function performLoadMatches({ force = false } = {}) {
 
   try {
     const payload = await fetchJsonWithTimeout(BACKEND_URL);
-    if (!payload || !Array.isArray(payload.matches)) {
+    if (!isValidLivePayload(payload)) {
       throw new Error("Invalid live match payload");
     }
 
@@ -1054,16 +1056,20 @@ async function loadMatchDetail(match) {
   const controller = new AbortController();
   detailAbortController = controller;
   const key = getDetailCacheKey(match);
+  detailAbortKey = key;
+  const loadingEntry = { status: "loading" };
+  matchDetailCache.set(key, loadingEntry);
   let shouldRender = true;
 
   try {
     const data = await fetchJsonWithTimeout(buildMatchDetailUrl(match), {
       signal: controller.signal,
     });
+    if (controller.signal.aborted) throw createAbortError();
     matchDetailCache.set(key, { status: "loaded", data });
   } catch (error) {
     if (error.name === "AbortError") {
-      matchDetailCache.delete(key);
+      if (matchDetailCache.get(key) === loadingEntry) matchDetailCache.delete(key);
       shouldRender = false;
     } else {
       if (isDailyRequestLimitError(error)) {
@@ -1076,6 +1082,7 @@ async function loadMatchDetail(match) {
   } finally {
     if (detailAbortController === controller) {
       detailAbortController = null;
+      detailAbortKey = null;
     }
     if (shouldRender && lastPayload && selectedMatchKey === getMatchKey(match)) {
       renderPayload(lastPayload);
@@ -1714,13 +1721,23 @@ function restoreFavorites() {
 function readClientLiveCache() {
   const cached = safeReadStorageJson(STORAGE_KEY_LIVE_CACHE, null);
   if (!cached || cached.version !== CLIENT_LIVE_CACHE_VERSION) return null;
-  if (!cached.payload || !Array.isArray(cached.payload.matches)) return null;
+  if (!isValidLivePayload(cached.payload)) return null;
   if (!hasRequiredClientCacheLeagues(cached.payload)) return null;
-  if (!Number.isFinite(cached.savedAt)) return null;
+  if (!Number.isFinite(cached.savedAt) || cached.savedAt <= 0 || cached.savedAt > Date.now()) return null;
   return cached;
 }
 
+function isValidLivePayload(payload) {
+  const validMatches = (matches) => Array.isArray(matches) && matches.every((match) =>
+    match && typeof match === "object" && typeof match.homeTeam === "string" &&
+    typeof match.awayTeam === "string" && typeof match.state === "string");
+  return Boolean(payload && validMatches(payload.matches) &&
+    (payload.leagues === undefined || (Array.isArray(payload.leagues) &&
+      payload.leagues.every((league) => league && typeof league.name === "string" && validMatches(league.matches)))));
+}
+
 function hasRequiredClientCacheLeagues(payload) {
+  if (!Array.isArray(payload.leagues)) return false;
   const leagueCodes = new Set(
     (payload.leagues || [])
       .map((league) => league?.code)
@@ -1783,7 +1800,7 @@ function createFavoriteButton({ active, label, onClick }) {
 
 function normalizeLeagueGroups(payload) {
   const leagues = Array.isArray(payload.leagues) && payload.leagues.length > 0
-    ? payload.leagues.filter((league) => Array.isArray(league.matches))
+    ? payload.leagues.filter((league) => league && typeof league.name === "string" && Array.isArray(league.matches))
     : buildLeagueGroupsFromMatches(payload.matches || []);
 
   return leagues
@@ -1849,7 +1866,7 @@ function hasLiveMatches(payload) {
   return Boolean(
     payload &&
       Array.isArray(payload.matches) &&
-      payload.matches.some((match) => match.state === "live"),
+      payload.matches.some((match) => match?.state === "live"),
   );
 }
 
@@ -2215,6 +2232,8 @@ function createLogoImage(className, src, alt, options = {}) {
     const img = document.createElement("img");
     img.className = "league-logo-image";
     img.alt = "";
+    img.referrerPolicy = "no-referrer";
+    img.decoding = "async";
     img.src = src || FALLBACK_LOGO;
     img.onerror = function () {
       this.src = FALLBACK_LOGO;
@@ -2228,6 +2247,8 @@ function createLogoImage(className, src, alt, options = {}) {
   const img = document.createElement("img");
   img.className = className;
   img.alt = alt || "";
+  img.referrerPolicy = "no-referrer";
+  img.decoding = "async";
   img.src = src || FALLBACK_LOGO;
   img.onerror = function () {
     this.src = FALLBACK_LOGO;
@@ -2281,7 +2302,11 @@ function setStatus(text) {
 function abortDetailRequest() {
   if (detailAbortController) {
     detailAbortController.abort();
+    if (matchDetailCache.get(detailAbortKey)?.status === "loading") {
+      matchDetailCache.delete(detailAbortKey);
+    }
     detailAbortController = null;
+    detailAbortKey = null;
   }
 }
 

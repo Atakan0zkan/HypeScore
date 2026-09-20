@@ -16,6 +16,9 @@ $ChromeCandidates = @(
   "$env:ProgramFiles\BraveSoftware\Brave-Browser\Application\brave.exe",
   "${env:ProgramFiles(x86)}\BraveSoftware\Brave-Browser\Application\brave.exe"
 )
+if ($ChromeBinary -and -not (Test-Path -LiteralPath $ChromeBinary)) {
+  throw "Requested browser executable was not found: $ChromeBinary"
+}
 $ChromePath = $ChromeCandidates | Where-Object { $_ -and (Test-Path -LiteralPath $_) } |
   Select-Object -First 1
 if (-not $ChromePath) {
@@ -181,7 +184,7 @@ const __hypeSmokePayload = $smokePayloadJson;
 const __hypeOriginalFetch = globalThis.fetch.bind(globalThis);
 globalThis.fetch = (input, init) => {
   const url = typeof input === "string" ? input : input?.url;
-  if (url === "https://api.atakanozkan.com/live-matches") {
+  if (url && new URL(url).origin === "https://api.atakanozkan.com" && new URL(url).pathname === "/live-matches") {
     return Promise.resolve(new Response(JSON.stringify(__hypeSmokePayload), {
       status: 200,
       headers: { "Content-Type": "application/json; charset=utf-8" },
@@ -194,6 +197,9 @@ window.addEventListener("error", (event) => {
 });
 window.addEventListener("unhandledrejection", (event) => {
   window.__hypeSmokeErrors.push(String(event.reason || "unhandled rejection"));
+});
+window.addEventListener("securitypolicyviolation", (event) => {
+  window.__hypeSmokeErrors.push("CSP: " + event.violatedDirective + " " + event.blockedURI);
 });
 "@
   } | Out-Null
@@ -263,6 +269,18 @@ fetch("https://api.atakanozkan.com/live-matches")
   if ($popupResult.shellWidth -le 0 -or $popupResult.shellHeight -le 0) { throw "Popup CSS dimensions are invalid." }
   if ($popupResult.errors.Count -ne 0) { throw "Popup recorded runtime errors: $($popupResult.errors -join '; ')" }
 
+  # A syntactically valid but structurally broken stored payload must recover.
+  Invoke-CdpExpression $client @"
+localStorage.setItem('hype_live_matches_cache', JSON.stringify({
+  version: 'v10', savedAt: Date.now(), payload: { matches: [], leagues: {} }
+}));
+"@ | Out-Null
+  Send-Cdp $client "Page.reload" | Out-Null
+  Wait-ForExpression $client "document.querySelectorAll('.league-pick-card').length === 32" 15000
+  Wait-ForExpression $client "isValidLivePayload(JSON.parse(localStorage.getItem('hype_live_matches_cache')).payload)" 15000
+  $cacheRecoveryErrors = Invoke-CdpExpression $client "window.__hypeSmokeErrors || []"
+  if ($cacheRecoveryErrors.Count -ne 0) { throw "Cache recovery recorded runtime/CSP errors." }
+
   Send-Cdp $client "Page.navigate" @{ url = "chrome://settings/" } | Out-Null
   Wait-ForExpression $client "location.href.includes('://settings')" 10000
   $restrictedResult = Invoke-CdpExpression $client @"
@@ -292,6 +310,7 @@ fetch("https://api.atakanozkan.com/live-matches")
     popupSize = "$($popupResult.shellWidth)x$($popupResult.shellHeight)"
     storageKeys = @($popupResult.storageKeys)
     runtimeErrors = @($popupResult.errors)
+    malformedCacheRecovery = $true
     restrictedPage = $restrictedResult.href
     restrictedInjection = $false
     contentScriptShadowDom = "not applicable (manifest has no content_scripts)"

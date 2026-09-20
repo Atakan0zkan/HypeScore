@@ -706,17 +706,19 @@ async function fetchJson(url, init = {}) {
       throw new Error(`${url} returned unexpected Content-Type: ${contentType}`);
     }
 
-    return response.json();
+    // Keep the timeout active until the response body has been consumed.
+    return await response.json();
   } finally {
     clearTimeout(timeoutId);
   }
 }
 
 function normalizeEspnMatches(payload) {
-  const events = Array.isArray(payload.events) ? payload.events : [];
+  const events = Array.isArray(payload?.events) ? payload.events : [];
   const payloadLeague = getPayloadLeagueMetadata(payload);
 
   return events
+    .filter((event) => event && typeof event === "object")
     .map((event) => {
       const competition = Array.isArray(event.competitions)
         ? event.competitions[0]
@@ -724,8 +726,8 @@ function normalizeEspnMatches(payload) {
       const competitors = Array.isArray(competition?.competitors)
         ? competition.competitors
         : [];
-      const home = competitors.find((team) => team.homeAway === "home");
-      const away = competitors.find((team) => team.homeAway === "away");
+      const home = competitors.find((team) => team?.homeAway === "home");
+      const away = competitors.find((team) => team?.homeAway === "away");
 
       if (!competition || !home || !away) {
         return null;
@@ -1071,7 +1073,7 @@ function normalizeBroadcasts(rows) {
   }
 
   return rows
-    .map((row) => row?.names?.join(", ") || row?.name || row?.shortName || "")
+    .map((row) => (Array.isArray(row?.names) ? row.names.join(", ") : "") || row?.name || row?.shortName || "")
     .filter(Boolean)
     .slice(0, 6);
 }
@@ -1084,6 +1086,7 @@ function normalizeTimeline(keyEvents, detailEvents) {
       : [];
 
   return rows
+    .filter((row) => row && typeof row === "object")
     .map((event, index) => ({
       id: String(event.id || event.sequenceNumber || index),
       minute: getEventMinute(event),
@@ -1173,6 +1176,7 @@ function normalizeCommentary(rows) {
   }
 
   return rows
+    .filter((row) => row && typeof row === "object")
     .map((row, index) => ({
       id: String(row.id || row.sequenceNumber || index),
       minute: getEventMinute(row),
@@ -1526,7 +1530,7 @@ function normalizeEspnStandings(payload) {
     const statMap = new Map();
     if (Array.isArray(entry.stats)) {
       for (const stat of entry.stats) {
-        statMap.set(stat.name, stat);
+        if (stat?.name) statMap.set(stat.name, stat);
       }
     }
 
@@ -1534,7 +1538,7 @@ function normalizeEspnStandings(payload) {
       for (const name of Array.isArray(names) ? names : [names]) {
         const stat = statMap.get(name);
         if (stat) {
-          return preferDisplay ? stat.displayValue : stat.value ?? stat.displayValue;
+          return preferDisplay ? stat.displayValue ?? stat.value : stat.value ?? stat.displayValue;
         }
       }
       return "";
@@ -1570,6 +1574,7 @@ function getEspnStandingRows(payload) {
   const rows = [];
   const appendEntries = (entries, group, groupOrder) => {
     entries.forEach((entry, index) => {
+      if (!entry || typeof entry !== "object") return;
       rows.push({
         entry,
         group,
@@ -2238,7 +2243,7 @@ function normalizeAnalyticsClient(value) {
 
 function normalizeClientVersion(value) {
   const version = String(value || "");
-  return /^\d+(?:\.\d+){0,3}$/.test(version) ? version : "unknown";
+  return /^\d{1,5}(?:\.\d{1,5}){0,3}$/.test(version) ? version : "unknown";
 }
 
 function normalizeLeagueCodeForAnalytics(value) {
@@ -2258,7 +2263,7 @@ function parseBrowserFamily(userAgent) {
   for (const [family, pattern] of patterns) {
     const match = userAgent.match(pattern);
     if (match) {
-      return { family, major: match[1] || "unknown" };
+      return { family, major: match[1].length <= 5 ? match[1] : "unknown" };
     }
   }
 

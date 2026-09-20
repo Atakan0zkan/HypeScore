@@ -21,6 +21,9 @@
     "default_title": "__MSG_extName__"
   },
   "permissions": [],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; connect-src https://api.atakanozkan.com; img-src 'self' data: https://*.espncdn.com https://espncdn.com https://www.cancunfc.mx https://cancunfc.mx https://commons.wikimedia.org https://upload.wikimedia.org"
+  },
   "host_permissions": [
     "https://api.atakanozkan.com/*"
   ]

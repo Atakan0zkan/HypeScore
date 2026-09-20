@@ -361,11 +361,13 @@ function formatDate(value) {
 }
 
 function formatNumber(value) {
+  if (value == null) return "—";
   const number = Number(value) || 0;
   return numberFormatter.format(number);
 }
 
 function formatPercent(value) {
+  if (value == null) return "—";
   const number = Number(value);
   return Number.isFinite(number) ? percentFormatter.format(number) : "—";
 }

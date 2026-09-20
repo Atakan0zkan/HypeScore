@@ -19,6 +19,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 26
+      # Required: tests/ imports devDeps (happy-dom). Previously zero-dep,
+      # so this step was unnecessary — it is mandatory now.
+      - run: npm ci
       - run: npm test
 
   ai-triage:

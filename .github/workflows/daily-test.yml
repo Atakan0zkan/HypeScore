@@ -50,7 +50,7 @@ jobs:
                - failing test file + error excerpt (max 20 lines)
                - suspected source file + line (worker/index.js or extension/popup.js)
                - one minimal suggested fix, no code changes, no PR
-               Write the issue body in Turkish. Do not push commits.
+               Write the issue body in English. Do not push commits.
 
   live-smoke:
     runs-on: ubuntu-latest

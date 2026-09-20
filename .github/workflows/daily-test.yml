@@ -1,0 +1,58 @@
+# Daily offline test run. No AI tokens spent unless tests fail.
+# - offline-tests: dumb `npm test` on a timer ($0 on public repo).
+# - ai-triage: wakes ONLY when offline-tests fails, reads the failed log
+#   with a free Zen model and opens a triage issue. Needs repo secret
+#   OPENCODE_API_KEY (Zen key) — see README note below.
+# - live-smoke: network-dependent, never blocks the build.
+name: Daily tests
+
+on:
+  schedule:
+    - cron: "0 6 * * *" # 06:00 UTC every day
+  workflow_dispatch: # manual "Run workflow" button
+
+jobs:
+  offline-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 26
+      - run: npm test
+
+  ai-triage:
+    needs: offline-tests
+    if: failure()
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - uses: actions/checkout@v6
+      - uses: anomalyco/opencode/github@latest
+        env:
+          OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          model: opencode/muse-spark-1.3-contributor-free
+          use_github_token: true
+          prompt: |
+            The daily `npm test` run failed (run id ${{ github.run_id }}).
+            1. Fetch ONLY the failed log lines: `gh run view ${{ github.run_id }} --log-failed | head -100`
+            2. Identify the failing test file and the exact assertion (tests/ or tools/).
+            3. Open ONE GitHub issue titled `[daily-test] <failing test name>` with:
+               - failing test file + error excerpt (max 20 lines)
+               - suspected source file + line (worker/index.js or extension/popup.js)
+               - one minimal suggested fix, no code changes, no PR
+               Write the issue body in Turkish. Do not push commits.
+
+  live-smoke:
+    runs-on: ubuntu-latest
+    continue-on-error: true # ESPN shape/time drift must not fail the build
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 26
+      - run: npm run smoke

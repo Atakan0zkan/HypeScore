@@ -6,14 +6,17 @@
   "description": "Hype - Live Football Scores Chrome Extension & Cloudflare Worker",
   "license": "SEE LICENSE IN LICENSE",
   "scripts": {
-    "test": "node --test tests/popup-guard.test.mjs tests/worker-guard.test.mjs tests/worker-http.test.mjs tests/static-guard.test.mjs && node tools/worker-regression-test.mjs && node tools/hardening-test.mjs && node tools/analytics-dashboard-test.mjs",
-    "test:fast": "node --test tests/popup-guard.test.mjs tests/worker-guard.test.mjs tests/worker-http.test.mjs tests/static-guard.test.mjs --test-reporter=dot",
+    "test": "node --test tests/popup-guard.test.mjs tests/worker-guard.test.mjs tests/worker-http.test.mjs tests/static-guard.test.mjs tests/popup-dom.test.mjs tests/popup-timers.test.mjs && node tools/worker-regression-test.mjs && node tools/hardening-test.mjs && node tools/analytics-dashboard-test.mjs",
+    "test:fast": "node --test tests/popup-guard.test.mjs tests/worker-guard.test.mjs tests/worker-http.test.mjs tests/static-guard.test.mjs tests/popup-dom.test.mjs tests/popup-timers.test.mjs --test-reporter=dot",
+    "test:e2e": "playwright test",
     "smoke": "node tools/smoke-test.js",
     "deploy": "wrangler deploy",
     "analytics": "powershell -NoProfile -ExecutionPolicy Bypass -File tools/start-analytics-dashboard.ps1",
     "analytics:test": "node tools/analytics-dashboard-test.mjs"
   },
   "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "happy-dom": "^20.14.5",
     "wrangler": "^4.131.1"
   }
 }

@@ -12,10 +12,13 @@ and the FIFA World Cup knockout bracket without injecting scripts into websites.
 - 32 curated football competitions, including UEFA Nations League, UEFA EURO,
   Copa América, FIFA World Cup, and major domestic and UEFA club competitions.
 - Live, completed, and upcoming matches in a compact popup.
-- Lazy-loaded standings, match statistics, lineups, timeline, commentary, news,
+- Lazy-loaded standings, proportional match statistics, pitch lineups, event timeline, news,
   links, and World Cup knockout rounds.
 - Local favorite leagues, adaptive refresh, local score cache, and request
   budget protection.
+- Favorite competitions stay first; each group prioritizes live, upcoming,
+  then completed matches. Pitch lineups use reported starting positions when
+  both complete XIs are available, with full rosters as a fallback.
 - 55 interface locales with RTL support for Arabic, Hebrew, and Persian.
 - No account, advertisements, content scripts, or remote executable code.
 

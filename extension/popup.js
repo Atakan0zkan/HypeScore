@@ -101,7 +101,6 @@ const FALLBACK_MESSAGES = {
   bracketUnavailable: "Knockout bracket unavailable.",
   broadcasts: "Broadcasts",
   club: "Club",
-  commentary: "Commentary",
   detailsUnavailable: "Details unavailable",
   draws: "D",
   empty: "No matches found today.",
@@ -1100,10 +1099,9 @@ function renderLoadedMatchDetail(detail) {
     leagueDetailContent.appendChild(meta);
   }
 
-  appendStatsSection(detail.stats);
+  appendStatsSection(detail.stats, detail.teams);
   appendDetailListSection(msg("timeline"), detail.timeline, createTimelineItem, msg("noSectionData"), true);
   appendLineupsSection(detail.lineups);
-  appendDetailListSection(msg("commentary"), detail.commentary, createCommentaryItem, msg("noSectionData"), true);
   appendDetailListSection(msg("headToHead"), detail.headToHead, createHeadToHeadItem);
   appendLinkSection(msg("news"), detail.news, msg("noNews"), true);
   appendVideoSection(detail.videos);
@@ -1134,8 +1132,40 @@ function appendDetailListSection(title, rows, renderer, emptyText = "", alwaysRe
 }
 
 function appendLineupsSection(lineups) {
-  const rows = Array.isArray(lineups) ? lineups : [];
+  const rows = (Array.isArray(lineups) ? lineups : []).filter(Boolean).slice(0, 2);
+  rows.sort((a, b) => Number(b.homeAway === "home") - Number(a.homeAway === "home"));
   const section = createDetailSection(msg("lineups"), rows.length);
+  const layouts = rows.map(getPitchLayout);
+  if (rows.length === 2 && layouts.every(Boolean)) {
+    const pitch = document.createElement("div");
+    pitch.className = "lineup-pitch";
+    rows.forEach((lineup, index) => {
+      const half = document.createElement("section");
+      half.className = `pitch-half pitch-half--${index === 0 ? "home" : "away"}`;
+      half.setAttribute("aria-label", lineup.team);
+      half.appendChild(createTextElement("h3", "pitch-team", [lineup.team, lineup.formation].filter(Boolean).join(" · ")));
+      const lines = index === 0 ? layouts[index] : [...layouts[index]].reverse();
+      for (const line of lines) {
+        const lane = document.createElement("div");
+        lane.className = "pitch-line";
+        for (const player of index === 0 ? line : [...line].reverse()) {
+          const marker = document.createElement("div");
+          marker.className = "pitch-player";
+          marker.title = [player.name, player.position].filter(Boolean).join(" · ");
+          marker.append(
+            createTextElement("span", "pitch-shirt", player.jersey || "•"),
+            createTextElement("span", "pitch-name", player.shortName || player.name),
+          );
+          lane.appendChild(marker);
+        }
+        half.appendChild(lane);
+      }
+      pitch.appendChild(half);
+    });
+    section.appendChild(pitch);
+  }
+  // Keep the complete named roster accessible, including substitutes and
+  // fallback data when an XI or a supported position is missing.
   const grid = document.createElement("div");
   grid.className = "lineup-grid";
 
@@ -1171,11 +1201,34 @@ function appendLineupsSection(lineups) {
   leagueDetailContent.appendChild(section);
 }
 
-function appendStatsSection(stats) {
+function getPitchLayout(lineup) {
+  const starters = (Array.isArray(lineup.players) ? lineup.players : []).filter((p) => p?.starter);
+  if (starters.length !== 11) return null;
+  const ranks = { G: 0, GK: 0, LB: 1, RB: 1, CB: 1, CD: 1, D: 1, LWB: 2, RWB: 2, DM: 2, CDM: 2, CM: 3, LM: 3, RM: 3, M: 3, AM: 4, CAM: 4, LW: 4, RW: 4, F: 5, CF: 5, ST: 5, LF: 5, RF: 5 };
+  const lanes = new Map();
+  for (const player of starters) {
+    const position = String(player.position || "").toUpperCase();
+    const rank = ranks[position.split("-")[0]];
+    if (rank === undefined) return null;
+    if (!lanes.has(rank)) lanes.set(rank, []);
+    lanes.get(rank).push(player);
+  }
+  if (lanes.get(0)?.length !== 1 || [...lanes.values()].some((line) => line.length > 5)) return null;
+  const side = (p) => /^(LB|LM|LW|LWB|LF)$/.test(p.position) ? 0 : /-L$/.test(p.position) ? 1 : /-R$/.test(p.position) ? 3 : /^(RB|RM|RW|RWB|RF)$/.test(p.position) ? 4 : 2;
+  return [...lanes.entries()].sort(([a], [b]) => a - b).map(([, players]) => players.sort((a, b) => side(a) - side(b)));
+}
+
+function appendStatsSection(stats, teams) {
   const rows = Array.isArray(stats) ? stats : [];
   const section = createDetailSection(msg("stats"), rows.length);
   const list = document.createElement("div");
   list.className = "stats-list";
+  if (rows.length && teams?.home?.name && teams?.away?.name) {
+    const legend = document.createElement("div");
+    legend.className = "stats-teams";
+    legend.append(createTextElement("span", "stat-value--home", teams.home.name), createTextElement("span", "stat-value--away", teams.away.name));
+    list.appendChild(legend);
+  }
 
   for (const stat of rows) {
     list.appendChild(createStatItem(stat));
@@ -1239,23 +1292,37 @@ function appendVideoSection(videos) {
 
 function createTimelineItem(item) {
   const row = document.createElement("div");
-  row.className = "timeline-item";
+  const kind = getTimelineKind(item);
+  row.className = `timeline-item timeline-item--${kind}`;
+  const icons = { goal: "⚽", "own-goal": "⚽", "yellow-card": "▮", "red-card": "▮", substitution: "⇄", kickoff: "⚑", halftime: "Ⅱ", fulltime: "■", penalty: "!", var: "▣", event: "•" };
+  const icon = createTextElement("span", `timeline-icon timeline-icon--${kind}`, icons[kind]);
+  icon.setAttribute("aria-hidden", "true");
+  const body = document.createElement("div");
+  body.className = "timeline-body";
+  body.appendChild(createTextElement("strong", "timeline-type", item.type || msg("matchDetails")));
+  if (item.team || item.players?.length) body.appendChild(createTextElement("span", "timeline-people", [item.team, formatList(item.players)].filter(Boolean).join(" · ")));
+  if (item.text && item.text !== item.type) body.appendChild(createTextElement("span", "timeline-text", item.text));
   row.append(
     createTextElement("span", "timeline-minute", item.minute || "-"),
-    createTextElement("strong", "timeline-type", item.type || item.team || msg("matchDetails")),
-    createTextElement("span", "timeline-text", [item.text, formatList(item.players)].filter(Boolean).join(" · ")),
+    icon,
+    body,
   );
   return row;
 }
 
-function createCommentaryItem(item) {
-  const row = document.createElement("div");
-  row.className = "commentary-item";
-  row.append(
-    createTextElement("span", "timeline-minute", item.minute || "-"),
-    createTextElement("span", "timeline-text", item.text),
-  );
-  return row;
+function getTimelineKind(item) {
+  const type = String(item.kind || item.type || "").toLowerCase().replace(/-/g, " ");
+  if (/red card|second yellow/.test(type)) return "red-card";
+  if (/yellow card/.test(type)) return "yellow-card";
+  if (/own goal/.test(type)) return "own-goal";
+  if (/goal|penalty.*scored/.test(type) && !/miss|disallow|no goal|cancel/.test(type)) return "goal";
+  if (/substitution/.test(type)) return "substitution";
+  if (/kickoff|kick off|start.*half/.test(type)) return "kickoff";
+  if (/halftime|half time/.test(type)) return "halftime";
+  if (/fulltime|full time|end regular|end extra/.test(type)) return "fulltime";
+  if (/penalty/.test(type)) return "penalty";
+  if (/var/.test(type)) return "var";
+  return "event";
 }
 
 function createHeadToHeadItem(item) {
@@ -1272,11 +1339,33 @@ function createStatItem(stat) {
   const row = document.createElement("div");
   row.className = "stat-item";
   row.append(
-    createTextElement("strong", "stat-value stat-value--home", stat.homeValue || "-"),
+    createTextElement("strong", "stat-value stat-value--home", String(stat.homeValue ?? "—")),
     createTextElement("span", "stat-label", stat.label || msg("stats")),
-    createTextElement("strong", "stat-value stat-value--away", stat.awayValue || "-"),
+    createTextElement("strong", "stat-value stat-value--away", String(stat.awayValue ?? "—")),
   );
+  const bar = document.createElement("div");
+  bar.className = "stat-bar";
+  bar.setAttribute("aria-hidden", "true");
+  const values = [stat.homeValue, stat.awayValue].map(parseStatValue);
+  if (values.every((v) => v !== null) && values[0] + values[1] > 0) {
+    const maximum = Math.max(...values);
+    const scaled = values.map((value) => value / maximum);
+    ["home", "away"].forEach((side, i) => {
+      const fill = document.createElement("span");
+      fill.className = `stat-bar-fill stat-bar-fill--${side}`;
+      fill.style.width = `${scaled[i] / (scaled[0] + scaled[1]) * 100}%`;
+      bar.appendChild(fill);
+    });
+  }
+  row.appendChild(bar);
   return row;
+}
+
+function parseStatValue(value) {
+  const text = String(value ?? "").trim();
+  if (!/^\d+(?:\.\d+)?%?$/.test(text)) return null;
+  const number = Number(text.replace("%", ""));
+  return Number.isFinite(number) ? number : null;
 }
 
 function createDetailSection(title) {
@@ -1843,8 +1932,18 @@ function compareLeagues(a, b) {
   const favoriteDiff = Number(isFavoriteLeague(getLeagueKey(b))) - Number(isFavoriteLeague(getLeagueKey(a)));
   if (favoriteDiff !== 0) return favoriteDiff;
 
+  const activityDiff = getLeagueActivityRank(a) - getLeagueActivityRank(b);
+  if (activityDiff !== 0) return activityDiff;
+
   const liveDiff = countLiveMatches(b.matches) - countLiveMatches(a.matches);
   return liveDiff !== 0 ? liveDiff : a.name.localeCompare(b.name);
+}
+
+function getLeagueActivityRank(league) {
+  const matches = Array.isArray(league.matches) ? league.matches : [];
+  if (matches.some((match) => match.state === "live")) return 0;
+  if (matches.some(isUpcomingWithinWindow)) return 1;
+  return matches.length ? 2 : 3;
 }
 
 function sortMatchesForDisplay(matches) {
@@ -2210,7 +2309,6 @@ function hasAnyDetail(detail) {
   return [
     detail.stats,
     detail.timeline,
-    detail.commentary,
     detail.lineups,
     detail.headToHead,
     detail.news,

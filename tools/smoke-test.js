@@ -187,7 +187,6 @@ function assertMatchDetailPayload(payload, match) {
   assertObject(payload.teams.home, "matchDetail.teams.home");
   assertObject(payload.teams.away, "matchDetail.teams.away");
   assertArray(payload.timeline, "matchDetail.timeline");
-  assertArray(payload.commentary, "matchDetail.commentary");
   assertArray(payload.stats, "matchDetail.stats");
   assertArray(payload.lineups, "matchDetail.lineups");
   assertArray(payload.news, "matchDetail.news");

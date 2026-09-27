@@ -17,6 +17,79 @@ function render(payload = domPayload()) {
 const cards = () => [...app.document.querySelectorAll(".league-pick-card")];
 const cardByName = (name) => cards().find((c) => c.querySelector(".league-pick-name").textContent === name);
 
+describe("match presentation", () => {
+  it("sorts activity inside favorites and non-favorites independently", () => {
+    const league = (code, state) => ({ code, name: code, matches: state ? [{ state, kickoff: new Date(Date.now() + 3600000).toISOString() }] : [] });
+    const leagues = [league("a.empty", null), league("b.result", "finished"), league("c.upcoming", "scheduled"), league("d.live", "live")];
+    const favorites = leagues.map((l) => ({ ...l, code: `f.${l.code}`, name: `f.${l.name}` }));
+    for (const l of favorites) app.eval(`__T.favoriteLeagues.add(${JSON.stringify(l.code)})`);
+    const ordered = app.eval(`${JSON.stringify([...leagues, ...favorites])}.sort(compareLeagues).map(l => l.code)`);
+    assert.deepEqual(Array.from(ordered), ["f.d.live", "f.c.upcoming", "f.b.result", "f.a.empty", "d.live", "c.upcoming", "b.result", "a.empty"]);
+  });
+
+  it("does not promote fixtures outside the visible upcoming window", () => {
+    assert.equal(app.eval(`getLeagueActivityRank({matches:[{state:'scheduled',kickoff:${JSON.stringify(new Date(Date.now() + 3 * 86400000).toISOString())}}]})`), 2);
+  });
+
+  it("renders proportional stats and preserves numeric zero", () => {
+    const row = app.eval('createStatItem({label:"Shots",homeValue:5,awayValue:10})');
+    const fills = row.querySelectorAll(".stat-bar-fill");
+    assert.ok(Math.abs(parseFloat(fills[0].style.width) - 100 / 3) < 0.001);
+    assert.ok(Math.abs(parseFloat(fills[1].style.width) - 200 / 3) < 0.001);
+    const zero = app.eval('createStatItem({homeValue:0,awayValue:0})');
+    assert.equal(zero.querySelector(".stat-value--home").textContent, "0");
+    assert.equal(zero.querySelectorAll(".stat-bar-fill").length, 0);
+    const percent = app.eval('createStatItem({homeValue:"40%",awayValue:"60%"})');
+    assert.equal(percent.querySelector(".stat-bar-fill").style.width, "40%");
+  });
+
+  it("does not invent ratios from missing, composite or negative statistics", () => {
+    for (const value of [null, "-", "5 (2)", "-1", "Infinity"]) {
+      const row = app.eval(`createStatItem({homeValue:${JSON.stringify(value)},awayValue:10})`);
+      assert.equal(row.querySelectorAll(".stat-bar-fill").length, 0);
+    }
+  });
+
+  it("distinguishes event types without mislabeling missed penalties as goals", () => {
+    for (const [type, kind] of [["Yellow Card", "yellow-card"], ["Second Yellow Card", "red-card"], ["Goal", "goal"], ["Own Goal", "own-goal"], ["Penalty - Scored", "goal"], ["Penalty - Missed", "penalty"], ["Kickoff", "kickoff"], ["VAR", "var"]]) {
+      const row = app.eval(`createTimelineItem({type:${JSON.stringify(type)},minute:"45'+3'",text:"<img src=x onerror=alert(1)>"})`);
+      assert.ok(row.classList.contains(`timeline-item--${kind}`));
+      assert.equal(row.querySelector(".timeline-icon").getAttribute("aria-hidden"), "true");
+      assert.equal(row.querySelector("img"), null);
+      assert.equal(row.querySelector(".timeline-type").textContent, type);
+    }
+  });
+
+  const lineup = (team) => ({ team, players: ["G", "LB", "CD-L", "CD-R", "RB", "LM", "RM", "AM-L", "AM", "AM-R", "F"].map((position, i) => ({ id: String(i), name: `${team} Player ${i}`, position, jersey: String(i + 1), starter: true })).concat({ name: "Bench Player", position: "F", starter: false }) });
+
+  it("puts only both starting XIs on a pitch and retains the full roster", () => {
+    app.eval(`appendLineupsSection(${JSON.stringify([lineup("Home"), lineup("Away")])})`);
+    assert.equal(app.document.querySelectorAll(".pitch-player").length, 22);
+    assert.equal(app.document.querySelectorAll(".lineup-player").length, 24);
+    assert.ok(!app.document.querySelector(".lineup-pitch").textContent.includes("Bench Player"));
+    const names = [...app.document.querySelector(".pitch-half .pitch-line:nth-of-type(2)").querySelectorAll(".pitch-name")].map((p) => p.textContent);
+    assert.deepEqual(names, ["Home Player 1", "Home Player 2", "Home Player 3", "Home Player 4"]);
+  });
+
+  it("falls back to rosters for incomplete XIs or unknown positions", () => {
+    const incomplete = lineup("Home");
+    incomplete.players.pop();
+    incomplete.players.pop();
+    assert.equal(app.eval(`getPitchLayout(${JSON.stringify(incomplete)})`), null);
+    const unknown = lineup("Home");
+    unknown.players[1].position = "Unknown";
+    app.eval(`appendLineupsSection(${JSON.stringify([unknown, lineup("Away")])})`);
+    assert.equal(app.document.querySelectorAll(".lineup-pitch").length, 0);
+    assert.equal(app.document.querySelectorAll(".lineup-team").length, 2);
+  });
+
+  it("does not render the removed Commentary section from legacy API responses", () => {
+    app.eval('renderLoadedMatchDetail({commentary:[{text:"legacy"}]})');
+    assert.ok(!app.document.querySelector("#leagueDetailContent").textContent.includes("Commentary"));
+    assert.ok(!app.document.querySelector("#leagueDetailContent").textContent.includes("legacy"));
+  });
+});
+
 describe("popup DOM: league list", () => {
   it("renders one card per league with names and meta", () => {
     render();

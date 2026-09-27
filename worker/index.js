@@ -22,7 +22,7 @@ const MAX_EVENT_ID_LENGTH = 20;
 const MAX_REMEMBERED_EVENT_KEYS = 1024;
 const LIVE_MATCHES_CACHE_KEY_VERSION = "v15";
 const STANDINGS_CACHE_KEY_VERSION = "v4";
-const MATCH_DETAIL_CACHE_KEY_VERSION = "v5";
+const MATCH_DETAIL_CACHE_KEY_VERSION = "v6";
 const TOURNAMENT_BRACKET_CACHE_KEY_VERSION = "v1";
 const CACHE_KEY_URL = `https://live-score-extension.internal/live-matches/${LIVE_MATCHES_CACHE_KEY_VERSION}`;
 let liveMatchesRefreshPromise = null;
@@ -1022,7 +1022,6 @@ function normalizeEspnMatchDetail(payload, context) {
       payload?.keyEvents,
       competition?.details || payload?.details,
     ),
-    commentary: normalizeCommentary(payload?.commentary),
     stats: normalizeMatchStats(payload, home, away),
     lineups: normalizeLineups(payload),
     headToHead: normalizeHeadToHead(payload?.headToHeadGames),
@@ -1091,12 +1090,13 @@ function normalizeTimeline(keyEvents, detailEvents) {
       id: String(event.id || event.sequenceNumber || index),
       minute: getEventMinute(event),
       type: getEventType(event),
+      kind: typeof event?.type?.type === "string" ? event.type.type.slice(0, 60) : "",
       text: getEventText(event),
       team: getEventTeam(event),
       players: getEventPlayers(event),
     }))
     .filter((event) => event.text || event.type || event.players.length > 0)
-    .slice(0, 24);
+    .slice(0, 120);
 }
 
 function getEventMinute(event) {
@@ -1168,22 +1168,6 @@ function getEventPlayers(event) {
   }
 
   return [...names].slice(0, 4);
-}
-
-function normalizeCommentary(rows) {
-  if (!Array.isArray(rows)) {
-    return [];
-  }
-
-  return rows
-    .filter((row) => row && typeof row === "object")
-    .map((row, index) => ({
-      id: String(row.id || row.sequenceNumber || index),
-      minute: getEventMinute(row),
-      text: row.text || row.shortText || row.description || "",
-    }))
-    .filter((row) => row.text)
-    .slice(0, 12);
 }
 
 function normalizeMatchStats(payload, homeCompetitor, awayCompetitor) {
@@ -1353,7 +1337,7 @@ function normalizeLineups(payload) {
         .map(normalizeRosterPlayer)
         .filter((player) => player.name)
         .sort(compareRosterPlayers)
-        .slice(0, 24);
+        .slice(0, 40);
 
       return {
         team:
@@ -1362,6 +1346,8 @@ function normalizeLineups(payload) {
           group?.team?.name ||
           "Team",
         logo: getTeamLogoFromTeam(group?.team),
+        homeAway: group?.homeAway === "home" ? "home" : group?.homeAway === "away" ? "away" : "",
+        formation: /^\d(?:-\d){1,4}$/.test(group?.formation || "") ? group.formation : "",
         players,
       };
     })
@@ -1389,18 +1375,19 @@ function getRosterPlayers(group) {
 
 function normalizeRosterPlayer(row) {
   const athlete = row?.athlete || row;
-  const position = athlete?.position || row?.position || {};
+  const position = row?.position || athlete?.position || {};
 
   return {
     id: athlete?.id ? String(athlete.id) : "",
     name: athlete?.displayName || athlete?.shortName || athlete?.name || "",
+    shortName: athlete?.shortName || athlete?.displayName || athlete?.name || "",
     position:
       position?.abbreviation ||
       position?.displayName ||
       position?.name ||
       (typeof position === "string" ? position : ""),
     jersey: athlete?.jersey || row?.jersey || "",
-    starter: Boolean(row?.starter || row?.didStart),
+    starter: row?.starter === true || row?.didStart === true,
   };
 }
 

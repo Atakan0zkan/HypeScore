@@ -31,7 +31,7 @@ assert.equal(vm.runInContext("normalizeClientVersion('1'.repeat(5000))", workerC
 assert.equal(vm.runInContext("parseBrowserFamily('Chrome/' + '1'.repeat(5000)).major", workerContext), "unknown");
 assert.equal(vm.runInContext("normalizeEspnMatches({events: [null]}).length", workerContext), 0);
 assert.equal(vm.runInContext("normalizeTimeline([null], []).length", workerContext), 0);
-assert.equal(vm.runInContext("normalizeCommentary([null]).length", workerContext), 0);
+assert.equal(vm.runInContext("normalizeLineups({rosters: [null]}).length", workerContext), 0);
 assert.equal(vm.runInContext("normalizeBroadcasts([{names: {}}]).length", workerContext), 0);
 assert.equal(vm.runInContext("normalizeEspnStandings({standings: {entries: [null, {stats: [null, {name: 'pointDifferential', value: 4}]}]}})[0].goalDifference", workerContext), "4");
 

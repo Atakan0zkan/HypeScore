@@ -48,7 +48,18 @@ const STANDINGS = [
 const DETAIL = {
   id: "e2e1", leagueCode: "eng.1", title: "Arsenal vs Chelsea",
   teams: { home: { name: "Arsenal" }, away: { name: "Chelsea" } },
-  timeline: [], commentary: [], stats: [], lineups: [], news: [], videos: [], links: [],
+  timeline: [
+    { minute: "0'", type: "Kickoff", kind: "kickoff" },
+    { minute: "23'", type: "Goal", kind: "goal", team: "Arsenal", players: ["Home Forward"], text: "Home Forward scores from inside the penalty area." },
+    { minute: "45'+3'", type: "Yellow Card", kind: "yellow-card", team: "Chelsea", players: ["Away Defender"] },
+  ],
+  stats: [{ label: "Shots", homeValue: "5", awayValue: "10" }, { label: "Possession", homeValue: "35%", awayValue: "65%" }],
+  lineups: ["Arsenal", "Chelsea"].map((team, index) => ({
+    team, homeAway: index ? "away" : "home", formation: "4-2-3-1",
+    players: ["G", "LB", "CD-L", "CD-R", "RB", "LM", "RM", "AM-L", "AM", "AM-R", "F"].map((position, i) => ({
+      id: `${index}-${i}`, name: ["Antonín Kinsky", "Destiny Udogie", "Micky van de Ven", "Kevin Danso", "Pedro Porro", "Conor Gallagher", "João Palhinha", "Mathys Tel", "Rodrigo Bentancur", "Randal Kolo Muani", "Dominic Calvert-Lewin"][i], jersey: String(i + 1), position, starter: true,
+    })),
+  })), news: [], videos: [], links: [],
 };
 
 test.describe.configure({ mode: "serial" });
@@ -103,6 +114,7 @@ test.beforeAll(async () => {
   });
 
   page = await context.newPage();
+  await page.setViewportSize({ width: 580, height: 600 });
   page.on("console", (m) => { if (m.type() === "error") consoleErrors.push(m.text()); });
   page.on("pageerror", (e) => pageErrors.push(String(e)));
   await page.goto(POPUP_URL, { waitUntil: "domcontentloaded" });
@@ -140,6 +152,40 @@ test("opens match detail hero and returns", async () => {
   await page.locator("#backBtn").click();
   await page.locator("#backBtn").click();
   await expect(page.locator(".league-pick-card")).toHaveCount(3);
+});
+
+test("readable stats, event timeline and two starting XIs fit the popup", async () => {
+  await page.locator(".league-pick-card", { hasText: "Premier League" }).click();
+  await page.locator(".match-card").first().click();
+  for (const [title, target] of [["Stats", ".stats-list"], ["Timeline", ".timeline-item"], ["Lineups", ".lineup-pitch"]]) {
+    const section = page.locator("details").filter({ has: page.locator("summary", { hasText: title }) });
+    await section.locator("summary").click();
+    await expect(section.locator(target).first()).toBeVisible();
+    await section.locator(title === "Lineups" ? ".pitch-half--home .pitch-line" : target).first().scrollIntoViewIfNeeded();
+    await page.screenshot({ path: `test-results/${title.toLowerCase()}-presentation.png` });
+    const overflow = await section.evaluate((el) => el.scrollWidth > el.clientWidth);
+    expect(overflow).toBe(false);
+    if (title === "Stats") {
+      const widths = await section.locator(".stat-item").first().locator(".stat-bar-fill").evaluateAll((els) => els.map((el) => el.getBoundingClientRect().width));
+      expect(widths[1] / widths[0]).toBeCloseTo(2, 1);
+      await page.evaluate(() => { document.documentElement.dir = "rtl"; });
+      const positions = await section.locator(".stat-item").first().locator(".stat-value").evaluateAll((els) => els.map((el) => el.getBoundingClientRect().left));
+      expect(positions[0]).toBeLessThan(positions[1]);
+      await page.evaluate(() => { document.documentElement.dir = "ltr"; });
+    }
+    if (title === "Lineups") {
+      await expect(section.locator(".pitch-player")).toHaveCount(22);
+      await section.locator(".pitch-half--away .pitch-line").last().scrollIntoViewIfNeeded();
+      await expect(section.locator(".pitch-half--away .pitch-line").last()).toBeInViewport();
+      await page.screenshot({ path: "test-results/lineups-away-presentation.png" });
+      const clippedNames = await section.locator(".pitch-name").evaluateAll((els) => els.some((el) => el.scrollWidth > el.clientWidth || el.scrollHeight > el.clientHeight));
+      expect(clippedNames).toBe(false);
+    }
+    await section.locator("summary").click();
+  }
+  await expect(page.locator("summary", { hasText: "Commentary" })).toHaveCount(0);
+  await page.locator("#backBtn").click();
+  await page.locator("#backBtn").click();
 });
 
 test("power toggle disables UI and persists", async () => {

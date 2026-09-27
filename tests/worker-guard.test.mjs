@@ -2,6 +2,22 @@ import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import { loadWorkerContext } from "./helpers.mjs";
 
+describe("match detail presentation fields", () => {
+  it("prefers match-specific positions and accepts only explicit starters", async () => {
+    const { run } = await loadWorkerContext();
+    assert.equal(run('normalizeRosterPlayer({starter:"false",athlete:{name:"Player"}}).starter'), false);
+    assert.equal(run('normalizeRosterPlayer({starter:true,position:{abbreviation:"CD-L"},athlete:{name:"Player",position:{abbreviation:"D"}}}).position'), "CD-L");
+    assert.equal(run('normalizeLineups({rosters:[{homeAway:"away",formation:"4-2-3-1",roster:[{starter:true,athlete:{name:"Player"}}]}]})[0].formation'), "4-2-3-1");
+    assert.equal(run('normalizeLineups({rosters:[{formation:"<script>",roster:[{athlete:{name:"Player"}}]}]})[0].formation'), "");
+  });
+  it("preserves late key events instead of truncating after 24 moments", async () => {
+    const { run } = await loadWorkerContext();
+    assert.equal(run('normalizeTimeline(Array.from({length:30}, (_,i)=>({id:i,type:{text:"Goal",type:"goal"}})),[]).length'), 30);
+    assert.equal(run('normalizeTimeline([{type:{text:"Yellow Card",type:"yellow-card"}}],[])[0].kind'), "yellow-card");
+    assert.equal(run('typeof normalizeCommentary'), "undefined");
+  });
+});
+
 describe("worker cache/TTL/bound contract", () => {
   it("TTLs, versions, bounds, probes, WC dates", async () => {
     const { run } = await loadWorkerContext();
@@ -12,7 +28,7 @@ describe("worker cache/TTL/bound contract", () => {
     assert.equal(run("TOURNAMENT_BRACKET_CACHE_TTL_SECONDS"), 900);
     assert.equal(run("LIVE_MATCHES_CACHE_KEY_VERSION"), "v15");
     assert.equal(run("STANDINGS_CACHE_KEY_VERSION"), "v4");
-    assert.equal(run("MATCH_DETAIL_CACHE_KEY_VERSION"), "v5");
+    assert.equal(run("MATCH_DETAIL_CACHE_KEY_VERSION"), "v6");
     assert.equal(run("TOURNAMENT_BRACKET_CACHE_KEY_VERSION"), "v1");
     assert.equal(run("MAX_EVENT_ID_LENGTH"), 20);
     assert.equal(run("MAX_REMEMBERED_EVENT_KEYS"), 1024);
@@ -34,7 +50,7 @@ describe("worker cache/TTL/bound contract", () => {
     const { run } = await loadWorkerContext();
     assert.equal(run("normalizeEspnMatches({events:[null]}).length"), 0);
     assert.equal(run("normalizeTimeline([null], []).length"), 0);
-    assert.equal(run("normalizeCommentary([null]).length"), 0);
+    assert.equal(run("normalizeLineups({rosters: [null]}).length"), 0);
     assert.equal(run("normalizeBroadcasts([{names:{}}]).length"), 0);
   });
 

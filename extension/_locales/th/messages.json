@@ -219,8 +219,8 @@
   "noStandings": {
     "message": "ไม่มีตารางคะแนนของลีกนี้"
   },
-  "noNews": {
-    "message": "ไม่มีข่าว"
+  "fullSquads": {
+    "message": "รายชื่อผู้เล่นทั้งหมด"
   },
   "noLinks": {
     "message": "ไม่มีลิงก์"

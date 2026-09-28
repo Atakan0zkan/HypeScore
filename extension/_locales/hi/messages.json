@@ -219,8 +219,8 @@
   "noStandings": {
     "message": "इस लीग की तालिका उपलब्ध नहीं।"
   },
-  "noNews": {
-    "message": "कोई समाचार नहीं।"
+  "fullSquads": {
+    "message": "पूरी टीमें"
   },
   "noLinks": {
     "message": "कोई लिंक नहीं।"

@@ -219,8 +219,8 @@
   "noStandings": {
     "message": "אין טבלה לליגה זו."
   },
-  "noNews": {
-    "message": "אין חדשות."
+  "fullSquads": {
+    "message": "הסגלים המלאים"
   },
   "noLinks": {
     "message": "אין קישורים."

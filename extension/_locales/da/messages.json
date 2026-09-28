@@ -219,8 +219,8 @@
   "noStandings": {
     "message": "Ingen stilling for denne liga."
   },
-  "noNews": {
-    "message": "Ingen nyheder tilgængelige."
+  "fullSquads": {
+    "message": "Hele trupper"
   },
   "noLinks": {
     "message": "Ingen links tilgængelige."

@@ -219,8 +219,8 @@
   "noStandings": {
     "message": "ఈ లీగ్‌కు పట్టిక లేదు."
   },
-  "noNews": {
-    "message": "వార్తలు లేవు."
+  "fullSquads": {
+    "message": "పూర్తి జట్లు"
   },
   "noLinks": {
     "message": "లింకులు లేవు."

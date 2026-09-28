@@ -219,8 +219,8 @@
   "noStandings": {
     "message": "இந்த லீக்கிற்கு அட்டவணை இல்லை."
   },
-  "noNews": {
-    "message": "செய்திகள் இல்லை."
+  "fullSquads": {
+    "message": "முழு அணிகள்"
   },
   "noLinks": {
     "message": "இணைப்புகள் இல்லை."

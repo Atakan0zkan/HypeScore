@@ -219,8 +219,8 @@
   "noStandings": {
     "message": "Nu există clasament pentru această ligă."
   },
-  "noNews": {
-    "message": "Nu există știri."
+  "fullSquads": {
+    "message": "Loturi complete"
   },
   "noLinks": {
     "message": "Nu există linkuri."

@@ -219,8 +219,8 @@
   "noStandings": {
     "message": "Tälle liigalle ei ole sarjataulukkoa."
   },
-  "noNews": {
-    "message": "Ei uutisia saatavilla."
+  "fullSquads": {
+    "message": "Koko joukkueet"
   },
   "noLinks": {
     "message": "Ei linkkejä saatavilla."

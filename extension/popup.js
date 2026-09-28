@@ -138,7 +138,7 @@ const FALLBACK_MESSAGES = {
   noDetails: "No extra details available for this match.",
   noLinks: "No links available.",
   noLiveMatches: "No live matches",
-  noNews: "No news available.",
+  fullSquads: "Full squads",
   noBracket: "No knockout bracket available.",
   noSectionData: "No data available.",
   noStats: "No match stats available.",
@@ -209,6 +209,10 @@ let consecutiveRefreshErrors = 0;
 let selectedLeagueKey = null;
 let selectedMatchKey = null;
 let selectedMatchSnapshot = null;
+// Navigation preferences are session-only, never analytics or persistent IDs.
+const viewStates = new Map();
+let renderedViewKey = null;
+let pendingViewRestore = false;
 let isEnabled = true;
 let isEnglishOverride = false;
 let contentOverlay = null;
@@ -759,6 +763,7 @@ function renderPayload(payload) {
 }
 
 function renderLeaguePickList(leagues) {
+  captureViewState();
   leaguePickList.replaceChildren();
 
   for (const league of leagues) {
@@ -827,10 +832,11 @@ function renderLeaguePickList(leagues) {
 
   leaguePickList.setAttribute("aria-label", msg("selectLeague"));
   showOnly("pick");
+  restoreViewState("pick");
 }
 
 function renderLeagueDetail(league) {
-  const scrollTop = leagueDetailContent.scrollTop;
+  captureViewState();
   leagueDetailContent.replaceChildren();
 
   const header = document.createElement("div");
@@ -882,9 +888,9 @@ function renderLeagueDetail(league) {
   card.appendChild(createStandingsSection(league));
 
   leagueDetailContent.appendChild(card);
-  leagueDetailContent.scrollTop = scrollTop;
   backBtn.textContent = formatBackLabel();
   showOnly("detail");
+  restoreViewState(`league:${getLeagueKey(league)}`, leagueStandingsCache.get(league.code)?.status === "loading");
 }
 
 function buildLeagueMetaText(league, liveCount, upcomingCount) {
@@ -986,6 +992,7 @@ function openMatchDetail(league, match) {
 }
 
 function renderMatchDetail(league, match) {
+  captureViewState();
   leagueDetailContent.replaceChildren();
   backBtn.textContent = formatBackLabel(league.name);
 
@@ -1027,6 +1034,39 @@ function renderMatchDetail(league, match) {
   }
 
   showOnly("detail");
+  restoreViewState(`match:${getDetailCacheKey(match)}`, !cacheEntry || cacheEntry.status === "loading");
+}
+
+function captureViewState() {
+  if (!renderedViewKey || pendingViewRestore) return;
+  const container = renderedViewKey === "pick" ? leaguePickList : leagueDetailContent;
+  const sections = {};
+  for (const section of container.querySelectorAll("details[data-section-key]")) {
+    sections[section.dataset.sectionKey] = section.open;
+  }
+  viewStates.delete(renderedViewKey);
+  viewStates.set(renderedViewKey, { scrollTop: container.scrollTop, sections });
+  while (viewStates.size > 80) viewStates.delete(viewStates.keys().next().value);
+}
+
+function restoreViewState(key, loading = false) {
+  renderedViewKey = key;
+  const container = key === "pick" ? leaguePickList : leagueDetailContent;
+  const state = viewStates.get(key);
+  for (const section of container.querySelectorAll("details[data-section-key]")) {
+    if (Object.hasOwn(state?.sections || {}, section.dataset.sectionKey)) {
+      section.open = state.sections[section.dataset.sectionKey];
+    }
+  }
+  container.scrollTop = state?.scrollTop || 0;
+  pendingViewRestore = loading && Boolean(state?.scrollTop);
+  // A deliberate user scroll during loading takes precedence over restoration.
+  if (!container.dataset.navigationTracking) {
+    container.dataset.navigationTracking = "true";
+    for (const event of ["wheel", "touchstart", "keydown", "pointerdown"]) {
+      container.addEventListener(event, () => { pendingViewRestore = false; }, { passive: true });
+    }
+  }
 }
 
 function createDetailTeam(logoUrl, name, score) {
@@ -1092,6 +1132,8 @@ async function loadMatchDetail(match) {
 function renderLoadedMatchDetail(detail) {
   const beforeCount = leagueDetailContent.childElementCount;
 
+  appendLineupsSection(detail.lineups);
+
   if (Array.isArray(detail.broadcasts) && detail.broadcasts.length > 0) {
     const meta = document.createElement("section");
     meta.className = "detail-meta-grid detail-meta-grid--secondary detail-meta-grid--single";
@@ -1100,11 +1142,9 @@ function renderLoadedMatchDetail(detail) {
   }
 
   appendStatsSection(detail.stats, detail.teams);
-  appendDetailListSection(msg("timeline"), detail.timeline, createTimelineItem, msg("noSectionData"), true);
-  appendLineupsSection(detail.lineups);
-  appendDetailListSection(msg("headToHead"), detail.headToHead, createHeadToHeadItem);
-  appendLinkSection(msg("news"), detail.news, msg("noNews"), true);
-  appendVideoSection(detail.videos);
+  appendDetailListSection(msg("timeline"), detail.timeline, createTimelineItem, msg("noSectionData"), true, "timeline");
+  appendDetailListSection(msg("headToHead"), detail.headToHead, createHeadToHeadItem, "", false, "headToHead");
+  appendNewsHighlightsSection(detail.news, detail.videos);
   appendLinkSection(msg("links"), detail.links, msg("noLinks"), true);
 
   if (leagueDetailContent.childElementCount === beforeCount) {
@@ -1112,10 +1152,10 @@ function renderLoadedMatchDetail(detail) {
   }
 }
 
-function appendDetailListSection(title, rows, renderer, emptyText = "", alwaysRender = false) {
+function appendDetailListSection(title, rows, renderer, emptyText = "", alwaysRender = false, key = title) {
   const items = Array.isArray(rows) ? rows : [];
   if (!alwaysRender && items.length === 0) return;
-  const section = createDetailSection(title, items.length);
+  const section = createDetailSection(title, key);
   const list = document.createElement("div");
   list.className = "detail-list";
 
@@ -1134,16 +1174,22 @@ function appendDetailListSection(title, rows, renderer, emptyText = "", alwaysRe
 function appendLineupsSection(lineups) {
   const rows = (Array.isArray(lineups) ? lineups : []).filter(Boolean).slice(0, 2);
   rows.sort((a, b) => Number(b.homeAway === "home") - Number(a.homeAway === "home"));
-  const section = createDetailSection(msg("lineups"), rows.length);
+  const section = document.createElement("section");
+  section.className = "detail-section lineup-section";
+  section.appendChild(createTextElement("h2", "detail-section-title lineup-heading", msg("lineups")));
   const layouts = rows.map(getPitchLayout);
-  if (rows.length === 2 && layouts.every(Boolean)) {
+  const hasPitch = rows.length === 2 && layouts.every(Boolean);
+  if (hasPitch) {
+    const legend = document.createElement("div");
+    legend.className = "pitch-teams";
+    rows.forEach((lineup) => legend.appendChild(createTextElement("span", "", [lineup.team, lineup.formation].filter(Boolean).join(" · "))));
+    section.appendChild(legend);
     const pitch = document.createElement("div");
     pitch.className = "lineup-pitch";
     rows.forEach((lineup, index) => {
       const half = document.createElement("section");
       half.className = `pitch-half pitch-half--${index === 0 ? "home" : "away"}`;
       half.setAttribute("aria-label", lineup.team);
-      half.appendChild(createTextElement("h3", "pitch-team", [lineup.team, lineup.formation].filter(Boolean).join(" · ")));
       const lines = index === 0 ? layouts[index] : [...layouts[index]].reverse();
       for (const line of lines) {
         const lane = document.createElement("div");
@@ -1152,9 +1198,10 @@ function appendLineupsSection(lineups) {
           const marker = document.createElement("div");
           marker.className = "pitch-player";
           marker.title = [player.name, player.position].filter(Boolean).join(" · ");
+          marker.setAttribute("aria-label", marker.title);
           marker.append(
             createTextElement("span", "pitch-shirt", player.jersey || "•"),
-            createTextElement("span", "pitch-name", player.shortName || player.name),
+            createTextElement("span", "pitch-name", getPitchPlayerName(player)),
           );
           lane.appendChild(marker);
         }
@@ -1193,12 +1240,21 @@ function appendLineupsSection(lineups) {
     grid.appendChild(column);
   }
 
-  section.appendChild(
-    grid.childElementCount > 0
-      ? grid
-      : createTextElement("p", "detail-empty", msg("noSectionData")),
-  );
+  if (hasPitch) {
+    const roster = createDetailSection(msg("fullSquads"), "fullSquads");
+    roster.classList.add("lineup-roster");
+    roster.appendChild(grid);
+    section.appendChild(roster);
+  } else {
+    section.appendChild(grid.childElementCount ? grid : createTextElement("p", "detail-empty", msg("noSectionData")));
+  }
   leagueDetailContent.appendChild(section);
+}
+
+function getPitchPlayerName(player) {
+  if (player.shortName) return player.shortName;
+  const parts = String(player.name || "").trim().split(/\s+/);
+  return parts.length > 1 ? `${parts[0][0]}. ${parts.slice(1).join(" ")}` : parts[0];
 }
 
 function getPitchLayout(lineup) {
@@ -1220,7 +1276,7 @@ function getPitchLayout(lineup) {
 
 function appendStatsSection(stats, teams) {
   const rows = Array.isArray(stats) ? stats : [];
-  const section = createDetailSection(msg("stats"), rows.length);
+  const section = createDetailSection(msg("stats"), "stats");
   const list = document.createElement("div");
   list.className = "stats-list";
   if (rows.length && teams?.home?.name && teams?.away?.name) {
@@ -1243,7 +1299,7 @@ function appendStatsSection(stats, teams) {
 }
 
 function appendLinkSection(title, rows, emptyText = "", alwaysRender = false) {
-  const section = createDetailSection(title, Array.isArray(rows) ? rows.length : 0);
+  const section = createDetailSection(title, "links");
   const list = document.createElement("div");
   list.className = "link-list";
   for (const row of Array.isArray(rows) ? rows : []) {
@@ -1264,16 +1320,16 @@ function appendLinkSection(title, rows, emptyText = "", alwaysRender = false) {
   }
 }
 
-function appendVideoSection(videos) {
-  if (!Array.isArray(videos) || videos.length === 0) return;
-  const section = createDetailSection(msg("highlights"), videos.length);
+function appendNewsHighlightsSection(news, videos) {
+  const section = createDetailSection(`${msg("news")} · ${msg("highlights")}`, "media");
   const list = document.createElement("div");
-  list.className = "video-list";
+  list.className = "media-list";
 
-  for (const video of videos) {
+  for (const video of Array.isArray(videos) ? videos : []) {
+    if (!video) continue;
     const safeUrl = sanitizeExternalUrl(video.url, ["espn.com"]);
     const card = document.createElement(safeUrl ? "a" : "div");
-    card.className = "video-card";
+    card.className = "video-card video-card--highlight";
     if (safeUrl) {
       card.href = safeUrl;
       card.target = "_blank";
@@ -1282,11 +1338,17 @@ function appendVideoSection(videos) {
     if (video.thumbnail) {
       card.appendChild(createLogoImage("video-thumb", video.thumbnail, video.title));
     }
-    card.appendChild(createTextElement("span", "", video.title));
+    const copy = document.createElement("span");
+    copy.className = "highlight-copy";
+    copy.append(createTextElement("strong", "highlight-badge", `▶ ${msg("highlights")}`), createTextElement("span", "highlight-title", video.title));
+    card.appendChild(copy);
     list.appendChild(card);
   }
 
-  section.appendChild(list);
+  for (const article of Array.isArray(news) ? news : []) {
+    if (article?.url) list.appendChild(createExternalLink(article.title || article.label, article.url));
+  }
+  section.appendChild(list.childElementCount ? list : createTextElement("p", "detail-empty", msg("noSectionData")));
   leagueDetailContent.appendChild(section);
 }
 
@@ -1368,9 +1430,10 @@ function parseStatValue(value) {
   return Number.isFinite(number) ? number : null;
 }
 
-function createDetailSection(title) {
+function createDetailSection(title, key = title) {
   const section = document.createElement("details");
   section.className = "detail-section detail-section--accordion";
+  section.dataset.sectionKey = key;
 
   const summary = document.createElement("summary");
   summary.className = "detail-section-summary";
@@ -1394,6 +1457,7 @@ function createTournamentBracketSection(league) {
   const leagueCode = league.code;
   const section = document.createElement("details");
   section.className = "tournament-bracket detail-section detail-section--accordion";
+  section.dataset.sectionKey = "bracket";
   section.open = openTournamentBracketLeagueCodes.has(leagueCode);
 
   const summary = document.createElement("summary");

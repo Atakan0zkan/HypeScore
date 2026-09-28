@@ -219,8 +219,8 @@
   "noStandings": {
     "message": "ለዚህ ሊግ ሰንጠረዥ የለም።"
   },
-  "noNews": {
-    "message": "ዜና የለም።"
+  "fullSquads": {
+    "message": "ሙሉ ቡድኖች"
   },
   "noLinks": {
     "message": "አገናኞች የሉም።"

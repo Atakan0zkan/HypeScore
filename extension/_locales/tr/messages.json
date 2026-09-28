@@ -219,8 +219,8 @@
   "noStandings": {
     "message": "Bu lig için puan durumu bulunamadı."
   },
-  "noNews": {
-    "message": "Haber bulunamadı."
+  "fullSquads": {
+    "message": "Tüm kadrolar"
   },
   "noLinks": {
     "message": "Bağlantı bulunamadı."

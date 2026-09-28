@@ -219,8 +219,8 @@
   "noStandings": {
     "message": "Aucun classement disponible pour cette ligue."
   },
-  "noNews": {
-    "message": "Aucune actualité disponible."
+  "fullSquads": {
+    "message": "Effectifs complets"
   },
   "noLinks": {
     "message": "Aucun lien disponible."

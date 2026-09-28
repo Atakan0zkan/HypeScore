@@ -219,8 +219,8 @@
   "noStandings": {
     "message": "이 리그의 순위가 없습니다."
   },
-  "noNews": {
-    "message": "뉴스가 없습니다."
+  "fullSquads": {
+    "message": "전체 선수 명단"
   },
   "noLinks": {
     "message": "링크가 없습니다."

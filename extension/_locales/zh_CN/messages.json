@@ -219,8 +219,8 @@
   "noStandings": {
     "message": "该联赛暂无积分榜。"
   },
-  "noNews": {
-    "message": "暂无新闻。"
+  "fullSquads": {
+    "message": "完整阵容"
   },
   "noLinks": {
     "message": "暂无链接。"

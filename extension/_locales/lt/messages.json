@@ -219,8 +219,8 @@
   "noStandings": {
     "message": "Šiai lygai lentelės nėra."
   },
-  "noNews": {
-    "message": "Nėra naujienų."
+  "fullSquads": {
+    "message": "Visos sudėtys"
   },
   "noLinks": {
     "message": "Nėra nuorodų."

@@ -219,8 +219,8 @@
   "noStandings": {
     "message": "Ingen tabell för den här ligan."
   },
-  "noNews": {
-    "message": "Inga nyheter tillgängliga."
+  "fullSquads": {
+    "message": "Hela trupperna"
   },
   "noLinks": {
     "message": "Inga länkar tillgängliga."

@@ -59,7 +59,8 @@ const DETAIL = {
     players: ["G", "LB", "CD-L", "CD-R", "RB", "LM", "RM", "AM-L", "AM", "AM-R", "F"].map((position, i) => ({
       id: `${index}-${i}`, name: ["Antonín Kinsky", "Destiny Udogie", "Micky van de Ven", "Kevin Danso", "Pedro Porro", "Conor Gallagher", "João Palhinha", "Mathys Tel", "Rodrigo Bentancur", "Randal Kolo Muani", "Dominic Calvert-Lewin"][i], jersey: String(i + 1), position, starter: true,
     })),
-  })), news: [], videos: [], links: [],
+  })), news: [{ title: "Match report", url: "https://www.espn.com/soccer/report/_/gameId/740954" }],
+  videos: [{ title: "Watch the match highlights", url: "https://www.espn.com/video/clip/_/id/12345" }], links: [],
 };
 
 test.describe.configure({ mode: "serial" });
@@ -157,11 +158,24 @@ test("opens match detail hero and returns", async () => {
 test("readable stats, event timeline and two starting XIs fit the popup", async () => {
   await page.locator(".league-pick-card", { hasText: "Premier League" }).click();
   await page.locator(".match-card").first().click();
-  for (const [title, target] of [["Stats", ".stats-list"], ["Timeline", ".timeline-item"], ["Lineups", ".lineup-pitch"]]) {
+  const pitch = page.locator(".lineup-pitch");
+  await expect(pitch).toBeVisible();
+  await expect(pitch.locator(".pitch-player")).toHaveCount(22);
+  await pitch.scrollIntoViewIfNeeded();
+  await page.screenshot({ path: "test-results/lineups-horizontal.png" });
+  const pitchBox = await pitch.boundingBox();
+  expect(pitchBox.height).toBeLessThanOrEqual(302);
+  expect(pitchBox.width).toBeGreaterThan(pitchBox.height);
+  const goalkeepers = await pitch.locator(".pitch-shirt", { hasText: /^1$/ }).evaluateAll((els) => els.map((el) => { const r = el.getBoundingClientRect(); return { x: r.x, y: r.y }; }));
+  expect(goalkeepers[1].x - goalkeepers[0].x).toBeGreaterThan(350);
+  expect(Math.abs(goalkeepers[1].y - goalkeepers[0].y)).toBeLessThan(2);
+  expect(await pitch.evaluate((el) => el.closest("details"))).toBeNull();
+  expect(await pitch.locator(".pitch-name").evaluateAll((els) => els.some((el) => el.scrollWidth > el.clientWidth))).toBe(false);
+  for (const [title, target] of [["Stats", ".stats-list"], ["Timeline", ".timeline-item"], ["News", ".media-list"]]) {
     const section = page.locator("details").filter({ has: page.locator("summary", { hasText: title }) });
     await section.locator("summary").click();
     await expect(section.locator(target).first()).toBeVisible();
-    await section.locator(title === "Lineups" ? ".pitch-half--home .pitch-line" : target).first().scrollIntoViewIfNeeded();
+    await section.locator(target).first().scrollIntoViewIfNeeded();
     await page.screenshot({ path: `test-results/${title.toLowerCase()}-presentation.png` });
     const overflow = await section.evaluate((el) => el.scrollWidth > el.clientWidth);
     expect(overflow).toBe(false);
@@ -173,17 +187,29 @@ test("readable stats, event timeline and two starting XIs fit the popup", async 
       expect(positions[0]).toBeLessThan(positions[1]);
       await page.evaluate(() => { document.documentElement.dir = "ltr"; });
     }
-    if (title === "Lineups") {
-      await expect(section.locator(".pitch-player")).toHaveCount(22);
-      await section.locator(".pitch-half--away .pitch-line").last().scrollIntoViewIfNeeded();
-      await expect(section.locator(".pitch-half--away .pitch-line").last()).toBeInViewport();
-      await page.screenshot({ path: "test-results/lineups-away-presentation.png" });
-      const clippedNames = await section.locator(".pitch-name").evaluateAll((els) => els.some((el) => el.scrollWidth > el.clientWidth || el.scrollHeight > el.clientHeight));
-      expect(clippedNames).toBe(false);
-    }
+    if (title === "News") await expect(section.locator(".media-list > :first-child")).toHaveClass(/video-card--highlight/);
     await section.locator("summary").click();
   }
   await expect(page.locator("summary", { hasText: "Commentary" })).toHaveCount(0);
+  await page.locator("#backBtn").click();
+  await page.locator("#backBtn").click();
+});
+
+test("back navigation restores per-view scrolling and open sections", async () => {
+  await page.locator(".league-pick-card", { hasText: "Premier League" }).click();
+  const scroll = page.locator("#leagueDetailContent");
+  await scroll.evaluate((el) => { el.scrollTop = 65; });
+  const leaguePosition = await scroll.evaluate((el) => el.scrollTop);
+  await page.locator(".match-card").first().click();
+  const stats = page.locator('details[data-section-key="stats"]');
+  await stats.locator("summary").click();
+  await stats.scrollIntoViewIfNeeded();
+  const matchPosition = await scroll.evaluate((el) => el.scrollTop);
+  await page.locator("#backBtn").click();
+  expect(await scroll.evaluate((el) => el.scrollTop)).toBeCloseTo(leaguePosition, 0);
+  await page.locator(".match-card").first().click();
+  await expect(stats).toHaveAttribute("open", "");
+  expect(await scroll.evaluate((el) => el.scrollTop)).toBeCloseTo(matchPosition, 0);
   await page.locator("#backBtn").click();
   await page.locator("#backBtn").click();
 });

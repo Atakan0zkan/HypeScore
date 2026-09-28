@@ -219,8 +219,8 @@
   "noStandings": {
     "message": "Для этой лиги нет таблицы."
   },
-  "noNews": {
-    "message": "Нет новостей."
+  "fullSquads": {
+    "message": "Полные составы"
   },
   "noLinks": {
     "message": "Нет ссылок."

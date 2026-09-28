@@ -219,8 +219,8 @@
   "noStandings": {
     "message": "Няма класиране за тази лига."
   },
-  "noNews": {
-    "message": "Няма новини."
+  "fullSquads": {
+    "message": "Пълни състави"
   },
   "noLinks": {
     "message": "Няма връзки."

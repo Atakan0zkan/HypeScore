@@ -219,8 +219,8 @@
   "noStandings": {
     "message": "Không có bảng xếp hạng cho giải này."
   },
-  "noNews": {
-    "message": "Không có tin tức."
+  "fullSquads": {
+    "message": "Danh sách toàn đội"
   },
   "noLinks": {
     "message": "Không có liên kết."

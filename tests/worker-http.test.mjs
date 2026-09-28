@@ -35,13 +35,13 @@ describe("worker HTTP: live-matches routing + cache", () => {
       let j = null; try { j = JSON.parse(t); } catch {}
       return { status: r.status, json: j, cors: r.headers.get("Access-Control-Allow-Origin"), cache: r.headers.get("X-Cache") };
     })()`);
-    const first = await call("/live-matches?client=extension&version=1.5.1", { Origin: UNPACKED_ORIGIN });
+    const first = await call("/live-matches?client=extension&version=1.6", { Origin: UNPACKED_ORIGIN });
     assert.equal(first.status, 200);
     assert.ok(Array.isArray(first.json.matches) && Array.isArray(first.json.leagues));
     assert.equal(first.json.leagues.length, 32);
     assert.equal(first.cors, UNPACKED_ORIGIN);
     assert.ok(first.json.matches.length >= 1, "live event survived");
-    const second = await call("/live-matches?client=extension&version=1.5.1", { Origin: UNPACKED_ORIGIN });
+    const second = await call("/live-matches?client=extension&version=1.6", { Origin: UNPACKED_ORIGIN });
     assert.equal(second.status, 200);
     assert.equal(second.cache, "HIT");
   });

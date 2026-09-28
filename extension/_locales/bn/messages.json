@@ -219,8 +219,8 @@
   "noStandings": {
     "message": "এই লিগের টেবিল নেই।"
   },
-  "noNews": {
-    "message": "কোনো খবর নেই।"
+  "fullSquads": {
+    "message": "সম্পূর্ণ দল"
   },
   "noLinks": {
     "message": "কোনো লিঙ্ক নেই।"

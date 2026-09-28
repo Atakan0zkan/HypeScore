@@ -219,8 +219,8 @@
   "noStandings": {
     "message": "جدولی برای این لیگ نیست."
   },
-  "noNews": {
-    "message": "خبری نیست."
+  "fullSquads": {
+    "message": "فهرست کامل تیم‌ها"
   },
   "noLinks": {
     "message": "پیوندی نیست."

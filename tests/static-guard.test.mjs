@@ -9,7 +9,11 @@ describe("static release guards (regression watchlist as code)", () => {
   it("manifest/package versions + minimal permissions", async () => {
     const manifest = JSON.parse(await read("extension/manifest.json"));
     const pkg = JSON.parse(await read("package.json"));
-    assert.equal(manifest.version, pkg.version);
+    const normalized = (version) => [...version.split("."), "0", "0"].slice(0, 3).join(".");
+    assert.equal(normalized(manifest.version), normalized(pkg.version));
+    const lock = JSON.parse(await read("package-lock.json"));
+    assert.equal(pkg.version, lock.version);
+    assert.equal(pkg.version, lock.packages[""].version);
     assert.equal(manifest.manifest_version, 3);
     assert.deepEqual(manifest.permissions, []);
     assert.deepEqual(manifest.host_permissions, ["https://api.atakanozkan.com/*"]);

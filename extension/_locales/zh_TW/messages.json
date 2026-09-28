@@ -219,8 +219,8 @@
   "noStandings": {
     "message": "此聯賽暫無積分榜。"
   },
-  "noNews": {
-    "message": "暫無新聞。"
+  "fullSquads": {
+    "message": "完整陣容"
   },
   "noLinks": {
     "message": "暫無連結。"

@@ -219,8 +219,8 @@
   "noStandings": {
     "message": "Brak tabeli dla tej ligi."
   },
-  "noNews": {
-    "message": "Brak wiadomości."
+  "fullSquads": {
+    "message": "Pełne składy"
   },
   "noLinks": {
     "message": "Brak linków."

@@ -219,8 +219,8 @@
   "noStandings": {
     "message": "Tiada kedudukan untuk liga ini."
   },
-  "noNews": {
-    "message": "Tiada berita."
+  "fullSquads": {
+    "message": "Skuad penuh"
   },
   "noLinks": {
     "message": "Tiada pautan."

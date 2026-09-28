@@ -219,8 +219,8 @@
   "noStandings": {
     "message": "このリーグの順位表はありません。"
   },
-  "noNews": {
-    "message": "ニュースはありません。"
+  "fullSquads": {
+    "message": "全選手"
   },
   "noLinks": {
     "message": "リンクはありません。"

@@ -219,8 +219,8 @@
   "noStandings": {
     "message": "Selle liiga tabelit pole."
   },
-  "noNews": {
-    "message": "Uudiseid pole."
+  "fullSquads": {
+    "message": "Täiskoosseisud"
   },
   "noLinks": {
     "message": "Linke pole."

@@ -219,8 +219,8 @@
   "noStandings": {
     "message": "Za to ligo ni lestvice."
   },
-  "noNews": {
-    "message": "Ni novic."
+  "fullSquads": {
+    "message": "Celotni postavi"
   },
   "noLinks": {
     "message": "Ni povezav."

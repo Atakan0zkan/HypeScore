@@ -219,8 +219,8 @@
   "noStandings": {
     "message": "Ehhez a ligához nincs tabella."
   },
-  "noNews": {
-    "message": "Nincs hír."
+  "fullSquads": {
+    "message": "Teljes keretek"
   },
   "noLinks": {
     "message": "Nincs link."

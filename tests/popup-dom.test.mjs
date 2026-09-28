@@ -67,8 +67,10 @@ describe("match presentation", () => {
     assert.equal(app.document.querySelectorAll(".pitch-player").length, 22);
     assert.equal(app.document.querySelectorAll(".lineup-player").length, 24);
     assert.ok(!app.document.querySelector(".lineup-pitch").textContent.includes("Bench Player"));
-    const names = [...app.document.querySelector(".pitch-half .pitch-line:nth-of-type(2)").querySelectorAll(".pitch-name")].map((p) => p.textContent);
+    const names = [...app.document.querySelector(".pitch-half .pitch-line:nth-of-type(2)").querySelectorAll(".pitch-player")].map((p) => p.getAttribute("aria-label").split(" · ")[0]);
     assert.deepEqual(names, ["Home Player 1", "Home Player 2", "Home Player 3", "Home Player 4"]);
+    assert.equal(app.document.querySelector(".lineup-section").tagName, "SECTION");
+    assert.equal(app.document.querySelector(".lineup-roster").open, false);
   });
 
   it("falls back to rosters for incomplete XIs or unknown positions", () => {
@@ -91,6 +93,88 @@ describe("match presentation", () => {
 });
 
 describe("popup DOM: league list", () => {
+  it("merges news and highlights into one section with videos first and safe links", () => {
+    app.eval('appendNewsHighlightsSection([{title:"Article",url:"https://www.espn.com/story"}], [{title:"Video",url:"https://www.espn.com/video/clip/1"},{title:"Unsafe",url:"javascript:alert(1)"}])');
+    const section = app.document.querySelector('[data-section-key="media"]');
+    assert.ok(section.querySelector("summary").textContent.includes("News"));
+    assert.ok(section.querySelector("summary").textContent.includes("Highlights"));
+    assert.ok(section.querySelector(".media-list").firstElementChild.classList.contains("video-card--highlight"));
+    assert.equal(section.querySelectorAll("a").length, 2);
+    assert.equal(section.querySelectorAll(".highlight-badge").length, 2);
+    assert.equal(app.document.querySelectorAll("details").length, 1);
+  });
+
+  it("keeps lineups between the score and stats without an accordion", () => {
+    const league = domPayload().leagues[0];
+    app.eval(`__T.detailCache.set(getDetailCacheKey(${JSON.stringify(league.matches[0])}), {status:'loaded', data:{stats:[],lineups:[]}})`);
+    app.eval(`renderMatchDetail(${JSON.stringify(league)}, ${JSON.stringify(league.matches[0])})`);
+    const hero = app.document.querySelector(".match-detail-hero");
+    assert.ok(hero.nextElementSibling.classList.contains("lineup-section"));
+    assert.equal(hero.nextElementSibling.nextElementSibling.dataset.sectionKey, "stats");
+  });
+
+  it("restores independent scroll positions and section states without storage writes", () => {
+    const payload = domPayload();
+    for (const match of payload.matches) app.eval(`__T.detailCache.set(getDetailCacheKey(${JSON.stringify(match)}), {status:'loaded', data:{stats:[],lineups:[]}})`);
+    app.eval('__T.standingsCache.set("eng.1", {status:"loaded",standings:[]})');
+    render(payload);
+    const pick = app.document.getElementById("leaguePickList");
+    const detail = app.document.getElementById("leagueDetailContent");
+    pick.scrollTop = 120;
+    cardByName("Premier League").click();
+    assert.equal(detail.scrollTop, 0);
+    detail.scrollTop = 210;
+    app.document.querySelector(".match-card").click();
+    assert.equal(detail.scrollTop, 0);
+    app.document.querySelector('[data-section-key="stats"]').open = true;
+    detail.scrollTop = 330;
+    app.document.getElementById("backBtn").click();
+    assert.equal(detail.scrollTop, 210);
+    app.document.querySelector(".match-card").click();
+    assert.equal(detail.scrollTop, 330);
+    assert.equal(app.document.querySelector('[data-section-key="stats"]').open, true);
+    app.document.getElementById("backBtn").click();
+    app.document.querySelectorAll(".match-card")[1].click();
+    assert.equal(detail.scrollTop, 0);
+    assert.equal(app.document.querySelector('[data-section-key="stats"]').open, false);
+    app.document.getElementById("backBtn").click();
+    app.document.getElementById("backBtn").click();
+    assert.equal(pick.scrollTop, 120);
+    assert.equal(app.window.localStorage.getItem("hype_navigation"), null);
+  });
+
+  it("preserves open sections through a same-view re-render and language switch", () => {
+    const league = domPayload().leagues[0];
+    app.eval(`__T.detailCache.set(getDetailCacheKey(${JSON.stringify(league.matches[0])}), {status:'loaded', data:{stats:[]}})`);
+    render();
+    cardByName("Premier League").click();
+    app.document.querySelector(".match-card").click();
+    app.document.querySelector('[data-section-key="media"]').open = true;
+    app.document.getElementById("leagueDetailContent").scrollTop = 160;
+    app.eval("toggleEnglishOverride()");
+    assert.equal(app.document.querySelector('[data-section-key="media"]').open, true);
+    assert.equal(app.document.getElementById("leagueDetailContent").scrollTop, 160);
+  });
+
+  it("keeps the saved position while a short loading shell is replaced with data", () => {
+    const league = domPayload().leagues[0];
+    const match = league.matches[0];
+    const setCache = (value) => app.eval(`__T.detailCache.set(getDetailCacheKey(${JSON.stringify(match)}), ${JSON.stringify(value)})`);
+    const show = () => app.eval(`renderMatchDetail(${JSON.stringify(league)}, ${JSON.stringify(match)})`);
+    setCache({ status: "loaded", data: { stats: [] } });
+    show();
+    const detail = app.document.getElementById("leagueDetailContent");
+    app.document.querySelector('[data-section-key="stats"]').open = true;
+    detail.scrollTop = 400;
+    setCache({ status: "loading" });
+    show();
+    detail.scrollTop = 0; // Browser clamps scroll while only the loading shell exists.
+    setCache({ status: "loaded", data: { stats: [] } });
+    show();
+    assert.equal(detail.scrollTop, 400);
+    assert.equal(app.document.querySelector('[data-section-key="stats"]').open, true);
+  });
+
   it("renders one card per league with names and meta", () => {
     render();
     assert.equal(cards().length, 2);

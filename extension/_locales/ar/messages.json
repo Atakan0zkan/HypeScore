@@ -219,8 +219,8 @@
   "noStandings": {
     "message": "لا يوجد ترتيب لهذا الدوري."
   },
-  "noNews": {
-    "message": "لا توجد أخبار."
+  "fullSquads": {
+    "message": "القوائم الكاملة"
   },
   "noLinks": {
     "message": "لا توجد روابط."

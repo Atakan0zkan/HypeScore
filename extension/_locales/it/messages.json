@@ -219,8 +219,8 @@
   "noStandings": {
     "message": "Nessuna classifica per questo campionato."
   },
-  "noNews": {
-    "message": "Nessuna notizia disponibile."
+  "fullSquads": {
+    "message": "Rose complete"
   },
   "noLinks": {
     "message": "Nessun link disponibile."

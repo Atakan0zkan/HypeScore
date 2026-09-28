@@ -219,8 +219,8 @@
   "noStandings": {
     "message": "No standings available for this league."
   },
-  "noNews": {
-    "message": "No news available."
+  "fullSquads": {
+    "message": "Full squads"
   },
   "noLinks": {
     "message": "No links available."

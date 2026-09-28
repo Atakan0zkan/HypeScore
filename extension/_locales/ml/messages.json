@@ -219,8 +219,8 @@
   "noStandings": {
     "message": "ഈ ലീഗിന് പട്ടികയില്ല."
   },
-  "noNews": {
-    "message": "വാർത്തകളില്ല."
+  "fullSquads": {
+    "message": "മുഴുവൻ ടീമുകൾ"
   },
   "noLinks": {
     "message": "ലിങ്കുകളില്ല."

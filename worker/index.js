@@ -22,7 +22,9 @@ const MAX_EVENT_ID_LENGTH = 20;
 const MAX_REMEMBERED_EVENT_KEYS = 1024;
 const LIVE_MATCHES_CACHE_KEY_VERSION = "v15";
 const STANDINGS_CACHE_KEY_VERSION = "v4";
-const MATCH_DETAIL_CACHE_KEY_VERSION = "v6";
+const MATCH_DETAIL_CACHE_KEY_VERSION = "v7";
+const KNOWN_EVENTS_TTL_MS = 60 * 60 * 1000;
+const KNOWN_EVENTS_CACHE_URL = "https://live-score-extension.internal/known-events/v1";
 const TOURNAMENT_BRACKET_CACHE_KEY_VERSION = "v1";
 const CACHE_KEY_URL = `https://live-score-extension.internal/live-matches/${LIVE_MATCHES_CACHE_KEY_VERSION}`;
 let liveMatchesRefreshPromise = null;
@@ -549,6 +551,7 @@ async function refreshLiveMatches(env, cache, cacheKey) {
     leagues: groupMatchesByLeague(matches),
   };
   rememberKnownMatches(matches);
+  await persistKnownMatches(cache, matches);
   const response = jsonResponse(data, {
     cache: "MISS",
     source,
@@ -597,6 +600,7 @@ async function refreshTournamentBracket(leagueCode, cache, cacheKey) {
   );
   const data = normalizeTournamentBracket(payload, leagueCode);
   rememberKnownBracketRounds(data.rounds);
+  await persistKnownMatches(cache, data.rounds.flatMap((round) => round.matches || []));
   const response = jsonResponse(data, {
     cache: "MISS",
     source: "espn-tournament-bracket",
@@ -1388,7 +1392,19 @@ function normalizeRosterPlayer(row) {
       (typeof position === "string" ? position : ""),
     jersey: athlete?.jersey || row?.jersey || "",
     starter: row?.starter === true || row?.didStart === true,
+    goals: getRosterMatchCount(row, "totalGoals", 20),
+    yellowCards: getRosterMatchCount(row, "yellowCards", 2),
+    redCards: getRosterMatchCount(row, "redCards", 1),
   };
+}
+
+function getRosterMatchCount(row, name, maximum) {
+  // Only match-roster stats, never athlete season/career totals or shootouts.
+  const stat = Array.isArray(row?.stats) ? row.stats.find((item) => item?.name === name) : null;
+  const value = stat?.value ?? stat?.displayValue;
+  if (typeof value !== "number" && !(typeof value === "string" && /^\d+$/.test(value))) return 0;
+  const count = Number(value);
+  return Number.isInteger(count) && count >= 0 && count <= maximum ? count : 0;
 }
 
 function compareRosterPlayers(a, b) {
@@ -1754,6 +1770,14 @@ async function isKnownMatchDetailEvent(cache, eventId, leagueCode) {
     return true;
   }
 
+  // The popup may retain results for 30 minutes, outliving the 30/120s live
+  // cache and the serving isolate. Keep a bounded, non-public allowlist longer.
+  const registry = await readKnownMatches(cache);
+  if (registry.some((entry) => entry.key === eventKey && entry.expires > Date.now())) {
+    rememberEventKey(eventId, leagueCode);
+    return true;
+  }
+
   const liveResponse = await cache.match(
     new Request(CACHE_KEY_URL, { method: "GET" }),
   );
@@ -1776,6 +1800,32 @@ async function isKnownMatchDetailEvent(cache, eventId, leagueCode) {
   }
 
   return rememberedEventKeys.has(eventKey);
+}
+
+async function readKnownMatches(cache) {
+  const response = await cache.match(new Request(KNOWN_EVENTS_CACHE_URL));
+  const entries = response ? await safeReadJsonResponse(response) : [];
+  return Array.isArray(entries) ? entries.filter((entry) =>
+    entry && typeof entry.key === "string" && Number.isFinite(entry.expires) && entry.expires > Date.now()
+  ).slice(-MAX_REMEMBERED_EVENT_KEYS) : [];
+}
+
+async function persistKnownMatches(cache, matches) {
+  try {
+    const entries = new Map((await readKnownMatches(cache)).map((entry) => [entry.key, entry]));
+    for (const match of Array.isArray(matches) ? matches : []) {
+      if (!isSafeEventId(String(match?.id || "")) || !isSupportedLeagueCode(match?.leagueCode)) continue;
+      const key = getEventKey(match.id, match.leagueCode);
+      entries.delete(key);
+      entries.set(key, { key, expires: Date.now() + KNOWN_EVENTS_TTL_MS });
+    }
+    await cache.put(new Request(KNOWN_EVENTS_CACHE_URL), new Response(
+      JSON.stringify([...entries.values()].slice(-MAX_REMEMBERED_EVENT_KEYS)),
+      { headers: { "Content-Type": "application/json", "Cache-Control": "public, max-age=3600" } },
+    ));
+  } catch (error) {
+    console.warn(`Known-event cache put failed: ${getErrorMessage(error)}`);
+  }
 }
 
 function rememberKnownMatches(matches) {

@@ -1101,9 +1101,7 @@ async function loadMatchDetail(match) {
   let shouldRender = true;
 
   try {
-    const data = await fetchJsonWithTimeout(buildMatchDetailUrl(match), {
-      signal: controller.signal,
-    });
+    const data = await fetchMatchDetailWithRecovery(match, controller.signal);
     if (controller.signal.aborted) throw createAbortError();
     matchDetailCache.set(key, { status: "loaded", data });
   } catch (error) {
@@ -1126,6 +1124,20 @@ async function loadMatchDetail(match) {
     if (shouldRender && lastPayload && selectedMatchKey === getMatchKey(match)) {
       renderPayload(lastPayload);
     }
+  }
+}
+
+async function fetchMatchDetailWithRecovery(match, signal) {
+  try {
+    return await fetchJsonWithTimeout(buildMatchDetailUrl(match), { signal });
+  } catch (error) {
+    if (error.status !== 404 || signal.aborted) throw error;
+    // A cold edge location may not know a card restored from local storage.
+    // Re-prime the public scoreboard once, then retry only if it lists this ID.
+    const payload = await fetchJsonWithTimeout(BACKEND_URL, { signal, cache: "reload" });
+    if (!isValidLivePayload(payload) || !payload.matches.some((row) =>
+      String(row.id) === String(match.id) && row.leagueCode === match.leagueCode)) throw error;
+    return fetchJsonWithTimeout(buildMatchDetailUrl(match), { signal });
   }
 }
 
@@ -1199,8 +1211,10 @@ function appendLineupsSection(lineups) {
           marker.className = "pitch-player";
           marker.title = [player.name, player.position].filter(Boolean).join(" · ");
           marker.setAttribute("aria-label", marker.title);
+          const shirt = createTextElement("span", "pitch-shirt", player.jersey || "•");
+          appendPlayerMatchBadges(shirt, player);
           marker.append(
-            createTextElement("span", "pitch-shirt", player.jersey || "•"),
+            shirt,
             createTextElement("span", "pitch-name", getPitchPlayerName(player)),
           );
           lane.appendChild(marker);
@@ -1249,6 +1263,38 @@ function appendLineupsSection(lineups) {
     section.appendChild(grid.childElementCount ? grid : createTextElement("p", "detail-empty", msg("noSectionData")));
   }
   leagueDetailContent.appendChild(section);
+}
+
+function appendPlayerMatchBadges(shirt, player) {
+  const count = (value, max) => Number.isInteger(value) && value > 0 && value <= max ? value : 0;
+  const goals = count(player.goals, 20);
+  if (goals) {
+    const stack = createTextElement("span", "pitch-goals", "");
+    stack.setAttribute("role", "img");
+    stack.setAttribute("aria-label", `⚽ × ${goals}`);
+    stack.title = `⚽ × ${goals}`;
+    for (let i = 0; i < goals; i += 1) {
+      const ball = createTextElement("span", "pitch-goal", "⚽︎");
+      ball.setAttribute("aria-hidden", "true");
+      ball.style.bottom = `${i * Math.min(6, 12 / Math.max(1, goals - 1))}px`;
+      stack.appendChild(ball);
+    }
+    shirt.appendChild(stack);
+  }
+  const yellow = count(player.yellowCards, 2);
+  const red = count(player.redCards, 1);
+  if (yellow || red) {
+    const cards = createTextElement("span", "pitch-cards", "");
+    cards.setAttribute("role", "img");
+    cards.setAttribute("aria-label", [yellow ? `🟨 × ${yellow}` : "", red ? "🟥 × 1" : ""].filter(Boolean).join(" · "));
+    cards.title = cards.getAttribute("aria-label");
+    for (const kind of [...Array(yellow).fill("yellow"), ...Array(red).fill("red")]) {
+      const card = createTextElement("span", `pitch-card pitch-card--${kind}`, "");
+      card.setAttribute("aria-hidden", "true");
+      cards.appendChild(card);
+    }
+    shirt.appendChild(cards);
+  }
 }
 
 function getPitchPlayerName(player) {
@@ -2279,7 +2325,9 @@ async function fetchJsonWithTimeout(url, options = {}) {
     });
 
     if (!response.ok) {
-      throw new Error("Backend returned " + response.status);
+      const error = new Error("Backend returned " + response.status);
+      error.status = response.status;
+      throw error;
     }
 
     const contentType = response.headers.get("content-type") || "";

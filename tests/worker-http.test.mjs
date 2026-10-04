@@ -3,6 +3,37 @@ import assert from "node:assert/strict";
 import { loadWorkerContext, memoryCache, espnEvent, scoreboardResponse } from "./helpers.mjs";
 
 const EXT_ORIGIN = "chrome-extension://cdnpjnmhmagmiefkleefgchgffeaacaa";
+
+describe("known-event registry survives live-cache expiry and isolate changes", () => {
+  it("keeps only issued events eligible without fetching arbitrary summaries", async () => {
+    const cache = memoryCache();
+    const first = await loadWorkerContext({ caches: { default: cache } });
+    await first.run('persistKnownMatches(caches.default, [{id:"760486",leagueCode:"eng.1"}])');
+    let calls = 0;
+    const second = await loadWorkerContext({ caches: { default: cache }, fetch: async () => {
+      calls += 1;
+      return scoreboardResponse([]);
+    } });
+    assert.equal(second.run("rememberedEventKeys.size"), 0);
+    assert.equal(await second.run('isKnownMatchDetailEvent(caches.default,"760486","eng.1")'), true);
+    assert.equal(await second.run('isKnownMatchDetailEvent(caches.default,"760486","esp.1")'), false);
+    const request = (id) => second.run(`handleRequest(new Request("https://api.atakanozkan.com/match-detail?eventId=${id}&leagueCode=eng.1", {headers:{Origin:"${EXT_ORIGIN}"}}), {})`);
+    assert.equal((await request("760486")).status, 200);
+    assert.equal((await request("999999")).status, 404);
+    assert.equal(calls, 1);
+  });
+  it("expires old entries, caps the registry, and preserves previous fixtures", async () => {
+    const cache = memoryCache();
+    const { run } = await loadWorkerContext({ caches: { default: cache } });
+    await run('persistKnownMatches(caches.default, [{id:"760486",leagueCode:"eng.1"}])');
+    await run('persistKnownMatches(caches.default, [{id:"760487",leagueCode:"eng.1"}])');
+    assert.equal((await run('readKnownMatches(caches.default)')).length, 2);
+    await run('caches.default.put(new Request(KNOWN_EVENTS_CACHE_URL), new Response(JSON.stringify([{key:"eng.1:760486",expires:Date.now()-1}])))');
+    assert.equal(await run('isKnownMatchDetailEvent(caches.default,"760486","eng.1")'), false);
+    await run('persistKnownMatches(caches.default, Array.from({length:1100},(_,i)=>({id:String(100000+i),leagueCode:"eng.1"})))');
+    assert.equal((await run('readKnownMatches(caches.default)')).length, 1024);
+  });
+});
 const UNPACKED_ORIGIN = "chrome-extension://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
 const BROWSER_NO_ORIGIN = {
   "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",

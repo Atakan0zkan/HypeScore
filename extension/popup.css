@@ -1070,7 +1070,13 @@ h1 {
 .pitch-half--away::before { left: auto; right: 0; }
 .pitch-line { flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: space-around; gap: 3px; position: relative; }
 .pitch-player { min-width: 0; display: flex; align-items: center; flex-direction: column; gap: 2px; }
-.pitch-shirt { display: grid; place-items: center; min-width: 21px; height: 20px; border-radius: 6px 6px 3px 3px; background: #b1f0df; color: #122d29; font-size: 10px; font-weight: 900; }
+.pitch-shirt { position: relative; display: grid; place-items: center; min-width: 21px; height: 20px; border-radius: 6px 6px 3px 3px; background: #b1f0df; color: #122d29; font-size: 10px; font-weight: 900; }
+.pitch-goals { position: absolute; left: -7px; top: 2px; width: 10px; height: 10px; pointer-events: none; }
+.pitch-goal { position: absolute; left: 0; width: 10px; height: 10px; border-radius: 50%; background: #fff; color: #171717; font: 10px/10px "Segoe UI Symbol", sans-serif; filter: drop-shadow(0 1px 1px #102d25); }
+.pitch-cards { position: absolute; right: -5px; top: -4px; display: flex; flex-direction: column; gap: 1px; pointer-events: none; }
+.pitch-card { display: block; width: 6px; height: 8px; border: 1px solid #382c17; border-radius: 1px; box-shadow: 0 1px 2px #102d25; }
+.pitch-card--yellow { background: #ffdc38; }
+.pitch-card--red { background: #ff4545; }
 .pitch-half--away .pitch-shirt { background: #ffd1cb; color: #48211d; }
 .pitch-name { width: 100%; box-sizing: border-box; padding: 2px 1px; border-radius: 3px; background: #102d25; color: #fff; text-align: center; font-size: 9px; line-height: 1.2; overflow-wrap: anywhere; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .media-list { display: grid; gap: 9px; padding: 0 12px 12px; }

@@ -58,6 +58,7 @@ const DETAIL = {
     team, homeAway: index ? "away" : "home", formation: "4-2-3-1",
     players: ["G", "LB", "CD-L", "CD-R", "RB", "LM", "RM", "AM-L", "AM", "AM-R", "F"].map((position, i) => ({
       id: `${index}-${i}`, name: ["Antonín Kinsky", "Destiny Udogie", "Micky van de Ven", "Kevin Danso", "Pedro Porro", "Conor Gallagher", "João Palhinha", "Mathys Tel", "Rodrigo Bentancur", "Randal Kolo Muani", "Dominic Calvert-Lewin"][i], jersey: String(i + 1), position, starter: true,
+      goals: i === 1 ? 5 : i === 10 ? 2 : 0, yellowCards: i === 1 ? 2 : 0, redCards: i === 1 ? 1 : 0,
     })),
   })), news: [{ title: "Match report", url: "https://www.espn.com/soccer/report/_/gameId/740954" }],
   videos: [{ title: "Watch the match highlights", url: "https://www.espn.com/video/clip/_/id/12345" }], links: [],
@@ -161,6 +162,25 @@ test("readable stats, event timeline and two starting XIs fit the popup", async 
   const pitch = page.locator(".lineup-pitch");
   await expect(pitch).toBeVisible();
   await expect(pitch.locator(".pitch-player")).toHaveCount(22);
+  await expect(pitch.locator(".pitch-goal")).toHaveCount(14);
+  await expect(pitch.locator(".pitch-card--yellow")).toHaveCount(4);
+  await expect(pitch.locator(".pitch-card--red")).toHaveCount(2);
+  const geometry = await pitch.evaluate((el) => {
+    const pitch = el.getBoundingClientRect();
+    const goals = [...el.querySelectorAll(".pitch-goals")].map((stack) => [...stack.children].map((ball) => {
+      const r = ball.getBoundingClientRect(); return {x:r.x,y:r.y,right:r.right};
+    }));
+    return {goals,pitch:{x:pitch.x,y:pitch.y,right:pitch.right}};
+  });
+  for (const stack of geometry.goals) {
+    expect(new Set(stack.map((ball) => ball.x)).size).toBe(1);
+    expect(stack.at(-1).y).toBeLessThan(stack[0].y);
+    for (const ball of stack) {
+      expect(ball.y).toBeGreaterThanOrEqual(geometry.pitch.y);
+      expect(ball.x).toBeGreaterThanOrEqual(geometry.pitch.x);
+      expect(ball.right).toBeLessThanOrEqual(geometry.pitch.right);
+    }
+  }
   await pitch.scrollIntoViewIfNeeded();
   await page.screenshot({ path: "test-results/lineups-horizontal.png" });
   const pitchBox = await pitch.boundingBox();

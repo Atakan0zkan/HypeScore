@@ -22,6 +22,8 @@ and the FIFA World Cup knockout bracket without injecting scripts into websites.
 - Favorite competitions stay first; each group prioritizes live, upcoming,
   then completed matches. Pitch lineups use reported starting positions when
   both complete XIs are available, with full rosters as a fallback.
+- Small goal and card markers identify scorers and booked players on the pitch
+  when the provider supplies match-specific player statistics.
 - 55 interface locales with RTL support for Arabic, Hebrew, and Persian.
 - No account, advertisements, content scripts, or remote executable code.
 

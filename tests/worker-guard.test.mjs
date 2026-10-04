@@ -1,5 +1,17 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
+
+it("normalizes only bounded match-roster goals and cards", async () => {
+  const { run } = await loadWorkerContext();
+  const result = run('normalizeRosterPlayer({athlete:{stats:[{name:"totalGoals",value:99}]},stats:[null,{name:"totalGoals",value:3},{name:"yellowCards",displayValue:"2"},{name:"redCards",value:1},{name:"ownGoals",value:4}]})');
+  assert.equal(result.goals, 3);
+  assert.equal(result.yellowCards, 2);
+  assert.equal(result.redCards, 1);
+  for (const value of [-1, 1.5, 999, null, true, "<script>"]) {
+    assert.equal(run(`getRosterMatchCount({stats:[{name:"totalGoals",value:${JSON.stringify(value)}}]},"totalGoals",20)`), 0);
+  }
+  assert.equal(run('normalizeRosterPlayer({athlete:{stats:[{name:"totalGoals",value:5}]}}).goals'), 0);
+});
 import { loadWorkerContext } from "./helpers.mjs";
 
 describe("match detail presentation fields", () => {
@@ -28,7 +40,7 @@ describe("worker cache/TTL/bound contract", () => {
     assert.equal(run("TOURNAMENT_BRACKET_CACHE_TTL_SECONDS"), 900);
     assert.equal(run("LIVE_MATCHES_CACHE_KEY_VERSION"), "v15");
     assert.equal(run("STANDINGS_CACHE_KEY_VERSION"), "v4");
-    assert.equal(run("MATCH_DETAIL_CACHE_KEY_VERSION"), "v6");
+    assert.equal(run("MATCH_DETAIL_CACHE_KEY_VERSION"), "v7");
     assert.equal(run("TOURNAMENT_BRACKET_CACHE_KEY_VERSION"), "v1");
     assert.equal(run("MAX_EVENT_ID_LENGTH"), 20);
     assert.equal(run("MAX_REMEMBERED_EVENT_KEYS"), 1024);

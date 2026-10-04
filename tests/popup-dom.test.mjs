@@ -18,6 +18,56 @@ const cards = () => [...app.document.querySelectorAll(".league-pick-card")];
 const cardByName = (name) => cards().find((c) => c.querySelector(".league-pick-name").textContent === name);
 
 describe("match presentation", () => {
+  it("shows one ball per goal and tiny cards with a bounded vertical stack", () => {
+    app.eval('window.shirt = document.createElement("span"); appendPlayerMatchBadges(window.shirt, {goals:5,yellowCards:2,redCards:1})');
+    const shirt = app.window.shirt;
+    assert.equal(shirt.querySelectorAll(".pitch-goal").length, 5);
+    assert.equal(shirt.querySelectorAll(".pitch-card--yellow").length, 2);
+    assert.equal(shirt.querySelectorAll(".pitch-card--red").length, 1);
+    assert.deepEqual([...shirt.querySelectorAll(".pitch-goal")].map((ball) => ball.style.bottom), ["0px", "3px", "6px", "9px", "12px"]);
+    assert.equal(shirt.querySelector(".pitch-goals").getAttribute("aria-label"), "⚽ × 5");
+    app.eval('window.empty = document.createElement("span"); appendPlayerMatchBadges(window.empty, {goals:999,yellowCards:-1,redCards:"1"})');
+    assert.equal(app.window.empty.childElementCount, 0);
+  });
+  it("recovers a cold-cache 404 exactly once after verifying the current scoreboard", async () => {
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    const calls = [];
+    app.window.fetch = async (url, options) => {
+      const path = new URL(url).pathname;
+      calls.push(path);
+      if (calls.length === 1) return new Response('{}', {status:404});
+      if (path === "/live-matches") assert.equal(options.cache, "reload");
+      return workerJson(path === "/live-matches" ? domPayload() : {id:"m1",lineups:[]});
+    };
+    const data = await app.eval('fetchMatchDetailWithRecovery({id:"m1",leagueCode:"eng.1"}, new AbortController().signal)');
+    assert.equal(data.id, "m1");
+    assert.deepEqual(calls, ["/match-detail", "/live-matches", "/match-detail"]);
+  });
+  it("does not loop, retry absent IDs, or recover a non-404 failure", async () => {
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    for (const status of [404, 502]) {
+      let calls = 0;
+      app.window.fetch = async (url) => {
+        calls += 1;
+        return new URL(url).pathname === "/live-matches" ? workerJson({matches:[]}) : new Response('{}', {status});
+      };
+      await assert.rejects(app.eval('fetchMatchDetailWithRecovery({id:"m1",leagueCode:"eng.1"}, new AbortController().signal)'), /Backend returned/);
+      assert.equal(calls, status === 404 ? 2 : 1);
+    }
+  });
+  it("stops after a second 404 and respects cancellation before recovery", async () => {
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    let calls = 0;
+    app.window.fetch = async (url) => {
+      calls += 1;
+      return new URL(url).pathname === "/live-matches" ? workerJson(domPayload()) : new Response('{}', {status:404});
+    };
+    await assert.rejects(app.eval('fetchMatchDetailWithRecovery({id:"m1",leagueCode:"eng.1"}, new AbortController().signal)'), /Backend returned 404/);
+    assert.equal(calls, 3);
+    calls = 0;
+    await assert.rejects(app.eval('fetchMatchDetailWithRecovery({id:"m1",leagueCode:"eng.1"}, AbortSignal.abort())'), {name:"AbortError"});
+    assert.equal(calls, 0);
+  });
   it("sorts activity inside favorites and non-favorites independently", () => {
     const league = (code, state) => ({ code, name: code, matches: state ? [{ state, kickoff: new Date(Date.now() + 3600000).toISOString() }] : [] });
     const leagues = [league("a.empty", null), league("b.result", "finished"), league("c.upcoming", "scheduled"), league("d.live", "live")];

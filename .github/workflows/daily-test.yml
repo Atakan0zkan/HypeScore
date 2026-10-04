@@ -7,13 +7,24 @@
 name: Daily tests
 
 on:
+  push:
+    branches: [main]
+  pull_request:
   schedule:
     - cron: "0 4 * * *" # 07:00 TRT (UTC+3) every day
   workflow_dispatch: # manual "Run workflow" button
 
+permissions:
+  contents: read
+
+concurrency:
+  group: tests-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   offline-tests:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v4
@@ -23,12 +34,14 @@ jobs:
       # so this step was unnecessary — it is mandatory now.
       - run: npm ci
       - run: npm test
+      - run: npm audit --audit-level=moderate
 
   ai-triage:
     needs: offline-tests
-    if: failure()
+    if: ${{ failure() && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') }}
     runs-on: ubuntu-latest
     permissions:
+      actions: read
       contents: read
       issues: write
     steps:
@@ -53,6 +66,7 @@ jobs:
                Write the issue body in English. Do not push commits.
 
   live-smoke:
+    if: ${{ github.event_name != 'pull_request' }}
     runs-on: ubuntu-latest
     continue-on-error: true # ESPN shape/time drift must not fail the build
     steps:
@@ -64,6 +78,7 @@ jobs:
 
   e2e:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v4

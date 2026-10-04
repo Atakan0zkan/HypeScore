@@ -20,12 +20,12 @@ const UPSTREAM_FETCH_TIMEOUT_MS = 8000;
 const UPCOMING_MATCH_WINDOW_MS = 24 * 60 * 60 * 1000;
 const MAX_EVENT_ID_LENGTH = 20;
 const MAX_REMEMBERED_EVENT_KEYS = 1024;
-const LIVE_MATCHES_CACHE_KEY_VERSION = "v15";
+const LIVE_MATCHES_CACHE_KEY_VERSION = "v16";
 const STANDINGS_CACHE_KEY_VERSION = "v4";
-const MATCH_DETAIL_CACHE_KEY_VERSION = "v7";
+const MATCH_DETAIL_CACHE_KEY_VERSION = "v8";
 const KNOWN_EVENTS_TTL_MS = 60 * 60 * 1000;
-const KNOWN_EVENTS_CACHE_URL = "https://live-score-extension.internal/known-events/v1";
-const TOURNAMENT_BRACKET_CACHE_KEY_VERSION = "v1";
+const KNOWN_EVENTS_CACHE_URL = "https://live-score-extension.internal/known-events/v2";
+const TOURNAMENT_BRACKET_CACHE_KEY_VERSION = "v2";
 const CACHE_KEY_URL = `https://live-score-extension.internal/live-matches/${LIVE_MATCHES_CACHE_KEY_VERSION}`;
 let liveMatchesRefreshPromise = null;
 const standingsRefreshPromises = new Map();
@@ -42,13 +42,13 @@ const ESPN_MEDIA_HOST_SUFFIXES = ["espncdn.com"];
 const TEAM_LOGO_OVERRIDE_HOST_SUFFIXES = ["cancunfc.mx"];
 const EXTRA_ESPN_SCOREBOARD_LEAGUES = [
   "uefa.europa.conf",
-  "fifa.world",
   "uefa.nations",
   "uefa.euro",
   "conmebol.america",
 ];
 const FIFA_WORLD_CUP_LEAGUE_CODE = "fifa.world";
-const FIFA_WORLD_CUP_KNOCKOUT_DATES = "20260628-20260719";
+const FIFA_WORLD_CUP_YEAR = 2030;
+const FIFA_WORLD_CUP_DATES = String(FIFA_WORLD_CUP_YEAR);
 const DANISH_SUPERLIGA_LOGO_URL =
   "https://commons.wikimedia.org/wiki/Special:Redirect/file/Superliga_2010.svg?width=512&type=png";
 const UEFA_CONFERENCE_LEAGUE_LOGO_URL =
@@ -73,7 +73,7 @@ const TEAM_LOGO_OVERRIDES_BY_NAME = new Map([
 const ESPN_LEAGUES_BY_ID = {
   "606": {
     code: "fifa.world",
-    name: "FIFA World Cup",
+    name: "FIFA World Cup 2030",
     logoId: "4",
     logoTone: "light",
   },
@@ -164,7 +164,7 @@ const ESPN_LEAGUES_BY_ID = {
     logoUrl: UEFA_CONFERENCE_LEAGUE_LOGO_URL,
     logoTone: "light",
   },
-  "23633": {
+  "4002": {
     code: "usa.usl.1",
     name: "USL Championship",
     logoId: "2292",
@@ -392,7 +392,7 @@ async function handleLeagueStandingsRequest(request, url) {
   try {
     const standings = await getFreshStandingsForLeague(leagueCode, cache, cacheKey);
     const response = jsonResponse(
-      { leagueCode, standings },
+      { leagueCode, standings, ...(leagueCode === FIFA_WORLD_CUP_LEAGUE_CODE ? { seasonYear: FIFA_WORLD_CUP_YEAR } : {}) },
       {
         request,
         cache: "MISS",
@@ -568,6 +568,18 @@ async function refreshLiveMatches(env, cache, cacheKey) {
 }
 
 async function refreshStandingsForLeague(leagueCode) {
+  if (leagueCode === FIFA_WORLD_CUP_LEAGUE_CODE) {
+    const payload = await fetchFutureWorldCupJson(
+      `${ESPN_STANDINGS_BASE_URL}/${leagueCode}/standings?season=${FIFA_WORLD_CUP_YEAR}`,
+    );
+    // Unknown years can return previous seasons or a season catalogue.
+    if (Number(payload?.season?.year) !== FIFA_WORLD_CUP_YEAR) return [];
+    return normalizeEspnStandings({
+      ...payload,
+      children: Array.isArray(payload.children) ? payload.children.filter((child) =>
+        !child?.season || Number(child.season.year) === FIFA_WORLD_CUP_YEAR) : [],
+    });
+  }
   const payload = await fetchJson(
     `${ESPN_STANDINGS_BASE_URL}/${leagueCode}/standings`,
   );
@@ -578,6 +590,9 @@ async function refreshMatchDetail(eventId, leagueCode, cache, cacheKey) {
   const payload = await fetchJson(
     `${ESPN_SUMMARY_BASE_URL}/${leagueCode}/summary?event=${eventId}`,
   );
+  if (leagueCode === FIFA_WORLD_CUP_LEAGUE_CODE && !isWorldCup2030Event(payload?.header)) {
+    throw new Error("World Cup match summary is not from the 2030 tournament");
+  }
   const data = normalizeEspnMatchDetail(payload, { eventId, leagueCode });
   const response = jsonResponse(data, {
     cache: "MISS",
@@ -595,8 +610,8 @@ async function refreshMatchDetail(eventId, leagueCode, cache, cacheKey) {
 }
 
 async function refreshTournamentBracket(leagueCode, cache, cacheKey) {
-  const payload = await fetchJson(
-    `${ESPN_SUMMARY_BASE_URL}/${leagueCode}/scoreboard?dates=${FIFA_WORLD_CUP_KNOCKOUT_DATES}`,
+  const payload = await fetchFutureWorldCupJson(
+    `${ESPN_SUMMARY_BASE_URL}/${leagueCode}/scoreboard?dates=${FIFA_WORLD_CUP_DATES}&season=${FIFA_WORLD_CUP_YEAR}`,
   );
   const data = normalizeTournamentBracket(payload, leagueCode);
   rememberKnownBracketRounds(data.rounds);
@@ -701,7 +716,9 @@ async function fetchJson(url, init = {}) {
     });
 
     if (!response.ok) {
-      throw new Error(`${url} returned ${response.status}`);
+      const error = new Error(`${url} returned ${response.status}`);
+      error.status = response.status;
+      throw error;
     }
 
     /* SEC-03: validate Content-Type before parsing */
@@ -715,6 +732,28 @@ async function fetchJson(url, init = {}) {
   } finally {
     clearTimeout(timeoutId);
   }
+}
+
+async function fetchFutureWorldCupJson(url) {
+  try {
+    return await fetchJson(url);
+  } catch (error) {
+    // An unpublished future season is empty; never fetch an older tournament.
+    // Preserve genuine outages rather than reporting them as missing data.
+    if (error?.status === 400 || error?.status === 404) return {};
+    throw error;
+  }
+}
+
+function isWorldCup2030Event(event) {
+  if (!event || typeof event !== "object") return false;
+  const competition = event.competitions?.[0];
+  const year = event.season?.year;
+  if (year != null && Number(year) !== FIFA_WORLD_CUP_YEAR) return false;
+  const kickoff = event.date || competition?.date;
+  if (!kickoff) return Number(year) === FIFA_WORLD_CUP_YEAR;
+  const date = new Date(kickoff);
+  return Number.isFinite(date.getTime()) && date.getUTCFullYear() === FIFA_WORLD_CUP_YEAR;
 }
 
 function normalizeEspnMatches(payload) {
@@ -745,6 +784,7 @@ function normalizeEspnMatches(payload) {
       if (!league.code || !isSupportedLeagueCode(league.code)) {
         return null;
       }
+      if (league.code === FIFA_WORLD_CUP_LEAGUE_CODE && !isWorldCup2030Event(event)) return null;
 
       return {
         id: String(event.id || competition.id || ""),
@@ -808,6 +848,7 @@ function normalizeTournamentBracket(payload, leagueCode) {
   const roundsBySlug = new Map();
 
   for (const event of events) {
+    if (leagueCode === FIFA_WORLD_CUP_LEAGUE_CODE && !isWorldCup2030Event(event)) continue;
     const match = normalizeTournamentBracketMatch(event, leagueCode);
     if (!match) {
       continue;
@@ -835,7 +876,8 @@ function normalizeTournamentBracket(payload, leagueCode) {
 
   return {
     leagueCode,
-    dates: FIFA_WORLD_CUP_KNOCKOUT_DATES,
+    seasonYear: FIFA_WORLD_CUP_YEAR,
+    dates: FIFA_WORLD_CUP_DATES,
     rounds,
   };
 }
@@ -847,8 +889,8 @@ function normalizeTournamentBracketMatch(event, leagueCode) {
   const competitors = Array.isArray(competition?.competitors)
     ? competition.competitors
     : [];
-  const home = competitors.find((team) => team.homeAway === "home") || competitors[0];
-  const away = competitors.find((team) => team.homeAway === "away") || competitors[1];
+  const home = competitors.find((team) => team?.homeAway === "home") || competitors.filter(Boolean)[0];
+  const away = competitors.find((team) => team?.homeAway === "away") || competitors.filter(Boolean)[1];
 
   if (!competition || !home || !away) {
     return null;
@@ -861,6 +903,7 @@ function normalizeTournamentBracketMatch(event, leagueCode) {
     id: String(event.id || competition.id || ""),
     leagueCode,
     roundSlug,
+    seasonYear: FIFA_WORLD_CUP_YEAR,
     roundName: formatTournamentRoundName(roundSlug),
     homeTeam: getEspnTeamName(home),
     awayTeam: getEspnTeamName(away),
@@ -1650,6 +1693,8 @@ function countLiveMatches(matches) {
 }
 
 function isRelevantMatch(match) {
+  if (match?.leagueCode === FIFA_WORLD_CUP_LEAGUE_CODE &&
+      new Date(match.kickoff).getUTCFullYear() !== FIFA_WORLD_CUP_YEAR) return false;
   if (!match || match.state !== "scheduled") {
     return Boolean(match);
   }
@@ -1878,8 +1923,9 @@ async function safeReadJsonResponse(response) {
 }
 
 function getStandingsCacheKey(leagueCode) {
+  const seasonSuffix = leagueCode === FIFA_WORLD_CUP_LEAGUE_CODE ? `/${FIFA_WORLD_CUP_YEAR}` : "";
   return new Request(
-    `https://live-score-extension.internal/standings/${STANDINGS_CACHE_KEY_VERSION}/${leagueCode}`,
+    `https://live-score-extension.internal/standings/${STANDINGS_CACHE_KEY_VERSION}/${leagueCode}${seasonSuffix}`,
     { method: "GET" },
   );
 }
@@ -1889,7 +1935,7 @@ function getTournamentBracketCacheKey(leagueCode) {
     "https://live-score-extension.internal/tournament-bracket",
     TOURNAMENT_BRACKET_CACHE_KEY_VERSION,
     leagueCode,
-    FIFA_WORLD_CUP_KNOCKOUT_DATES,
+    FIFA_WORLD_CUP_DATES,
   ].join("/");
 
   return new Request(cacheKeyUrl, { method: "GET" });

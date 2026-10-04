@@ -90,7 +90,6 @@ for (const code of REQUIRED_LEAGUE_CODES) {
 
 for (const code of [
   "uefa.europa.conf",
-  "fifa.world",
   "uefa.nations",
   "uefa.euro",
   "conmebol.america",
@@ -100,6 +99,7 @@ for (const code of [
     `missing direct scoreboard probe for ${code}`,
   );
 }
+assert.ok(!upstreamCalls.some((url) => url.endsWith("/fifa.world/scoreboard")), "do not probe previous World Cup seasons in the live hot path");
 
 const detailCallsBefore = countSummaryCalls();
 const [detailResponseA, detailResponseB] = await Promise.all([

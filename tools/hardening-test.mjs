@@ -50,7 +50,7 @@ const popupContext = vm.createContext({
 vm.runInContext(popupSource, popupContext);
 const match = { id: "760486", leagueCode: "eng.1", homeTeam: "Home", awayTeam: "Away", state: "live" };
 const payload = { matches: [match], leagues: ["fifa.world", "uefa.nations", "uefa.euro", "conmebol.america"].map((code) => ({ code, name: code, matches: [] })) };
-const cache = { version: "v10", payload, savedAt: Date.now() };
+const cache = { version: "v11", payload, savedAt: Date.now() };
 storage.set("hype_live_matches_cache", JSON.stringify(cache));
 assert.ok(vm.runInContext("readClientLiveCache()", popupContext));
 for (const invalid of [

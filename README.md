@@ -5,7 +5,7 @@ HypeScore is the source-available project behind
 a lightweight Chrome Manifest V3 popup backed by a Cloudflare Worker.
 
 It shows live scores, results, upcoming fixtures, league tables, match details,
-and the FIFA World Cup knockout bracket without injecting scripts into websites.
+and available FIFA World Cup 2030 fixtures without injecting scripts into websites.
 
 ## Features
 
@@ -16,7 +16,8 @@ and the FIFA World Cup knockout bracket without injecting scripts into websites.
   pitch lineups below the score, event timeline, and combined news/highlights.
 - Highlight videos are emphasized; scroll positions and open sections are
   remembered while navigating within a popup session.
-- ESPN links and World Cup knockout rounds (subject to provider availability).
+- ESPN links and World Cup 2030 fixtures/rounds (subject to provider availability;
+  unpublished 2030 data stays empty, with no fallback to past tournaments).
 - Local favorite leagues, adaptive refresh, local score cache, and request
   budget protection.
 - Favorite competitions stay first; each group prioritizes live, upcoming,
@@ -63,7 +64,7 @@ extension source in `extension/` is the package loaded by Chrome.
 | `GET /live-matches` | Curated live, result, and next-24-hour fixtures |
 | `GET /league-standings?leagueCode=...` | Lazy league table |
 | `GET /match-detail?eventId=...&leagueCode=...` | Lazy match detail |
-| `GET /tournament-bracket?leagueCode=fifa.world` | Lazy World Cup bracket |
+| `GET /tournament-bracket?leagueCode=fifa.world` | Lazy World Cup 2030 fixtures/rounds |
 
 ## Run the extension locally
 
@@ -78,7 +79,7 @@ The extension connects to the production API configured in
 
 ## Development
 
-Install the development dependency:
+Install the development dependencies:
 
 ```powershell
 npm install
@@ -92,10 +93,16 @@ npm run analytics:test
 npm run smoke
 ```
 
-- `npm test` runs the Worker regression suite.
+- `npm test` runs popup, Worker, and dashboard regression suites.
 - `npm run analytics:test` validates dashboard queries and data shaping.
 - `npm run smoke` checks the deployed API and therefore requires internet
   access.
+
+GitHub tests run on pushes, pull requests, and daily at 07:00 Europe/Istanbul.
+Dependabot checks npm packages at 06:30 and GitHub Actions at 06:45 every day,
+then opens update pull requests. Compatible minor/patch updates are grouped;
+major changes stay separate. Pull requests run offline/browser tests and the
+dependency audit; merging and production deployment remain owner-approved.
 
 ## Deploy the Worker
 

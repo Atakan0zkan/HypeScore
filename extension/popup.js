@@ -19,7 +19,7 @@ const INACTIVITY_PAUSE_AFTER_MS = 3 * 60 * 1000;
 const ACTIVITY_TIMER_RESET_THROTTLE_MS = 1000;
 const ERROR_RETRY_DELAYS_MS = [120000, 300000, 600000];
 const DAILY_REQUEST_LIMIT = 2000;
-const CLIENT_LIVE_CACHE_VERSION = "v10";
+const CLIENT_LIVE_CACHE_VERSION = "v11";
 const REQUIRED_CLIENT_CACHE_LEAGUE_CODES = [
   "fifa.world",
   "uefa.nations",
@@ -27,6 +27,7 @@ const REQUIRED_CLIENT_CACHE_LEAGUE_CODES = [
   "conmebol.america",
 ];
 const FIFA_WORLD_CUP_LEAGUE_CODE = "fifa.world";
+const FIFA_WORLD_CUP_YEAR = 2030;
 const CLIENT_LIVE_CACHE_MAX_AGE_LIVE_MS = 30000;
 const CLIENT_LIVE_CACHE_MAX_AGE_IDLE_MS = 120000;
 const CLIENT_LIVE_CACHE_MAX_AGE_QUIET_MS = 30 * 60 * 1000;
@@ -1501,6 +1502,7 @@ function createTournamentBracketSection(league) {
   }
 
   const leagueCode = league.code;
+  if (!tournamentBracketCache.has(leagueCode)) openTournamentBracketLeagueCodes.add(leagueCode);
   const section = document.createElement("details");
   section.className = "tournament-bracket detail-section detail-section--accordion";
   section.dataset.sectionKey = "bracket";
@@ -1509,7 +1511,7 @@ function createTournamentBracketSection(league) {
   const summary = document.createElement("summary");
   summary.className = "detail-section-summary";
   summary.appendChild(
-    createTextElement("span", "detail-section-title", msg("bracket")),
+    createTextElement("span", "detail-section-title", `${msg("matches")} · ${FIFA_WORLD_CUP_YEAR}`),
   );
 
   section.appendChild(summary);
@@ -1570,7 +1572,7 @@ function renderTournamentBracketBody(container, league) {
   const rounds = Array.isArray(cached.rounds) ? cached.rounds : [];
 
   if (rounds.length === 0) {
-    container.appendChild(createTextElement("p", "bracket-message", msg("noBracket")));
+    container.appendChild(createTextElement("p", "bracket-message", msg("noSectionData")));
     return;
   }
 
@@ -1693,7 +1695,11 @@ async function loadTournamentBracket(leagueCode) {
     const data = await fetchJsonWithTimeout(buildTournamentBracketUrl(leagueCode));
     tournamentBracketCache.set(leagueCode, {
       status: "loaded",
-      rounds: Array.isArray(data.rounds) ? data.rounds : [],
+      rounds: data.seasonYear === FIFA_WORLD_CUP_YEAR && Array.isArray(data.rounds)
+        ? data.rounds.filter((round) => round && Array.isArray(round.matches))
+          .map((round) => ({ ...round, matches: round.matches.filter(isWorldCup2030Match) }))
+          .filter((round) => round.matches.length > 0)
+        : [],
     });
   } catch (error) {
     if (isDailyRequestLimitError(error)) {
@@ -1798,7 +1804,9 @@ async function loadLeagueStandings(leagueCode) {
     const data = await fetchJsonWithTimeout(buildLeagueStandingsUrl(leagueCode));
     leagueStandingsCache.set(leagueCode, {
       status: "loaded",
-      standings: Array.isArray(data.standings) ? data.standings : [],
+      standings: Array.isArray(data.standings) &&
+        (leagueCode !== FIFA_WORLD_CUP_LEAGUE_CODE || data.seasonYear === FIFA_WORLD_CUP_YEAR)
+        ? data.standings : [],
     });
   } catch (error) {
     if (isDailyRequestLimitError(error)) {
@@ -2005,7 +2013,9 @@ function normalizeLeagueGroups(payload) {
   return leagues
     .map((league) => ({
       ...league,
-      matches: sortMatchesForDisplay((league.matches || []).filter(isVisibleMatch)),
+      name: league.code === FIFA_WORLD_CUP_LEAGUE_CODE ? "FIFA World Cup 2030" : league.name,
+      matches: sortMatchesForDisplay((league.matches || []).filter((match) =>
+        isVisibleMatch(match) && (league.code !== FIFA_WORLD_CUP_LEAGUE_CODE || isWorldCup2030Match(match)))),
     }))
     .filter((league) => league.matches.length > 0 || league.code || league.id)
     .sort(compareLeagues);
@@ -2091,8 +2101,17 @@ function countUpcomingMatches(matches) {
   return matches.filter(isUpcomingWithinWindow).length;
 }
 
+function isWorldCup2030Match(match) {
+  if (!match || typeof match !== "object") return false;
+  if (match.seasonYear != null && Number(match.seasonYear) !== FIFA_WORLD_CUP_YEAR) return false;
+  if (!match.kickoff) return Number(match.seasonYear) === FIFA_WORLD_CUP_YEAR;
+  const kickoff = new Date(match.kickoff);
+  return Number.isFinite(kickoff.getTime()) && kickoff.getUTCFullYear() === FIFA_WORLD_CUP_YEAR;
+}
+
 function isVisibleMatch(match) {
   if (!match) return false;
+  if (match.leagueCode === FIFA_WORLD_CUP_LEAGUE_CODE && !isWorldCup2030Match(match)) return false;
   if (match.state !== "scheduled") return true;
   return isUpcomingWithinWindow(match);
 }
@@ -2143,6 +2162,7 @@ function buildLeagueStandingsUrl(leagueCode) {
   const url = new URL(BACKEND_URL);
   url.pathname = "/league-standings";
   url.searchParams.set("leagueCode", leagueCode);
+  if (leagueCode === FIFA_WORLD_CUP_LEAGUE_CODE) url.searchParams.set("season", FIFA_WORLD_CUP_YEAR);
   return url.href;
 }
 
@@ -2150,6 +2170,7 @@ function buildTournamentBracketUrl(leagueCode) {
   const url = new URL(BACKEND_URL);
   url.pathname = "/tournament-bracket";
   url.searchParams.set("leagueCode", leagueCode);
+  url.searchParams.set("season", FIFA_WORLD_CUP_YEAR);
   return url.href;
 }
 

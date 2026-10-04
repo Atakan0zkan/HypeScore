@@ -250,6 +250,47 @@ test("favorites pin leagues to the top", async () => {
   await expect(cards.first()).toContainText("LaLiga");
 });
 
+test("World Cup opens 2030 data, excludes legacy results, and supports an empty future season", async ({}, testInfo) => {
+  const future = { id: "203001", leagueCode: "fifa.world", seasonYear: 2030, homeTeam: "Spain", awayTeam: "England", state: "scheduled", kickoff: "2030-06-15T18:00:00Z" };
+  const old = { ...future, id: "760517", seasonYear: 2026, homeTeam: "Old Spain", awayTeam: "Old Argentina", state: "finished", kickoff: "2026-07-19T18:00:00Z" };
+  for (const scenario of [
+    { name: "legacy-backend", data: { rounds: [{ slug: "final", matches: [old] }], standings: STANDINGS }, count: 0 },
+    { name: "unpublished-2030", data: { seasonYear: 2030, rounds: [], standings: [] }, count: 0 },
+    { name: "published-2030", data: { seasonYear: 2030, rounds: [{ slug: "group-stage", name: "Group stage", matches: [old, future] }], standings: [] }, count: 1 },
+  ]) {
+    await test.step(scenario.name, async () => {
+      const urls = [];
+      const handler = async (route) => {
+        const url = new URL(route.request().url());
+        urls.push(url);
+        const body = url.pathname === "/live-matches"
+          ? { matches: [old], leagues: [{ code: "fifa.world", name: "FIFA World Cup", matches: [old] }] }
+          : scenario.data;
+        return route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify(body) });
+      };
+      await page.route("**://api.atakanozkan.com/**", handler);
+      try {
+        await page.evaluate(() => localStorage.clear());
+        await page.reload();
+        await page.getByRole("button", { name: "FIFA World Cup 2030", exact: true }).click();
+        await expect(page.locator(".league-detail-title")).toHaveText("FIFA World Cup 2030");
+        await expect.poll(() => urls.some((url) => url.pathname === "/tournament-bracket" && url.searchParams.get("season") === "2030")).toBe(true);
+        await expect(page.locator(".bracket-message").filter({ hasText: "Loading" })).toHaveCount(0);
+        await expect(page.locator(".bracket-match-card")).toHaveCount(scenario.count);
+        await expect(page.locator(".match-card,.standings-table")).toHaveCount(0);
+        await expect(page.locator("#leagueDetailContent")).not.toContainText("Old Argentina");
+        await expect(page.locator(".bracket-message--error,.standings-message--error")).toHaveCount(0);
+        await page.screenshot({ path: testInfo.outputPath(`world-cup-${scenario.name}.png`) });
+      } finally {
+        await page.unroute("**://api.atakanozkan.com/**", handler);
+        await page.evaluate(() => localStorage.clear());
+        await page.reload();
+        await page.locator(".league-pick-card").first().waitFor();
+      }
+    });
+  }
+});
+
 test("zero console and page errors", async () => {
   expect(pageErrors).toEqual([]);
   expect(consoleErrors).toEqual([]);

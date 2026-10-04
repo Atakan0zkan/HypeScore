@@ -13,7 +13,7 @@ describe("popup constants (budget contract)", () => {
     assert.equal(run("DAILY_REQUEST_LIMIT"), 2000);
     assert.equal(run("FETCH_TIMEOUT_MS"), 10000);
     assert.equal(run("LAZY_ERROR_RETRY_MS"), 60000);
-    assert.equal(run("CLIENT_LIVE_CACHE_VERSION"), "v10");
+    assert.equal(run("CLIENT_LIVE_CACHE_VERSION"), "v11");
     assert.equal(run("UPCOMING_MATCH_WINDOW_MS"), 86400000);
   });
 });
@@ -80,7 +80,7 @@ describe("popup daily guard (attempted vs successful)", () => {
 describe("popup cache validation", () => {
   it("rejects bad shape, future timestamp, missing required leagues", async () => {
     const { run, storage } = await loadPopupContext();
-    const good = { version: "v10", savedAt: Date.now(), payload: livePayload() };
+    const good = { version: "v11", savedAt: Date.now(), payload: livePayload() };
     storage.set("hype_live_matches_cache", JSON.stringify(good));
     assert.ok(run("readClientLiveCache()"), "good cache accepted");
     for (const bad of [

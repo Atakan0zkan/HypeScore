@@ -43,38 +43,11 @@ async function main() {
     return `${countStandingsRows(payload.standings)} rows`;
   });
 
-  // The World Cup knockout source is a tournament-specific ESPN date range
-  // (20260628-20260719). ESPN retired it after the tournament (HTTP 400
-  // "Failed to get events endpoint" upstream -> HTTP 502 from the Worker).
-  // That is a retired source, not a product bug, so a 502 degrades to SKIP.
-  // NOTE: bracket is intentionally not run through step() — step() records
-  // a FAIL entry before throwing, which would leave a misleading FAIL line
-  // next to the SKIP.
-  try {
-    const payload = await fetchJson("/tournament-bracket?leagueCode=fifa.world");
+  await step("GET /tournament-bracket?leagueCode=fifa.world&season=2030", async () => {
+    const payload = await fetchJson("/tournament-bracket?leagueCode=fifa.world&season=2030");
     assertTournamentBracketPayload(payload);
-    results.push({
-      name: "GET /tournament-bracket?leagueCode=fifa.world",
-      status: "ok",
-      detail: `${payload.rounds.length} rounds, ${countBracketMatches(payload.rounds)} matches`,
-    });
-  } catch (error) {
-    const message = error instanceof Error ? error.message : String(error);
-    if (/HTTP 502/.test(message)) {
-      results.push({
-        name: "GET /tournament-bracket?leagueCode=fifa.world",
-        status: "skipped",
-        detail: "ESPN retired the 2026 knockout date range (upstream gone, not a product bug)",
-      });
-    } else {
-      results.push({
-        name: "GET /tournament-bracket?leagueCode=fifa.world",
-        status: "failed",
-        detail: message,
-      });
-      throw error;
-    }
-  }
+    return `${payload.rounds.length} rounds, ${countBracketMatches(payload.rounds)} matches (2030; unpublished data may be empty)`;
+  });
 
   const match = livePayload.matches.find((item) => item.id && item.leagueCode);
   if (!match) {
@@ -200,10 +173,7 @@ function assertTournamentBracketPayload(payload) {
     throw new Error(`Expected tournament bracket leagueCode fifa.world, got ${payload.leagueCode}`);
   }
   assertArray(payload.rounds, "tournament bracket rounds");
-
-  if (payload.rounds.length === 0) {
-    throw new Error("Expected at least one tournament bracket round");
-  }
+  if (payload.seasonYear !== 2030 || payload.dates !== "2030") throw new Error("Expected only World Cup 2030 data");
 
   for (const round of payload.rounds) {
     assertString(round.slug, "bracketRound.slug");
@@ -211,12 +181,15 @@ function assertTournamentBracketPayload(payload) {
     assertArray(round.matches, "bracketRound.matches");
   }
 
-  const firstMatch = payload.rounds.flatMap((round) => round.matches)[0];
-  assertObject(firstMatch, "bracketMatch");
-  assertString(firstMatch.id, "bracketMatch.id");
-  assertString(firstMatch.homeTeam, "bracketMatch.homeTeam");
-  assertString(firstMatch.awayTeam, "bracketMatch.awayTeam");
-  assertString(firstMatch.kickoff, "bracketMatch.kickoff");
+  for (const match of payload.rounds.flatMap((round) => round.matches)) {
+    assertObject(match, "bracketMatch");
+    assertString(match.id, "bracketMatch.id");
+    assertString(match.homeTeam, "bracketMatch.homeTeam");
+    assertString(match.awayTeam, "bracketMatch.awayTeam");
+    if (match.seasonYear !== 2030 || (match.kickoff && new Date(match.kickoff).getUTCFullYear() !== 2030)) {
+      throw new Error("Historical or unverified World Cup match in 2030 response");
+    }
+  }
 }
 
 function countStandingsRows(standings) {

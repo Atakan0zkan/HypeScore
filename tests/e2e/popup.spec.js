@@ -134,7 +134,9 @@ test.afterAll(async () => {
 test("renders league cards from the API", async () => {
   await expect(page.locator(".league-pick-card")).toHaveCount(3);
   await expect(page.locator(".league-pick-name", { hasText: "Premier League" })).toBeVisible();
-  await expect(page.locator(".league-pick-badge").first()).toBeVisible();
+  await expect(page.locator(".league-pick-badge")).toHaveCount(0);
+  await expect(page.locator(".league-card-actions .favorite-btn")).toHaveCount(3);
+  await expect(page.locator(".league-preview-status").first()).toHaveText("67' · Live");
   expect(apiCalls.filter((p) => p === "/live-matches").length).toBeGreaterThanOrEqual(1);
 });
 

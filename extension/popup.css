@@ -369,12 +369,6 @@ html[dir="rtl"] .settings-panel { padding: 0 0 12px 6px; }
   gap: 8px;
 }
 
-.league-pick-card .league-card-actions {
-  flex-direction: column;
-  min-width: 74px;
-  gap: 6px;
-}
-
 .league-pick-logo {
   display: inline-flex;
   align-items: center;
@@ -460,24 +454,6 @@ html[dir="rtl"] .settings-panel { padding: 0 0 12px 6px; }
 
 .league-pick-preview--half-time .league-preview-status {
   color: var(--gold);
-}
-
-.league-pick-badge {
-  display: inline-flex;
-  min-width: 74px;
-  justify-content: center;
-  border: 1px solid rgba(255, 160, 160, 0.46);
-  border-radius: 999px;
-  padding: 6px 11px;
-  color: #fff;
-  background:
-    linear-gradient(135deg, rgba(214, 75, 69, 0.98), rgba(115, 26, 24, 0.95));
-  box-shadow: 0 0 18px rgba(214, 75, 69, 0.24);
-  font-family: "Trebuchet MS", Verdana, sans-serif;
-  font-size: 11px;
-  font-weight: 900;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
 }
 
 /* ── Back button ────────────────────────────── */

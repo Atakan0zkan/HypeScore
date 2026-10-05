@@ -1095,16 +1095,6 @@ function renderLeaguePickList(leagues) {
       }),
     );
 
-    if (liveCount > 0) {
-      actions.appendChild(
-        createTextElement(
-          "span",
-          "league-pick-badge",
-          msg("liveCount", [String(liveCount)]),
-        ),
-      );
-    }
-
     card.append(logo, info, actions);
     leaguePickList.appendChild(card);
   }

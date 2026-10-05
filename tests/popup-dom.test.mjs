@@ -412,10 +412,15 @@ describe("popup DOM: league list", () => {
     assert.ok(names.includes("Premier League") && names.includes("LaLiga"));
   });
 
-  it("live league gets a badge, quiet league gets none", () => {
+  it("keeps live status in the match preview and only the favorite button on the right", () => {
     render();
-    assert.ok(cardByName("Premier League").querySelector(".league-pick-badge"), "live badge present");
-    assert.equal(cardByName("LaLiga").querySelector(".league-pick-badge"), null);
+    assert.equal(app.document.querySelectorAll(".league-pick-badge").length, 0);
+    assert.equal(cardByName("Premier League").querySelector(".league-preview-status").textContent, "67' · Live");
+    for (const card of cards()) {
+      const actions = card.querySelector(".league-card-actions");
+      assert.equal(actions.childElementCount, 1);
+      assert.ok(actions.firstElementChild.classList.contains("favorite-btn"));
+    }
   });
 
   it("favorite league sorts first with active star", () => {

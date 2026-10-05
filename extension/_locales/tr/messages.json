@@ -8,9 +8,6 @@
   "appTitle": {
     "message": "Hype Skorları"
   },
-  "subtitle": {
-    "message": "Canlı skorlar, sonuçlar ve puan durumları tek ekranda."
-  },
   "loading": {
     "message": "Maçlar yükleniyor…"
   },
@@ -219,9 +216,6 @@
   "noStandings": {
     "message": "Bu lig için puan durumu bulunamadı."
   },
-  "fullSquads": {
-    "message": "Tüm kadrolar"
-  },
   "noLinks": {
     "message": "Bağlantı bulunamadı."
   },
@@ -254,5 +248,121 @@
   },
   "links": {
     "message": "Bağlantılar"
+  },
+  "settings": {
+    "message": "Ayarlar"
+  },
+  "popupSize": {
+    "message": "Popup boyutu"
+  },
+  "sizeSmall": {
+    "message": "Küçük"
+  },
+  "sizeDefault": {
+    "message": "Varsayılan"
+  },
+  "sizeBig": {
+    "message": "Büyük"
+  },
+  "settingsBackup": {
+    "message": "Ayar yedeği"
+  },
+  "settingsBackupHint": {
+    "message": "Favori ligleri ve popup boyutunu içerir. İçe aktarma bu ayarları değiştirir."
+  },
+  "exportSettings": {
+    "message": "Ayarları dışa aktar"
+  },
+  "importSettings": {
+    "message": "Ayarları içe aktar"
+  },
+  "privacyPolicy": {
+    "message": "Gizlilik politikası"
+  },
+  "closeSettings": {
+    "message": "Ayarları kapat"
+  },
+  "settingsImported": {
+    "message": "Ayarlar içe aktarıldı."
+  },
+  "settingsImportError": {
+    "message": "Bu geçerli bir Hype ayar dosyası değil."
+  },
+  "settingsSaveError": {
+    "message": "Ayarlar bu cihazda kaydedilemedi."
+  },
+  "settingsExported": {
+    "message": "Ayarlar dışa aktarıldı."
+  },
+  "settingsExportError": {
+    "message": "Ayarlar dışa aktarılamadı."
+  },
+  "substitutes": {
+    "message": "Yedekler"
+  },
+  "startingXI": {
+    "message": "İlk 11"
+  },
+  "fullTimeLabel": {
+    "message": "Maç Bitti"
+  },
+  "halfTimeLabel": {
+    "message": "Devre Arası"
+  },
+  "liveMatchCountOne": {
+    "message": "$COUNT$ canlı maç",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "liveMatchesCount": {
+    "message": "$COUNT$ canlı maç",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchCountOne": {
+    "message": "$COUNT$ yaklaşan maç",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchesCount": {
+    "message": "$COUNT$ yaklaşan maç",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchCountOne": {
+    "message": "$COUNT$ tamamlanan maç",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchesCount": {
+    "message": "$COUNT$ tamamlanan maç",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCountOne": {
+    "message": "$COUNT$ maç",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
   }
 }

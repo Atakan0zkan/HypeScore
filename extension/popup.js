@@ -38,7 +38,12 @@ const STORAGE_KEY_FAVORITE_LEAGUES = "hype_favorite_leagues";
 const STORAGE_KEY_LIVE_CACHE = "hype_live_matches_cache";
 const STORAGE_KEY_DAILY_REQUEST_BUCKET = "hype_daily_request_count";
 const STORAGE_KEY_ENGLISH_OVERRIDE = "hype_english_override";
+const STORAGE_KEY_POPUP_SIZE = "hype_popup_size";
 const LEGACY_STORAGE_KEY_FAVORITE_TEAMS = "hype_favorite_teams";
+const POPUP_SIZES = new Set(["small", "default", "big"]);
+const SETTINGS_FILE_FORMAT = "hype-score-preferences";
+const SETTINGS_FILE_VERSION = 1;
+const MAX_SETTINGS_FILE_BYTES = 64 * 1024;
 
 const LOCAL_LEAGUE_LOGOS = {
   "arg.1": "icons/leagues/arg-1.png",
@@ -74,6 +79,59 @@ const LOCAL_LEAGUE_LOGOS = {
   "usa.1": "icons/leagues/usa-1.png",
   "usa.usl.1": "icons/leagues/usa-usl-1.png",
 };
+
+// Approximate club popularity, not a live match audience or unique-user count.
+// Curated subset of CIES Weekly Post 548 (official accounts, May 2026),
+// rounded to 0.1 million followers. ESPN IDs were checked against its team API.
+// https://football-observatory.com/IMG/sites/b5wp/2025/wp548/en/
+// No remote ranking request is made by the extension.
+const CLUB_POPULARITY_SNAPSHOT = [
+  [["86"], 4876, ["Real Madrid"]],
+  [["83"], 4418, ["FC Barcelona", "Barcelona"]],
+  [["360"], 2386, ["Manchester United", "Manchester Utd", "Man United", "Man Utd"]],
+  [["160"], 2081, ["Paris St-Germain", "Paris Saint-Germain", "PSG"]],
+  [["382"], 1878, ["Manchester City", "Man City"]],
+  [["364"], 1792, ["Liverpool FC", "Liverpool"]],
+  [["111"], 1783, ["Juventus FC", "Juventus"]],
+  [["132"], 1652, ["Bayern München", "Bayern Munich", "Bayern Munchen"]],
+  [["363"], 1565, ["Chelsea FC", "Chelsea"]],
+  [["359"], 1185, ["Arsenal FC", "Arsenal"]],
+  [["367"], 1122, ["Tottenham Hotspur", "Tottenham", "Spurs"]],
+  [["1068"], 914, ["Atlético Madrid", "Atletico Madrid"]],
+  [["110"], 827, ["FC Inter", "Internazionale", "Inter Milan"]],
+  [["103"], 810, ["AC Milan"]],
+  [["124"], 646, ["Borussia Dortmund"]],
+  [["432"], 546, ["Galatasaray SK", "Galatasaray"]],
+  [["104"], 434, ["AS Roma", "Roma"]],
+  [["20232"], 432, ["Inter Miami", "Inter Miami CF"]],
+  [["436"], 393, ["Fenerbahçe SK", "Fenerbahce"]],
+  [["5"], 310, ["Boca Juniors"]],
+  [["16"], 303, ["River Plate"]],
+  [["227"], 297, ["CF América", "América", "Club América"]],
+  [["244"], 291, ["Real Betis"]],
+  [["243"], 286, ["Sevilla FC", "Sevilla"]],
+  [["139"], 269, ["AFC Ajax", "Ajax Amsterdam", "Ajax"]],
+  [["174"], 250, ["AS Monaco"]],
+  [["89"], 245, ["Real Sociedad"]],
+  [[], 243, ["Leicester City"]],
+  [["176"], 238, ["Olympique Marseille", "Marseille"]],
+  [["1895"], 223, ["Beşiktaş JK", "Besiktas"]],
+  [["361"], 213, ["Newcastle United"]],
+  [["219"], 208, ["Chivas Guadalajara", "Guadalajara"]],
+  [["371"], 203, ["West Ham United"]],
+  [["114"], 201, ["SSC Napoli", "Napoli"]],
+  [["362"], 196, ["Aston Villa"]],
+  [["94"], 192, ["Valencia CF", "Valencia"]],
+  [["93"], 190, ["Athletic Club", "Athletic Bilbao"]],
+  [["131"], 186, ["Bayer Leverkusen"]],
+  [["368"], 177, ["Everton FC", "Everton"]],
+  [["3842"], 171, ["Cádiz CF", "Cadiz"]],
+];
+const CLUB_POPULARITY_BY_ID = new Map(CLUB_POPULARITY_SNAPSHOT.flatMap(([ids, weight]) => ids.map(id => [id, weight])));
+const CLUB_POPULARITY_BY_NAME = new Map(CLUB_POPULARITY_SNAPSHOT.flatMap(([, weight, names]) => names.map(name => [normalizePopularityTeamName(name), weight])));
+// Club reach cannot be reused as a national-team or women's-team ranking.
+const CLUB_POPULARITY_LEAGUES = new Set(Object.keys(LOCAL_LEAGUE_LOGOS).filter(code =>
+  !["eng.w.1", "fifa.world", "uefa.nations", "uefa.euro", "conmebol.america"].includes(code)));
 
 const FALLBACK_LOGO_SVG = [
   '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">',
@@ -115,10 +173,12 @@ const FALLBACK_MESSAGES = {
   forceEnglishOff: "Return to browser language",
   forceEnglishOn: "Show English labels",
   fullTime: "FT",
+  fullTimeLabel: "Full Time",
   goalDifference: "GD",
   goalsAgainst: "A",
   goalsFor: "F",
   halfTime: "HT",
+  halfTimeLabel: "Half Time",
   headToHead: "Head to head",
   highlights: "Highlights",
   idlePaused: "Paused while inactive.",
@@ -127,19 +187,25 @@ const FALLBACK_MESSAGES = {
   links: "Links",
   live: "Live",
   liveCount: "$1 live",
+  liveMatchesCount: "$1 live matches",
+  liveMatchCountOne: "$1 live match",
   loading: "Loading matches…",
   loadingDetails: "Loading match details…",
   loadingBracket: "Loading knockout bracket…",
   loadingStandings: "Loading standings…",
   losses: "L",
   matchCount: "$1 matches",
+  matchCountOne: "$1 match",
+  upcomingMatchesCount: "$1 upcoming matches",
+  upcomingMatchCountOne: "$1 upcoming match",
+  completedMatchesCount: "$1 completed matches",
+  completedMatchCountOne: "$1 completed match",
   matchDetails: "Match details",
   matches: "Matches",
   news: "News",
   noDetails: "No extra details available for this match.",
   noLinks: "No links available.",
   noLiveMatches: "No live matches",
-  fullSquads: "Full squads",
   noBracket: "No knockout bracket available.",
   noSectionData: "No data available.",
   noStats: "No match stats available.",
@@ -159,7 +225,24 @@ const FALLBACK_MESSAGES = {
   selectLeague: "Select a league",
   stats: "Stats",
   standings: "Standings",
-  subtitle: "Fast live scores, results and league tables.",
+  settings: "Settings",
+  popupSize: "Popup size",
+  sizeSmall: "Small",
+  sizeDefault: "Default",
+  sizeBig: "Big",
+  settingsBackup: "Settings backup",
+  settingsBackupHint: "Includes favorite leagues and popup size. Import replaces these settings.",
+  exportSettings: "Export settings",
+  importSettings: "Import settings",
+  privacyPolicy: "Privacy policy",
+  closeSettings: "Close settings",
+  settingsImported: "Settings imported.",
+  settingsImportError: "This is not a valid Hype settings file.",
+  settingsSaveError: "Settings could not be saved on this device.",
+  settingsExported: "Settings exported.",
+  settingsExportError: "Settings could not be exported.",
+  substitutes: "Substitutes",
+  startingXI: "Starting XI",
   team: "Team",
   tbd: "TBD",
   timeline: "Timeline",
@@ -182,10 +265,17 @@ const FALLBACK_MESSAGES = {
 
 let appShell;
 let appTitle;
-let subtitle;
 let statusBar;
 let powerToggle;
 let englishToggle;
+let settingsToggle;
+let settingsPanel;
+let settingsStatus;
+let settingsFile;
+let popupSize = "default";
+let isSettingsOpen = false;
+let settingsStatusMessage = null;
+let settingsImportPending = false;
 let loadingState;
 let errorState;
 let emptyState;
@@ -229,10 +319,13 @@ const openTournamentBracketLeagueCodes = new Set();
 document.addEventListener("DOMContentLoaded", () => {
   appShell = document.querySelector(".app-shell");
   appTitle = document.getElementById("appTitle");
-  subtitle = document.getElementById("subtitle");
   statusBar = document.getElementById("statusBar");
   powerToggle = document.getElementById("powerToggle");
   englishToggle = document.getElementById("englishToggle");
+  settingsToggle = document.getElementById("settingsToggle");
+  settingsPanel = document.getElementById("settingsPanel");
+  settingsStatus = document.getElementById("settingsStatus");
+  settingsFile = document.getElementById("settingsFile");
   loadingState = document.getElementById("loadingState");
   errorState = document.getElementById("errorState");
   emptyState = document.getElementById("emptyState");
@@ -241,6 +334,7 @@ document.addEventListener("DOMContentLoaded", () => {
   leagueDetailContent = document.getElementById("leagueDetailContent");
   backBtn = document.getElementById("backBtn");
 
+  restorePopupSize();
   restoreEnglishOverride();
   applyDocumentDirection();
   applyI18n();
@@ -249,6 +343,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
   englishToggle.addEventListener("click", toggleEnglishOverride);
   powerToggle.addEventListener("click", togglePower);
+  settingsToggle.addEventListener("click", () => setSettingsOpen(!isSettingsOpen));
+  document.getElementById("settingsClose").addEventListener("click", () => setSettingsOpen(false));
+  for (const input of settingsPanel.querySelectorAll('input[name="popupSize"]')) {
+    input.addEventListener("change", () => { if (input.checked) savePopupSize(input.value); });
+  }
+  document.getElementById("exportSettings").addEventListener("click", exportPreferences);
+  document.getElementById("importSettings").addEventListener("click", () => settingsFile.click());
+  settingsFile.addEventListener("change", () => importPreferencesFile(settingsFile.files?.[0]));
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && isSettingsOpen) {
+      event.preventDefault();
+      setSettingsOpen(false);
+    }
+  });
   backBtn.addEventListener("click", handleBack);
   document.addEventListener("visibilitychange", handleVisibilityChange);
   installActivityListeners();
@@ -332,13 +440,176 @@ function applyI18n() {
   applyDocumentDirection();
   document.title = msg("extName");
   appTitle.textContent = msg("appTitle");
-  subtitle.textContent = msg("subtitle");
   loadingState.textContent = msg("loading");
   errorState.textContent = msg("error");
   emptyState.textContent = msg("empty");
   backBtn.textContent = formatBackLabel();
   updateEnglishToggleLabel();
+  applySettingsLabels();
   setStatus(msg("notUpdated"));
+}
+
+function restorePopupSize() {
+  const stored = safeGetStorageItem(STORAGE_KEY_POPUP_SIZE);
+  applyPopupSize(POPUP_SIZES.has(stored) ? stored : "default");
+}
+
+function applyPopupSize(value) {
+  popupSize = POPUP_SIZES.has(value) ? value : "default";
+  document.documentElement.dataset.popupSize = popupSize;
+  for (const input of settingsPanel.querySelectorAll('input[name="popupSize"]')) {
+    input.checked = input.value === popupSize;
+  }
+}
+
+function savePopupSize(value) {
+  if (!POPUP_SIZES.has(value)) return false;
+  if (!safeSetStorageItem(STORAGE_KEY_POPUP_SIZE, value)) {
+    applyPopupSize(popupSize);
+    setSettingsStatus("settingsSaveError", true);
+    return false;
+  }
+  applyPopupSize(value);
+  clearSettingsStatus();
+  return true;
+}
+
+function applySettingsLabels() {
+  const label = msg("settings");
+  settingsToggle.title = label;
+  settingsToggle.setAttribute("aria-label", label);
+  const closeLabel = msg("closeSettings");
+  const close = document.getElementById("settingsClose");
+  close.title = closeLabel;
+  close.setAttribute("aria-label", closeLabel);
+  const labels = {
+    settingsTitle: label,
+    popupSizeLabel: msg("popupSize"),
+    sizeSmallLabel: msg("sizeSmall"),
+    sizeDefaultLabel: msg("sizeDefault"),
+    sizeBigLabel: msg("sizeBig"),
+    settingsBackupTitle: msg("settingsBackup"),
+    settingsBackupHint: msg("settingsBackupHint"),
+    exportSettings: msg("exportSettings"),
+    importSettings: msg("importSettings"),
+  };
+  for (const [id, text] of Object.entries(labels)) document.getElementById(id).textContent = text;
+  document.getElementById("privacyLink").firstChild.textContent = `${msg("privacyPolicy")} `;
+  settingsFile.setAttribute("aria-label", msg("importSettings"));
+  if (settingsStatusMessage) settingsStatus.textContent = msg(settingsStatusMessage);
+}
+
+function setSettingsOpen(open) {
+  if (isSettingsOpen === open) return;
+  if (open) captureViewState();
+  isSettingsOpen = open;
+  settingsPanel.hidden = !open;
+  appShell.classList.toggle("app-shell--settings-open", open);
+  settingsToggle.setAttribute("aria-expanded", String(open));
+  for (const element of [loadingState, errorState, emptyState, leaguePickList, leagueDetailView]) {
+    element.inert = open;
+  }
+  if (open) {
+    clearSettingsStatus();
+    settingsPanel.querySelector('input[name="popupSize"]:checked')?.focus();
+  } else {
+    // The hidden view must not overwrite its saved scroll with a clamped zero.
+    if (renderedViewKey) restoreViewState(renderedViewKey, pendingViewRestore);
+    if (lastPayload) renderPayload(lastPayload);
+    settingsToggle.focus();
+  }
+}
+
+function clearSettingsStatus() {
+  settingsStatusMessage = null;
+  settingsStatus.hidden = true;
+  settingsStatus.textContent = "";
+  settingsStatus.classList.remove("settings-status--error");
+}
+
+function setSettingsStatus(key, error = false) {
+  settingsStatusMessage = key;
+  settingsStatus.textContent = msg(key);
+  settingsStatus.classList.toggle("settings-status--error", error);
+  settingsStatus.hidden = false;
+}
+
+function buildPreferencesExport() {
+  return {
+    format: SETTINGS_FILE_FORMAT,
+    version: SETTINGS_FILE_VERSION,
+    favoriteLeagues: [...favoriteLeagues].filter((code) => typeof code === "string" && Object.hasOwn(LOCAL_LEAGUE_LOGOS, code)).sort(),
+    popupSize,
+  };
+}
+
+function parsePreferencesImport(text) {
+  if (typeof text !== "string" || text.length > MAX_SETTINGS_FILE_BYTES) throw new Error("Invalid settings file");
+  const data = JSON.parse(text);
+  if (!data || Array.isArray(data) || typeof data !== "object" ||
+      Object.keys(data).sort().join(",") !== "favoriteLeagues,format,popupSize,version" ||
+      data.format !== SETTINGS_FILE_FORMAT || data.version !== SETTINGS_FILE_VERSION ||
+      !POPUP_SIZES.has(data.popupSize) || !Array.isArray(data.favoriteLeagues) ||
+      data.favoriteLeagues.length > Object.keys(LOCAL_LEAGUE_LOGOS).length ||
+      !data.favoriteLeagues.every((code) => typeof code === "string" && Object.hasOwn(LOCAL_LEAGUE_LOGOS, code))) {
+    throw new Error("Invalid settings file");
+  }
+  return { favoriteLeagues: [...new Set(data.favoriteLeagues)].sort(), popupSize: data.popupSize };
+}
+
+function applyImportedPreferences(preferences) {
+  const oldFavorites = safeGetStorageItem(STORAGE_KEY_FAVORITE_LEAGUES);
+  const oldSize = safeGetStorageItem(STORAGE_KEY_POPUP_SIZE);
+  const restore = (key, value) => value === null ? safeRemoveStorageItem(key) : safeSetStorageItem(key, value);
+  if (!safeWriteStorageJson(STORAGE_KEY_FAVORITE_LEAGUES, preferences.favoriteLeagues) ||
+      !safeSetStorageItem(STORAGE_KEY_POPUP_SIZE, preferences.popupSize)) {
+    restore(STORAGE_KEY_FAVORITE_LEAGUES, oldFavorites);
+    restore(STORAGE_KEY_POPUP_SIZE, oldSize);
+    return false;
+  }
+  favoriteLeagues = new Set(preferences.favoriteLeagues);
+  applyPopupSize(preferences.popupSize);
+  if (lastPayload) renderPayload(lastPayload);
+  return true;
+}
+
+function exportPreferences() {
+  let url;
+  try {
+    const blob = new Blob([JSON.stringify(buildPreferencesExport(), null, 2) + "\n"], { type: "application/json" });
+    url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "hype-settings.json";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    setSettingsStatus("settingsExported");
+  } catch {
+    setSettingsStatus("settingsExportError", true);
+  } finally {
+    if (url) setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+}
+
+async function importPreferencesFile(file) {
+  if (!file || settingsImportPending) return;
+  settingsImportPending = true;
+  document.getElementById("importSettings").disabled = true;
+  document.getElementById("exportSettings").disabled = true;
+  try {
+    if (file.size > MAX_SETTINGS_FILE_BYTES) throw new Error("Settings file is too large");
+    const preferences = parsePreferencesImport(await file.text());
+    const applied = applyImportedPreferences(preferences);
+    setSettingsStatus(applied ? "settingsImported" : "settingsSaveError", !applied);
+  } catch {
+    setSettingsStatus("settingsImportError", true);
+  } finally {
+    settingsFile.value = "";
+    settingsImportPending = false;
+    document.getElementById("importSettings").disabled = false;
+    document.getElementById("exportSettings").disabled = false;
+  }
 }
 
 function toggleEnglishOverride() {
@@ -468,6 +739,7 @@ function installActivityListeners() {
   }
   leaguePickList.addEventListener("scroll", recordActivity, { passive: true });
   leagueDetailContent.addEventListener("scroll", recordActivity, { passive: true });
+  settingsPanel.addEventListener("scroll", recordActivity, { passive: true });
 }
 
 function installScrollBoundaryGuard() {
@@ -485,7 +757,7 @@ function lockDocumentScroll() {
 
 function guardScrollBoundary(event) {
   const target = event.target instanceof Element
-    ? event.target.closest(".league-pick-list, .league-detail-scroll")
+    ? event.target.closest(".league-pick-list, .league-detail-scroll, .settings-panel")
     : null;
 
   if (!target || target.hidden) {
@@ -720,6 +992,7 @@ function handleVisibilityChange() {
 }
 
 function renderPayload(payload) {
+  if (isSettingsOpen) return;
   const leagues = normalizeLeagueGroups(payload);
 
   if (leagues.length === 0) {
@@ -801,9 +1074,14 @@ function renderLeaguePickList(leagues) {
     info.className = "league-pick-info";
 
     const metaText = buildLeagueMetaText(league, liveCount, upcomingCount);
+    const previewMatch = getLeaguePreviewMatch(league);
 
     info.appendChild(createTextElement("span", "league-pick-name", league.name));
-    if (metaText) {
+    if (previewMatch) {
+      const preview = createLeagueMatchPreview(previewMatch);
+      info.appendChild(preview);
+      card.setAttribute("aria-label", `${league.name} · ${preview.title}`);
+    } else if (metaText) {
       info.appendChild(createTextElement("span", "league-pick-meta", metaText));
     }
 
@@ -834,6 +1112,90 @@ function renderLeaguePickList(leagues) {
   leaguePickList.setAttribute("aria-label", msg("selectLeague"));
   showOnly("pick");
   restoreViewState("pick");
+}
+
+function getLeaguePreviewMatch(league) {
+  let liveMatch = null;
+  let finishedMatch = null;
+  const matches = Array.isArray(league?.matches) ? league.matches : [];
+
+  for (const match of matches) {
+    if (!match || typeof match.homeTeam !== "string" || !match.homeTeam.trim() ||
+        typeof match.awayTeam !== "string" || !match.awayTeam.trim() || !isVisibleMatch(match)) continue;
+
+    // A finished match must never displace an available live match.
+    if (match.state === "live") {
+      if (!liveMatch || compareLeaguePreviewMatches(match, liveMatch, league.code) < 0) {
+        liveMatch = match;
+      }
+    } else if (match.state === "finished") {
+      if (!finishedMatch || compareLeaguePreviewMatches(match, finishedMatch, league.code) < 0) {
+        finishedMatch = match;
+      }
+    }
+  }
+
+  return liveMatch || finishedMatch;
+}
+
+function compareLeaguePreviewMatches(a, b, leagueCode) {
+  const popularityDiff = getMatchPopularityScore(b, leagueCode) - getMatchPopularityScore(a, leagueCode);
+  if (popularityDiff) return popularityDiff;
+  if (a.state === "finished" && b.state === "finished") {
+    const aTime = typeof a.kickoff === "string" ? Date.parse(a.kickoff) : NaN;
+    const bTime = typeof b.kickoff === "string" ? Date.parse(b.kickoff) : NaN;
+    const latestDiff = (Number.isFinite(bTime) ? bTime : -Infinity) - (Number.isFinite(aTime) ? aTime : -Infinity);
+    if (latestDiff) return latestDiff;
+  }
+  return compareMatches(a, b) || getMatchKey(a).localeCompare(getMatchKey(b));
+}
+
+function normalizePopularityTeamName(name) {
+  if (typeof name !== "string") return "";
+  return name.normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+}
+
+function getMatchPopularityScore(match, leagueCode = match?.leagueCode) {
+  if (!match || !CLUB_POPULARITY_LEAGUES.has(leagueCode)) return 0;
+  const teamWeight = (id, name) => {
+    const idWeight = (typeof id === "string" || typeof id === "number") ? CLUB_POPULARITY_BY_ID.get(String(id)) : undefined;
+    return idWeight ?? CLUB_POPULARITY_BY_NAME.get(normalizePopularityTeamName(name)) ?? 0;
+  };
+  return teamWeight(match.homeTeamId, match.homeTeam) + teamWeight(match.awayTeamId, match.awayTeam);
+}
+
+function createLeagueMatchPreview(match) {
+  const halfTime = match.state === "live" && [match.status, match.minute].some((value) =>
+    typeof value === "string" && /^(?:HT|half[\s-]*time|STATUS_HALFTIME)$/i.test(value.trim()));
+  const kind = match.state === "finished" ? "finished" : halfTime ? "half-time" : "live";
+  const statusLabel = kind === "finished" ? msg("fullTimeLabel") : halfTime ? msg("halfTimeLabel") : msg("live");
+  const minute = kind === "live" && typeof match.minute === "string" &&
+    /^\d{1,3}['′]?(?:\s*\+\s*\d{1,2}['′]?)?$/.test(match.minute.trim()) ? match.minute.trim() : "";
+  const statusText = minute ? `${minute} · ${statusLabel}` : statusLabel;
+  const homeScore = formatLeaguePreviewScore(match.homeScore);
+  const awayScore = formatLeaguePreviewScore(match.awayScore);
+  const summary = `${match.homeTeam} ${homeScore} – ${awayScore} ${match.awayTeam}`;
+  const preview = document.createElement("div");
+  preview.className = `league-pick-preview league-pick-preview--${kind}`;
+  preview.title = `${summary} · ${statusText}`;
+
+  const row = document.createElement("span");
+  row.className = "league-preview-match";
+  const home = createTextElement("bdi", "league-preview-team", match.homeTeam);
+  const score = createTextElement("span", "league-preview-score", `${homeScore} – ${awayScore}`);
+  const away = createTextElement("bdi", "league-preview-team", match.awayTeam);
+  home.title = match.homeTeam;
+  away.title = match.awayTeam;
+  score.dir = "ltr";
+  row.append(home, score, away);
+  preview.append(row, createTextElement("span", "league-preview-status", statusText));
+  return preview;
+}
+
+function formatLeaguePreviewScore(score) {
+  if (typeof score !== "number" && (typeof score !== "string" || !/^\d{1,3}$/.test(score))) return "–";
+  const value = Number(score);
+  return Number.isInteger(value) && value >= 0 && value <= 999 ? String(value) : "–";
 }
 
 function renderLeagueDetail(league) {
@@ -896,12 +1258,16 @@ function renderLeagueDetail(league) {
 
 function buildLeagueMetaText(league, liveCount, upcomingCount) {
   const metaParts = [];
-  const totalMatches = Array.isArray(league?.matches) ? league.matches.length : 0;
+  const matches = Array.isArray(league?.matches) ? league.matches : [];
+  const totalMatches = matches.length;
+  const completedCount = matches.filter(match => match?.state === "finished").length;
+  const otherCount = Math.max(0, totalMatches - liveCount - upcomingCount - completedCount);
 
-  if (totalMatches > 0) metaParts.push(msg("matchCount", [String(totalMatches)]));
-  if (upcomingCount > 0) metaParts.push(upcomingCount + " " + msg("upcoming"));
-  if (liveCount > 0) metaParts.push(msg("liveCount", [String(liveCount)]));
-  if (liveCount === 0 && totalMatches === 0) metaParts.push(msg("noLiveMatches"));
+  if (liveCount > 0) metaParts.push(msg(liveCount === 1 ? "liveMatchCountOne" : "liveMatchesCount", [String(liveCount)]));
+  if (upcomingCount > 0) metaParts.push(msg(upcomingCount === 1 ? "upcomingMatchCountOne" : "upcomingMatchesCount", [String(upcomingCount)]));
+  if (completedCount > 0) metaParts.push(msg(completedCount === 1 ? "completedMatchCountOne" : "completedMatchesCount", [String(completedCount)]));
+  if (otherCount > 0) metaParts.push(msg(otherCount === 1 ? "matchCountOne" : "matchCount", [String(otherCount)]));
+  if (totalMatches === 0) metaParts.push(msg("noLiveMatches"));
 
   return metaParts.join(" · ");
 }
@@ -1039,7 +1405,7 @@ function renderMatchDetail(league, match) {
 }
 
 function captureViewState() {
-  if (!renderedViewKey || pendingViewRestore) return;
+  if (isSettingsOpen || !renderedViewKey || pendingViewRestore) return;
   const container = renderedViewKey === "pick" ? leaguePickList : leagueDetailContent;
   const sections = {};
   for (const section of container.querySelectorAll("details[data-section-key]")) {
@@ -1185,7 +1551,7 @@ function appendDetailListSection(title, rows, renderer, emptyText = "", alwaysRe
 }
 
 function appendLineupsSection(lineups) {
-  const rows = (Array.isArray(lineups) ? lineups : []).filter(Boolean).slice(0, 2);
+  const rows = (Array.isArray(lineups) ? lineups : []).filter((lineup) => lineup && typeof lineup === "object" && !Array.isArray(lineup)).slice(0, 2);
   rows.sort((a, b) => Number(b.homeAway === "home") - Number(a.homeAway === "home"));
   const section = document.createElement("section");
   section.className = "detail-section lineup-section";
@@ -1226,12 +1592,12 @@ function appendLineupsSection(lineups) {
     });
     section.appendChild(pitch);
   }
-  // Keep the complete named roster accessible, including substitutes and
-  // fallback data when an XI or a supported position is missing.
-  const grid = document.createElement("div");
-  grid.className = "lineup-grid";
-
-  for (const lineup of rows) {
+  // Never repeat the starting XI below a rendered pitch. If formation data
+  // is incomplete, retain a starter-only fallback rather than inventing it.
+  const createRosterGrid = (starter) => {
+    const grid = document.createElement("div");
+    grid.className = starter ? "lineup-grid lineup-starters" : "lineup-grid lineup-substitutes";
+    for (const lineup of rows) {
     const column = document.createElement("div");
     column.className = "lineup-team";
     const title = document.createElement("div");
@@ -1242,27 +1608,29 @@ function appendLineupsSection(lineups) {
     );
     const players = document.createElement("div");
     players.className = "lineup-players";
-    for (const player of lineup.players || []) {
+    for (const player of (Array.isArray(lineup.players) ? lineup.players : []).filter((player) => player && player.starter === starter).slice(0, 50)) {
       players.appendChild(
         createTextElement(
           "span",
-          player.starter ? "lineup-player lineup-player--starter" : "lineup-player",
+          starter ? "lineup-player lineup-player--starter" : "lineup-player",
           [player.jersey, player.name, player.position].filter(Boolean).join(" · "),
         ),
       );
     }
+    if (!players.childElementCount) players.appendChild(createTextElement("p", "detail-empty", msg("noSectionData")));
     column.append(title, players);
     grid.appendChild(column);
+    }
+    return grid;
+  };
+  if (!hasPitch && rows.some((lineup) => Array.isArray(lineup.players) && lineup.players.some((player) => player?.starter === true))) {
+    section.appendChild(createTextElement("h3", "lineup-subheading", msg("startingXI")));
+    section.appendChild(createRosterGrid(true));
   }
-
-  if (hasPitch) {
-    const roster = createDetailSection(msg("fullSquads"), "fullSquads");
-    roster.classList.add("lineup-roster");
-    roster.appendChild(grid);
-    section.appendChild(roster);
-  } else {
-    section.appendChild(grid.childElementCount ? grid : createTextElement("p", "detail-empty", msg("noSectionData")));
-  }
+  if (rows.length) {
+    section.appendChild(createTextElement("h3", "lineup-subheading", msg("substitutes")));
+    section.appendChild(createRosterGrid(false));
+  } else section.appendChild(createTextElement("p", "detail-empty", msg("noSectionData")));
   leagueDetailContent.appendChild(section);
 }
 

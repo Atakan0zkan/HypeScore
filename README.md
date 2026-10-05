@@ -12,6 +12,8 @@ and available FIFA World Cup 2030 fixtures without injecting scripts into websit
 - 32 curated football competitions, including UEFA Nations League, UEFA EURO,
   Copa América, FIFA World Cup, and major domestic and UEFA club competitions.
 - Live, completed, and upcoming matches in a compact popup.
+- League cards preview a popular live match or an available result, including
+  score and Live, Half Time, or Full Time status, without opening the league.
 - Lazy-loaded standings, proportional match statistics, compact horizontal
   pitch lineups below the score, event timeline, and combined news/highlights.
 - Highlight videos are emphasized; scroll positions and open sections are
@@ -22,11 +24,19 @@ and available FIFA World Cup 2030 fixtures without injecting scripts into websit
   budget protection.
 - Favorite competitions stay first; each group prioritizes live, upcoming,
   then completed matches. Pitch lineups use reported starting positions when
-  both complete XIs are available, with full rosters as a fallback.
+  both complete XIs are available, with named starters as a fallback.
+- Substitutes appear directly below the pitch without repeating the starting
+  XIs. Settings offer Small, Default, and Big popup sizes plus a local JSON
+  backup of favorite leagues and the selected size.
 - Small goal and card markers identify scorers and booked players on the pitch
   when the provider supplies match-specific player statistics.
 - 55 interface locales with RTL support for Arabic, Hebrew, and Persian.
 - No account, advertisements, content scripts, or remote executable code.
+
+Club match previews use a bundled, approximate social-reach signal from
+[CIES Weekly Post 548](https://football-observatory.com/IMG/sites/b5wp/2025/wp548/en/)
+(May 2026), not real-time viewing figures. Live matches always take priority;
+unranked or equally ranked completed matches fall back to the latest kickoff.
 
 ## Privacy
 

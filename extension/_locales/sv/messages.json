@@ -8,9 +8,6 @@
   "appTitle": {
     "message": "Hype Scores"
   },
-  "subtitle": {
-    "message": "Snabba livesiffror, resultat och tabeller."
-  },
   "loading": {
     "message": "Laddar matcher…"
   },
@@ -219,9 +216,6 @@
   "noStandings": {
     "message": "Ingen tabell för den här ligan."
   },
-  "fullSquads": {
-    "message": "Hela trupperna"
-  },
   "noLinks": {
     "message": "Inga länkar tillgängliga."
   },
@@ -254,5 +248,121 @@
   },
   "links": {
     "message": "Länkar"
+  },
+  "settings": {
+    "message": "Inställningar"
+  },
+  "popupSize": {
+    "message": "Popupstorlek"
+  },
+  "sizeSmall": {
+    "message": "Liten"
+  },
+  "sizeDefault": {
+    "message": "Standard"
+  },
+  "sizeBig": {
+    "message": "Stor"
+  },
+  "settingsBackup": {
+    "message": "Säkerhetskopia av inställningar"
+  },
+  "settingsBackupHint": {
+    "message": "Innehåller favoritligor och popupstorlek. Import ersätter dessa inställningar."
+  },
+  "exportSettings": {
+    "message": "Exportera inställningar"
+  },
+  "importSettings": {
+    "message": "Importera inställningar"
+  },
+  "privacyPolicy": {
+    "message": "Integritetspolicy"
+  },
+  "closeSettings": {
+    "message": "Stäng inställningar"
+  },
+  "settingsImported": {
+    "message": "Inställningar importerade."
+  },
+  "settingsImportError": {
+    "message": "Detta är ingen giltig Hype-inställningsfil."
+  },
+  "settingsSaveError": {
+    "message": "Inställningarna kunde inte sparas på den här enheten."
+  },
+  "settingsExported": {
+    "message": "Inställningar exporterade."
+  },
+  "settingsExportError": {
+    "message": "Inställningarna kunde inte exporteras."
+  },
+  "substitutes": {
+    "message": "Avbytare"
+  },
+  "startingXI": {
+    "message": "Startelva"
+  },
+  "fullTimeLabel": {
+    "message": "Matchen slut"
+  },
+  "halfTimeLabel": {
+    "message": "Halvtid"
+  },
+  "liveMatchCountOne": {
+    "message": "$COUNT$ livematch",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "liveMatchesCount": {
+    "message": "$COUNT$ livematcher",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchCountOne": {
+    "message": "$COUNT$ kommande match",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchesCount": {
+    "message": "$COUNT$ kommande matcher",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchCountOne": {
+    "message": "$COUNT$ avslutad match",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchesCount": {
+    "message": "$COUNT$ avslutade matcher",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCountOne": {
+    "message": "$COUNT$ match",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
   }
 }

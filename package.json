@@ -6,8 +6,8 @@
   "description": "Hype - Live Football Scores Chrome Extension & Cloudflare Worker",
   "license": "SEE LICENSE IN LICENSE",
   "scripts": {
-    "test": "node --test tests/popup-guard.test.mjs tests/worker-guard.test.mjs tests/worker-http.test.mjs tests/static-guard.test.mjs tests/popup-dom.test.mjs tests/popup-timers.test.mjs tests/tournament-season.test.mjs && node tools/worker-regression-test.mjs && node tools/hardening-test.mjs && node tools/analytics-dashboard-test.mjs",
-    "test:fast": "node --test --test-reporter=dot tests/popup-guard.test.mjs tests/worker-guard.test.mjs tests/worker-http.test.mjs tests/static-guard.test.mjs tests/popup-dom.test.mjs tests/popup-timers.test.mjs tests/tournament-season.test.mjs",
+    "test": "node --test tests/popup-guard.test.mjs tests/worker-guard.test.mjs tests/worker-http.test.mjs tests/static-guard.test.mjs tests/popup-dom.test.mjs tests/popup-settings.test.mjs tests/popup-timers.test.mjs tests/tournament-season.test.mjs && node tools/worker-regression-test.mjs && node tools/hardening-test.mjs && node tools/analytics-dashboard-test.mjs",
+    "test:fast": "node --test --test-reporter=dot tests/popup-guard.test.mjs tests/worker-guard.test.mjs tests/worker-http.test.mjs tests/static-guard.test.mjs tests/popup-dom.test.mjs tests/popup-settings.test.mjs tests/popup-timers.test.mjs tests/tournament-season.test.mjs",
     "test:e2e": "playwright test",
     "smoke": "node tools/smoke-test.js",
     "deploy": "wrangler deploy",

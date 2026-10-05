@@ -8,9 +8,6 @@
   "appTitle": {
     "message": "Hype Scores"
   },
-  "subtitle": {
-    "message": "빠른 라이브 스코어, 결과, 순위표."
-  },
   "loading": {
     "message": "경기 불러오는 중…"
   },
@@ -219,9 +216,6 @@
   "noStandings": {
     "message": "이 리그의 순위가 없습니다."
   },
-  "fullSquads": {
-    "message": "전체 선수 명단"
-  },
   "noLinks": {
     "message": "링크가 없습니다."
   },
@@ -254,5 +248,121 @@
   },
   "links": {
     "message": "링크"
+  },
+  "settings": {
+    "message": "설정"
+  },
+  "popupSize": {
+    "message": "팝업 크기"
+  },
+  "sizeSmall": {
+    "message": "작게"
+  },
+  "sizeDefault": {
+    "message": "기본"
+  },
+  "sizeBig": {
+    "message": "크게"
+  },
+  "settingsBackup": {
+    "message": "설정 백업"
+  },
+  "settingsBackupHint": {
+    "message": "즐겨찾는 리그와 팝업 크기를 포함합니다. 가져오면 이 설정이 교체됩니다."
+  },
+  "exportSettings": {
+    "message": "설정 내보내기"
+  },
+  "importSettings": {
+    "message": "설정 가져오기"
+  },
+  "privacyPolicy": {
+    "message": "개인정보 처리방침"
+  },
+  "closeSettings": {
+    "message": "설정 닫기"
+  },
+  "settingsImported": {
+    "message": "설정을 가져왔습니다."
+  },
+  "settingsImportError": {
+    "message": "올바른 Hype 설정 파일이 아닙니다."
+  },
+  "settingsSaveError": {
+    "message": "이 기기에 설정을 저장할 수 없습니다."
+  },
+  "settingsExported": {
+    "message": "설정을 내보냈습니다."
+  },
+  "settingsExportError": {
+    "message": "설정을 내보낼 수 없습니다."
+  },
+  "substitutes": {
+    "message": "교체 선수"
+  },
+  "startingXI": {
+    "message": "선발 명단"
+  },
+  "fullTimeLabel": {
+    "message": "경기 종료"
+  },
+  "halfTimeLabel": {
+    "message": "하프타임"
+  },
+  "liveMatchCountOne": {
+    "message": "$COUNT$ 경기가 진행 중",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "liveMatchesCount": {
+    "message": "$COUNT$ 경기가 진행 중",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchCountOne": {
+    "message": "$COUNT$ 경기가 예정됨",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchesCount": {
+    "message": "$COUNT$ 경기가 예정됨",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchCountOne": {
+    "message": "$COUNT$ 경기가 종료됨",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchesCount": {
+    "message": "$COUNT$ 경기가 종료됨",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCountOne": {
+    "message": "$COUNT$ 경기",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
   }
 }

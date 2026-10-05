@@ -8,9 +8,6 @@
   "appTitle": {
     "message": "Hype Scores"
   },
-  "subtitle": {
-    "message": "ઝડપી લાઇવ સ્કોર, પરિણામો અને કોષ્ટકો."
-  },
   "loading": {
     "message": "મેચ લોડ થઈ રહી છે…"
   },
@@ -219,9 +216,6 @@
   "noStandings": {
     "message": "આ લીગ માટે કોષ્ટક નથી."
   },
-  "fullSquads": {
-    "message": "સંપૂર્ણ ટીમો"
-  },
   "noLinks": {
     "message": "કોઈ લિંક નથી."
   },
@@ -254,5 +248,121 @@
   },
   "links": {
     "message": "લિંક"
+  },
+  "settings": {
+    "message": "સેટિંગ્સ"
+  },
+  "popupSize": {
+    "message": "પોપઅપનું કદ"
+  },
+  "sizeSmall": {
+    "message": "નાનું"
+  },
+  "sizeDefault": {
+    "message": "ડિફૉલ્ટ"
+  },
+  "sizeBig": {
+    "message": "મોટું"
+  },
+  "settingsBackup": {
+    "message": "સેટિંગ્સ બૅકઅપ"
+  },
+  "settingsBackupHint": {
+    "message": "મનપસંદ લીગ અને પોપઅપનું કદ શામેલ છે. આયાત આ સેટિંગ્સને બદલે છે."
+  },
+  "exportSettings": {
+    "message": "સેટિંગ્સ નિકાસ કરો"
+  },
+  "importSettings": {
+    "message": "સેટિંગ્સ આયાત કરો"
+  },
+  "privacyPolicy": {
+    "message": "ગોપનીયતા નીતિ"
+  },
+  "closeSettings": {
+    "message": "સેટિંગ્સ બંધ કરો"
+  },
+  "settingsImported": {
+    "message": "સેટિંગ્સ આયાત થઈ."
+  },
+  "settingsImportError": {
+    "message": "આ માન્ય Hype સેટિંગ્સ ફાઇલ નથી."
+  },
+  "settingsSaveError": {
+    "message": "આ ઉપકરણ પર સેટિંગ્સ સાચવી શકાઈ નથી."
+  },
+  "settingsExported": {
+    "message": "સેટિંગ્સ નિકાસ થઈ."
+  },
+  "settingsExportError": {
+    "message": "સેટિંગ્સ નિકાસ કરી શકાઈ નથી."
+  },
+  "substitutes": {
+    "message": "અવેજી ખેલાડીઓ"
+  },
+  "startingXI": {
+    "message": "પ્રારંભિક અગિયાર"
+  },
+  "fullTimeLabel": {
+    "message": "મેચ સમાપ્ત"
+  },
+  "halfTimeLabel": {
+    "message": "મધ્યાંતર"
+  },
+  "liveMatchCountOne": {
+    "message": "$COUNT$ લાઇવ મેચ",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "liveMatchesCount": {
+    "message": "$COUNT$ લાઇવ મેચ",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchCountOne": {
+    "message": "$COUNT$ આગામી મેચ",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchesCount": {
+    "message": "$COUNT$ આગામી મેચ",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchCountOne": {
+    "message": "$COUNT$ પૂર્ણ થયેલી મેચ",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchesCount": {
+    "message": "$COUNT$ પૂર્ણ થયેલી મેચ",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCountOne": {
+    "message": "$COUNT$ મેચ",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
   }
 }

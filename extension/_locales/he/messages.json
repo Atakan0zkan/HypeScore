@@ -8,9 +8,6 @@
   "appTitle": {
     "message": "Hype Scores"
   },
-  "subtitle": {
-    "message": "תוצאות חיות מהירות, תוצאות וטבלאות."
-  },
   "loading": {
     "message": "טוען משחקים…"
   },
@@ -219,9 +216,6 @@
   "noStandings": {
     "message": "אין טבלה לליגה זו."
   },
-  "fullSquads": {
-    "message": "הסגלים המלאים"
-  },
   "noLinks": {
     "message": "אין קישורים."
   },
@@ -254,5 +248,121 @@
   },
   "links": {
     "message": "קישורים"
+  },
+  "settings": {
+    "message": "הגדרות"
+  },
+  "popupSize": {
+    "message": "גודל החלון"
+  },
+  "sizeSmall": {
+    "message": "קטן"
+  },
+  "sizeDefault": {
+    "message": "ברירת מחדל"
+  },
+  "sizeBig": {
+    "message": "גדול"
+  },
+  "settingsBackup": {
+    "message": "גיבוי הגדרות"
+  },
+  "settingsBackupHint": {
+    "message": "כולל ליגות מועדפות וגודל חלון. הייבוא מחליף הגדרות אלה."
+  },
+  "exportSettings": {
+    "message": "ייצוא הגדרות"
+  },
+  "importSettings": {
+    "message": "ייבוא הגדרות"
+  },
+  "privacyPolicy": {
+    "message": "מדיניות פרטיות"
+  },
+  "closeSettings": {
+    "message": "סגירת ההגדרות"
+  },
+  "settingsImported": {
+    "message": "ההגדרות יובאו."
+  },
+  "settingsImportError": {
+    "message": "זה אינו קובץ הגדרות Hype תקין."
+  },
+  "settingsSaveError": {
+    "message": "לא ניתן לשמור את ההגדרות במכשיר זה."
+  },
+  "settingsExported": {
+    "message": "ההגדרות יוצאו."
+  },
+  "settingsExportError": {
+    "message": "לא ניתן לייצא את ההגדרות."
+  },
+  "substitutes": {
+    "message": "מחליפים"
+  },
+  "startingXI": {
+    "message": "הרכב פותח"
+  },
+  "fullTimeLabel": {
+    "message": "סיום המשחק"
+  },
+  "halfTimeLabel": {
+    "message": "מחצית"
+  },
+  "liveMatchCountOne": {
+    "message": "$COUNT$ משחק חי",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "liveMatchesCount": {
+    "message": "$COUNT$ משחקים חיים",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchCountOne": {
+    "message": "$COUNT$ משחק קרוב",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchesCount": {
+    "message": "$COUNT$ משחקים קרובים",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchCountOne": {
+    "message": "$COUNT$ משחק שהסתיים",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchesCount": {
+    "message": "$COUNT$ משחקים שהסתיימו",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCountOne": {
+    "message": "$COUNT$ משחק",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
   }
 }

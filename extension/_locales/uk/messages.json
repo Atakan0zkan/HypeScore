@@ -8,9 +8,6 @@
   "appTitle": {
     "message": "Hype Scores"
   },
-  "subtitle": {
-    "message": "Швидкі live-рахунки, результати та таблиці."
-  },
   "loading": {
     "message": "Завантаження матчів…"
   },
@@ -219,9 +216,6 @@
   "noStandings": {
     "message": "Для цієї ліги немає таблиці."
   },
-  "fullSquads": {
-    "message": "Повні склади"
-  },
   "noLinks": {
     "message": "Немає посилань."
   },
@@ -254,5 +248,121 @@
   },
   "links": {
     "message": "Посилання"
+  },
+  "settings": {
+    "message": "Налаштування"
+  },
+  "popupSize": {
+    "message": "Розмір вікна"
+  },
+  "sizeSmall": {
+    "message": "Малий"
+  },
+  "sizeDefault": {
+    "message": "За замовчуванням"
+  },
+  "sizeBig": {
+    "message": "Великий"
+  },
+  "settingsBackup": {
+    "message": "Резервна копія налаштувань"
+  },
+  "settingsBackupHint": {
+    "message": "Містить улюблені ліги та розмір вікна. Імпорт замінює ці налаштування."
+  },
+  "exportSettings": {
+    "message": "Експорт налаштувань"
+  },
+  "importSettings": {
+    "message": "Імпорт налаштувань"
+  },
+  "privacyPolicy": {
+    "message": "Політика конфіденційності"
+  },
+  "closeSettings": {
+    "message": "Закрити налаштування"
+  },
+  "settingsImported": {
+    "message": "Налаштування імпортовано."
+  },
+  "settingsImportError": {
+    "message": "Це не дійсний файл налаштувань Hype."
+  },
+  "settingsSaveError": {
+    "message": "Не вдалося зберегти налаштування на цьому пристрої."
+  },
+  "settingsExported": {
+    "message": "Налаштування експортовано."
+  },
+  "settingsExportError": {
+    "message": "Не вдалося експортувати налаштування."
+  },
+  "substitutes": {
+    "message": "Запасні"
+  },
+  "startingXI": {
+    "message": "Стартовий склад"
+  },
+  "fullTimeLabel": {
+    "message": "Матч завершено"
+  },
+  "halfTimeLabel": {
+    "message": "Перерва"
+  },
+  "liveMatchCountOne": {
+    "message": "$COUNT$ матч наживо",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "liveMatchesCount": {
+    "message": "$COUNT$ матчів наживо",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchCountOne": {
+    "message": "$COUNT$ майбутній матч",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchesCount": {
+    "message": "$COUNT$ майбутніх матчів",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchCountOne": {
+    "message": "$COUNT$ завершений матч",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchesCount": {
+    "message": "$COUNT$ завершених матчів",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCountOne": {
+    "message": "$COUNT$ матч",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
   }
 }

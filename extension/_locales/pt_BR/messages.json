@@ -8,9 +8,6 @@
   "appTitle": {
     "message": "Hype Scores"
   },
-  "subtitle": {
-    "message": "Placares ao vivo, resultados e tabelas em poucos segundos."
-  },
   "loading": {
     "message": "Carregando jogos…"
   },
@@ -219,9 +216,6 @@
   "noStandings": {
     "message": "Nenhuma tabela disponível para esta liga."
   },
-  "fullSquads": {
-    "message": "Elencos completos"
-  },
   "noLinks": {
     "message": "Nenhum link disponível."
   },
@@ -254,5 +248,121 @@
   },
   "links": {
     "message": "Links"
+  },
+  "settings": {
+    "message": "Configurações"
+  },
+  "popupSize": {
+    "message": "Tamanho do popup"
+  },
+  "sizeSmall": {
+    "message": "Pequeno"
+  },
+  "sizeDefault": {
+    "message": "Padrão"
+  },
+  "sizeBig": {
+    "message": "Grande"
+  },
+  "settingsBackup": {
+    "message": "Backup de configurações"
+  },
+  "settingsBackupHint": {
+    "message": "Inclui ligas favoritas e tamanho do popup. A importação substitui essas configurações."
+  },
+  "exportSettings": {
+    "message": "Exportar configurações"
+  },
+  "importSettings": {
+    "message": "Importar configurações"
+  },
+  "privacyPolicy": {
+    "message": "Política de privacidade"
+  },
+  "closeSettings": {
+    "message": "Fechar configurações"
+  },
+  "settingsImported": {
+    "message": "Configurações importadas."
+  },
+  "settingsImportError": {
+    "message": "Este arquivo de configurações do Hype não é válido."
+  },
+  "settingsSaveError": {
+    "message": "Não foi possível salvar as configurações neste dispositivo."
+  },
+  "settingsExported": {
+    "message": "Configurações exportadas."
+  },
+  "settingsExportError": {
+    "message": "Não foi possível exportar as configurações."
+  },
+  "substitutes": {
+    "message": "Reservas"
+  },
+  "startingXI": {
+    "message": "Onze titulares"
+  },
+  "fullTimeLabel": {
+    "message": "Fim de jogo"
+  },
+  "halfTimeLabel": {
+    "message": "Intervalo"
+  },
+  "liveMatchCountOne": {
+    "message": "$COUNT$ jogo ao vivo",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "liveMatchesCount": {
+    "message": "$COUNT$ jogos ao vivo",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchCountOne": {
+    "message": "$COUNT$ próximo jogo",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchesCount": {
+    "message": "$COUNT$ próximos jogos",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchCountOne": {
+    "message": "$COUNT$ jogo encerrado",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchesCount": {
+    "message": "$COUNT$ jogos encerrados",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCountOne": {
+    "message": "$COUNT$ jogo",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
   }
 }

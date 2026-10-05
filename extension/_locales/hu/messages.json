@@ -8,9 +8,6 @@
   "appTitle": {
     "message": "Hype Scores"
   },
-  "subtitle": {
-    "message": "Gyors élő állások, eredmények és tabellák."
-  },
   "loading": {
     "message": "Meccsek betöltése…"
   },
@@ -219,9 +216,6 @@
   "noStandings": {
     "message": "Ehhez a ligához nincs tabella."
   },
-  "fullSquads": {
-    "message": "Teljes keretek"
-  },
   "noLinks": {
     "message": "Nincs link."
   },
@@ -254,5 +248,121 @@
   },
   "links": {
     "message": "Linkek"
+  },
+  "settings": {
+    "message": "Beállítások"
+  },
+  "popupSize": {
+    "message": "Felugró ablak mérete"
+  },
+  "sizeSmall": {
+    "message": "Kicsi"
+  },
+  "sizeDefault": {
+    "message": "Alapértelmezett"
+  },
+  "sizeBig": {
+    "message": "Nagy"
+  },
+  "settingsBackup": {
+    "message": "Beállítások mentése"
+  },
+  "settingsBackupHint": {
+    "message": "Tartalmazza a kedvenc ligákat és az ablakméretet. Az importálás felülírja ezeket a beállításokat."
+  },
+  "exportSettings": {
+    "message": "Beállítások exportálása"
+  },
+  "importSettings": {
+    "message": "Beállítások importálása"
+  },
+  "privacyPolicy": {
+    "message": "Adatvédelmi szabályzat"
+  },
+  "closeSettings": {
+    "message": "Beállítások bezárása"
+  },
+  "settingsImported": {
+    "message": "Beállítások importálva."
+  },
+  "settingsImportError": {
+    "message": "Ez nem érvényes Hype-beállításfájl."
+  },
+  "settingsSaveError": {
+    "message": "A beállításokat nem sikerült menteni ezen az eszközön."
+  },
+  "settingsExported": {
+    "message": "Beállítások exportálva."
+  },
+  "settingsExportError": {
+    "message": "A beállításokat nem sikerült exportálni."
+  },
+  "substitutes": {
+    "message": "Cserék"
+  },
+  "startingXI": {
+    "message": "Kezdő tizenegy"
+  },
+  "fullTimeLabel": {
+    "message": "Mérkőzés vége"
+  },
+  "halfTimeLabel": {
+    "message": "Félidő"
+  },
+  "liveMatchCountOne": {
+    "message": "$COUNT$ élő mérkőzés",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "liveMatchesCount": {
+    "message": "$COUNT$ élő mérkőzés",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchCountOne": {
+    "message": "$COUNT$ közelgő mérkőzés",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchesCount": {
+    "message": "$COUNT$ közelgő mérkőzés",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchCountOne": {
+    "message": "$COUNT$ befejezett mérkőzés",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchesCount": {
+    "message": "$COUNT$ befejezett mérkőzés",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCountOne": {
+    "message": "$COUNT$ mérkőzés",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
   }
 }

@@ -8,9 +8,6 @@
   "appTitle": {
     "message": "Hype Scores"
   },
-  "subtitle": {
-    "message": "Ātri live rezultāti, iznākumi un tabulas."
-  },
   "loading": {
     "message": "Ielādē spēles…"
   },
@@ -219,9 +216,6 @@
   "noStandings": {
     "message": "Šai līgai nav tabulas."
   },
-  "fullSquads": {
-    "message": "Pilni sastāvi"
-  },
   "noLinks": {
     "message": "Nav saišu."
   },
@@ -254,5 +248,121 @@
   },
   "links": {
     "message": "Saites"
+  },
+  "settings": {
+    "message": "Iestatījumi"
+  },
+  "popupSize": {
+    "message": "Loga izmērs"
+  },
+  "sizeSmall": {
+    "message": "Mazs"
+  },
+  "sizeDefault": {
+    "message": "Noklusējuma"
+  },
+  "sizeBig": {
+    "message": "Liels"
+  },
+  "settingsBackup": {
+    "message": "Iestatījumu kopija"
+  },
+  "settingsBackupHint": {
+    "message": "Ietver iecienītās līgas un loga izmēru. Importēšana aizstāj šos iestatījumus."
+  },
+  "exportSettings": {
+    "message": "Eksportēt iestatījumus"
+  },
+  "importSettings": {
+    "message": "Importēt iestatījumus"
+  },
+  "privacyPolicy": {
+    "message": "Privātuma politika"
+  },
+  "closeSettings": {
+    "message": "Aizvērt iestatījumus"
+  },
+  "settingsImported": {
+    "message": "Iestatījumi importēti."
+  },
+  "settingsImportError": {
+    "message": "Šis nav derīgs Hype iestatījumu fails."
+  },
+  "settingsSaveError": {
+    "message": "Neizdevās saglabāt iestatījumus šajā ierīcē."
+  },
+  "settingsExported": {
+    "message": "Iestatījumi eksportēti."
+  },
+  "settingsExportError": {
+    "message": "Neizdevās eksportēt iestatījumus."
+  },
+  "substitutes": {
+    "message": "Rezervisti"
+  },
+  "startingXI": {
+    "message": "Sākumsastāvs"
+  },
+  "fullTimeLabel": {
+    "message": "Spēle beigusies"
+  },
+  "halfTimeLabel": {
+    "message": "Puslaiks"
+  },
+  "liveMatchCountOne": {
+    "message": "$COUNT$ spēle tiešraidē",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "liveMatchesCount": {
+    "message": "$COUNT$ spēles tiešraidē",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchCountOne": {
+    "message": "$COUNT$ gaidāma spēle",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchesCount": {
+    "message": "$COUNT$ gaidāmas spēles",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchCountOne": {
+    "message": "$COUNT$ pabeigta spēle",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchesCount": {
+    "message": "$COUNT$ pabeigtas spēles",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCountOne": {
+    "message": "$COUNT$ spēle",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
   }
 }

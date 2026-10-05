@@ -1,6 +1,6 @@
 import { describe, it, beforeEach, afterEach } from "node:test";
 import assert from "node:assert/strict";
-import { loadPopupDOM, domPayload, standingsRows, workerJson } from "./dom-helpers.mjs";
+import { loadPopupDOM, domMatch, domPayload, standingsRows, workerJson } from "./dom-helpers.mjs";
 
 let app;
 beforeEach(async () => {
@@ -16,6 +16,173 @@ function render(payload = domPayload()) {
 }
 const cards = () => [...app.document.querySelectorAll(".league-pick-card")];
 const cardByName = (name) => cards().find((c) => c.querySelector(".league-pick-name").textContent === name);
+
+describe("popup DOM: concise league metadata", () => {
+  const meta = matches => app.eval(`buildLeagueMetaText({matches:${JSON.stringify(matches)}}, countLiveMatches(${JSON.stringify(matches)}), countUpcomingMatches(${JSON.stringify(matches)}))`);
+  const scheduled = count => Array.from({ length: count }, (_, i) => domMatch({ id: `scheduled-${i}`, state: "scheduled", kickoff: new Date(Date.now() + 3600000).toISOString() }));
+
+  it("combines the upcoming count and noun without repeating the total", () => {
+    assert.equal(meta(scheduled(4)), "4 upcoming matches");
+    assert.equal(meta(scheduled(1)), "1 upcoming match");
+    render({ matches: scheduled(4), leagues: [{ code: "arg.1", name: "Argentine Liga Profesional", matches: scheduled(4) }] });
+    assert.equal(cardByName("Argentine Liga Profesional").querySelector(".league-pick-meta").textContent, "4 upcoming matches");
+    cardByName("Argentine Liga Profesional").click();
+    assert.equal(app.document.querySelector(".league-detail-meta").textContent, "4 upcoming matches");
+  });
+
+  it("uses singular and plural labels for live and completed matches", () => {
+    assert.equal(meta([domMatch()]), "1 live match");
+    assert.equal(meta([domMatch(), domMatch()]), "2 live matches");
+    assert.equal(meta([domMatch({ state: "finished" })]), "1 completed match");
+    assert.equal(meta(Array.from({ length: 4 }, () => domMatch({ state: "finished" }))), "4 completed matches");
+  });
+
+  it("counts mixed categories once each without adding a redundant total", () => {
+    const matches = [domMatch(), ...scheduled(2), ...Array.from({ length: 3 }, () => domMatch({ state: "finished" }))];
+    assert.equal(meta(matches), "1 live match · 2 upcoming matches · 3 completed matches");
+    assert.ok(!meta(matches).includes("6 matches"));
+  });
+
+  it("retains sensible unknown-state and empty-data fallbacks", () => {
+    assert.equal(meta([domMatch({ state: "postponed" })]), "1 match");
+    assert.equal(meta([domMatch({ state: "postponed" }), domMatch({ state: "unknown" })]), "2 matches");
+    assert.equal(meta([]), "No live matches");
+    assert.equal(app.eval('buildLeagueMetaText({matches:{}}, 0, 0)'), "No live matches");
+  });
+});
+
+describe("popup DOM: league match previews", () => {
+  const select = (matches) => app.eval(`getLeaguePreviewMatch({matches:${JSON.stringify(matches)}})`);
+  const preview = (match) => app.eval(`createLeagueMatchPreview(${JSON.stringify(match)})`);
+
+  it("shows one live match and its real score directly below the league name", () => {
+    render();
+    const card = cardByName("Premier League");
+    assert.equal(card.querySelectorAll(".league-pick-preview").length, 1);
+    assert.equal(card.querySelector(".league-pick-name").nextElementSibling.className, "league-pick-preview league-pick-preview--live");
+    assert.deepEqual([...card.querySelectorAll(".league-preview-team")].map(el => el.textContent), ["Arsenal", "Chelsea"]);
+    assert.equal(card.querySelector(".league-preview-score").textContent, "2 – 1");
+    assert.equal(card.querySelector(".league-preview-status").textContent, "67' · Live");
+    assert.ok(card.getAttribute("aria-label").includes("Arsenal 2 – 1 Chelsea"));
+    assert.equal(cardByName("LaLiga").querySelector(".league-pick-preview"), null);
+  });
+
+  it("recognizes half time from either provider status or clock without showing a stale minute", () => {
+    for (const [status, minute] of [["Half Time", "45'"], ["HT", "45'+3'"], ["half-time", "45'"], ["STATUS_HALFTIME", "45'"], ["Live", "HT"], ["Live", "Half Time"]]) {
+      const node = preview(domMatch({ status, minute }));
+      assert.ok(node.classList.contains("league-pick-preview--half-time"));
+      assert.equal(node.querySelector(".league-preview-status").textContent, "Half Time");
+    }
+  });
+
+  it("labels finished matches Full Time regardless of a residual clock", () => {
+    const node = preview(domMatch({ state: "finished", status: "FT", minute: "90'+6'" }));
+    assert.equal(node.querySelector(".league-preview-status").textContent, "Full Time");
+    assert.ok(node.classList.contains("league-pick-preview--finished"));
+  });
+
+  it("prioritizes live games with stable ordering when the API reorders matches", () => {
+    const matches = [domMatch({ id: "z", homeTeam: "Zulu" }), domMatch({ id: "f", state: "finished" }), domMatch({ id: "a", homeTeam: "Ajax" })];
+    assert.equal(select(matches).id, "a");
+    assert.equal(select([...matches].reverse()).id, "a");
+    assert.equal(select([domMatch({ id: "z" }), domMatch({ id: "a" })]).id, "a");
+  });
+
+  it("falls back to the latest finished kickoff when popularity is equal or unknown", () => {
+    const older = domMatch({ id: "old", homeTeam: "Alpha FC", awayTeam: "Minor FC", state: "finished", kickoff: "2026-10-05T10:00:00Z" });
+    const latest = domMatch({ id: "new", homeTeam: "Zulu FC", awayTeam: "Minor FC", state: "finished", kickoff: "2026-10-05T12:00:00Z" });
+    const invalid = domMatch({ id: "bad", homeTeam: "Minor FC", awayTeam: "Unknown FC", state: "finished", kickoff: "invalid" });
+    assert.equal(select([older, invalid, latest]).id, "new");
+    assert.equal(select([{ ...invalid, id: "z", homeTeam: "Zulu FC" }, { ...invalid, id: "a", homeTeam: "Alpha FC" }]).id, "a");
+    assert.equal(select([{ ...latest, id: "z" }, { ...latest, id: "a" }]).id, "a");
+  });
+
+  it("prefers popular club matchups within each phase but never puts a result ahead of a live game", () => {
+    const small = domMatch({ id: "small", homeTeam: "Alpha FC", awayTeam: "Minor FC" });
+    const popular = domMatch({ id: "popular", homeTeam: "Manchester United", awayTeam: "Liverpool" });
+    assert.equal(select([small, popular]).id, "popular");
+    assert.equal(select([popular, small]).id, "popular");
+    assert.equal(select([{ ...popular, state: "finished", kickoff: "2026-10-05T10:00:00Z" }, { ...small, state: "finished", kickoff: "2026-10-05T12:00:00Z" }]).id, "popular");
+    assert.equal(select([{ ...popular, state: "finished" }, small]).id, "small");
+    const derby = domMatch({ id: "derby", homeTeam: "Manchester United", awayTeam: "Manchester City" });
+    assert.equal(select([popular, derby]).id, "derby");
+  });
+
+  it("uses verified ESPN IDs and exact accent-normalized aliases without fuzzy club collisions", () => {
+    const score = match => app.eval(`getMatchPopularityScore(${JSON.stringify(match)})`);
+    assert.equal(score(domMatch({ homeTeam: "Provider-localized name", homeTeamId: "360", awayTeam: "Unknown" })), 2386);
+    assert.equal(score(domMatch({ homeTeam: "Man Utd", awayTeam: "Unknown" })), 2386);
+    assert.equal(score(domMatch({ leagueCode: "tur.1", homeTeam: "Fenerbahçe", awayTeam: "Beşiktaş" })), 616);
+    assert.equal(score(domMatch({ homeTeam: "City", awayTeam: "United" })), 0);
+    assert.equal(score(domMatch({ homeTeam: "Inter", awayTeam: "Sporting" })), 0);
+    assert.equal(score(domMatch({ homeTeam: "Manchester United Youth", awayTeam: "Arsenal Women" })), 0);
+  });
+
+  it("does not apply men's club social reach to national or women's competitions", () => {
+    for (const leagueCode of ["eng.w.1", "fifa.world", "uefa.euro", "uefa.nations", "conmebol.america", "unsupported"]) {
+      const match = domMatch({ leagueCode, homeTeamId: "360", homeTeam: "Manchester United", awayTeam: "Liverpool" });
+      assert.equal(app.eval(`getMatchPopularityScore(${JSON.stringify(match)})`), 0);
+    }
+  });
+
+  it("does not present scheduled, cancelled, malformed or historical World Cup data as live", () => {
+    const future = domMatch({ state: "scheduled", kickoff: new Date(Date.now() + 3600000).toISOString() });
+    assert.equal(select([null, {}, future, domMatch({ state: "cancelled" }), domMatch({ homeTeam: null }), domMatch({ awayTeam: " " })]), null);
+    assert.equal(select([domMatch({ leagueCode: "fifa.world", seasonYear: 2026, state: "finished", kickoff: "2026-07-19T18:00:00Z" })]), null);
+    const payload = domPayload();
+    payload.leagues[0].matches = [future];
+    render(payload);
+    assert.equal(cardByName("Premier League").querySelector(".league-pick-preview"), null);
+    assert.ok(cardByName("Premier League").querySelector(".league-pick-meta"));
+  });
+
+  it("preserves zero scores and never converts missing or invalid scores to fake goals", () => {
+    for (const [value, expected] of [[0, "0"], ["2", "2"], [null, "–"], ["", "–"], [-1, "–"], [2.5, "–"], ["<img>", "–"], [1000, "–"]]) {
+      const node = preview(domMatch({ homeScore: value, awayScore: 0 }));
+      assert.equal(node.querySelector(".league-preview-score").textContent, `${expected} – 0`);
+    }
+  });
+
+  it("updates score and phase on normal renders without duplicate previews or changing favorites", () => {
+    app.eval('__T.favoriteLeagues.add("eng.1")');
+    for (const [state, status, label] of [["live", "Live", "67' · Live"], ["live", "Half Time", "Half Time"], ["finished", "Full Time", "Full Time"]]) {
+      const match = domMatch({ state, status, homeScore: 3 });
+      render({ matches: [match], leagues: [{ code: "eng.1", name: "Premier League", matches: [match] }] });
+      const card = cardByName("Premier League");
+      assert.equal(card.querySelectorAll(".league-pick-preview").length, 1);
+      assert.equal(card.querySelector(".league-preview-score").textContent, "3 – 1");
+      assert.equal(card.querySelector(".league-preview-status").textContent, label);
+      assert.ok(card.querySelector(".favorite-btn--active"));
+    }
+  });
+
+  it("renders provider names as isolated plain text and keeps full text available for truncated names", () => {
+    const node = preview(domMatch({ homeTeam: '<img src=x onerror="alert(1)">', awayTeam: "A very long away team name" }));
+    assert.equal(node.querySelectorAll("img,script").length, 0);
+    assert.equal(node.querySelectorAll("bdi").length, 2);
+    assert.equal(node.querySelector(".league-preview-team").title, '<img src=x onerror="alert(1)">');
+    assert.equal(node.querySelector(".league-preview-score").dir, "ltr");
+    assert.ok(node.title.includes("A very long away team name"));
+  });
+
+  it("keeps opening the league from the preview and isolates favorite button clicks", () => {
+    render();
+    cardByName("Premier League").querySelector(".favorite-btn").click();
+    assert.equal(app.eval("__T.selectedLeagueKey"), null);
+    cardByName("Premier League").querySelector(".league-pick-preview").click();
+    assert.equal(app.eval("__T.selectedLeagueKey"), "eng.1");
+  });
+
+  it("adds no requests when selecting or rendering preview data", async () => {
+    await new Promise(resolve => setTimeout(resolve, 0));
+    let requests = 0;
+    app.window.fetch = async () => { requests += 1; return workerJson(domPayload()); };
+    select(domPayload().matches);
+    render();
+    render();
+    assert.equal(requests, 0);
+  });
+});
 
 describe("match presentation", () => {
   it("shows one ball per goal and tiny cards with a bounded vertical stack", () => {
@@ -112,15 +279,19 @@ describe("match presentation", () => {
 
   const lineup = (team) => ({ team, players: ["G", "LB", "CD-L", "CD-R", "RB", "LM", "RM", "AM-L", "AM", "AM-R", "F"].map((position, i) => ({ id: String(i), name: `${team} Player ${i}`, position, jersey: String(i + 1), starter: true })).concat({ name: "Bench Player", position: "F", starter: false }) });
 
-  it("puts only both starting XIs on a pitch and retains the full roster", () => {
+  it("puts both starting XIs on a pitch and lists only substitutes underneath", () => {
     app.eval(`appendLineupsSection(${JSON.stringify([lineup("Home"), lineup("Away")])})`);
     assert.equal(app.document.querySelectorAll(".pitch-player").length, 22);
-    assert.equal(app.document.querySelectorAll(".lineup-player").length, 24);
+    assert.equal(app.document.querySelectorAll(".lineup-player").length, 2);
+    assert.equal(app.document.querySelectorAll(".lineup-substitutes .lineup-team").length, 2);
+    assert.equal(app.document.querySelectorAll(".lineup-player--starter").length, 0);
     assert.ok(!app.document.querySelector(".lineup-pitch").textContent.includes("Bench Player"));
     const names = [...app.document.querySelector(".pitch-half .pitch-line:nth-of-type(2)").querySelectorAll(".pitch-player")].map((p) => p.getAttribute("aria-label").split(" · ")[0]);
     assert.deepEqual(names, ["Home Player 1", "Home Player 2", "Home Player 3", "Home Player 4"]);
     assert.equal(app.document.querySelector(".lineup-section").tagName, "SECTION");
-    assert.equal(app.document.querySelector(".lineup-roster").open, false);
+    assert.equal(app.document.querySelector(".lineup-roster"), null);
+    assert.equal(app.document.querySelector(".lineup-substitutes").closest("details"), null);
+    assert.ok(!app.document.querySelector(".lineup-section").textContent.includes("Full squads"));
   });
 
   it("falls back to rosters for incomplete XIs or unknown positions", () => {
@@ -132,7 +303,16 @@ describe("match presentation", () => {
     unknown.players[1].position = "Unknown";
     app.eval(`appendLineupsSection(${JSON.stringify([unknown, lineup("Away")])})`);
     assert.equal(app.document.querySelectorAll(".lineup-pitch").length, 0);
-    assert.equal(app.document.querySelectorAll(".lineup-team").length, 2);
+    assert.equal(app.document.querySelectorAll(".lineup-starters .lineup-team").length, 2);
+    assert.equal(app.document.querySelectorAll(".lineup-substitutes .lineup-team").length, 2);
+    assert.equal(app.document.querySelectorAll(".lineup-substitutes .lineup-player").length, 2);
+  });
+
+  it("handles absent or malformed rosters without inventing substitute players", () => {
+    app.eval('appendLineupsSection([null, {team:"Home",players:{}}, {team:"Away",players:[null]}])');
+    assert.equal(app.document.querySelectorAll(".lineup-player").length, 0);
+    assert.equal(app.document.querySelectorAll(".lineup-pitch").length, 0);
+    assert.equal(app.document.querySelectorAll(".lineup-substitutes .lineup-team").length, 2);
   });
 
   it("does not render the removed Commentary section from legacy API responses", () => {

@@ -8,9 +8,6 @@
   "appTitle": {
     "message": "Hype Scores"
   },
-  "subtitle": {
-    "message": "Nopeat livescoret, tulokset ja taulukot."
-  },
   "loading": {
     "message": "Ladataan otteluita…"
   },
@@ -219,9 +216,6 @@
   "noStandings": {
     "message": "Tälle liigalle ei ole sarjataulukkoa."
   },
-  "fullSquads": {
-    "message": "Koko joukkueet"
-  },
   "noLinks": {
     "message": "Ei linkkejä saatavilla."
   },
@@ -254,5 +248,121 @@
   },
   "links": {
     "message": "Linkit"
+  },
+  "settings": {
+    "message": "Asetukset"
+  },
+  "popupSize": {
+    "message": "Ponnahdusikkunan koko"
+  },
+  "sizeSmall": {
+    "message": "Pieni"
+  },
+  "sizeDefault": {
+    "message": "Oletus"
+  },
+  "sizeBig": {
+    "message": "Suuri"
+  },
+  "settingsBackup": {
+    "message": "Asetusten varmuuskopio"
+  },
+  "settingsBackupHint": {
+    "message": "Sisältää suosikkiliigat ja ikkunan koon. Tuonti korvaa nämä asetukset."
+  },
+  "exportSettings": {
+    "message": "Vie asetukset"
+  },
+  "importSettings": {
+    "message": "Tuo asetukset"
+  },
+  "privacyPolicy": {
+    "message": "Tietosuojakäytäntö"
+  },
+  "closeSettings": {
+    "message": "Sulje asetukset"
+  },
+  "settingsImported": {
+    "message": "Asetukset tuotu."
+  },
+  "settingsImportError": {
+    "message": "Tämä ei ole kelvollinen Hype-asetustiedosto."
+  },
+  "settingsSaveError": {
+    "message": "Asetuksia ei voitu tallentaa tälle laitteelle."
+  },
+  "settingsExported": {
+    "message": "Asetukset viety."
+  },
+  "settingsExportError": {
+    "message": "Asetuksia ei voitu viedä."
+  },
+  "substitutes": {
+    "message": "Vaihtopelaajat"
+  },
+  "startingXI": {
+    "message": "Avauskokoonpano"
+  },
+  "fullTimeLabel": {
+    "message": "Ottelu päättynyt"
+  },
+  "halfTimeLabel": {
+    "message": "Tauko"
+  },
+  "liveMatchCountOne": {
+    "message": "$COUNT$ käynnissä oleva ottelu",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "liveMatchesCount": {
+    "message": "$COUNT$ käynnissä olevaa ottelua",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchCountOne": {
+    "message": "$COUNT$ tuleva ottelu",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchesCount": {
+    "message": "$COUNT$ tulevaa ottelua",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchCountOne": {
+    "message": "$COUNT$ päättynyt ottelu",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchesCount": {
+    "message": "$COUNT$ päättynyttä ottelua",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCountOne": {
+    "message": "$COUNT$ ottelu",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
   }
 }

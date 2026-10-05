@@ -1,6 +1,6 @@
 # HypeScore Privacy Notice
 
-Last updated: 2026-09-13
+Last updated: 2026-10-05
 
 Hype - Live Football Scores does not require an account and does not use
 advertising trackers, analytics cookies, or a persistent device identifier.
@@ -52,9 +52,14 @@ for three months under Cloudflare's current service limits.
 
 ## Local extension data
 
-The power setting, favorite leagues, English override, request budget, and
-short-lived public score cache remain in the extension's local storage. They
-are not sent to the Hype analytics dataset.
+The power setting, favorite leagues, popup-size preference, English override,
+request budget, and short-lived public score cache remain in the extension's
+local storage. They are not sent to the Hype analytics dataset.
+
+You can export favorite leagues and the popup-size preference to a local JSON
+backup and import that backup on another installation. These files do not
+include the score cache, request counters, power setting, or language setting.
+Import and export do not upload preferences to Hype or a third-party service.
 
 ## Choices and contact
 

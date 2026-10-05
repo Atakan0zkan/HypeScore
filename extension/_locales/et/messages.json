@@ -8,9 +8,6 @@
   "appTitle": {
     "message": "Hype Scores"
   },
-  "subtitle": {
-    "message": "Kiired live-skoorid, tulemused ja tabelid."
-  },
   "loading": {
     "message": "Mängude laadimine…"
   },
@@ -219,9 +216,6 @@
   "noStandings": {
     "message": "Selle liiga tabelit pole."
   },
-  "fullSquads": {
-    "message": "Täiskoosseisud"
-  },
   "noLinks": {
     "message": "Linke pole."
   },
@@ -254,5 +248,121 @@
   },
   "links": {
     "message": "Lingid"
+  },
+  "settings": {
+    "message": "Seaded"
+  },
+  "popupSize": {
+    "message": "Hüpikakna suurus"
+  },
+  "sizeSmall": {
+    "message": "Väike"
+  },
+  "sizeDefault": {
+    "message": "Vaikimisi"
+  },
+  "sizeBig": {
+    "message": "Suur"
+  },
+  "settingsBackup": {
+    "message": "Seadete varukoopia"
+  },
+  "settingsBackupHint": {
+    "message": "Sisaldab lemmikliigasid ja akna suurust. Import asendab need seaded."
+  },
+  "exportSettings": {
+    "message": "Ekspordi seaded"
+  },
+  "importSettings": {
+    "message": "Impordi seaded"
+  },
+  "privacyPolicy": {
+    "message": "Privaatsuspoliitika"
+  },
+  "closeSettings": {
+    "message": "Sulge seaded"
+  },
+  "settingsImported": {
+    "message": "Seaded imporditud."
+  },
+  "settingsImportError": {
+    "message": "See pole kehtiv Hype'i seadete fail."
+  },
+  "settingsSaveError": {
+    "message": "Seadeid ei saanud selles seadmes salvestada."
+  },
+  "settingsExported": {
+    "message": "Seaded eksporditud."
+  },
+  "settingsExportError": {
+    "message": "Seadeid ei saanud eksportida."
+  },
+  "substitutes": {
+    "message": "Vahetusmängijad"
+  },
+  "startingXI": {
+    "message": "Algkoosseis"
+  },
+  "fullTimeLabel": {
+    "message": "Mäng lõppenud"
+  },
+  "halfTimeLabel": {
+    "message": "Poolaeg"
+  },
+  "liveMatchCountOne": {
+    "message": "$COUNT$ käimasolev mäng",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "liveMatchesCount": {
+    "message": "$COUNT$ käimasolevat mängu",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchCountOne": {
+    "message": "$COUNT$ tulevane mäng",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchesCount": {
+    "message": "$COUNT$ tulevast mängu",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchCountOne": {
+    "message": "$COUNT$ lõppenud mäng",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchesCount": {
+    "message": "$COUNT$ lõppenud mängu",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCountOne": {
+    "message": "$COUNT$ mäng",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
   }
 }

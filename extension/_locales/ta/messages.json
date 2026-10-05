@@ -8,9 +8,6 @@
   "appTitle": {
     "message": "Hype Scores"
   },
-  "subtitle": {
-    "message": "விரைவான நேரடி மதிப்பெண்கள், முடிவுகள் மற்றும் அட்டவணைகள்."
-  },
   "loading": {
     "message": "போட்டிகள் ஏற்றப்படுகிறது…"
   },
@@ -219,9 +216,6 @@
   "noStandings": {
     "message": "இந்த லீக்கிற்கு அட்டவணை இல்லை."
   },
-  "fullSquads": {
-    "message": "முழு அணிகள்"
-  },
   "noLinks": {
     "message": "இணைப்புகள் இல்லை."
   },
@@ -254,5 +248,121 @@
   },
   "links": {
     "message": "இணைப்புகள்"
+  },
+  "settings": {
+    "message": "அமைப்புகள்"
+  },
+  "popupSize": {
+    "message": "பாப்அப் அளவு"
+  },
+  "sizeSmall": {
+    "message": "சிறியது"
+  },
+  "sizeDefault": {
+    "message": "இயல்புநிலை"
+  },
+  "sizeBig": {
+    "message": "பெரியது"
+  },
+  "settingsBackup": {
+    "message": "அமைப்புகளின் காப்புப்பிரதி"
+  },
+  "settingsBackupHint": {
+    "message": "விருப்பமான லீக்குகளும் பாப்அப் அளவும் அடங்கும். இறக்குமதி இந்த அமைப்புகளை மாற்றும்."
+  },
+  "exportSettings": {
+    "message": "அமைப்புகளை ஏற்றுமதி செய்"
+  },
+  "importSettings": {
+    "message": "அமைப்புகளை இறக்குமதி செய்"
+  },
+  "privacyPolicy": {
+    "message": "தனியுரிமைக் கொள்கை"
+  },
+  "closeSettings": {
+    "message": "அமைப்புகளை மூடு"
+  },
+  "settingsImported": {
+    "message": "அமைப்புகள் இறக்குமதி செய்யப்பட்டன."
+  },
+  "settingsImportError": {
+    "message": "இது செல்லுபடியாகும் Hype அமைப்புக் கோப்பு அல்ல."
+  },
+  "settingsSaveError": {
+    "message": "இந்தச் சாதனத்தில் அமைப்புகளைச் சேமிக்க முடியவில்லை."
+  },
+  "settingsExported": {
+    "message": "அமைப்புகள் ஏற்றுமதி செய்யப்பட்டன."
+  },
+  "settingsExportError": {
+    "message": "அமைப்புகளை ஏற்றுமதி செய்ய முடியவில்லை."
+  },
+  "substitutes": {
+    "message": "மாற்று வீரர்கள்"
+  },
+  "startingXI": {
+    "message": "தொடக்கப் பதினொன்று"
+  },
+  "fullTimeLabel": {
+    "message": "போட்டி முடிந்தது"
+  },
+  "halfTimeLabel": {
+    "message": "இடைவேளை"
+  },
+  "liveMatchCountOne": {
+    "message": "$COUNT$ நேரலைப் போட்டி",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "liveMatchesCount": {
+    "message": "$COUNT$ நேரலைப் போட்டிகள்",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchCountOne": {
+    "message": "$COUNT$ வரவிருக்கும் போட்டி",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchesCount": {
+    "message": "$COUNT$ வரவிருக்கும் போட்டிகள்",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchCountOne": {
+    "message": "$COUNT$ முடிவடைந்த போட்டி",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchesCount": {
+    "message": "$COUNT$ முடிவடைந்த போட்டிகள்",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCountOne": {
+    "message": "$COUNT$ போட்டி",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
   }
 }

@@ -8,9 +8,6 @@
   "appTitle": {
     "message": "Hype Scores"
   },
-  "subtitle": {
-    "message": "Mabilis na live scores, resulta, at standings."
-  },
   "loading": {
     "message": "Nilo-load ang mga laban…"
   },
@@ -219,9 +216,6 @@
   "noStandings": {
     "message": "Walang standings para sa ligang ito."
   },
-  "fullSquads": {
-    "message": "Buong mga koponan"
-  },
   "noLinks": {
     "message": "Walang link."
   },
@@ -254,5 +248,121 @@
   },
   "links": {
     "message": "Mga link"
+  },
+  "settings": {
+    "message": "Mga setting"
+  },
+  "popupSize": {
+    "message": "Laki ng popup"
+  },
+  "sizeSmall": {
+    "message": "Maliit"
+  },
+  "sizeDefault": {
+    "message": "Default"
+  },
+  "sizeBig": {
+    "message": "Malaki"
+  },
+  "settingsBackup": {
+    "message": "Backup ng mga setting"
+  },
+  "settingsBackupHint": {
+    "message": "Kasama ang mga paboritong liga at laki ng popup. Papalitan ng import ang mga setting na ito."
+  },
+  "exportSettings": {
+    "message": "I-export ang mga setting"
+  },
+  "importSettings": {
+    "message": "I-import ang mga setting"
+  },
+  "privacyPolicy": {
+    "message": "Patakaran sa privacy"
+  },
+  "closeSettings": {
+    "message": "Isara ang mga setting"
+  },
+  "settingsImported": {
+    "message": "Na-import ang mga setting."
+  },
+  "settingsImportError": {
+    "message": "Hindi ito wastong Hype settings file."
+  },
+  "settingsSaveError": {
+    "message": "Hindi na-save ang mga setting sa device na ito."
+  },
+  "settingsExported": {
+    "message": "Na-export ang mga setting."
+  },
+  "settingsExportError": {
+    "message": "Hindi na-export ang mga setting."
+  },
+  "substitutes": {
+    "message": "Mga reserba"
+  },
+  "startingXI": {
+    "message": "Unang labing-isa"
+  },
+  "fullTimeLabel": {
+    "message": "Tapos na ang laban"
+  },
+  "halfTimeLabel": {
+    "message": "Pahinga"
+  },
+  "liveMatchCountOne": {
+    "message": "$COUNT$ live na laban",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "liveMatchesCount": {
+    "message": "$COUNT$ live na laban",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchCountOne": {
+    "message": "$COUNT$ paparating na laban",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchesCount": {
+    "message": "$COUNT$ paparating na laban",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchCountOne": {
+    "message": "$COUNT$ natapos na laban",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchesCount": {
+    "message": "$COUNT$ natapos na laban",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCountOne": {
+    "message": "$COUNT$ laban",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
   }
 }

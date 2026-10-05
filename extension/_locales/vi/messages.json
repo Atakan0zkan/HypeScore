@@ -8,9 +8,6 @@
   "appTitle": {
     "message": "Hype Scores"
   },
-  "subtitle": {
-    "message": "Tỷ số live nhanh, kết quả và bảng xếp hạng."
-  },
   "loading": {
     "message": "Đang tải trận đấu…"
   },
@@ -219,9 +216,6 @@
   "noStandings": {
     "message": "Không có bảng xếp hạng cho giải này."
   },
-  "fullSquads": {
-    "message": "Danh sách toàn đội"
-  },
   "noLinks": {
     "message": "Không có liên kết."
   },
@@ -254,5 +248,121 @@
   },
   "links": {
     "message": "Liên kết"
+  },
+  "settings": {
+    "message": "Cài đặt"
+  },
+  "popupSize": {
+    "message": "Kích thước cửa sổ"
+  },
+  "sizeSmall": {
+    "message": "Nhỏ"
+  },
+  "sizeDefault": {
+    "message": "Mặc định"
+  },
+  "sizeBig": {
+    "message": "Lớn"
+  },
+  "settingsBackup": {
+    "message": "Sao lưu cài đặt"
+  },
+  "settingsBackupHint": {
+    "message": "Gồm các giải yêu thích và kích thước cửa sổ. Nhập sẽ thay thế các cài đặt này."
+  },
+  "exportSettings": {
+    "message": "Xuất cài đặt"
+  },
+  "importSettings": {
+    "message": "Nhập cài đặt"
+  },
+  "privacyPolicy": {
+    "message": "Chính sách quyền riêng tư"
+  },
+  "closeSettings": {
+    "message": "Đóng cài đặt"
+  },
+  "settingsImported": {
+    "message": "Đã nhập cài đặt."
+  },
+  "settingsImportError": {
+    "message": "Đây không phải tệp cài đặt Hype hợp lệ."
+  },
+  "settingsSaveError": {
+    "message": "Không thể lưu cài đặt trên thiết bị này."
+  },
+  "settingsExported": {
+    "message": "Đã xuất cài đặt."
+  },
+  "settingsExportError": {
+    "message": "Không thể xuất cài đặt."
+  },
+  "substitutes": {
+    "message": "Cầu thủ dự bị"
+  },
+  "startingXI": {
+    "message": "Đội hình xuất phát"
+  },
+  "fullTimeLabel": {
+    "message": "Kết thúc trận"
+  },
+  "halfTimeLabel": {
+    "message": "Nghỉ giữa hiệp"
+  },
+  "liveMatchCountOne": {
+    "message": "$COUNT$ trận đang diễn ra",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "liveMatchesCount": {
+    "message": "$COUNT$ trận đang diễn ra",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchCountOne": {
+    "message": "$COUNT$ trận sắp diễn ra",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchesCount": {
+    "message": "$COUNT$ trận sắp diễn ra",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchCountOne": {
+    "message": "$COUNT$ trận đã kết thúc",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchesCount": {
+    "message": "$COUNT$ trận đã kết thúc",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCountOne": {
+    "message": "$COUNT$ trận đấu",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
   }
 }

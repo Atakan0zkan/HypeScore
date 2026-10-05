@@ -8,9 +8,6 @@
   "appTitle": {
     "message": "Hype Scores"
   },
-  "subtitle": {
-    "message": "Live-Ergebnisse, Resultate und Tabellen auf einen Blick."
-  },
   "loading": {
     "message": "Spiele werden geladen…"
   },
@@ -219,9 +216,6 @@
   "noStandings": {
     "message": "Für diese Liga ist keine Tabelle verfügbar."
   },
-  "fullSquads": {
-    "message": "Vollständige Kader"
-  },
   "noLinks": {
     "message": "Keine Links verfügbar."
   },
@@ -254,5 +248,121 @@
   },
   "links": {
     "message": "Links"
+  },
+  "settings": {
+    "message": "Einstellungen"
+  },
+  "popupSize": {
+    "message": "Popup-Größe"
+  },
+  "sizeSmall": {
+    "message": "Klein"
+  },
+  "sizeDefault": {
+    "message": "Standard"
+  },
+  "sizeBig": {
+    "message": "Groß"
+  },
+  "settingsBackup": {
+    "message": "Einstellungen sichern"
+  },
+  "settingsBackupHint": {
+    "message": "Enthält Lieblingsligen und Popup-Größe. Ein Import ersetzt diese Einstellungen."
+  },
+  "exportSettings": {
+    "message": "Einstellungen exportieren"
+  },
+  "importSettings": {
+    "message": "Einstellungen importieren"
+  },
+  "privacyPolicy": {
+    "message": "Datenschutzerklärung"
+  },
+  "closeSettings": {
+    "message": "Einstellungen schließen"
+  },
+  "settingsImported": {
+    "message": "Einstellungen importiert."
+  },
+  "settingsImportError": {
+    "message": "Keine gültige Hype-Einstellungsdatei."
+  },
+  "settingsSaveError": {
+    "message": "Einstellungen konnten auf diesem Gerät nicht gespeichert werden."
+  },
+  "settingsExported": {
+    "message": "Einstellungen exportiert."
+  },
+  "settingsExportError": {
+    "message": "Einstellungen konnten nicht exportiert werden."
+  },
+  "substitutes": {
+    "message": "Auswechselspieler"
+  },
+  "startingXI": {
+    "message": "Startelf"
+  },
+  "fullTimeLabel": {
+    "message": "Spielende"
+  },
+  "halfTimeLabel": {
+    "message": "Halbzeit"
+  },
+  "liveMatchCountOne": {
+    "message": "$COUNT$ Live-Spiel",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "liveMatchesCount": {
+    "message": "$COUNT$ Live-Spiele",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchCountOne": {
+    "message": "$COUNT$ anstehendes Spiel",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchesCount": {
+    "message": "$COUNT$ anstehende Spiele",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchCountOne": {
+    "message": "$COUNT$ beendetes Spiel",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchesCount": {
+    "message": "$COUNT$ beendete Spiele",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCountOne": {
+    "message": "$COUNT$ Spiel",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
   }
 }

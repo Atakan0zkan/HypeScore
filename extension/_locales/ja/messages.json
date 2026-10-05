@@ -8,9 +8,6 @@
   "appTitle": {
     "message": "Hype Scores"
   },
-  "subtitle": {
-    "message": "ライブスコア、結果、順位表をすばやく確認。"
-  },
   "loading": {
     "message": "試合を読み込み中…"
   },
@@ -219,9 +216,6 @@
   "noStandings": {
     "message": "このリーグの順位表はありません。"
   },
-  "fullSquads": {
-    "message": "全選手"
-  },
   "noLinks": {
     "message": "リンクはありません。"
   },
@@ -254,5 +248,121 @@
   },
   "links": {
     "message": "リンク"
+  },
+  "settings": {
+    "message": "設定"
+  },
+  "popupSize": {
+    "message": "ポップアップのサイズ"
+  },
+  "sizeSmall": {
+    "message": "小"
+  },
+  "sizeDefault": {
+    "message": "標準"
+  },
+  "sizeBig": {
+    "message": "大"
+  },
+  "settingsBackup": {
+    "message": "設定のバックアップ"
+  },
+  "settingsBackupHint": {
+    "message": "お気に入りのリーグとサイズを含みます。読み込みでこれらの設定が置き換わります。"
+  },
+  "exportSettings": {
+    "message": "設定を書き出す"
+  },
+  "importSettings": {
+    "message": "設定を読み込む"
+  },
+  "privacyPolicy": {
+    "message": "プライバシーポリシー"
+  },
+  "closeSettings": {
+    "message": "設定を閉じる"
+  },
+  "settingsImported": {
+    "message": "設定を読み込みました。"
+  },
+  "settingsImportError": {
+    "message": "有効な Hype 設定ファイルではありません。"
+  },
+  "settingsSaveError": {
+    "message": "この端末に設定を保存できませんでした。"
+  },
+  "settingsExported": {
+    "message": "設定を書き出しました。"
+  },
+  "settingsExportError": {
+    "message": "設定を書き出せませんでした。"
+  },
+  "substitutes": {
+    "message": "控え選手"
+  },
+  "startingXI": {
+    "message": "先発メンバー"
+  },
+  "fullTimeLabel": {
+    "message": "試合終了"
+  },
+  "halfTimeLabel": {
+    "message": "ハーフタイム"
+  },
+  "liveMatchCountOne": {
+    "message": "$COUNT$ 試合が進行中",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "liveMatchesCount": {
+    "message": "$COUNT$ 試合が進行中",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchCountOne": {
+    "message": "$COUNT$ 試合が開催予定",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchesCount": {
+    "message": "$COUNT$ 試合が開催予定",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchCountOne": {
+    "message": "$COUNT$ 試合が終了",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchesCount": {
+    "message": "$COUNT$ 試合が終了",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCountOne": {
+    "message": "$COUNT$ 試合",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
   }
 }

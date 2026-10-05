@@ -8,9 +8,6 @@
   "appTitle": {
     "message": "Hype Scores"
   },
-  "subtitle": {
-    "message": "Skor live pantas, keputusan dan carta."
-  },
   "loading": {
     "message": "Memuatkan perlawanan…"
   },
@@ -219,9 +216,6 @@
   "noStandings": {
     "message": "Tiada kedudukan untuk liga ini."
   },
-  "fullSquads": {
-    "message": "Skuad penuh"
-  },
   "noLinks": {
     "message": "Tiada pautan."
   },
@@ -254,5 +248,121 @@
   },
   "links": {
     "message": "Pautan"
+  },
+  "settings": {
+    "message": "Tetapan"
+  },
+  "popupSize": {
+    "message": "Saiz popup"
+  },
+  "sizeSmall": {
+    "message": "Kecil"
+  },
+  "sizeDefault": {
+    "message": "Lalai"
+  },
+  "sizeBig": {
+    "message": "Besar"
+  },
+  "settingsBackup": {
+    "message": "Sandaran tetapan"
+  },
+  "settingsBackupHint": {
+    "message": "Mengandungi liga kegemaran dan saiz popup. Import menggantikan tetapan ini."
+  },
+  "exportSettings": {
+    "message": "Eksport tetapan"
+  },
+  "importSettings": {
+    "message": "Import tetapan"
+  },
+  "privacyPolicy": {
+    "message": "Dasar privasi"
+  },
+  "closeSettings": {
+    "message": "Tutup tetapan"
+  },
+  "settingsImported": {
+    "message": "Tetapan diimport."
+  },
+  "settingsImportError": {
+    "message": "Ini bukan fail tetapan Hype yang sah."
+  },
+  "settingsSaveError": {
+    "message": "Tetapan tidak dapat disimpan pada peranti ini."
+  },
+  "settingsExported": {
+    "message": "Tetapan dieksport."
+  },
+  "settingsExportError": {
+    "message": "Tetapan tidak dapat dieksport."
+  },
+  "substitutes": {
+    "message": "Pemain simpanan"
+  },
+  "startingXI": {
+    "message": "Kesebelasan utama"
+  },
+  "fullTimeLabel": {
+    "message": "Tamat perlawanan"
+  },
+  "halfTimeLabel": {
+    "message": "Rehat separuh masa"
+  },
+  "liveMatchCountOne": {
+    "message": "$COUNT$ perlawanan langsung",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "liveMatchesCount": {
+    "message": "$COUNT$ perlawanan langsung",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchCountOne": {
+    "message": "$COUNT$ perlawanan akan datang",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchesCount": {
+    "message": "$COUNT$ perlawanan akan datang",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchCountOne": {
+    "message": "$COUNT$ perlawanan tamat",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchesCount": {
+    "message": "$COUNT$ perlawanan tamat",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCountOne": {
+    "message": "$COUNT$ perlawanan",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
   }
 }

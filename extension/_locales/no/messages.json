@@ -8,9 +8,6 @@
   "appTitle": {
     "message": "Hype Scores"
   },
-  "subtitle": {
-    "message": "Raske livesifre, resultater og tabeller."
-  },
   "loading": {
     "message": "Laster kamper…"
   },
@@ -219,9 +216,6 @@
   "noStandings": {
     "message": "Ingen tabell for denne ligaen."
   },
-  "fullSquads": {
-    "message": "Hele troppene"
-  },
   "noLinks": {
     "message": "Ingen lenker tilgjengelig."
   },
@@ -254,5 +248,121 @@
   },
   "links": {
     "message": "Lenker"
+  },
+  "settings": {
+    "message": "Innstillinger"
+  },
+  "popupSize": {
+    "message": "Popup-størrelse"
+  },
+  "sizeSmall": {
+    "message": "Liten"
+  },
+  "sizeDefault": {
+    "message": "Standard"
+  },
+  "sizeBig": {
+    "message": "Stor"
+  },
+  "settingsBackup": {
+    "message": "Sikkerhetskopi av innstillinger"
+  },
+  "settingsBackupHint": {
+    "message": "Inneholder favorittligaer og popup-størrelse. Import erstatter disse innstillingene."
+  },
+  "exportSettings": {
+    "message": "Eksporter innstillinger"
+  },
+  "importSettings": {
+    "message": "Importer innstillinger"
+  },
+  "privacyPolicy": {
+    "message": "Personvernerklæring"
+  },
+  "closeSettings": {
+    "message": "Lukk innstillinger"
+  },
+  "settingsImported": {
+    "message": "Innstillinger importert."
+  },
+  "settingsImportError": {
+    "message": "Dette er ikke en gyldig Hype-innstillingsfil."
+  },
+  "settingsSaveError": {
+    "message": "Innstillingene kunne ikke lagres på denne enheten."
+  },
+  "settingsExported": {
+    "message": "Innstillinger eksportert."
+  },
+  "settingsExportError": {
+    "message": "Innstillingene kunne ikke eksporteres."
+  },
+  "substitutes": {
+    "message": "Innbyttere"
+  },
+  "startingXI": {
+    "message": "Startellever"
+  },
+  "fullTimeLabel": {
+    "message": "Kampen er slutt"
+  },
+  "halfTimeLabel": {
+    "message": "Pause"
+  },
+  "liveMatchCountOne": {
+    "message": "$COUNT$ direktekamp",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "liveMatchesCount": {
+    "message": "$COUNT$ direktekamper",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchCountOne": {
+    "message": "$COUNT$ kommende kamp",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchesCount": {
+    "message": "$COUNT$ kommende kamper",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchCountOne": {
+    "message": "$COUNT$ ferdigspilt kamp",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchesCount": {
+    "message": "$COUNT$ ferdigspilte kamper",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCountOne": {
+    "message": "$COUNT$ kamp",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
   }
 }

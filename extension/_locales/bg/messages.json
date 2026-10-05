@@ -8,9 +8,6 @@
   "appTitle": {
     "message": "Hype Scores"
   },
-  "subtitle": {
-    "message": "Бързи live резултати, изходи и класирания."
-  },
   "loading": {
     "message": "Зареждане на мачове…"
   },
@@ -219,9 +216,6 @@
   "noStandings": {
     "message": "Няма класиране за тази лига."
   },
-  "fullSquads": {
-    "message": "Пълни състави"
-  },
   "noLinks": {
     "message": "Няма връзки."
   },
@@ -254,5 +248,121 @@
   },
   "links": {
     "message": "Връзки"
+  },
+  "settings": {
+    "message": "Настройки"
+  },
+  "popupSize": {
+    "message": "Размер на прозореца"
+  },
+  "sizeSmall": {
+    "message": "Малък"
+  },
+  "sizeDefault": {
+    "message": "По подразбиране"
+  },
+  "sizeBig": {
+    "message": "Голям"
+  },
+  "settingsBackup": {
+    "message": "Архив на настройките"
+  },
+  "settingsBackupHint": {
+    "message": "Включва любими лиги и размер на прозореца. Импортирането заменя тези настройки."
+  },
+  "exportSettings": {
+    "message": "Експортиране на настройки"
+  },
+  "importSettings": {
+    "message": "Импортиране на настройки"
+  },
+  "privacyPolicy": {
+    "message": "Политика за поверителност"
+  },
+  "closeSettings": {
+    "message": "Затваряне на настройките"
+  },
+  "settingsImported": {
+    "message": "Настройките са импортирани."
+  },
+  "settingsImportError": {
+    "message": "Това не е валиден файл с настройки на Hype."
+  },
+  "settingsSaveError": {
+    "message": "Настройките не могат да бъдат запазени на това устройство."
+  },
+  "settingsExported": {
+    "message": "Настройките са експортирани."
+  },
+  "settingsExportError": {
+    "message": "Настройките не могат да бъдат експортирани."
+  },
+  "substitutes": {
+    "message": "Резерви"
+  },
+  "startingXI": {
+    "message": "Титулярен състав"
+  },
+  "fullTimeLabel": {
+    "message": "Край на мача"
+  },
+  "halfTimeLabel": {
+    "message": "Почивка"
+  },
+  "liveMatchCountOne": {
+    "message": "$COUNT$ мач на живо",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "liveMatchesCount": {
+    "message": "$COUNT$ мача на живо",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchCountOne": {
+    "message": "$COUNT$ предстоящ мач",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchesCount": {
+    "message": "$COUNT$ предстоящи мача",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchCountOne": {
+    "message": "$COUNT$ завършил мач",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchesCount": {
+    "message": "$COUNT$ завършили мача",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCountOne": {
+    "message": "$COUNT$ мач",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
   }
 }

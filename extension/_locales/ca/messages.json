@@ -8,9 +8,6 @@
   "appTitle": {
     "message": "Hype Scores"
   },
-  "subtitle": {
-    "message": "Resultats en directe, finals i classificacions al moment."
-  },
   "loading": {
     "message": "S’estan carregant els partits…"
   },
@@ -219,9 +216,6 @@
   "noStandings": {
     "message": "No hi ha classificació per a aquesta lliga."
   },
-  "fullSquads": {
-    "message": "Plantilles completes"
-  },
   "noLinks": {
     "message": "No hi ha enllaços."
   },
@@ -254,5 +248,121 @@
   },
   "links": {
     "message": "Enllaços"
+  },
+  "settings": {
+    "message": "Configuració"
+  },
+  "popupSize": {
+    "message": "Mida de la finestra"
+  },
+  "sizeSmall": {
+    "message": "Petita"
+  },
+  "sizeDefault": {
+    "message": "Per defecte"
+  },
+  "sizeBig": {
+    "message": "Gran"
+  },
+  "settingsBackup": {
+    "message": "Còpia de configuració"
+  },
+  "settingsBackupHint": {
+    "message": "Inclou lligues preferides i mida de la finestra. La importació substitueix aquests ajustos."
+  },
+  "exportSettings": {
+    "message": "Exporta la configuració"
+  },
+  "importSettings": {
+    "message": "Importa la configuració"
+  },
+  "privacyPolicy": {
+    "message": "Política de privadesa"
+  },
+  "closeSettings": {
+    "message": "Tanca la configuració"
+  },
+  "settingsImported": {
+    "message": "Configuració importada."
+  },
+  "settingsImportError": {
+    "message": "Aquest fitxer de configuració de Hype no és vàlid."
+  },
+  "settingsSaveError": {
+    "message": "No s’ha pogut desar la configuració en aquest dispositiu."
+  },
+  "settingsExported": {
+    "message": "Configuració exportada."
+  },
+  "settingsExportError": {
+    "message": "No s’ha pogut exportar la configuració."
+  },
+  "substitutes": {
+    "message": "Suplents"
+  },
+  "startingXI": {
+    "message": "Onze inicial"
+  },
+  "fullTimeLabel": {
+    "message": "Final del partit"
+  },
+  "halfTimeLabel": {
+    "message": "Mitja part"
+  },
+  "liveMatchCountOne": {
+    "message": "$COUNT$ partit en directe",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "liveMatchesCount": {
+    "message": "$COUNT$ partits en directe",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchCountOne": {
+    "message": "$COUNT$ partit pròxim",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchesCount": {
+    "message": "$COUNT$ partits pròxims",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchCountOne": {
+    "message": "$COUNT$ partit acabat",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchesCount": {
+    "message": "$COUNT$ partits acabats",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCountOne": {
+    "message": "$COUNT$ partit",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
   }
 }

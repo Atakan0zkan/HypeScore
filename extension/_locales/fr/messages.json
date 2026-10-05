@@ -8,9 +8,6 @@
   "appTitle": {
     "message": "Hype Scores"
   },
-  "subtitle": {
-    "message": "Scores en direct, résultats et classements en un clin d’œil."
-  },
   "loading": {
     "message": "Chargement des matchs…"
   },
@@ -219,9 +216,6 @@
   "noStandings": {
     "message": "Aucun classement disponible pour cette ligue."
   },
-  "fullSquads": {
-    "message": "Effectifs complets"
-  },
   "noLinks": {
     "message": "Aucun lien disponible."
   },
@@ -254,5 +248,121 @@
   },
   "links": {
     "message": "Liens"
+  },
+  "settings": {
+    "message": "Paramètres"
+  },
+  "popupSize": {
+    "message": "Taille du popup"
+  },
+  "sizeSmall": {
+    "message": "Petit"
+  },
+  "sizeDefault": {
+    "message": "Par défaut"
+  },
+  "sizeBig": {
+    "message": "Grand"
+  },
+  "settingsBackup": {
+    "message": "Sauvegarde des paramètres"
+  },
+  "settingsBackupHint": {
+    "message": "Comprend les ligues favorites et la taille du popup. L’import remplace ces paramètres."
+  },
+  "exportSettings": {
+    "message": "Exporter les paramètres"
+  },
+  "importSettings": {
+    "message": "Importer les paramètres"
+  },
+  "privacyPolicy": {
+    "message": "Politique de confidentialité"
+  },
+  "closeSettings": {
+    "message": "Fermer les paramètres"
+  },
+  "settingsImported": {
+    "message": "Paramètres importés."
+  },
+  "settingsImportError": {
+    "message": "Ce fichier de paramètres Hype n’est pas valide."
+  },
+  "settingsSaveError": {
+    "message": "Impossible d’enregistrer les paramètres sur cet appareil."
+  },
+  "settingsExported": {
+    "message": "Paramètres exportés."
+  },
+  "settingsExportError": {
+    "message": "Impossible d’exporter les paramètres."
+  },
+  "substitutes": {
+    "message": "Remplaçants"
+  },
+  "startingXI": {
+    "message": "Onze de départ"
+  },
+  "fullTimeLabel": {
+    "message": "Fin du match"
+  },
+  "halfTimeLabel": {
+    "message": "Mi-temps"
+  },
+  "liveMatchCountOne": {
+    "message": "$COUNT$ match en direct",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "liveMatchesCount": {
+    "message": "$COUNT$ matchs en direct",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchCountOne": {
+    "message": "$COUNT$ match à venir",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchesCount": {
+    "message": "$COUNT$ matchs à venir",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchCountOne": {
+    "message": "$COUNT$ match terminé",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchesCount": {
+    "message": "$COUNT$ matchs terminés",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCountOne": {
+    "message": "$COUNT$ match",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
   }
 }

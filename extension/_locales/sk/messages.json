@@ -8,9 +8,6 @@
   "appTitle": {
     "message": "Hype Scores"
   },
-  "subtitle": {
-    "message": "Rýchle live skóre, výsledky a tabuľky."
-  },
   "loading": {
     "message": "Načítavanie zápasov…"
   },
@@ -219,9 +216,6 @@
   "noStandings": {
     "message": "Pre túto ligu nie je tabuľka."
   },
-  "fullSquads": {
-    "message": "Úplné súpisky"
-  },
   "noLinks": {
     "message": "Žiadne odkazy."
   },
@@ -254,5 +248,121 @@
   },
   "links": {
     "message": "Odkazy"
+  },
+  "settings": {
+    "message": "Nastavenia"
+  },
+  "popupSize": {
+    "message": "Veľkosť okna"
+  },
+  "sizeSmall": {
+    "message": "Malé"
+  },
+  "sizeDefault": {
+    "message": "Predvolené"
+  },
+  "sizeBig": {
+    "message": "Veľké"
+  },
+  "settingsBackup": {
+    "message": "Záloha nastavení"
+  },
+  "settingsBackupHint": {
+    "message": "Obsahuje obľúbené ligy a veľkosť okna. Import nahradí tieto nastavenia."
+  },
+  "exportSettings": {
+    "message": "Exportovať nastavenia"
+  },
+  "importSettings": {
+    "message": "Importovať nastavenia"
+  },
+  "privacyPolicy": {
+    "message": "Zásady ochrany súkromia"
+  },
+  "closeSettings": {
+    "message": "Zavrieť nastavenia"
+  },
+  "settingsImported": {
+    "message": "Nastavenia importované."
+  },
+  "settingsImportError": {
+    "message": "Toto nie je platný súbor nastavení Hype."
+  },
+  "settingsSaveError": {
+    "message": "Nastavenia sa na tomto zariadení nepodarilo uložiť."
+  },
+  "settingsExported": {
+    "message": "Nastavenia exportované."
+  },
+  "settingsExportError": {
+    "message": "Nastavenia sa nepodarilo exportovať."
+  },
+  "substitutes": {
+    "message": "Náhradníci"
+  },
+  "startingXI": {
+    "message": "Základná jedenástka"
+  },
+  "fullTimeLabel": {
+    "message": "Koniec zápasu"
+  },
+  "halfTimeLabel": {
+    "message": "Polčas"
+  },
+  "liveMatchCountOne": {
+    "message": "$COUNT$ živý zápas",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "liveMatchesCount": {
+    "message": "$COUNT$ živých zápasov",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchCountOne": {
+    "message": "$COUNT$ nadchádzajúci zápas",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchesCount": {
+    "message": "$COUNT$ nadchádzajúcich zápasov",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchCountOne": {
+    "message": "$COUNT$ ukončený zápas",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchesCount": {
+    "message": "$COUNT$ ukončených zápasov",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCountOne": {
+    "message": "$COUNT$ zápas",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
   }
 }

@@ -8,9 +8,6 @@
   "appTitle": {
     "message": "Hype Scores"
   },
-  "subtitle": {
-    "message": "Fast live scores, results and league tables."
-  },
   "loading": {
     "message": "Loading matches…"
   },
@@ -219,9 +216,6 @@
   "noStandings": {
     "message": "No standings available for this league."
   },
-  "fullSquads": {
-    "message": "Full squads"
-  },
   "noLinks": {
     "message": "No links available."
   },
@@ -254,5 +248,121 @@
   },
   "links": {
     "message": "Links"
+  },
+  "settings": {
+    "message": "Settings"
+  },
+  "popupSize": {
+    "message": "Popup size"
+  },
+  "sizeSmall": {
+    "message": "Small"
+  },
+  "sizeDefault": {
+    "message": "Default"
+  },
+  "sizeBig": {
+    "message": "Big"
+  },
+  "settingsBackup": {
+    "message": "Settings backup"
+  },
+  "settingsBackupHint": {
+    "message": "Includes favorite leagues and popup size. Import replaces these settings."
+  },
+  "exportSettings": {
+    "message": "Export settings"
+  },
+  "importSettings": {
+    "message": "Import settings"
+  },
+  "privacyPolicy": {
+    "message": "Privacy policy"
+  },
+  "closeSettings": {
+    "message": "Close settings"
+  },
+  "settingsImported": {
+    "message": "Settings imported."
+  },
+  "settingsImportError": {
+    "message": "This is not a valid Hype settings file."
+  },
+  "settingsSaveError": {
+    "message": "Settings could not be saved on this device."
+  },
+  "settingsExported": {
+    "message": "Settings exported."
+  },
+  "settingsExportError": {
+    "message": "Settings could not be exported."
+  },
+  "substitutes": {
+    "message": "Substitutes"
+  },
+  "startingXI": {
+    "message": "Starting XI"
+  },
+  "fullTimeLabel": {
+    "message": "Full Time"
+  },
+  "halfTimeLabel": {
+    "message": "Half Time"
+  },
+  "liveMatchCountOne": {
+    "message": "$COUNT$ live match",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "liveMatchesCount": {
+    "message": "$COUNT$ live matches",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchCountOne": {
+    "message": "$COUNT$ upcoming match",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchesCount": {
+    "message": "$COUNT$ upcoming matches",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchCountOne": {
+    "message": "$COUNT$ completed match",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchesCount": {
+    "message": "$COUNT$ completed matches",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCountOne": {
+    "message": "$COUNT$ match",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
   }
 }

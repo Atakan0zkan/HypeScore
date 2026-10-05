@@ -8,9 +8,6 @@
   "appTitle": {
     "message": "Hype Scores"
   },
-  "subtitle": {
-    "message": "Snelle live scores, uitslagen en standen."
-  },
   "loading": {
     "message": "Wedstrijden laden…"
   },
@@ -219,9 +216,6 @@
   "noStandings": {
     "message": "Geen stand beschikbaar voor deze competitie."
   },
-  "fullSquads": {
-    "message": "Volledige selecties"
-  },
   "noLinks": {
     "message": "Geen links beschikbaar."
   },
@@ -254,5 +248,121 @@
   },
   "links": {
     "message": "Links"
+  },
+  "settings": {
+    "message": "Instellingen"
+  },
+  "popupSize": {
+    "message": "Popupgrootte"
+  },
+  "sizeSmall": {
+    "message": "Klein"
+  },
+  "sizeDefault": {
+    "message": "Standaard"
+  },
+  "sizeBig": {
+    "message": "Groot"
+  },
+  "settingsBackup": {
+    "message": "Back-up van instellingen"
+  },
+  "settingsBackupHint": {
+    "message": "Bevat favoriete competities en popupgrootte. Importeren vervangt deze instellingen."
+  },
+  "exportSettings": {
+    "message": "Instellingen exporteren"
+  },
+  "importSettings": {
+    "message": "Instellingen importeren"
+  },
+  "privacyPolicy": {
+    "message": "Privacybeleid"
+  },
+  "closeSettings": {
+    "message": "Instellingen sluiten"
+  },
+  "settingsImported": {
+    "message": "Instellingen geïmporteerd."
+  },
+  "settingsImportError": {
+    "message": "Dit is geen geldig Hype-instellingenbestand."
+  },
+  "settingsSaveError": {
+    "message": "Instellingen konden niet op dit apparaat worden opgeslagen."
+  },
+  "settingsExported": {
+    "message": "Instellingen geëxporteerd."
+  },
+  "settingsExportError": {
+    "message": "Instellingen konden niet worden geëxporteerd."
+  },
+  "substitutes": {
+    "message": "Wisselspelers"
+  },
+  "startingXI": {
+    "message": "Basiselftal"
+  },
+  "fullTimeLabel": {
+    "message": "Afgelopen"
+  },
+  "halfTimeLabel": {
+    "message": "Rust"
+  },
+  "liveMatchCountOne": {
+    "message": "$COUNT$ livewedstrijd",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "liveMatchesCount": {
+    "message": "$COUNT$ livewedstrijden",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchCountOne": {
+    "message": "$COUNT$ komende wedstrijd",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchesCount": {
+    "message": "$COUNT$ komende wedstrijden",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchCountOne": {
+    "message": "$COUNT$ afgelopen wedstrijd",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchesCount": {
+    "message": "$COUNT$ afgelopen wedstrijden",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCountOne": {
+    "message": "$COUNT$ wedstrijd",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
   }
 }

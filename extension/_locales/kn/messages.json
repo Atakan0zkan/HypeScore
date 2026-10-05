@@ -8,9 +8,6 @@
   "appTitle": {
     "message": "Hype Scores"
   },
-  "subtitle": {
-    "message": "ವೇಗದ ಲೈವ್ ಸ್ಕೋರ್‌ಗಳು, ಫಲಿತಾಂಶಗಳು ಮತ್ತು ಕೋಷ್ಟಕಗಳು."
-  },
   "loading": {
     "message": "ಪಂದ್ಯಗಳನ್ನು ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ…"
   },
@@ -219,9 +216,6 @@
   "noStandings": {
     "message": "ಈ ಲೀಗ್‌ಗೆ ಕೋಷ್ಟಕವಿಲ್ಲ."
   },
-  "fullSquads": {
-    "message": "ಸಂಪೂರ್ಣ ತಂಡಗಳು"
-  },
   "noLinks": {
     "message": "ಲಿಂಕ್‌ಗಳಿಲ್ಲ."
   },
@@ -254,5 +248,121 @@
   },
   "links": {
     "message": "ಲಿಂಕ್‌ಗಳು"
+  },
+  "settings": {
+    "message": "ಸೆಟ್ಟಿಂಗ್‌ಗಳು"
+  },
+  "popupSize": {
+    "message": "ಪಾಪ್‌ಅಪ್ ಗಾತ್ರ"
+  },
+  "sizeSmall": {
+    "message": "ಚಿಕ್ಕದು"
+  },
+  "sizeDefault": {
+    "message": "ಡೀಫಾಲ್ಟ್"
+  },
+  "sizeBig": {
+    "message": "ದೊಡ್ಡದು"
+  },
+  "settingsBackup": {
+    "message": "ಸೆಟ್ಟಿಂಗ್‌ಗಳ ಬ್ಯಾಕಪ್"
+  },
+  "settingsBackupHint": {
+    "message": "ಮೆಚ್ಚಿನ ಲೀಗ್‌ಗಳು ಮತ್ತು ಪಾಪ್‌ಅಪ್ ಗಾತ್ರ ಒಳಗೊಂಡಿವೆ. ಆಮದು ಈ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಬದಲಿಸುತ್ತದೆ."
+  },
+  "exportSettings": {
+    "message": "ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ರಫ್ತು ಮಾಡಿ"
+  },
+  "importSettings": {
+    "message": "ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಆಮದು ಮಾಡಿ"
+  },
+  "privacyPolicy": {
+    "message": "ಗೌಪ್ಯತೆ ನೀತಿ"
+  },
+  "closeSettings": {
+    "message": "ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಮುಚ್ಚಿ"
+  },
+  "settingsImported": {
+    "message": "ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಆಮದು ಮಾಡಲಾಗಿದೆ."
+  },
+  "settingsImportError": {
+    "message": "ಇದು ಮಾನ್ಯವಾದ Hype ಸೆಟ್ಟಿಂಗ್‌ಗಳ ಫೈಲ್ ಅಲ್ಲ."
+  },
+  "settingsSaveError": {
+    "message": "ಈ ಸಾಧನದಲ್ಲಿ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಉಳಿಸಲಾಗಲಿಲ್ಲ."
+  },
+  "settingsExported": {
+    "message": "ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ರಫ್ತು ಮಾಡಲಾಗಿದೆ."
+  },
+  "settingsExportError": {
+    "message": "ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ರಫ್ತು ಮಾಡಲಾಗಲಿಲ್ಲ."
+  },
+  "substitutes": {
+    "message": "ಬದಲಿ ಆಟಗಾರರು"
+  },
+  "startingXI": {
+    "message": "ಆರಂಭಿಕ ಹನ್ನೊಂದು"
+  },
+  "fullTimeLabel": {
+    "message": "ಪಂದ್ಯ ಮುಗಿದಿದೆ"
+  },
+  "halfTimeLabel": {
+    "message": "ಮಧ್ಯಂತರ"
+  },
+  "liveMatchCountOne": {
+    "message": "$COUNT$ ಲೈವ್ ಪಂದ್ಯ",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "liveMatchesCount": {
+    "message": "$COUNT$ ಲೈವ್ ಪಂದ್ಯಗಳು",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchCountOne": {
+    "message": "$COUNT$ ಮುಂಬರುವ ಪಂದ್ಯ",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchesCount": {
+    "message": "$COUNT$ ಮುಂಬರುವ ಪಂದ್ಯಗಳು",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchCountOne": {
+    "message": "$COUNT$ ಮುಗಿದ ಪಂದ್ಯ",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchesCount": {
+    "message": "$COUNT$ ಮುಗಿದ ಪಂದ್ಯಗಳು",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCountOne": {
+    "message": "$COUNT$ ಪಂದ್ಯ",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
   }
 }

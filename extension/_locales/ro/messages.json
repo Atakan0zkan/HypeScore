@@ -8,9 +8,6 @@
   "appTitle": {
     "message": "Hype Scores"
   },
-  "subtitle": {
-    "message": "Scoruri live rapide, rezultate și clasamente."
-  },
   "loading": {
     "message": "Se încarcă meciurile…"
   },
@@ -219,9 +216,6 @@
   "noStandings": {
     "message": "Nu există clasament pentru această ligă."
   },
-  "fullSquads": {
-    "message": "Loturi complete"
-  },
   "noLinks": {
     "message": "Nu există linkuri."
   },
@@ -254,5 +248,121 @@
   },
   "links": {
     "message": "Linkuri"
+  },
+  "settings": {
+    "message": "Setări"
+  },
+  "popupSize": {
+    "message": "Dimensiunea ferestrei"
+  },
+  "sizeSmall": {
+    "message": "Mică"
+  },
+  "sizeDefault": {
+    "message": "Implicită"
+  },
+  "sizeBig": {
+    "message": "Mare"
+  },
+  "settingsBackup": {
+    "message": "Copie de siguranță"
+  },
+  "settingsBackupHint": {
+    "message": "Include ligile favorite și dimensiunea ferestrei. Importul înlocuiește aceste setări."
+  },
+  "exportSettings": {
+    "message": "Exportă setările"
+  },
+  "importSettings": {
+    "message": "Importă setările"
+  },
+  "privacyPolicy": {
+    "message": "Politica de confidențialitate"
+  },
+  "closeSettings": {
+    "message": "Închide setările"
+  },
+  "settingsImported": {
+    "message": "Setări importate."
+  },
+  "settingsImportError": {
+    "message": "Acesta nu este un fișier de setări Hype valid."
+  },
+  "settingsSaveError": {
+    "message": "Setările nu au putut fi salvate pe acest dispozitiv."
+  },
+  "settingsExported": {
+    "message": "Setări exportate."
+  },
+  "settingsExportError": {
+    "message": "Setările nu au putut fi exportate."
+  },
+  "substitutes": {
+    "message": "Rezerve"
+  },
+  "startingXI": {
+    "message": "Primul unsprezece"
+  },
+  "fullTimeLabel": {
+    "message": "Final de meci"
+  },
+  "halfTimeLabel": {
+    "message": "Pauză"
+  },
+  "liveMatchCountOne": {
+    "message": "$COUNT$ meci în direct",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "liveMatchesCount": {
+    "message": "$COUNT$ meciuri în direct",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchCountOne": {
+    "message": "$COUNT$ meci viitor",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchesCount": {
+    "message": "$COUNT$ meciuri viitoare",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchCountOne": {
+    "message": "$COUNT$ meci încheiat",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchesCount": {
+    "message": "$COUNT$ meciuri încheiate",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCountOne": {
+    "message": "$COUNT$ meci",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
   }
 }

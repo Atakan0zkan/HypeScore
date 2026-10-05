@@ -8,9 +8,6 @@
   "appTitle": {
     "message": "Hype Scores"
   },
-  "subtitle": {
-    "message": "വേഗത്തിലുള്ള ലൈവ് സ്കോറുകൾ, ഫലങ്ങൾ, പട്ടികകൾ."
-  },
   "loading": {
     "message": "മത്സരങ്ങൾ ലോഡ് ചെയ്യുന്നു…"
   },
@@ -219,9 +216,6 @@
   "noStandings": {
     "message": "ഈ ലീഗിന് പട്ടികയില്ല."
   },
-  "fullSquads": {
-    "message": "മുഴുവൻ ടീമുകൾ"
-  },
   "noLinks": {
     "message": "ലിങ്കുകളില്ല."
   },
@@ -254,5 +248,121 @@
   },
   "links": {
     "message": "ലിങ്കുകൾ"
+  },
+  "settings": {
+    "message": "ക്രമീകരണങ്ങൾ"
+  },
+  "popupSize": {
+    "message": "പോപ്പപ്പിന്റെ വലുപ്പം"
+  },
+  "sizeSmall": {
+    "message": "ചെറുത്"
+  },
+  "sizeDefault": {
+    "message": "സ്ഥിരം"
+  },
+  "sizeBig": {
+    "message": "വലുത്"
+  },
+  "settingsBackup": {
+    "message": "ക്രമീകരണങ്ങളുടെ ബാക്കപ്പ്"
+  },
+  "settingsBackupHint": {
+    "message": "പ്രിയ ലീഗുകളും പോപ്പപ്പ് വലുപ്പവും ഉൾപ്പെടുന്നു. ഇറക്കുമതി ഈ ക്രമീകരണങ്ങളെ മാറ്റിസ്ഥാപിക്കും."
+  },
+  "exportSettings": {
+    "message": "ക്രമീകരണങ്ങൾ കയറ്റുമതി ചെയ്യുക"
+  },
+  "importSettings": {
+    "message": "ക്രമീകരണങ്ങൾ ഇറക്കുമതി ചെയ്യുക"
+  },
+  "privacyPolicy": {
+    "message": "സ്വകാര്യതാ നയം"
+  },
+  "closeSettings": {
+    "message": "ക്രമീകരണങ്ങൾ അടയ്ക്കുക"
+  },
+  "settingsImported": {
+    "message": "ക്രമീകരണങ്ങൾ ഇറക്കുമതി ചെയ്തു."
+  },
+  "settingsImportError": {
+    "message": "ഇത് സാധുവായ Hype ക്രമീകരണ ഫയലല്ല."
+  },
+  "settingsSaveError": {
+    "message": "ഈ ഉപകരണത്തിൽ ക്രമീകരണങ്ങൾ സംരക്ഷിക്കാനായില്ല."
+  },
+  "settingsExported": {
+    "message": "ക്രമീകരണങ്ങൾ കയറ്റുമതി ചെയ്തു."
+  },
+  "settingsExportError": {
+    "message": "ക്രമീകരണങ്ങൾ കയറ്റുമതി ചെയ്യാനായില്ല."
+  },
+  "substitutes": {
+    "message": "പകരക്കാരായ കളിക്കാർ"
+  },
+  "startingXI": {
+    "message": "ആദ്യ പതിനൊന്ന്"
+  },
+  "fullTimeLabel": {
+    "message": "മത്സരം അവസാനിച്ചു"
+  },
+  "halfTimeLabel": {
+    "message": "ഇടവേള"
+  },
+  "liveMatchCountOne": {
+    "message": "$COUNT$ തത്സമയ മത്സരം",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "liveMatchesCount": {
+    "message": "$COUNT$ തത്സമയ മത്സരങ്ങൾ",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchCountOne": {
+    "message": "$COUNT$ വരാനിരിക്കുന്ന മത്സരം",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchesCount": {
+    "message": "$COUNT$ വരാനിരിക്കുന്ന മത്സരങ്ങൾ",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchCountOne": {
+    "message": "$COUNT$ അവസാനിച്ച മത്സരം",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchesCount": {
+    "message": "$COUNT$ അവസാനിച്ച മത്സരങ്ങൾ",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCountOne": {
+    "message": "$COUNT$ മത്സരം",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
   }
 }

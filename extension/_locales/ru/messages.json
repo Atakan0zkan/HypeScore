@@ -8,9 +8,6 @@
   "appTitle": {
     "message": "Hype Scores"
   },
-  "subtitle": {
-    "message": "Быстрые live-счета, результаты и таблицы."
-  },
   "loading": {
     "message": "Загрузка матчей…"
   },
@@ -219,9 +216,6 @@
   "noStandings": {
     "message": "Для этой лиги нет таблицы."
   },
-  "fullSquads": {
-    "message": "Полные составы"
-  },
   "noLinks": {
     "message": "Нет ссылок."
   },
@@ -254,5 +248,121 @@
   },
   "links": {
     "message": "Ссылки"
+  },
+  "settings": {
+    "message": "Настройки"
+  },
+  "popupSize": {
+    "message": "Размер окна"
+  },
+  "sizeSmall": {
+    "message": "Маленький"
+  },
+  "sizeDefault": {
+    "message": "По умолчанию"
+  },
+  "sizeBig": {
+    "message": "Большой"
+  },
+  "settingsBackup": {
+    "message": "Резервная копия настроек"
+  },
+  "settingsBackupHint": {
+    "message": "Содержит любимые лиги и размер окна. Импорт заменяет эти настройки."
+  },
+  "exportSettings": {
+    "message": "Экспорт настроек"
+  },
+  "importSettings": {
+    "message": "Импорт настроек"
+  },
+  "privacyPolicy": {
+    "message": "Политика конфиденциальности"
+  },
+  "closeSettings": {
+    "message": "Закрыть настройки"
+  },
+  "settingsImported": {
+    "message": "Настройки импортированы."
+  },
+  "settingsImportError": {
+    "message": "Это не корректный файл настроек Hype."
+  },
+  "settingsSaveError": {
+    "message": "Не удалось сохранить настройки на этом устройстве."
+  },
+  "settingsExported": {
+    "message": "Настройки экспортированы."
+  },
+  "settingsExportError": {
+    "message": "Не удалось экспортировать настройки."
+  },
+  "substitutes": {
+    "message": "Запасные"
+  },
+  "startingXI": {
+    "message": "Стартовый состав"
+  },
+  "fullTimeLabel": {
+    "message": "Матч окончен"
+  },
+  "halfTimeLabel": {
+    "message": "Перерыв"
+  },
+  "liveMatchCountOne": {
+    "message": "$COUNT$ матч в прямом эфире",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "liveMatchesCount": {
+    "message": "$COUNT$ матчей в прямом эфире",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchCountOne": {
+    "message": "$COUNT$ предстоящий матч",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchesCount": {
+    "message": "$COUNT$ предстоящих матчей",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchCountOne": {
+    "message": "$COUNT$ завершённый матч",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchesCount": {
+    "message": "$COUNT$ завершённых матчей",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCountOne": {
+    "message": "$COUNT$ матч",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
   }
 }

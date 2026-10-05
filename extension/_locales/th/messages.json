@@ -8,9 +8,6 @@
   "appTitle": {
     "message": "Hype Scores"
   },
-  "subtitle": {
-    "message": "ผลสด ผลแข่ง และตารางคะแนนอย่างรวดเร็ว"
-  },
   "loading": {
     "message": "กำลังโหลดแมตช์…"
   },
@@ -219,9 +216,6 @@
   "noStandings": {
     "message": "ไม่มีตารางคะแนนของลีกนี้"
   },
-  "fullSquads": {
-    "message": "รายชื่อผู้เล่นทั้งหมด"
-  },
   "noLinks": {
     "message": "ไม่มีลิงก์"
   },
@@ -254,5 +248,121 @@
   },
   "links": {
     "message": "ลิงก์"
+  },
+  "settings": {
+    "message": "การตั้งค่า"
+  },
+  "popupSize": {
+    "message": "ขนาดหน้าต่าง"
+  },
+  "sizeSmall": {
+    "message": "เล็ก"
+  },
+  "sizeDefault": {
+    "message": "ค่าเริ่มต้น"
+  },
+  "sizeBig": {
+    "message": "ใหญ่"
+  },
+  "settingsBackup": {
+    "message": "สำรองการตั้งค่า"
+  },
+  "settingsBackupHint": {
+    "message": "รวมลีกโปรดและขนาดหน้าต่าง การนำเข้าจะแทนที่การตั้งค่าเหล่านี้"
+  },
+  "exportSettings": {
+    "message": "ส่งออกการตั้งค่า"
+  },
+  "importSettings": {
+    "message": "นำเข้าการตั้งค่า"
+  },
+  "privacyPolicy": {
+    "message": "นโยบายความเป็นส่วนตัว"
+  },
+  "closeSettings": {
+    "message": "ปิดการตั้งค่า"
+  },
+  "settingsImported": {
+    "message": "นำเข้าการตั้งค่าแล้ว"
+  },
+  "settingsImportError": {
+    "message": "ไฟล์นี้ไม่ใช่ไฟล์การตั้งค่า Hype ที่ถูกต้อง"
+  },
+  "settingsSaveError": {
+    "message": "ไม่สามารถบันทึกการตั้งค่าบนอุปกรณ์นี้ได้"
+  },
+  "settingsExported": {
+    "message": "ส่งออกการตั้งค่าแล้ว"
+  },
+  "settingsExportError": {
+    "message": "ไม่สามารถส่งออกการตั้งค่าได้"
+  },
+  "substitutes": {
+    "message": "ผู้เล่นสำรอง"
+  },
+  "startingXI": {
+    "message": "ผู้เล่นตัวจริง"
+  },
+  "fullTimeLabel": {
+    "message": "จบการแข่งขัน"
+  },
+  "halfTimeLabel": {
+    "message": "พักครึ่ง"
+  },
+  "liveMatchCountOne": {
+    "message": "$COUNT$ นัดกำลังแข่งขัน",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "liveMatchesCount": {
+    "message": "$COUNT$ นัดกำลังแข่งขัน",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchCountOne": {
+    "message": "$COUNT$ นัดที่กำลังจะเริ่ม",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchesCount": {
+    "message": "$COUNT$ นัดที่กำลังจะเริ่ม",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchCountOne": {
+    "message": "$COUNT$ นัดที่จบแล้ว",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchesCount": {
+    "message": "$COUNT$ นัดที่จบแล้ว",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCountOne": {
+    "message": "$COUNT$ นัด",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
   }
 }

@@ -3,10 +3,11 @@ import { readFile } from "node:fs/promises";
 
 // Full popup runtime in a real DOM (popup.html + popup.js, no mocks
 // except fetch). Each call returns an isolated window.
-export async function loadPopupDOM({ fetchImpl = null } = {}) {
+export async function loadPopupDOM({ fetchImpl = null, storage = {} } = {}) {
   const html = await readFile(new URL("../extension/popup.html", import.meta.url), "utf8");
   const js = await readFile(new URL("../extension/popup.js", import.meta.url), "utf8");
   const window = new Window({ url: "chrome-extension://test/popup.html" });
+  for (const [key, value] of Object.entries(storage)) window.localStorage.setItem(key, value);
   if (fetchImpl) window.fetch = fetchImpl;
   window.document.write(html);
   // NOTE: happy-dom runs each eval() in a fresh lexical scope sharing one
@@ -21,6 +22,8 @@ export async function loadPopupDOM({ fetchImpl = null } = {}) {
     get refreshTimer(){ return refreshTimer; },
     get isEnabled(){ return isEnabled; },
     get isEnglishOverride(){ return isEnglishOverride; },
+    get isSettingsOpen(){ return isSettingsOpen; },
+    get popupSize(){ return popupSize; },
     get dailyLimitReached(){ return dailyLimitReached; },
     get autoPausedForSession(){ return autoPausedForSession; },
     get inactivePaused(){ return inactivePaused; },

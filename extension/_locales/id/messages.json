@@ -8,9 +8,6 @@
   "appTitle": {
     "message": "Hype Scores"
   },
-  "subtitle": {
-    "message": "Skor live cepat, hasil, dan klasemen."
-  },
   "loading": {
     "message": "Memuat pertandingan…"
   },
@@ -219,9 +216,6 @@
   "noStandings": {
     "message": "Klasemen tidak tersedia untuk liga ini."
   },
-  "fullSquads": {
-    "message": "Skuad lengkap"
-  },
   "noLinks": {
     "message": "Tidak ada tautan."
   },
@@ -254,5 +248,121 @@
   },
   "links": {
     "message": "Tautan"
+  },
+  "settings": {
+    "message": "Pengaturan"
+  },
+  "popupSize": {
+    "message": "Ukuran popup"
+  },
+  "sizeSmall": {
+    "message": "Kecil"
+  },
+  "sizeDefault": {
+    "message": "Default"
+  },
+  "sizeBig": {
+    "message": "Besar"
+  },
+  "settingsBackup": {
+    "message": "Cadangan pengaturan"
+  },
+  "settingsBackupHint": {
+    "message": "Berisi liga favorit dan ukuran popup. Impor mengganti pengaturan ini."
+  },
+  "exportSettings": {
+    "message": "Ekspor pengaturan"
+  },
+  "importSettings": {
+    "message": "Impor pengaturan"
+  },
+  "privacyPolicy": {
+    "message": "Kebijakan privasi"
+  },
+  "closeSettings": {
+    "message": "Tutup pengaturan"
+  },
+  "settingsImported": {
+    "message": "Pengaturan diimpor."
+  },
+  "settingsImportError": {
+    "message": "Ini bukan berkas pengaturan Hype yang valid."
+  },
+  "settingsSaveError": {
+    "message": "Pengaturan tidak dapat disimpan di perangkat ini."
+  },
+  "settingsExported": {
+    "message": "Pengaturan diekspor."
+  },
+  "settingsExportError": {
+    "message": "Pengaturan tidak dapat diekspor."
+  },
+  "substitutes": {
+    "message": "Pemain cadangan"
+  },
+  "startingXI": {
+    "message": "Sebelas awal"
+  },
+  "fullTimeLabel": {
+    "message": "Pertandingan selesai"
+  },
+  "halfTimeLabel": {
+    "message": "Jeda babak"
+  },
+  "liveMatchCountOne": {
+    "message": "$COUNT$ pertandingan langsung",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "liveMatchesCount": {
+    "message": "$COUNT$ pertandingan langsung",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchCountOne": {
+    "message": "$COUNT$ pertandingan mendatang",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchesCount": {
+    "message": "$COUNT$ pertandingan mendatang",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchCountOne": {
+    "message": "$COUNT$ pertandingan selesai",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchesCount": {
+    "message": "$COUNT$ pertandingan selesai",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCountOne": {
+    "message": "$COUNT$ pertandingan",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
   }
 }

@@ -8,9 +8,6 @@
   "appTitle": {
     "message": "Hype Scores"
   },
-  "subtitle": {
-    "message": "快速查看即時比分、賽果與積分榜。"
-  },
   "loading": {
     "message": "正在載入比賽…"
   },
@@ -219,9 +216,6 @@
   "noStandings": {
     "message": "此聯賽暫無積分榜。"
   },
-  "fullSquads": {
-    "message": "完整陣容"
-  },
   "noLinks": {
     "message": "暫無連結。"
   },
@@ -254,5 +248,121 @@
   },
   "links": {
     "message": "連結"
+  },
+  "settings": {
+    "message": "設定"
+  },
+  "popupSize": {
+    "message": "彈出視窗大小"
+  },
+  "sizeSmall": {
+    "message": "小"
+  },
+  "sizeDefault": {
+    "message": "預設"
+  },
+  "sizeBig": {
+    "message": "大"
+  },
+  "settingsBackup": {
+    "message": "設定備份"
+  },
+  "settingsBackupHint": {
+    "message": "包含收藏聯賽和視窗大小。匯入將取代這些設定。"
+  },
+  "exportSettings": {
+    "message": "匯出設定"
+  },
+  "importSettings": {
+    "message": "匯入設定"
+  },
+  "privacyPolicy": {
+    "message": "隱私權政策"
+  },
+  "closeSettings": {
+    "message": "關閉設定"
+  },
+  "settingsImported": {
+    "message": "設定已匯入。"
+  },
+  "settingsImportError": {
+    "message": "這不是有效的 Hype 設定檔。"
+  },
+  "settingsSaveError": {
+    "message": "無法在此裝置上儲存設定。"
+  },
+  "settingsExported": {
+    "message": "設定已匯出。"
+  },
+  "settingsExportError": {
+    "message": "無法匯出設定。"
+  },
+  "substitutes": {
+    "message": "替補球員"
+  },
+  "startingXI": {
+    "message": "先發陣容"
+  },
+  "fullTimeLabel": {
+    "message": "全場結束"
+  },
+  "halfTimeLabel": {
+    "message": "中場休息"
+  },
+  "liveMatchCountOne": {
+    "message": "$COUNT$ 場比賽進行中",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "liveMatchesCount": {
+    "message": "$COUNT$ 場比賽進行中",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchCountOne": {
+    "message": "$COUNT$ 場即將開始的比賽",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchesCount": {
+    "message": "$COUNT$ 場即將開始的比賽",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchCountOne": {
+    "message": "$COUNT$ 場已結束的比賽",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchesCount": {
+    "message": "$COUNT$ 場已結束的比賽",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCountOne": {
+    "message": "$COUNT$ 場比賽",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
   }
 }

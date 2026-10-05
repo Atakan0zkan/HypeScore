@@ -8,9 +8,6 @@
   "appTitle": {
     "message": "Hype Scores"
   },
-  "subtitle": {
-    "message": "వేగవంతమైన లైవ్ స్కోర్లు, ఫలితాలు మరియు పట్టికలు."
-  },
   "loading": {
     "message": "మ్యాచ్‌లు లోడ్ అవుతున్నాయి…"
   },
@@ -219,9 +216,6 @@
   "noStandings": {
     "message": "ఈ లీగ్‌కు పట్టిక లేదు."
   },
-  "fullSquads": {
-    "message": "పూర్తి జట్లు"
-  },
   "noLinks": {
     "message": "లింకులు లేవు."
   },
@@ -254,5 +248,121 @@
   },
   "links": {
     "message": "లింకులు"
+  },
+  "settings": {
+    "message": "సెట్టింగ్‌లు"
+  },
+  "popupSize": {
+    "message": "పాపప్ పరిమాణం"
+  },
+  "sizeSmall": {
+    "message": "చిన్నది"
+  },
+  "sizeDefault": {
+    "message": "డిఫాల్ట్"
+  },
+  "sizeBig": {
+    "message": "పెద్దది"
+  },
+  "settingsBackup": {
+    "message": "సెట్టింగ్‌ల బ్యాకప్"
+  },
+  "settingsBackupHint": {
+    "message": "ఇష్టమైన లీగ్‌లు మరియు పాపప్ పరిమాణం ఉంటాయి. దిగుమతి ఈ సెట్టింగ్‌లను భర్తీ చేస్తుంది."
+  },
+  "exportSettings": {
+    "message": "సెట్టింగ్‌లను ఎగుమతి చేయండి"
+  },
+  "importSettings": {
+    "message": "సెట్టింగ్‌లను దిగుమతి చేయండి"
+  },
+  "privacyPolicy": {
+    "message": "గోప్యతా విధానం"
+  },
+  "closeSettings": {
+    "message": "సెట్టింగ్‌లను మూసివేయండి"
+  },
+  "settingsImported": {
+    "message": "సెట్టింగ్‌లు దిగుమతి అయ్యాయి."
+  },
+  "settingsImportError": {
+    "message": "ఇది చెల్లుబాటు అయ్యే Hype సెట్టింగ్‌ల ఫైల్ కాదు."
+  },
+  "settingsSaveError": {
+    "message": "ఈ పరికరంలో సెట్టింగ్‌లను సేవ్ చేయలేకపోయాము."
+  },
+  "settingsExported": {
+    "message": "సెట్టింగ్‌లు ఎగుమతి అయ్యాయి."
+  },
+  "settingsExportError": {
+    "message": "సెట్టింగ్‌లను ఎగుమతి చేయలేకపోయాము."
+  },
+  "substitutes": {
+    "message": "ప్రత్యామ్నాయ ఆటగాళ్లు"
+  },
+  "startingXI": {
+    "message": "ప్రారంభ పదకొండు"
+  },
+  "fullTimeLabel": {
+    "message": "మ్యాచ్ ముగిసింది"
+  },
+  "halfTimeLabel": {
+    "message": "విరామం"
+  },
+  "liveMatchCountOne": {
+    "message": "$COUNT$ లైవ్ మ్యాచ్",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "liveMatchesCount": {
+    "message": "$COUNT$ లైవ్ మ్యాచ్‌లు",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchCountOne": {
+    "message": "$COUNT$ రాబోయే మ్యాచ్",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchesCount": {
+    "message": "$COUNT$ రాబోయే మ్యాచ్‌లు",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchCountOne": {
+    "message": "$COUNT$ ముగిసిన మ్యాచ్",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchesCount": {
+    "message": "$COUNT$ ముగిసిన మ్యాచ్‌లు",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCountOne": {
+    "message": "$COUNT$ మ్యాచ్",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
   }
 }

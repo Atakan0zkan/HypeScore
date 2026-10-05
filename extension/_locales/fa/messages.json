@@ -8,9 +8,6 @@
   "appTitle": {
     "message": "Hype Scores"
   },
-  "subtitle": {
-    "message": "امتیاز زنده سریع، نتایج و جداول."
-  },
   "loading": {
     "message": "در حال بارگذاری بازی‌ها…"
   },
@@ -219,9 +216,6 @@
   "noStandings": {
     "message": "جدولی برای این لیگ نیست."
   },
-  "fullSquads": {
-    "message": "فهرست کامل تیم‌ها"
-  },
   "noLinks": {
     "message": "پیوندی نیست."
   },
@@ -254,5 +248,121 @@
   },
   "links": {
     "message": "پیوندها"
+  },
+  "settings": {
+    "message": "تنظیمات"
+  },
+  "popupSize": {
+    "message": "اندازه پنجره"
+  },
+  "sizeSmall": {
+    "message": "کوچک"
+  },
+  "sizeDefault": {
+    "message": "پیش‌فرض"
+  },
+  "sizeBig": {
+    "message": "بزرگ"
+  },
+  "settingsBackup": {
+    "message": "پشتیبان تنظیمات"
+  },
+  "settingsBackupHint": {
+    "message": "شامل لیگ‌های موردعلاقه و اندازه پنجره است. واردکردن جایگزین این تنظیمات می‌شود."
+  },
+  "exportSettings": {
+    "message": "خروجی تنظیمات"
+  },
+  "importSettings": {
+    "message": "ورود تنظیمات"
+  },
+  "privacyPolicy": {
+    "message": "سیاست حریم خصوصی"
+  },
+  "closeSettings": {
+    "message": "بستن تنظیمات"
+  },
+  "settingsImported": {
+    "message": "تنظیمات وارد شد."
+  },
+  "settingsImportError": {
+    "message": "این فایل تنظیمات Hype معتبر نیست."
+  },
+  "settingsSaveError": {
+    "message": "تنظیمات در این دستگاه ذخیره نشد."
+  },
+  "settingsExported": {
+    "message": "تنظیمات صادر شد."
+  },
+  "settingsExportError": {
+    "message": "تنظیمات صادر نشد."
+  },
+  "substitutes": {
+    "message": "بازیکنان ذخیره"
+  },
+  "startingXI": {
+    "message": "ترکیب اصلی"
+  },
+  "fullTimeLabel": {
+    "message": "پایان بازی"
+  },
+  "halfTimeLabel": {
+    "message": "بین دو نیمه"
+  },
+  "liveMatchCountOne": {
+    "message": "$COUNT$ بازی زنده",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "liveMatchesCount": {
+    "message": "$COUNT$ بازی زنده",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchCountOne": {
+    "message": "$COUNT$ بازی پیش رو",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchesCount": {
+    "message": "$COUNT$ بازی پیش رو",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchCountOne": {
+    "message": "$COUNT$ بازی پایان‌یافته",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchesCount": {
+    "message": "$COUNT$ بازی پایان‌یافته",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCountOne": {
+    "message": "$COUNT$ بازی",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
   }
 }

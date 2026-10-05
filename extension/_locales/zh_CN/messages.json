@@ -8,9 +8,6 @@
   "appTitle": {
     "message": "Hype Scores"
   },
-  "subtitle": {
-    "message": "快速查看即时比分、赛果与积分榜。"
-  },
   "loading": {
     "message": "正在加载比赛…"
   },
@@ -219,9 +216,6 @@
   "noStandings": {
     "message": "该联赛暂无积分榜。"
   },
-  "fullSquads": {
-    "message": "完整阵容"
-  },
   "noLinks": {
     "message": "暂无链接。"
   },
@@ -254,5 +248,121 @@
   },
   "links": {
     "message": "链接"
+  },
+  "settings": {
+    "message": "设置"
+  },
+  "popupSize": {
+    "message": "弹窗大小"
+  },
+  "sizeSmall": {
+    "message": "小"
+  },
+  "sizeDefault": {
+    "message": "默认"
+  },
+  "sizeBig": {
+    "message": "大"
+  },
+  "settingsBackup": {
+    "message": "设置备份"
+  },
+  "settingsBackupHint": {
+    "message": "包含收藏联赛和弹窗大小。导入将替换这些设置。"
+  },
+  "exportSettings": {
+    "message": "导出设置"
+  },
+  "importSettings": {
+    "message": "导入设置"
+  },
+  "privacyPolicy": {
+    "message": "隐私政策"
+  },
+  "closeSettings": {
+    "message": "关闭设置"
+  },
+  "settingsImported": {
+    "message": "设置已导入。"
+  },
+  "settingsImportError": {
+    "message": "这不是有效的 Hype 设置文件。"
+  },
+  "settingsSaveError": {
+    "message": "无法在此设备上保存设置。"
+  },
+  "settingsExported": {
+    "message": "设置已导出。"
+  },
+  "settingsExportError": {
+    "message": "无法导出设置。"
+  },
+  "substitutes": {
+    "message": "替补球员"
+  },
+  "startingXI": {
+    "message": "首发阵容"
+  },
+  "fullTimeLabel": {
+    "message": "全场结束"
+  },
+  "halfTimeLabel": {
+    "message": "中场休息"
+  },
+  "liveMatchCountOne": {
+    "message": "$COUNT$ 场比赛进行中",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "liveMatchesCount": {
+    "message": "$COUNT$ 场比赛进行中",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchCountOne": {
+    "message": "$COUNT$ 场即将开始的比赛",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchesCount": {
+    "message": "$COUNT$ 场即将开始的比赛",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchCountOne": {
+    "message": "$COUNT$ 场已结束的比赛",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchesCount": {
+    "message": "$COUNT$ 场已结束的比赛",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCountOne": {
+    "message": "$COUNT$ 场比赛",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
   }
 }

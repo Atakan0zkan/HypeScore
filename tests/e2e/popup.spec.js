@@ -59,7 +59,10 @@ const DETAIL = {
     players: ["G", "LB", "CD-L", "CD-R", "RB", "LM", "RM", "AM-L", "AM", "AM-R", "F"].map((position, i) => ({
       id: `${index}-${i}`, name: ["Antonín Kinsky", "Destiny Udogie", "Micky van de Ven", "Kevin Danso", "Pedro Porro", "Conor Gallagher", "João Palhinha", "Mathys Tel", "Rodrigo Bentancur", "Randal Kolo Muani", "Dominic Calvert-Lewin"][i], jersey: String(i + 1), position, starter: true,
       goals: i === 1 ? 5 : i === 10 ? 2 : 0, yellowCards: i === 1 ? 2 : 0, redCards: i === 1 ? 1 : 0,
-    })),
+    })).concat([
+      { id: `${index}-sub-1`, name: `${team} Substitute One`, jersey: "12", position: "M", starter: false },
+      { id: `${index}-sub-2`, name: `${team} Substitute Two`, jersey: "13", position: "F", starter: false },
+    ]),
   })), news: [{ title: "Match report", url: "https://www.espn.com/soccer/report/_/gameId/740954" }],
   videos: [{ title: "Watch the match highlights", url: "https://www.espn.com/video/clip/_/id/12345" }], links: [],
 };
@@ -135,6 +138,35 @@ test("renders league cards from the API", async () => {
   expect(apiCalls.filter((p) => p === "/live-matches").length).toBeGreaterThanOrEqual(1);
 });
 
+test("league previews share the league font and fit all three popup sizes", async ({}, testInfo) => {
+  const premier = page.locator(".league-pick-card", { hasText: "Premier League" });
+  await expect(premier.locator(".league-preview-team")).toHaveText(["Arsenal", "Chelsea"]);
+  await expect(premier.locator(".league-preview-score")).toHaveText("2 – 1");
+  await expect(premier.locator(".league-preview-status")).toHaveText("67' · Live");
+  await expect(page.locator(".league-pick-card", { hasText: "Serie A" }).locator(".league-preview-status")).toHaveText("Full Time");
+  await expect(page.locator(".league-pick-card", { hasText: "LaLiga" }).locator(".league-pick-preview")).toHaveCount(0);
+  const type = await premier.evaluate(card => {
+    const league = getComputedStyle(card.querySelector(".league-pick-name"));
+    const match = getComputedStyle(card.querySelector(".league-pick-preview"));
+    return { leagueFont: league.fontFamily, matchFont: match.fontFamily, leagueSize: parseFloat(league.fontSize), matchSize: parseFloat(match.fontSize), leagueColor: league.color, matchColor: match.color };
+  });
+  expect(type.matchFont).toBe(type.leagueFont);
+  expect(type.matchSize).toBe(12);
+  expect(type.matchSize).toBeLessThan(type.leagueSize);
+  expect(type.matchColor).not.toBe(type.leagueColor);
+  const before = apiCalls.length;
+  for (const [size, width, height] of [["small", 480, 540], ["big", 720, 600], ["default", 580, 600]]) {
+    await page.locator("#settingsToggle").click();
+    await page.locator(`input[name="popupSize"][value="${size}"]`).check();
+    await page.setViewportSize({ width, height });
+    await page.locator("#settingsClose").click();
+    expect(await page.locator("#leaguePickList").evaluate(el => el.scrollWidth > el.clientWidth)).toBe(false);
+    expect(await page.locator(".league-preview-match").evaluateAll(rows => rows.every(row => row.scrollWidth <= row.clientWidth))).toBe(true);
+    await page.screenshot({ path: testInfo.outputPath(`league-previews-${size}.png`) });
+  }
+  expect(apiCalls.length).toBe(before);
+});
+
 test("opens league detail with sections and standings", async () => {
   await page.locator(".league-pick-card", { hasText: "Premier League" }).click();
   await expect(page.locator(".match-section")).toHaveCount(3);
@@ -162,6 +194,10 @@ test("readable stats, event timeline and two starting XIs fit the popup", async 
   const pitch = page.locator(".lineup-pitch");
   await expect(pitch).toBeVisible();
   await expect(pitch.locator(".pitch-player")).toHaveCount(22);
+  await expect(page.locator(".lineup-substitutes .lineup-player")).toHaveCount(4);
+  await expect(page.locator(".lineup-player--starter")).toHaveCount(0);
+  await expect(page.locator("summary", { hasText: "Full squads" })).toHaveCount(0);
+  expect(await page.locator(".lineup-substitutes").evaluate(el => el.closest("details"))).toBeNull();
   await expect(pitch.locator(".pitch-goal")).toHaveCount(14);
   await expect(pitch.locator(".pitch-card--yellow")).toHaveCount(4);
   await expect(pitch.locator(".pitch-card--red")).toHaveCount(2);
@@ -250,6 +286,83 @@ test("favorites pin leagues to the top", async () => {
   await expect(cards.first()).toContainText("LaLiga");
 });
 
+test("settings sizes persist and local backup safely round-trips only favorites and size", async ({}, testInfo) => {
+  await expect(page.locator("#subtitle")).toHaveCount(0);
+  expect(await page.locator(".hero-actions > button").evaluateAll(els => els.map(el => el.id))).toEqual(["englishToggle", "settingsToggle", "powerToggle"]);
+  await page.locator("#settingsToggle").click();
+  const before = apiCalls.length;
+  for (const [size, width, height] of [["small", 480, 540], ["default", 580, 600], ["big", 720, 600]]) {
+    await page.setViewportSize({ width, height });
+    await page.locator(`input[name="popupSize"][value="${size}"]`).check();
+    await expect(page.locator("html")).toHaveAttribute("data-popup-size", size);
+    expect(await page.evaluate(() => ({ width: document.body.getBoundingClientRect().width, height: document.body.getBoundingClientRect().height }))).toEqual({ width, height });
+    expect(await page.locator("#settingsPanel").evaluate(el => el.scrollWidth > el.clientWidth)).toBe(false);
+    await page.screenshot({ path: testInfo.outputPath(`settings-${size}.png`) });
+  }
+  const [download] = await Promise.all([page.waitForEvent("download"), page.locator("#exportSettings").click()]);
+  expect(download.suggestedFilename()).toBe("hype-settings.json");
+  const exported = JSON.parse(fs.readFileSync(await download.path(), "utf8"));
+  expect(exported).toEqual({ format: "hype-score-preferences", version: 1, favoriteLeagues: ["esp.1"], popupSize: "big" });
+  expect(apiCalls.length).toBe(before);
+  const privacy = page.locator("#privacyLink");
+  await expect(privacy).toHaveAttribute("href", "https://gist.github.com/Atakan0zkan/7767ff31859fa9703b9e851ea5eb9a6d");
+  await expect(privacy).toHaveAttribute("rel", "noopener noreferrer");
+  await page.reload();
+  await expect(page.locator("html")).toHaveAttribute("data-popup-size", "big");
+  await page.locator(".league-pick-card").first().waitFor();
+  await page.locator(".league-pick-card", { hasText: "LaLiga" }).locator(".favorite-btn").click();
+  await page.locator("#settingsToggle").click();
+  await page.locator('input[name="popupSize"][value="default"]').check();
+  const importBefore = apiCalls.length;
+  await page.locator("#settingsFile").setInputFiles({ name: "hype-settings.json", mimeType: "application/json", buffer: Buffer.from(JSON.stringify(exported)) });
+  await expect(page.locator("#settingsStatus")).toHaveText("Settings imported.");
+  await expect(page.locator("html")).toHaveAttribute("data-popup-size", "big");
+  expect(await page.evaluate(() => JSON.parse(localStorage.getItem("hype_favorite_leagues")))).toEqual(["esp.1"]);
+  expect(apiCalls.length).toBe(importBefore);
+  await page.locator("#settingsFile").setInputFiles({ name: "invalid.json", mimeType: "application/json", buffer: Buffer.from('{"__proto__":{"polluted":true}}') });
+  await expect(page.locator("#settingsStatus")).toHaveClass(/settings-status--error/);
+  await expect(page.locator("html")).toHaveAttribute("data-popup-size", "big");
+  expect(await page.evaluate(() => JSON.parse(localStorage.getItem("hype_favorite_leagues")))).toEqual(["esp.1"]);
+  await page.locator("#settingsFile").setInputFiles({ name: "oversized.json", mimeType: "application/json", buffer: Buffer.alloc(65537, " ") });
+  await expect(page.locator("#settingsStatus")).toHaveText("This is not a valid Hype settings file.");
+  await page.locator('input[name="popupSize"][value="default"]').check();
+  await page.setViewportSize({ width: 580, height: 600 });
+  await page.locator("#settingsClose").click();
+  await expect(page.locator(".league-pick-card").first()).toContainText("LaLiga");
+});
+
+test("settings preserve match navigation and work while power is off", async () => {
+  await page.locator(".league-pick-card", { hasText: "Premier League" }).click();
+  await page.locator(".match-card").first().click();
+  const stats = page.locator('details[data-section-key="stats"]');
+  await stats.locator("summary").click();
+  await stats.scrollIntoViewIfNeeded();
+  const scroll = page.locator("#leagueDetailContent");
+  const position = await scroll.evaluate(el => el.scrollTop);
+  await page.locator("#settingsToggle").click();
+  await expect(page.locator("#settingsPanel")).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(page.locator(".match-detail-hero")).toBeVisible();
+  await expect(stats).toHaveAttribute("open", "");
+  expect(await scroll.evaluate(el => el.scrollTop)).toBeCloseTo(position, 0);
+  await page.locator("#backBtn").click();
+  await page.locator("#backBtn").click();
+  await page.locator("#powerToggle").click();
+  const requests = apiCalls.length;
+  await page.locator("#settingsToggle").click();
+  await expect(page.locator("#settingsPanel")).toBeVisible();
+  await page.locator('input[name="popupSize"][value="small"]').check();
+  expect(apiCalls.length).toBe(requests);
+  await page.reload();
+  await expect(page.locator("html")).toHaveAttribute("data-popup-size", "small");
+  await expect(page.locator(".app-shell--disabled")).toBeAttached();
+  await page.locator("#settingsToggle").click();
+  await page.locator('input[name="popupSize"][value="default"]').check();
+  await page.locator("#settingsClose").click();
+  await page.locator("#powerToggle").click();
+  await page.locator(".league-pick-card").first().waitFor();
+});
+
 test("World Cup opens 2030 data, excludes legacy results, and supports an empty future season", async ({}, testInfo) => {
   const future = { id: "203001", leagueCode: "fifa.world", seasonYear: 2030, homeTeam: "Spain", awayTeam: "England", state: "scheduled", kickoff: "2030-06-15T18:00:00Z" };
   const old = { ...future, id: "760517", seasonYear: 2026, homeTeam: "Old Spain", awayTeam: "Old Argentina", state: "finished", kickoff: "2026-07-19T18:00:00Z" };
@@ -288,6 +401,84 @@ test("World Cup opens 2030 data, excludes legacy results, and supports an empty 
         await page.locator(".league-pick-card").first().waitFor();
       }
     });
+  }
+});
+
+test("league previews refresh Live, Half Time and Full Time with long and RTL team names", async () => {
+  let fixture;
+  let previewRequests = 0;
+  const before = apiCalls.length;
+  const handler = async route => {
+    previewRequests += 1;
+    await route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ matches: [fixture], leagues: [{ code: "eng.1", name: "Premier League", matches: [fixture] }] }) });
+  };
+  await page.route("**://api.atakanozkan.com/live-matches**", handler);
+  try {
+    for (const [index, state, status, label] of [[0, "live", "Live", "67' · Live"], [1, "live", "Half Time", "Half Time"], [2, "finished", "Full Time", "Full Time"]]) {
+      fixture = { ...LEAGUES[0].matches[0], state, status, homeScore: index, awayScore: 0, homeTeam: "A football club with an exceptionally long home team name", awayTeam: "فريق كرة القدم ذو الاسم الطويل للغاية" };
+      await page.evaluate(() => localStorage.removeItem("hype_live_matches_cache"));
+      await page.reload();
+      await expect(page.locator(".league-preview-status")).toHaveText(label);
+      await expect(page.locator(".league-preview-score")).toHaveText(`${index} – 0`);
+      await expect(page.locator(".league-pick-preview")).toHaveCount(1);
+      await expect(page.locator(".league-pick-card")).toHaveAttribute("aria-label", `Premier League · ${fixture.homeTeam} ${index} – 0 ${fixture.awayTeam} · ${label}`);
+      for (const dir of ["ltr", "rtl"]) {
+        await page.evaluate(dir => { document.documentElement.dir = dir; }, dir);
+        expect(await page.locator(".league-preview-match").evaluate(el => el.scrollWidth > el.clientWidth)).toBe(false);
+        expect(await page.locator(".league-preview-team").evaluateAll(teams => teams.every(el => getComputedStyle(el).textOverflow === "ellipsis" && el.getBoundingClientRect().width > 0))).toBe(true);
+        await expect(page.locator(".league-preview-score")).toHaveAttribute("dir", "ltr");
+      }
+    }
+    expect(previewRequests).toBe(3);
+    expect(apiCalls.length).toBe(before);
+  } finally {
+    await page.unroute("**://api.atakanozkan.com/live-matches**", handler);
+    await page.evaluate(() => localStorage.clear());
+    await page.reload();
+    await page.locator(".league-pick-card").first().waitFor();
+  }
+});
+
+test("previews prefer popular club matches and upcoming metadata has no repeated total", async ({}, testInfo) => {
+  let selectedMatches;
+  const popular = { ...LEAGUES[0].matches[0], id: "880001", homeTeamId: "360", homeTeam: "Manchester United", awayTeamId: "364", awayTeam: "Liverpool", kickoff: new Date(Date.now() - 3 * 3600000).toISOString() };
+  const minor = { ...LEAGUES[0].matches[0], id: "880002", homeTeamId: "370", homeTeam: "Fulham", awayTeamId: "384", awayTeam: "Crystal Palace", kickoff: new Date(Date.now() - 3600000).toISOString() };
+  const upcoming = Array.from({ length: 4 }, (_, i) => ({ ...LEAGUES[0].matches[1], id: `88100${i}`, leagueCode: "arg.1", homeTeam: `Home Club ${i}`, awayTeam: `Away Club ${i}`, kickoff: new Date(Date.now() + 2 * 3600000).toISOString() }));
+  const handler = async route => {
+    const leagues = [{ code: "eng.1", name: "Premier League", matches: selectedMatches }, { code: "arg.1", name: "Argentine Liga Profesional", matches: upcoming }];
+    await route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ matches: [...selectedMatches, ...upcoming], leagues }) });
+  };
+  await page.route("**://api.atakanozkan.com/live-matches**", handler);
+  try {
+    for (const [matches, expectedTeams] of [
+      [[minor, popular], ["Manchester United", "Liverpool"]],
+      [[{ ...popular, state: "finished", status: "Full Time" }, { ...minor, state: "finished", status: "Full Time" }], ["Manchester United", "Liverpool"]],
+      [[{ ...popular, state: "finished", status: "Full Time" }, minor], ["Fulham", "Crystal Palace"]],
+    ]) {
+      selectedMatches = matches;
+      await page.evaluate(() => localStorage.removeItem("hype_live_matches_cache"));
+      await page.reload();
+      const premier = page.locator(".league-pick-card", { hasText: "Premier League" });
+      await expect(premier.locator(".league-preview-team")).toHaveText(expectedTeams);
+      const argentina = page.locator(".league-pick-card", { hasText: "Argentine Liga Profesional" });
+      await expect(argentina.locator(".league-pick-meta")).toHaveText("4 upcoming matches");
+      await expect(argentina).not.toContainText("4 matches");
+      expect(await argentina.evaluate(el => el.scrollWidth > el.clientWidth)).toBe(false);
+    }
+    await page.locator("#settingsToggle").click();
+    await page.locator('input[name="popupSize"][value="small"]').check();
+    await page.setViewportSize({ width: 480, height: 540 });
+    await page.locator("#settingsClose").click();
+    expect(await page.locator("#leaguePickList").evaluate(el => el.scrollWidth > el.clientWidth)).toBe(false);
+    await page.screenshot({ path: testInfo.outputPath("popular-match-and-upcoming-copy.png") });
+    await page.locator(".league-pick-card", { hasText: "Argentine Liga Profesional" }).click();
+    await expect(page.locator(".league-detail-meta")).toHaveText("4 upcoming matches");
+  } finally {
+    await page.unroute("**://api.atakanozkan.com/live-matches**", handler);
+    await page.evaluate(() => localStorage.clear());
+    await page.setViewportSize({ width: 580, height: 600 });
+    await page.reload();
+    await page.locator(".league-pick-card").first().waitFor();
   }
 });
 

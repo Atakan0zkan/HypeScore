@@ -8,9 +8,6 @@
   "appTitle": {
     "message": "Hype Scores"
   },
-  "subtitle": {
-    "message": "Alama za live haraka, matokeo na meza."
-  },
   "loading": {
     "message": "Inapakia mechi…"
   },
@@ -219,9 +216,6 @@
   "noStandings": {
     "message": "Hakuna meza ya ligi hii."
   },
-  "fullSquads": {
-    "message": "Vikosi kamili"
-  },
   "noLinks": {
     "message": "Hakuna viungo."
   },
@@ -254,5 +248,121 @@
   },
   "links": {
     "message": "Viungo"
+  },
+  "settings": {
+    "message": "Mipangilio"
+  },
+  "popupSize": {
+    "message": "Ukubwa wa dirisha"
+  },
+  "sizeSmall": {
+    "message": "Ndogo"
+  },
+  "sizeDefault": {
+    "message": "Chaguomsingi"
+  },
+  "sizeBig": {
+    "message": "Kubwa"
+  },
+  "settingsBackup": {
+    "message": "Nakala ya mipangilio"
+  },
+  "settingsBackupHint": {
+    "message": "Inajumuisha ligi pendwa na ukubwa wa dirisha. Uagizaji hubadilisha mipangilio hii."
+  },
+  "exportSettings": {
+    "message": "Hamisha mipangilio"
+  },
+  "importSettings": {
+    "message": "Ingiza mipangilio"
+  },
+  "privacyPolicy": {
+    "message": "Sera ya faragha"
+  },
+  "closeSettings": {
+    "message": "Funga mipangilio"
+  },
+  "settingsImported": {
+    "message": "Mipangilio imeingizwa."
+  },
+  "settingsImportError": {
+    "message": "Hii si faili halali ya mipangilio ya Hype."
+  },
+  "settingsSaveError": {
+    "message": "Mipangilio haikuweza kuhifadhiwa kwenye kifaa hiki."
+  },
+  "settingsExported": {
+    "message": "Mipangilio imehamishwa."
+  },
+  "settingsExportError": {
+    "message": "Mipangilio haikuweza kuhamishwa."
+  },
+  "substitutes": {
+    "message": "Wachezaji wa akiba"
+  },
+  "startingXI": {
+    "message": "Kikosi cha kuanza"
+  },
+  "fullTimeLabel": {
+    "message": "Mwisho wa mechi"
+  },
+  "halfTimeLabel": {
+    "message": "Mapumziko"
+  },
+  "liveMatchCountOne": {
+    "message": "$COUNT$ mechi ya moja kwa moja",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "liveMatchesCount": {
+    "message": "$COUNT$ mechi za moja kwa moja",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchCountOne": {
+    "message": "$COUNT$ mechi ijayo",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchesCount": {
+    "message": "$COUNT$ mechi zijazo",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchCountOne": {
+    "message": "$COUNT$ mechi iliyomalizika",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchesCount": {
+    "message": "$COUNT$ mechi zilizomalizika",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCountOne": {
+    "message": "$COUNT$ mechi",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
   }
 }

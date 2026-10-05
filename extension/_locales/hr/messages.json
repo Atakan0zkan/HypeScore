@@ -8,9 +8,6 @@
   "appTitle": {
     "message": "Hype Scores"
   },
-  "subtitle": {
-    "message": "Brzi live rezultati, ishodi i ljestvice."
-  },
   "loading": {
     "message": "Učitavanje utakmica…"
   },
@@ -219,9 +216,6 @@
   "noStandings": {
     "message": "Nema ljestvice za ovu ligu."
   },
-  "fullSquads": {
-    "message": "Cijeli sastavi"
-  },
   "noLinks": {
     "message": "Nema poveznica."
   },
@@ -254,5 +248,121 @@
   },
   "links": {
     "message": "Poveznice"
+  },
+  "settings": {
+    "message": "Postavke"
+  },
+  "popupSize": {
+    "message": "Veličina prozora"
+  },
+  "sizeSmall": {
+    "message": "Mala"
+  },
+  "sizeDefault": {
+    "message": "Zadana"
+  },
+  "sizeBig": {
+    "message": "Velika"
+  },
+  "settingsBackup": {
+    "message": "Sigurnosna kopija postavki"
+  },
+  "settingsBackupHint": {
+    "message": "Sadrži omiljene lige i veličinu prozora. Uvoz zamjenjuje ove postavke."
+  },
+  "exportSettings": {
+    "message": "Izvezi postavke"
+  },
+  "importSettings": {
+    "message": "Uvezi postavke"
+  },
+  "privacyPolicy": {
+    "message": "Pravila privatnosti"
+  },
+  "closeSettings": {
+    "message": "Zatvori postavke"
+  },
+  "settingsImported": {
+    "message": "Postavke su uvezene."
+  },
+  "settingsImportError": {
+    "message": "Ovo nije valjana datoteka postavki za Hype."
+  },
+  "settingsSaveError": {
+    "message": "Postavke se nisu mogle spremiti na ovaj uređaj."
+  },
+  "settingsExported": {
+    "message": "Postavke su izvezene."
+  },
+  "settingsExportError": {
+    "message": "Postavke se nisu mogle izvesti."
+  },
+  "substitutes": {
+    "message": "Zamjene"
+  },
+  "startingXI": {
+    "message": "Početna jedanaestorica"
+  },
+  "fullTimeLabel": {
+    "message": "Kraj utakmice"
+  },
+  "halfTimeLabel": {
+    "message": "Poluvrijeme"
+  },
+  "liveMatchCountOne": {
+    "message": "$COUNT$ utakmica uživo",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "liveMatchesCount": {
+    "message": "$COUNT$ utakmica uživo",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchCountOne": {
+    "message": "$COUNT$ nadolazeća utakmica",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchesCount": {
+    "message": "$COUNT$ nadolazećih utakmica",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchCountOne": {
+    "message": "$COUNT$ završena utakmica",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchesCount": {
+    "message": "$COUNT$ završenih utakmica",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCountOne": {
+    "message": "$COUNT$ utakmica",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
   }
 }

@@ -14,9 +14,6 @@
             <img class="brand-logo" src="icons/icon48.png" alt="" aria-hidden="true">
             <div class="brand-text">
               <h1 id="appTitle">Hype Scores</h1>
-              <p id="subtitle" class="subtitle">
-                Fast live scores, results and league tables.
-              </p>
             </div>
           </div>
         </div>
@@ -31,6 +28,12 @@
           >
             ENG
           </button>
+          <button id="settingsToggle" class="settings-toggle" type="button" title="Settings" aria-label="Settings" aria-controls="settingsPanel" aria-expanded="false">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m9.5 3-.7 2.4-2.1 1.2-2.4-.6L2 10l1.7 1.8v2.4L2 16l2.3 4 2.4-.6 2.1 1.2.7 2.4h5l.7-2.4 2.1-1.2 2.4.6L22 16l-1.7-1.8v-2.4L22 10l-2.3-4-2.4.6-2.1-1.2L14.5 3z" transform="translate(0 -1) scale(1 .92)"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+          </button>
           <button id="powerToggle" class="power-toggle" type="button" title="Toggle extension" aria-label="Toggle extension on/off">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
               <path d="M12 2v8"/>
@@ -40,7 +43,36 @@
         </div>
       </header>
 
-
+      <section id="settingsPanel" class="settings-panel" aria-labelledby="settingsTitle" hidden>
+        <div class="settings-header">
+          <h2 id="settingsTitle">Settings</h2>
+          <button id="settingsClose" class="settings-close" type="button" title="Close settings" aria-label="Close settings">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+          </button>
+        </div>
+        <fieldset class="settings-group">
+          <legend id="popupSizeLabel">Popup size</legend>
+          <div class="size-options">
+            <label class="size-option"><input type="radio" name="popupSize" value="small"><span id="sizeSmallLabel">Small</span></label>
+            <label class="size-option"><input type="radio" name="popupSize" value="default" checked><span id="sizeDefaultLabel">Default</span></label>
+            <label class="size-option"><input type="radio" name="popupSize" value="big"><span id="sizeBigLabel">Big</span></label>
+          </div>
+        </fieldset>
+        <section class="settings-group" aria-labelledby="settingsBackupTitle">
+          <h3 id="settingsBackupTitle">Settings backup</h3>
+          <p id="settingsBackupHint" class="settings-hint">Includes favorite leagues and popup size. Import replaces these settings.</p>
+          <div class="settings-backup-actions">
+            <button id="exportSettings" class="settings-action" type="button">Export settings</button>
+            <button id="importSettings" class="settings-action" type="button">Import settings</button>
+          </div>
+          <input id="settingsFile" type="file" accept=".json,application/json" aria-label="Import settings" hidden>
+        </section>
+        <div class="settings-links">
+          <a class="settings-link" href="https://github.com/Atakan0zkan/HypeScore" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+          <a id="privacyLink" class="settings-link" href="https://gist.github.com/Atakan0zkan/7767ff31859fa9703b9e851ea5eb9a6d" target="_blank" rel="noopener noreferrer">Privacy policy <span aria-hidden="true">↗</span></a>
+        </div>
+        <p id="settingsStatus" class="settings-status" role="status" aria-live="polite" hidden></p>
+      </section>
 
       <section id="loadingState" class="state-card">
         Loading matches…

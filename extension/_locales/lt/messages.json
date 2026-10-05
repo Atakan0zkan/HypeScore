@@ -8,9 +8,6 @@
   "appTitle": {
     "message": "Hype Scores"
   },
-  "subtitle": {
-    "message": "Greiti live rezultatai, baigtys ir lentelės."
-  },
   "loading": {
     "message": "Įkeliami mačai…"
   },
@@ -219,9 +216,6 @@
   "noStandings": {
     "message": "Šiai lygai lentelės nėra."
   },
-  "fullSquads": {
-    "message": "Visos sudėtys"
-  },
   "noLinks": {
     "message": "Nėra nuorodų."
   },
@@ -254,5 +248,121 @@
   },
   "links": {
     "message": "Nuorodos"
+  },
+  "settings": {
+    "message": "Nustatymai"
+  },
+  "popupSize": {
+    "message": "Lango dydis"
+  },
+  "sizeSmall": {
+    "message": "Mažas"
+  },
+  "sizeDefault": {
+    "message": "Numatytasis"
+  },
+  "sizeBig": {
+    "message": "Didelis"
+  },
+  "settingsBackup": {
+    "message": "Nustatymų kopija"
+  },
+  "settingsBackupHint": {
+    "message": "Apima mėgstamas lygas ir lango dydį. Importavimas pakeičia šiuos nustatymus."
+  },
+  "exportSettings": {
+    "message": "Eksportuoti nustatymus"
+  },
+  "importSettings": {
+    "message": "Importuoti nustatymus"
+  },
+  "privacyPolicy": {
+    "message": "Privatumo politika"
+  },
+  "closeSettings": {
+    "message": "Uždaryti nustatymus"
+  },
+  "settingsImported": {
+    "message": "Nustatymai importuoti."
+  },
+  "settingsImportError": {
+    "message": "Tai nėra galiojantis Hype nustatymų failas."
+  },
+  "settingsSaveError": {
+    "message": "Nepavyko išsaugoti nustatymų šiame įrenginyje."
+  },
+  "settingsExported": {
+    "message": "Nustatymai eksportuoti."
+  },
+  "settingsExportError": {
+    "message": "Nepavyko eksportuoti nustatymų."
+  },
+  "substitutes": {
+    "message": "Atsarginiai"
+  },
+  "startingXI": {
+    "message": "Pradinė sudėtis"
+  },
+  "fullTimeLabel": {
+    "message": "Rungtynių pabaiga"
+  },
+  "halfTimeLabel": {
+    "message": "Pertrauka"
+  },
+  "liveMatchCountOne": {
+    "message": "$COUNT$ tiesioginės rungtynės",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "liveMatchesCount": {
+    "message": "$COUNT$ tiesioginių rungtynių",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchCountOne": {
+    "message": "$COUNT$ artėjančios rungtynės",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchesCount": {
+    "message": "$COUNT$ artėjančių rungtynių",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchCountOne": {
+    "message": "$COUNT$ baigtos rungtynės",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchesCount": {
+    "message": "$COUNT$ baigtų rungtynių",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCountOne": {
+    "message": "$COUNT$ rungtynės",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
   }
 }

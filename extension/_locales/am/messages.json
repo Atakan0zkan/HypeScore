@@ -8,9 +8,6 @@
   "appTitle": {
     "message": "Hype Scores"
   },
-  "subtitle": {
-    "message": "ፈጣን ቀጥታ ውጤቶች፣ ውጤቶች እና ሰንጠረዦች።"
-  },
   "loading": {
     "message": "ጨዋታዎች በመጫን ላይ…"
   },
@@ -219,9 +216,6 @@
   "noStandings": {
     "message": "ለዚህ ሊግ ሰንጠረዥ የለም።"
   },
-  "fullSquads": {
-    "message": "ሙሉ ቡድኖች"
-  },
   "noLinks": {
     "message": "አገናኞች የሉም።"
   },
@@ -254,5 +248,121 @@
   },
   "links": {
     "message": "አገናኞች"
+  },
+  "settings": {
+    "message": "ቅንብሮች"
+  },
+  "popupSize": {
+    "message": "የመስኮት መጠን"
+  },
+  "sizeSmall": {
+    "message": "ትንሽ"
+  },
+  "sizeDefault": {
+    "message": "ነባሪ"
+  },
+  "sizeBig": {
+    "message": "ትልቅ"
+  },
+  "settingsBackup": {
+    "message": "የቅንብሮች ምትኬ"
+  },
+  "settingsBackupHint": {
+    "message": "ተወዳጅ ሊጎችን እና የመስኮት መጠንን ያካትታል። ማስመጣት እነዚህን ቅንብሮች ይተካል።"
+  },
+  "exportSettings": {
+    "message": "ቅንብሮችን ላክ"
+  },
+  "importSettings": {
+    "message": "ቅንብሮችን አስመጣ"
+  },
+  "privacyPolicy": {
+    "message": "የግላዊነት ፖሊሲ"
+  },
+  "closeSettings": {
+    "message": "ቅንብሮችን ዝጋ"
+  },
+  "settingsImported": {
+    "message": "ቅንብሮች ገብተዋል።"
+  },
+  "settingsImportError": {
+    "message": "ይህ ትክክለኛ የHype ቅንብር ፋይል አይደለም።"
+  },
+  "settingsSaveError": {
+    "message": "ቅንብሮችን በዚህ መሣሪያ ላይ ማስቀመጥ አልተቻለም።"
+  },
+  "settingsExported": {
+    "message": "ቅንብሮች ተልከዋል።"
+  },
+  "settingsExportError": {
+    "message": "ቅንብሮችን መላክ አልተቻለም።"
+  },
+  "substitutes": {
+    "message": "ተቀያሪ ተጫዋቾች"
+  },
+  "startingXI": {
+    "message": "መነሻ አስራ አንድ"
+  },
+  "fullTimeLabel": {
+    "message": "ሙሉ ሰዓት"
+  },
+  "halfTimeLabel": {
+    "message": "የእረፍት ሰዓት"
+  },
+  "liveMatchCountOne": {
+    "message": "$COUNT$ የቀጥታ ጨዋታ",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "liveMatchesCount": {
+    "message": "$COUNT$ የቀጥታ ጨዋታዎች",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchCountOne": {
+    "message": "$COUNT$ መጪ ጨዋታ",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchesCount": {
+    "message": "$COUNT$ መጪ ጨዋታዎች",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchCountOne": {
+    "message": "$COUNT$ የተጠናቀቀ ጨዋታ",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchesCount": {
+    "message": "$COUNT$ የተጠናቀቁ ጨዋታዎች",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCountOne": {
+    "message": "$COUNT$ ጨዋታ",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
   }
 }

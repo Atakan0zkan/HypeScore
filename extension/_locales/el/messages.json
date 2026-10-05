@@ -8,9 +8,6 @@
   "appTitle": {
     "message": "Hype Scores"
   },
-  "subtitle": {
-    "message": "Γρήγορα live σκορ, αποτελέσματα και βαθμολογίες."
-  },
   "loading": {
     "message": "Φόρτωση αγώνων…"
   },
@@ -219,9 +216,6 @@
   "noStandings": {
     "message": "Δεν υπάρχει βαθμολογία για αυτό το πρωτάθλημα."
   },
-  "fullSquads": {
-    "message": "Πλήρεις συνθέσεις"
-  },
   "noLinks": {
     "message": "Δεν υπάρχουν σύνδεσμοι."
   },
@@ -254,5 +248,121 @@
   },
   "links": {
     "message": "Σύνδεσμοι"
+  },
+  "settings": {
+    "message": "Ρυθμίσεις"
+  },
+  "popupSize": {
+    "message": "Μέγεθος παραθύρου"
+  },
+  "sizeSmall": {
+    "message": "Μικρό"
+  },
+  "sizeDefault": {
+    "message": "Προεπιλογή"
+  },
+  "sizeBig": {
+    "message": "Μεγάλο"
+  },
+  "settingsBackup": {
+    "message": "Αντίγραφο ρυθμίσεων"
+  },
+  "settingsBackupHint": {
+    "message": "Περιλαμβάνει αγαπημένα πρωταθλήματα και μέγεθος παραθύρου. Η εισαγωγή αντικαθιστά αυτές τις ρυθμίσεις."
+  },
+  "exportSettings": {
+    "message": "Εξαγωγή ρυθμίσεων"
+  },
+  "importSettings": {
+    "message": "Εισαγωγή ρυθμίσεων"
+  },
+  "privacyPolicy": {
+    "message": "Πολιτική απορρήτου"
+  },
+  "closeSettings": {
+    "message": "Κλείσιμο ρυθμίσεων"
+  },
+  "settingsImported": {
+    "message": "Οι ρυθμίσεις εισήχθησαν."
+  },
+  "settingsImportError": {
+    "message": "Δεν είναι έγκυρο αρχείο ρυθμίσεων Hype."
+  },
+  "settingsSaveError": {
+    "message": "Δεν ήταν δυνατή η αποθήκευση ρυθμίσεων στη συσκευή."
+  },
+  "settingsExported": {
+    "message": "Οι ρυθμίσεις εξήχθησαν."
+  },
+  "settingsExportError": {
+    "message": "Δεν ήταν δυνατή η εξαγωγή ρυθμίσεων."
+  },
+  "substitutes": {
+    "message": "Αναπληρωματικοί"
+  },
+  "startingXI": {
+    "message": "Αρχική ενδεκάδα"
+  },
+  "fullTimeLabel": {
+    "message": "Λήξη αγώνα"
+  },
+  "halfTimeLabel": {
+    "message": "Ημίχρονο"
+  },
+  "liveMatchCountOne": {
+    "message": "$COUNT$ ζωντανός αγώνας",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "liveMatchesCount": {
+    "message": "$COUNT$ ζωντανοί αγώνες",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchCountOne": {
+    "message": "$COUNT$ επερχόμενος αγώνας",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchesCount": {
+    "message": "$COUNT$ επερχόμενοι αγώνες",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchCountOne": {
+    "message": "$COUNT$ ολοκληρωμένος αγώνας",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchesCount": {
+    "message": "$COUNT$ ολοκληρωμένοι αγώνες",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCountOne": {
+    "message": "$COUNT$ αγώνας",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
   }
 }

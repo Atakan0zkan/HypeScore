@@ -8,9 +8,6 @@
   "appTitle": {
     "message": "Hype Scores"
   },
-  "subtitle": {
-    "message": "نتائج مباشرة سريعة ونتائج وترتيب الدوريات."
-  },
   "loading": {
     "message": "جارٍ تحميل المباريات…"
   },
@@ -219,9 +216,6 @@
   "noStandings": {
     "message": "لا يوجد ترتيب لهذا الدوري."
   },
-  "fullSquads": {
-    "message": "القوائم الكاملة"
-  },
   "noLinks": {
     "message": "لا توجد روابط."
   },
@@ -254,5 +248,121 @@
   },
   "links": {
     "message": "روابط"
+  },
+  "settings": {
+    "message": "الإعدادات"
+  },
+  "popupSize": {
+    "message": "حجم النافذة"
+  },
+  "sizeSmall": {
+    "message": "صغير"
+  },
+  "sizeDefault": {
+    "message": "افتراضي"
+  },
+  "sizeBig": {
+    "message": "كبير"
+  },
+  "settingsBackup": {
+    "message": "نسخة احتياطية للإعدادات"
+  },
+  "settingsBackupHint": {
+    "message": "تشمل الدوريات المفضلة وحجم النافذة. يحل الاستيراد محل هذه الإعدادات."
+  },
+  "exportSettings": {
+    "message": "تصدير الإعدادات"
+  },
+  "importSettings": {
+    "message": "استيراد الإعدادات"
+  },
+  "privacyPolicy": {
+    "message": "سياسة الخصوصية"
+  },
+  "closeSettings": {
+    "message": "إغلاق الإعدادات"
+  },
+  "settingsImported": {
+    "message": "تم استيراد الإعدادات."
+  },
+  "settingsImportError": {
+    "message": "هذا ليس ملف إعدادات Hype صالحًا."
+  },
+  "settingsSaveError": {
+    "message": "تعذر حفظ الإعدادات على هذا الجهاز."
+  },
+  "settingsExported": {
+    "message": "تم تصدير الإعدادات."
+  },
+  "settingsExportError": {
+    "message": "تعذر تصدير الإعدادات."
+  },
+  "substitutes": {
+    "message": "البدلاء"
+  },
+  "startingXI": {
+    "message": "التشكيلة الأساسية"
+  },
+  "fullTimeLabel": {
+    "message": "نهاية المباراة"
+  },
+  "halfTimeLabel": {
+    "message": "بين الشوطين"
+  },
+  "liveMatchCountOne": {
+    "message": "$COUNT$ مباراة مباشرة",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "liveMatchesCount": {
+    "message": "$COUNT$ مباريات مباشرة",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchCountOne": {
+    "message": "$COUNT$ مباراة قادمة",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchesCount": {
+    "message": "$COUNT$ مباريات قادمة",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchCountOne": {
+    "message": "$COUNT$ مباراة مكتملة",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchesCount": {
+    "message": "$COUNT$ مباريات مكتملة",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCountOne": {
+    "message": "$COUNT$ مباراة",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
   }
 }

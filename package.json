@@ -17,6 +17,6 @@
   "devDependencies": {
     "@playwright/test": "^1.63.0",
     "happy-dom": "^20.14.5",
-    "wrangler": "^4.147.0"
+    "wrangler": "^4.148.0"
   }
 }

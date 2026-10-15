@@ -4,13 +4,13 @@ const DEFAULT_FETCH_HEADERS = {
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
 };
 const ESPN_SCOREBOARD_URL =
-  "https://site.web.api.espn.com/apis/site/v2/sports/soccer/all/scoreboard";
+  "https://site.api.espn.com/apis/site/v2/sports/soccer/all/scoreboard";
 const THESPORTSDB_LIVE_SCORE_URL =
   "https://www.thesportsdb.com/api/v2/json/livescore/soccer";
 const ESPN_STANDINGS_BASE_URL =
-  "https://site.web.api.espn.com/apis/v2/sports/soccer";
+  "https://site.api.espn.com/apis/v2/sports/soccer";
 const ESPN_SUMMARY_BASE_URL =
-  "https://site.web.api.espn.com/apis/site/v2/sports/soccer";
+  "https://site.api.espn.com/apis/site/v2/sports/soccer";
 const LIVE_CACHE_TTL_SECONDS = 30;
 const IDLE_CACHE_TTL_SECONDS = 120;
 const STANDINGS_CACHE_TTL_SECONDS = 1800;
@@ -704,33 +704,78 @@ function normalizeEspnMatchPayloads(payloads) {
 async function fetchJson(url, init = {}) {
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), UPSTREAM_FETCH_TIMEOUT_MS);
+  const externalSignal = init.signal;
+  const abortFromExternal = () => controller.abort();
+  if (externalSignal?.aborted) controller.abort();
+  else externalSignal?.addEventListener("abort", abortFromExternal, { once: true });
+  const urls = [url];
+  const alternateUrl = getAlternateEspnUrl(url);
+  if (alternateUrl) urls.push(alternateUrl);
 
   try {
-    const response = await fetch(url, {
-      ...init,
-      signal: init.signal || controller.signal,
-      headers: {
-        ...DEFAULT_FETCH_HEADERS,
-        ...(init.headers || {}),
-      },
-    });
-
-    if (!response.ok) {
-      const error = new Error(`${url} returned ${response.status}`);
-      error.status = response.status;
+    if (controller.signal.aborted) {
+      const error = new Error("Request aborted");
+      error.name = "AbortError";
       throw error;
     }
+    for (let index = 0; index < urls.length; index += 1) {
+      try {
+        const response = await fetch(urls[index], {
+          ...init,
+          signal: controller.signal,
+          headers: {
+            ...DEFAULT_FETCH_HEADERS,
+            ...(init.headers || {}),
+          },
+        });
 
-    /* SEC-03: validate Content-Type before parsing */
-    const contentType = response.headers.get("content-type") || "";
-    if (!contentType.includes("json")) {
-      throw new Error(`${url} returned unexpected Content-Type: ${contentType}`);
+        if (!response.ok) {
+          const error = new Error(`${urls[index]} returned ${response.status}`);
+          error.status = response.status;
+          await response.body?.cancel().catch(() => {});
+          throw error;
+        }
+
+        /* SEC-03: validate Content-Type before parsing */
+        const contentType = response.headers.get("content-type") || "";
+        if (!contentType.includes("json")) {
+          await response.body?.cancel();
+          throw new Error(`${urls[index]} returned unexpected Content-Type: ${contentType}`);
+        }
+
+        // Both ESPN hosts share one deadline, including response body consumption.
+        return await response.json();
+      } catch (error) {
+        // Do not turn missing seasons, authentication failures or rate limits
+        // into extra requests. In particular, World Cup 2030's 400/404 stays empty.
+        const canRetry = error?.status == null || error.status === 403 ||
+          error.status === 408 || (error.status >= 500 && error.status <= 599);
+        if (index === urls.length - 1 || !canRetry ||
+            controller.signal.aborted || init.signal?.aborted || error?.name === "AbortError") {
+          throw error;
+        }
+      }
     }
-
-    // Keep the timeout active until the response body has been consumed.
-    return await response.json();
   } finally {
     clearTimeout(timeoutId);
+    externalSignal?.removeEventListener("abort", abortFromExternal);
+  }
+}
+
+function getAlternateEspnUrl(value) {
+  try {
+    const url = new URL(value);
+    if (url.username || url.password) return null;
+    if (url.origin === "https://site.web.api.espn.com") {
+      url.hostname = "site.api.espn.com";
+    } else if (url.origin === "https://site.api.espn.com") {
+      url.hostname = "site.web.api.espn.com";
+    } else {
+      return null;
+    }
+    return url.href;
+  } catch {
+    return null;
   }
 }
 

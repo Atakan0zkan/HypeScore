@@ -17,6 +17,7 @@ const STANDINGS_CACHE_TTL_SECONDS = 1800;
 const MATCH_DETAIL_CACHE_TTL_SECONDS = 60;
 const TOURNAMENT_BRACKET_CACHE_TTL_SECONDS = 900;
 const UPSTREAM_FETCH_TIMEOUT_MS = 8000;
+const MONITOR_USER_AGENT = "HypeScore-HealthMonitor/1.0";
 const UPCOMING_MATCH_WINDOW_MS = 24 * 60 * 60 * 1000;
 const MAX_EVENT_ID_LENGTH = 20;
 const MAX_REMEMBERED_EVENT_KEYS = 1024;
@@ -191,6 +192,9 @@ const securityHeaders = {
 };
 
 export default {
+  async scheduled(_controller, env) {
+    await runScheduledHealthCheck(env);
+  },
   async fetch(request, env) {
     const startedAt = Date.now();
     let response;
@@ -208,6 +212,24 @@ export default {
     }
   },
 };
+
+async function runScheduledHealthCheck(env) {
+  // Exercise the normal data/cache/failover path without recording a user visit.
+  // GitHub's separate external probe also checks DNS, TLS and HTTP routing.
+  const response = await handleRequest(new Request(
+    "https://api.atakanozkan.com/live-matches?client=monitor", {
+      headers: { Origin: "chrome-extension://cdnpjnmhmagmiefkleefgchgffeaacaa",
+        "User-Agent": MONITOR_USER_AGENT },
+    }), env);
+  if (!response.ok) throw new Error(`Scheduled data health check failed: HTTP ${response.status}`);
+  const payload = await response.json();
+  const codes = new Set(Array.isArray(payload.leagues) ? payload.leagues.map(league => league?.code) : []);
+  if (!Array.isArray(payload.matches) || codes.size !== ESPN_LEAGUES_BY_CODE.size ||
+      [...ESPN_LEAGUES_BY_CODE.keys()].some(code => !codes.has(code))) {
+    throw new Error("Scheduled data health check failed: invalid league payload");
+  }
+  console.log("Scheduled data health check passed");
+}
 
 async function handleRequest(request, env) {
   const url = new URL(request.url);
@@ -2320,6 +2342,11 @@ function recordUsageAnalytics(env, request, response, startedAt, error = null) {
   try {
     const url = new URL(request.url);
     const originPolicy = getRequestOriginPolicy(request);
+    // A non-secret traffic label, never authentication or an origin bypass.
+    // Keep automated probes out of the product-usage dataset.
+    if (request.method === "GET" && originPolicy.allowed &&
+        url.searchParams.get("client") === "monitor" &&
+        request.headers.get("User-Agent") === MONITOR_USER_AGENT) return;
     const endpoint = normalizeAnalyticsEndpoint(url.pathname);
     const client = normalizeAnalyticsClient(url.searchParams.get("client"));
     const clientVersion = normalizeClientVersion(url.searchParams.get("version"));

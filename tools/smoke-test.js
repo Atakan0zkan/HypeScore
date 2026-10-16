@@ -1,6 +1,10 @@
 #!/usr/bin/env node
 
-const DEFAULT_WORKER_URL = "https://api.atakanozkan.com";
+import { resolve } from "node:path";
+import { pathToFileURL } from "node:url";
+
+export const DEFAULT_WORKER_URL = "https://api.atakanozkan.com";
+export const MONITOR_USER_AGENT = "HypeScore-HealthMonitor/1.0";
 const EXTENSION_ORIGIN = "chrome-extension://cdnpjnmhmagmiefkleefgchgffeaacaa";
 const REQUEST_TIMEOUT_MS = 10000;
 const REQUIRED_LEAGUE_CODES = [
@@ -10,23 +14,58 @@ const REQUIRED_LEAGUE_CODES = [
   "conmebol.america",
 ];
 
-const baseUrl = (process.env.HYPE_WORKER_URL || DEFAULT_WORKER_URL).replace(/\/+$/, "");
-
 const headers = {
   Accept: "application/json",
   Origin: EXTENSION_ORIGIN,
+  "User-Agent": MONITOR_USER_AGENT,
 };
 
-const results = [];
+export async function runSmokeChecks({
+  baseUrl = process.env.HYPE_WORKER_URL || DEFAULT_WORKER_URL,
+  fetchImpl = globalThis.fetch,
+  timeoutMs = REQUEST_TIMEOUT_MS,
+} = {}) {
+  const base = new URL(baseUrl);
+  if (base.username || base.password || base.search || base.hash ||
+      (base.protocol !== "https:" && !(base.protocol === "http:" &&
+        ["localhost", "127.0.0.1", "[::1]"].includes(base.hostname)))) {
+    throw new Error("Invalid Worker base URL");
+  }
+  const results = [];
 
-main().catch((error) => {
-  console.error("\nSmoke test failed:");
-  console.error(error instanceof Error ? error.message : error);
-  process.exitCode = 1;
-});
+  async function step(name, action) {
+    try {
+      const detail = await action();
+      results.push({ name, status: "ok", detail });
+    } catch (error) {
+      results.push({ name, status: "failed",
+        code: error.code || (error.name === "AbortError" || error.name === "TimeoutError" ? "TIMEOUT" :
+          error.name === "TypeError" ? "NETWORK_ERROR" : "INVALID_RESPONSE"),
+        detail: String(error.message || "Request failed").replace(/[\r\n\t]/g, " ").slice(0, 240),
+      });
+    }
+  }
 
-async function main() {
-  console.log(`Smoke testing ${baseUrl}`);
+  async function fetchJson(path) {
+    const url = new URL(path, base);
+    url.searchParams.set("client", "monitor");
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+    try {
+      const response = await fetchImpl(url.href, { headers, signal: controller.signal, redirect: "error" });
+      if (!response.ok) {
+        await response.body?.cancel().catch(() => {});
+        throw Object.assign(new Error(`${path.split("?")[0]} returned HTTP ${response.status}`), { code: `HTTP_${response.status}` });
+      }
+      if (!(response.headers.get("content-type") || "").includes("json")) {
+        await response.body?.cancel().catch(() => {});
+        throw Object.assign(new Error("API returned non-JSON data"), { code: "NON_JSON" });
+      }
+      return await response.json();
+    } finally {
+      clearTimeout(timeoutId);
+    }
+  }
 
   let livePayload = null;
 
@@ -49,7 +88,7 @@ async function main() {
     return `${payload.rounds.length} rounds, ${countBracketMatches(payload.rounds)} matches (2030; unpublished data may be empty)`;
   });
 
-  const match = livePayload.matches.find((item) => item.id && item.leagueCode);
+  const match = livePayload?.matches?.find((item) => item.id && item.leagueCode);
   if (!match) {
     results.push({
       name: "GET /match-detail",
@@ -57,7 +96,7 @@ async function main() {
       detail: "No current match with id + leagueCode in live payload",
     });
   } else {
-    await step(`GET /match-detail?eventId=${match.id}&leagueCode=${match.leagueCode}`, async () => {
+    await step("GET /match-detail", async () => {
       const payload = await fetchJson(
         `/match-detail?eventId=${encodeURIComponent(match.id)}&leagueCode=${encodeURIComponent(match.leagueCode)}`,
       );
@@ -66,47 +105,7 @@ async function main() {
     });
   }
 
-  printResults();
-}
-
-async function step(name, action) {
-  try {
-    const detail = await action();
-    results.push({ name, status: "ok", detail });
-    return detail;
-  } catch (error) {
-    results.push({
-      name,
-      status: "failed",
-      detail: error instanceof Error ? error.message : String(error),
-    });
-    throw error;
-  }
-}
-
-async function fetchJson(path) {
-  const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
-
-  try {
-    const response = await fetch(`${baseUrl}${path}`, {
-      headers,
-      signal: controller.signal,
-    });
-
-    if (!response.ok) {
-      throw new Error(`${path} returned HTTP ${response.status}`);
-    }
-
-    const contentType = response.headers.get("content-type") || "";
-    if (!contentType.includes("json")) {
-      throw new Error(`${path} returned non-JSON content-type: ${contentType || "missing"}`);
-    }
-
-    return await response.json();
-  } finally {
-    clearTimeout(timeoutId);
-  }
+  return { ok: results.every(result => result.status !== "failed"), checks: results };
 }
 
 function assertLivePayload(payload) {
@@ -214,7 +213,7 @@ function countBracketMatches(rounds) {
   );
 }
 
-function printResults() {
+export function printResults(results) {
   console.log("");
   for (const result of results) {
     const prefix = result.status === "ok" ? "PASS" : result.status === "skipped" ? "SKIP" : "FAIL";
@@ -244,4 +243,12 @@ function assertNumber(value, label) {
   if (typeof value !== "number" || Number.isNaN(value)) {
     throw new Error(`${label} must be a number`);
   }
+}
+
+if (process.argv[1] && pathToFileURL(resolve(process.argv[1])).href === import.meta.url) {
+  console.log("Smoke testing the deployed Hype API");
+  runSmokeChecks().then(report => {
+    printResults(report.checks);
+    if (!report.ok) process.exitCode = 1;
+  }).catch(() => { console.error("Smoke test could not run"); process.exitCode = 1; });
 }

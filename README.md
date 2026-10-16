@@ -101,18 +101,36 @@ Run the local checks:
 npm test
 npm run analytics:test
 npm run smoke
+npm run monitor
 ```
 
 - `npm test` runs popup, Worker, and dashboard regression suites.
 - `npm run analytics:test` validates dashboard queries and data shaping.
 - `npm run smoke` checks the deployed API and therefore requires internet
   access.
+- `npm run monitor` confirms failures with a second probe 30 seconds later,
+  without opening or changing GitHub issues when run locally.
 
 GitHub tests run on pushes, pull requests, and daily at 07:00 Europe/Istanbul.
 Dependabot checks npm packages at 06:30 and GitHub Actions at 06:45 every day,
 then opens update pull requests. Compatible minor/patch updates are grouped;
 major changes stay separate. Pull requests run offline/browser tests and the
 dependency audit; merging and production deployment remain owner-approved.
+
+Production availability is checked separately every five minutes. Cloudflare's
+cron exercises the data/cache/upstream-failover path; an independent GitHub
+workflow checks the public API, including standings, available match details and
+the intentionally empty future World Cup. GitHub schedules can be delayed.
+Confirmed repeated failures open one monitor-owned issue assigned to the owner;
+unchanged failures do not post repeated comments, and two healthy probes close
+the incident. Daily live checks are blocking and main-push checks wait for the
+matching Cloudflare build. No automatic code edits, deployments or merges are
+performed by the monitor.
+
+Health probes are excluded from Hype's product-usage dataset. Cloudflare's raw
+hosting/request metrics still include external monitoring traffic. GitHub uses
+its short-lived `GITHUB_TOKEN` with issue-write permission; no extra API key is
+required, and PR/fork code cannot run the incident-writing workflow.
 
 ## Deploy the Worker
 

@@ -3,7 +3,7 @@
 # - ai-triage: wakes ONLY when offline-tests fails, reads the failed log
 #   with a free Zen model and opens a triage issue. Needs repo secret
 #   OPENCODE_API_KEY (Zen key) — see README note below.
-# - live-smoke: network-dependent, never blocks the build.
+# - live-smoke: blocking production check with deterministic incident handling.
 name: Daily tests
 
 on:
@@ -66,15 +66,33 @@ jobs:
                Write the issue body in English. Do not push commits.
 
   live-smoke:
-    if: ${{ github.event_name != 'pull_request' }}
+    if: ${{ github.event_name != 'pull_request' && github.repository == 'Atakan0zkan/HypeScore' && github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
-    continue-on-error: true # ESPN shape/time drift must not fail the build
+    timeout-minutes: 8
+    permissions:
+      contents: read
+      checks: read
+      issues: write
+    concurrency:
+      group: production-availability
+      cancel-in-progress: false
     steps:
       - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v7
         with:
           node-version: 26
-      - run: npm run smoke
+      - name: Wait for this commit's Cloudflare deployment
+        if: ${{ github.event_name == 'push' }}
+        run: node tools/wait-for-worker-build.mjs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Confirm production health and maintain one incident
+        run: node tools/production-monitor.mjs --manage-incidents
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HYPE_MONITOR_ASSIGNEE: Atakan0zkan
 
   e2e:
     runs-on: ubuntu-latest

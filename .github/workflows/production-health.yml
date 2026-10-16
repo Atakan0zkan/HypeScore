@@ -1,0 +1,36 @@
+# Independent external probe. Cloudflare's own five-minute cron also exercises
+# its data/cache/failover path, even if GitHub schedules are delayed.
+name: Production availability
+
+on:
+  schedule:
+    - cron: "2-59/5 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-availability
+  cancel-in-progress: false
+
+jobs:
+  monitor:
+    if: ${{ github.repository == 'Atakan0zkan/HypeScore' && github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 26
+      - name: Confirm production health and maintain one incident
+        run: node tools/production-monitor.mjs --manage-incidents
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HYPE_MONITOR_ASSIGNEE: Atakan0zkan

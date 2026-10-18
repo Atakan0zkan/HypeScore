@@ -13,6 +13,7 @@ const ESPN_SUMMARY_BASE_URL =
   "https://site.api.espn.com/apis/site/v2/sports/soccer";
 const LIVE_CACHE_TTL_SECONDS = 30;
 const IDLE_CACHE_TTL_SECONDS = 120;
+const LIVE_SNAPSHOT_MAX_AGE_MS = 5 * 60 * 1000;
 const STANDINGS_CACHE_TTL_SECONDS = 1800;
 const MATCH_DETAIL_CACHE_TTL_SECONDS = 60;
 const TOURNAMENT_BRACKET_CACHE_TTL_SECONDS = 900;
@@ -21,13 +22,14 @@ const MONITOR_USER_AGENT = "HypeScore-HealthMonitor/1.0";
 const UPCOMING_MATCH_WINDOW_MS = 24 * 60 * 60 * 1000;
 const MAX_EVENT_ID_LENGTH = 20;
 const MAX_REMEMBERED_EVENT_KEYS = 1024;
-const LIVE_MATCHES_CACHE_KEY_VERSION = "v16";
+const LIVE_MATCHES_CACHE_KEY_VERSION = "v17";
 const STANDINGS_CACHE_KEY_VERSION = "v4";
 const MATCH_DETAIL_CACHE_KEY_VERSION = "v8";
 const KNOWN_EVENTS_TTL_MS = 60 * 60 * 1000;
 const KNOWN_EVENTS_CACHE_URL = "https://live-score-extension.internal/known-events/v2";
 const TOURNAMENT_BRACKET_CACHE_KEY_VERSION = "v2";
 const CACHE_KEY_URL = `https://live-score-extension.internal/live-matches/${LIVE_MATCHES_CACHE_KEY_VERSION}`;
+const LAST_GOOD_LIVE_CACHE_URL = `${CACHE_KEY_URL}/last-good`;
 let liveMatchesRefreshPromise = null;
 const standingsRefreshPromises = new Map();
 const matchDetailRefreshPromises = new Map();
@@ -217,12 +219,15 @@ async function runScheduledHealthCheck(env) {
   // Exercise the normal data/cache/failover path without recording a user visit.
   // GitHub's separate external probe also checks DNS, TLS and HTTP routing.
   const response = await handleRequest(new Request(
-    "https://api.atakanozkan.com/live-matches?client=monitor", {
+    "https://api.atakanozkan.com/live-matches?client=monitor&allowStale=1", {
       headers: { Origin: "chrome-extension://cdnpjnmhmagmiefkleefgchgffeaacaa",
         "User-Agent": MONITOR_USER_AGENT },
     }), env);
   if (!response.ok) throw new Error(`Scheduled data health check failed: HTTP ${response.status}`);
   const payload = await response.json();
+  if (payload.freshness?.stale === true) {
+    throw new Error("Scheduled data health check degraded: last-successful snapshot in use");
+  }
   const codes = new Set(Array.isArray(payload.leagues) ? payload.leagues.map(league => league?.code) : []);
   if (!Array.isArray(payload.matches) || codes.size !== ESPN_LEAGUES_BY_CODE.size ||
       [...ESPN_LEAGUES_BY_CODE.keys()].some(code => !codes.has(code))) {
@@ -285,20 +290,9 @@ async function handleLiveMatchesRequest(request, env) {
 
   const cache = caches.default;
   const cacheKey = new Request(CACHE_KEY_URL, { method: "GET" });
-  const cachedResponse = await cache.match(cacheKey);
-
-  if (cachedResponse) {
-    const body = await cachedResponse.text();
-    return new Response(body, {
-      status: cachedResponse.status,
-      headers: responseHeaders({
-        request,
-        cache: "HIT",
-        source: cachedResponse.headers.get("X-Data-Source") || "cache",
-        cacheControl:
-          cachedResponse.headers.get("Cache-Control") || "public, max-age=30",
-      }),
-    });
+  const cached = await readLiveSnapshot(cache, cacheKey);
+  if (cached && Date.now() - cached.updatedAt < getLiveCacheTtl(cached.payload.matches) * 1000) {
+    return liveSnapshotResponse(cached, request, false);
   }
 
   try {
@@ -306,11 +300,57 @@ async function handleLiveMatchesRequest(request, env) {
   } catch (error) {
     const message = getErrorMessage(error);
     console.warn(`Live match refresh failed: ${message}`);
+    // Older Store clients cannot show the stale-data warning. They must opt in
+    // to this contract before receiving a successful but degraded response.
+    if (new URL(request.url).searchParams.get("allowStale") === "1") {
+      const snapshot = await readLiveSnapshot(cache, new Request(LAST_GOOD_LIVE_CACHE_URL));
+      if (snapshot) return liveSnapshotResponse(snapshot, request, true);
+    }
     return jsonResponse(
       { error: "Live match data could not be fetched", details: message },
       { status: 502, cache: "BYPASS", source: "none", request },
     );
   }
+}
+
+function getLiveCacheTtl(matches) {
+  return countLiveMatches(matches) > 0 ? LIVE_CACHE_TTL_SECONDS : IDLE_CACHE_TTL_SECONDS;
+}
+
+async function readLiveSnapshot(cache, key) {
+  try {
+    const response = await cache.match(key);
+    if (!response?.ok) return null;
+    const payload = await response.json();
+    const updatedAt = typeof payload?.freshness?.updatedAt === "string"
+      ? Date.parse(payload.freshness.updatedAt) : NaN;
+    const age = Date.now() - updatedAt;
+    const codes = new Set(Array.isArray(payload?.leagues) ? payload.leagues.map(league => league?.code) : []);
+    if (!Number.isFinite(updatedAt) || updatedAt <= 0 || age < 0 || age >= LIVE_SNAPSHOT_MAX_AGE_MS ||
+        payload.freshness.stale !== false || !Array.isArray(payload.matches) ||
+        codes.size !== ESPN_LEAGUES_BY_CODE.size ||
+        [...ESPN_LEAGUES_BY_CODE.keys()].some(code => !codes.has(code)) ||
+        payload.leagues.some(league => !Array.isArray(league?.matches))) return null;
+    return { payload, updatedAt, source: response.headers.get("X-Data-Source") || "cache" };
+  } catch (error) {
+    console.warn(`Live snapshot cache read failed: ${getErrorMessage(error)}`);
+    return null;
+  }
+}
+
+function liveSnapshotResponse(snapshot, request, stale) {
+  const ageSeconds = Math.max(0, Math.floor((Date.now() - snapshot.updatedAt) / 1000));
+  return jsonResponse({
+    ...snapshot.payload,
+    freshness: { updatedAt: new Date(snapshot.updatedAt).toISOString(), stale },
+  }, {
+    request,
+    cache: stale ? "STALE" : "HIT",
+    source: snapshot.source,
+    // Stale output is never written back, and neither the browser nor a proxy
+    // may extend its lifetime. The original timestamp remains authoritative.
+    cacheControl: stale ? "no-store" : `public, max-age=${Math.max(0, getLiveCacheTtl(snapshot.payload.matches) - ageSeconds)}`,
+  });
 }
 
 async function handleMatchDetailRequest(request, url) {
@@ -565,12 +605,11 @@ async function getFreshTournamentBracketResponse(
 
 async function refreshLiveMatches(env, cache, cacheKey) {
   const { matches, source } = await getLiveMatches(env);
-  const cacheTtl = countLiveMatches(matches) > 0
-    ? LIVE_CACHE_TTL_SECONDS
-    : IDLE_CACHE_TTL_SECONDS;
+  const cacheTtl = getLiveCacheTtl(matches);
   const data = {
     matches,
     leagues: groupMatchesByLeague(matches),
+    freshness: { updatedAt: new Date().toISOString(), stale: false },
   };
   rememberKnownMatches(matches);
   await persistKnownMatches(cache, matches);
@@ -584,6 +623,15 @@ async function refreshLiveMatches(env, cache, cacheKey) {
     await cache.put(cacheKey, response.clone());
   } catch (error) {
     console.warn(`Cache put failed: ${getErrorMessage(error)}`);
+  }
+
+  try {
+    await cache.put(new Request(LAST_GOOD_LIVE_CACHE_URL), jsonResponse(data, {
+      source,
+      cacheControl: `public, max-age=${LIVE_SNAPSHOT_MAX_AGE_MS / 1000}`,
+    }));
+  } catch (error) {
+    console.warn(`Last-successful snapshot write failed: ${getErrorMessage(error)}`);
   }
 
   return response;

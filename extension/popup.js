@@ -19,7 +19,8 @@ const INACTIVITY_PAUSE_AFTER_MS = 3 * 60 * 1000;
 const ACTIVITY_TIMER_RESET_THROTTLE_MS = 1000;
 const ERROR_RETRY_DELAYS_MS = [120000, 300000, 600000];
 const DAILY_REQUEST_LIMIT = 2000;
-const CLIENT_LIVE_CACHE_VERSION = "v11";
+const CLIENT_LIVE_CACHE_VERSION = "v12";
+const CLIENT_SNAPSHOT_MAX_AGE_MS = 5 * 60 * 1000;
 const REQUIRED_CLIENT_CACHE_LEAGUE_CODES = [
   "fifa.world",
   "uefa.nations",
@@ -146,6 +147,7 @@ const FALLBACK_LOGO = "data:image/svg+xml," + encodeURIComponent(FALLBACK_LOGO_S
 function buildBackendUrl(rawUrl) {
   const url = new URL(rawUrl);
   url.searchParams.set("client", "extension");
+  if (url.pathname === "/live-matches") url.searchParams.set("allowStale", "1");
   if (/^\d+(?:\.\d+){0,3}$/.test(EXTENSION_VERSION)) {
     url.searchParams.set("version", EXTENSION_VERSION);
   }
@@ -278,6 +280,7 @@ let settingsStatusMessage = null;
 let settingsImportPending = false;
 let loadingState;
 let errorState;
+let snapshotNotice;
 let emptyState;
 let leaguePickList;
 let leagueDetailView;
@@ -287,6 +290,9 @@ let backBtn;
 let hasLoadedOnce = false;
 let lastPayload = null;
 let lastFetchCompletedAt = 0;
+let lastDataUpdatedAt = 0;
+let lastDataIsStale = false;
+let snapshotNoticeTimer = null;
 let refreshTimer = null;
 let sessionAutoPauseTimer = null;
 let inactivityTimer = null;
@@ -328,6 +334,7 @@ document.addEventListener("DOMContentLoaded", () => {
   settingsFile = document.getElementById("settingsFile");
   loadingState = document.getElementById("loadingState");
   errorState = document.getElementById("errorState");
+  snapshotNotice = document.getElementById("snapshotNotice");
   emptyState = document.getElementById("emptyState");
   leaguePickList = document.getElementById("leaguePickList");
   leagueDetailView = document.getElementById("leagueDetailView");
@@ -503,6 +510,7 @@ function setSettingsOpen(open) {
   if (isSettingsOpen === open) return;
   if (open) captureViewState();
   isSettingsOpen = open;
+  updateSnapshotNotice();
   settingsPanel.hidden = !open;
   appShell.classList.toggle("app-shell--settings-open", open);
   settingsToggle.setAttribute("aria-expanded", String(open));
@@ -668,6 +676,7 @@ function restoreEnabledState() {
 
 function applyEnabledState() {
   updatePowerToggleLabel();
+  updateSnapshotNotice();
 
   if (isEnabled) {
     appShell.classList.remove("app-shell--disabled");
@@ -836,6 +845,8 @@ function hydrateFromClientCache() {
   }
 
   lastPayload = cached.payload;
+  lastDataUpdatedAt = cached.savedAt;
+  lastDataIsStale = false;
   lastFetchCompletedAt = cached.savedAt;
   hasLoadedOnce = true;
   renderPayload(cached.payload);
@@ -872,17 +883,22 @@ async function performLoadMatches({ force = false } = {}) {
   let didHitDailyLimit = false;
 
   try {
-    const payload = await fetchJsonWithTimeout(BACKEND_URL);
+    const payload = await fetchJsonWithTimeout(BACKEND_URL, { cache: "no-store" });
     if (!isValidLivePayload(payload)) {
       throw new Error("Invalid live match payload");
     }
 
-    lastPayload = payload;
+    const freshness = getPayloadFreshness(payload);
+    lastPayload = { ...payload, freshness: {
+      updatedAt: new Date(freshness.updatedAt).toISOString(), stale: freshness.stale,
+    } };
+    lastDataUpdatedAt = freshness.updatedAt;
+    lastDataIsStale = freshness.stale;
     lastFetchCompletedAt = Date.now();
-    consecutiveRefreshErrors = 0;
-    writeClientLiveCache(payload, lastFetchCompletedAt);
-    renderPayload(payload);
-    setStatus(`${msg("updated")} ${formatClockTime(lastFetchCompletedAt)}`);
+    if (!lastDataIsStale) consecutiveRefreshErrors = 0;
+    writeClientLiveCache(lastPayload, lastDataUpdatedAt);
+    renderPayload(lastPayload);
+    setStatus(`${msg("updated")} ${formatClockTime(lastDataUpdatedAt)}`);
     hasLoadedOnce = true;
     didSucceed = true;
   } catch (error) {
@@ -893,12 +909,11 @@ async function performLoadMatches({ force = false } = {}) {
     } else {
       consecutiveRefreshErrors += 1;
       console.error(error);
-      if (hasLoadedOnce || lastPayload) {
-        setStatus(msg("refreshFailed"));
-      }
+      setStatus(msg("refreshFailed"));
     }
 
-    if (!hasLoadedOnce && !lastPayload) {
+    if (!restoreRecentSnapshot()) {
+      discardSnapshot();
       showError(
         didHitDailyLimit ? msg("requestLimitReached") : msg("error"),
       );
@@ -906,7 +921,9 @@ async function performLoadMatches({ force = false } = {}) {
     hasLoadedOnce = true;
   } finally {
     if (didSucceed) {
-      scheduleNextRefresh(lastPayload);
+      scheduleNextRefresh(lastPayload, lastDataIsStale
+        ? Math.min(LIVE_REFRESH_INTERVAL_MS, getRefreshInterval(lastPayload))
+        : getRefreshInterval(lastPayload));
     } else if (!didHitDailyLimit) {
       scheduleErrorRetry();
     }
@@ -960,6 +977,7 @@ function getRemainingRefreshDelay(payload, completedAt = lastFetchCompletedAt) {
 }
 
 function handleVisibilityChange() {
+  updateSnapshotNotice();
   if (document.hidden) {
     clearTimeout(refreshTimer);
     clearTimeout(inactivityTimer);
@@ -992,6 +1010,7 @@ function handleVisibilityChange() {
 }
 
 function renderPayload(payload) {
+  if (updateSnapshotNotice() === false) return;
   if (isSettingsOpen) return;
   const leagues = normalizeLeagueGroups(payload);
 
@@ -2289,6 +2308,10 @@ function readClientLiveCache() {
   if (!isValidLivePayload(cached.payload)) return null;
   if (!hasRequiredClientCacheLeagues(cached.payload)) return null;
   if (!Number.isFinite(cached.savedAt) || cached.savedAt <= 0 || cached.savedAt > Date.now()) return null;
+  if (cached.payload.freshness !== undefined &&
+      (typeof cached.payload.freshness?.stale !== "boolean" ||
+       typeof cached.payload.freshness?.updatedAt !== "string" ||
+       Date.parse(cached.payload.freshness?.updatedAt) !== cached.savedAt)) return null;
   return cached;
 }
 
@@ -2321,7 +2344,87 @@ function writeClientLiveCache(payload, savedAt) {
 }
 
 function isClientLiveCacheFresh(cached) {
-  return Date.now() - cached.savedAt <= getClientLiveCacheMaxAge(cached.payload);
+  return cached.payload.freshness?.stale !== true &&
+    Date.now() - cached.savedAt <= getClientLiveCacheMaxAge(cached.payload);
+}
+
+function getPayloadFreshness(payload) {
+  const now = Date.now();
+  // Older deployments do not yet supply source timestamps.
+  if (payload.freshness === undefined) return { updatedAt: now, stale: false };
+  const metadata = payload.freshness;
+  const timestamp = typeof metadata?.updatedAt === "string" ? Date.parse(metadata.updatedAt) : NaN;
+  if (typeof metadata?.stale !== "boolean" || !Number.isFinite(timestamp) || timestamp <= 0 ||
+      timestamp > now + 5000 || now - timestamp >= CLIENT_SNAPSHOT_MAX_AGE_MS) {
+    throw new Error("Invalid or expired score freshness metadata");
+  }
+  return { updatedAt: Math.min(now, timestamp), stale: metadata.stale };
+}
+
+function isRecentSnapshot(timestamp) {
+  const age = Date.now() - timestamp;
+  return Number.isFinite(timestamp) && timestamp > 0 && age >= 0 && age < CLIENT_SNAPSHOT_MAX_AGE_MS;
+}
+
+function restoreRecentSnapshot() {
+  const cached = readClientLiveCache();
+  if (cached && (!lastPayload || cached.savedAt > lastDataUpdatedAt)) {
+    lastPayload = cached.payload;
+    lastDataUpdatedAt = cached.savedAt;
+  }
+  if (!lastPayload || !isRecentSnapshot(lastDataUpdatedAt)) return false;
+  lastDataIsStale = true;
+  lastPayload = { ...lastPayload, freshness: {
+    updatedAt: new Date(lastDataUpdatedAt).toISOString(), stale: true,
+  } };
+  hasLoadedOnce = true;
+  renderPayload(lastPayload);
+  return true;
+}
+
+function discardSnapshot() {
+  clearTimeout(snapshotNoticeTimer);
+  snapshotNoticeTimer = null;
+  lastPayload = null;
+  lastDataUpdatedAt = 0;
+  lastDataIsStale = false;
+  selectedMatchSnapshot = null;
+  selectedMatchKey = null;
+  selectedLeagueKey = null;
+  abortDetailRequest();
+  if (snapshotNotice) snapshotNotice.hidden = true;
+  document.body.classList.remove("has-stale-scores");
+}
+
+function formatSnapshotAge(timestamp) {
+  const seconds = Math.max(0, Math.floor((Date.now() - timestamp) / 1000));
+  const unit = seconds >= 60 ? "minute" : "second";
+  const value = unit === "minute" ? Math.floor(seconds / 60) : seconds;
+  try {
+    return new Intl.RelativeTimeFormat(isEnglishOverride ? "en" : getUiLanguage().replace("_", "-"),
+      { numeric: "always" }).format(-value, unit);
+  } catch { return `${seconds}s`; }
+}
+
+function updateSnapshotNotice() {
+  clearTimeout(snapshotNoticeTimer);
+  snapshotNoticeTimer = null;
+  if (!snapshotNotice) return;
+  if (lastPayload && lastDataIsStale && !isRecentSnapshot(lastDataUpdatedAt)) {
+    discardSnapshot();
+    showError(msg("error"));
+    return false;
+  }
+  const stale = Boolean(lastPayload && lastDataIsStale);
+  snapshotNotice.hidden = !stale || !isEnabled || isSettingsOpen;
+  document.body.classList.toggle("has-stale-scores", stale);
+  if (!stale) return;
+  const text = `⚠ ${msg("refreshFailed")} ${msg("updated")} ${formatClockTime(lastDataUpdatedAt)} · ${formatSnapshotAge(lastDataUpdatedAt)}`;
+  if (snapshotNotice.textContent !== text) snapshotNotice.textContent = text;
+  // This updates only text, never the network or the saved data timestamp.
+  // Check the hard expiry even while automatic refresh is paused.
+  if (!document.hidden) snapshotNoticeTimer = setTimeout(updateSnapshotNotice,
+    Math.min(1000, Math.max(1, CLIENT_SNAPSHOT_MAX_AGE_MS - (Date.now() - lastDataUpdatedAt))));
 }
 
 function getClientLiveCacheMaxAge(payload) {

@@ -484,6 +484,68 @@ test("previews prefer popular club matches and upcoming metadata has no repeated
   }
 });
 
+test("last-successful scores show their real age, fit every size, expire and recover", async ({}, testInfo) => {
+  const snapshotPage = await context.newPage();
+  snapshotPage.on("console", message => { if (message.type() === "error") consoleErrors.push(message.text()); });
+  snapshotPage.on("pageerror", error => pageErrors.push(String(error)));
+  let sourceTime = Date.now() - 80000;
+  let stale = true;
+  let requests = 0;
+  await snapshotPage.clock.install({ time: Date.now() });
+  await snapshotPage.route("**://api.atakanozkan.com/live-matches**", async route => {
+    requests += 1;
+    expect(new URL(route.request().url()).searchParams.get("allowStale")).toBe("1");
+    await route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({
+      matches: ALL_MATCHES, leagues: LEAGUES,
+      freshness: { updatedAt: new Date(sourceTime).toISOString(), stale },
+    }) });
+  });
+  try {
+    await page.evaluate(() => localStorage.clear());
+    await snapshotPage.goto(POPUP_URL, { waitUntil: "domcontentloaded" });
+    const notice = snapshotPage.locator("#snapshotNotice");
+    await expect(notice).toBeVisible();
+    await expect(notice).toContainText("Refresh failed. Showing latest data.");
+    await expect(notice).toContainText("1 minute ago");
+    await expect(snapshotPage.locator(".league-pick-card")).toHaveCount(3);
+    expect(await snapshotPage.evaluate(() => JSON.parse(localStorage.getItem("hype_live_matches_cache")).savedAt)).toBe(sourceTime);
+    const initialRequests = requests;
+    for (const [size, width, height] of [["small", 480, 540], ["default", 580, 600], ["big", 720, 600]]) {
+      await snapshotPage.locator("#settingsToggle").click();
+      await expect(notice).toBeHidden();
+      await snapshotPage.locator(`input[name="popupSize"][value="${size}"]`).check();
+      await snapshotPage.setViewportSize({ width, height });
+      await snapshotPage.locator("#settingsClose").click();
+      await expect(notice).toBeVisible();
+      expect(await notice.evaluate(element => element.scrollWidth > element.clientWidth)).toBe(false);
+      expect(await snapshotPage.locator("#leaguePickList").evaluate(element => element.scrollWidth > element.clientWidth)).toBe(false);
+      await snapshotPage.screenshot({ path: testInfo.outputPath(`stale-score-warning-${size}.png`) });
+    }
+    expect(requests).toBe(initialRequests);
+    sourceTime = await snapshotPage.evaluate(() => Date.now() - 290000);
+    await snapshotPage.evaluate(() => localStorage.removeItem("hype_live_matches_cache"));
+    await snapshotPage.reload();
+    await expect(notice).toBeVisible();
+    const beforeExpiry = requests;
+    await snapshotPage.clock.fastForward(10001);
+    await expect(notice).toBeHidden();
+    await expect(snapshotPage.locator("#leaguePickList")).toBeHidden();
+    await expect(snapshotPage.locator("#errorState")).toBeVisible();
+    expect(requests).toBe(beforeExpiry);
+    stale = false;
+    sourceTime = await snapshotPage.evaluate(() => Date.now());
+    await snapshotPage.reload();
+    await expect(snapshotPage.locator(".league-pick-card")).toHaveCount(3);
+    await expect(notice).toBeHidden();
+    await expect(snapshotPage.locator("#errorState")).toBeHidden();
+  } finally {
+    await snapshotPage.close();
+    await page.evaluate(() => localStorage.clear());
+    await page.reload();
+    await page.locator(".league-pick-card").first().waitFor();
+  }
+});
+
 test("zero console and page errors", async () => {
   expect(pageErrors).toEqual([]);
   expect(consoleErrors).toEqual([]);

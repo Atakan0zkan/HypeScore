@@ -272,7 +272,7 @@ fetch("https://api.atakanozkan.com/live-matches")
   # A syntactically valid but structurally broken stored payload must recover.
   Invoke-CdpExpression $client @"
 localStorage.setItem('hype_live_matches_cache', JSON.stringify({
-  version: 'v11', savedAt: Date.now(), payload: { matches: [], leagues: {} }
+  version: 'v12', savedAt: Date.now(), payload: { matches: [], leagues: {} }
 }));
 "@ | Out-Null
   Send-Cdp $client "Page.reload" | Out-Null

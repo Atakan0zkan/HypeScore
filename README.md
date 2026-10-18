@@ -22,6 +22,9 @@ and available FIFA World Cup 2030 fixtures without injecting scripts into websit
   unpublished 2030 data stays empty, with no fallback to past tournaments).
 - Local favorite leagues, adaptive refresh, local score cache, and request
   budget protection.
+- During a short provider outage, updated clients can show the last successful
+  scores for at most five minutes, with their original update time and age.
+  Expired snapshots are removed instead of being presented as current scores.
 - Favorite competitions stay first; each group prioritizes live, upcoming,
   then completed matches. Pitch lineups use reported starting positions when
   both complete XIs are available, with named starters as a fallback.
@@ -132,6 +135,23 @@ hosting/request metrics still include external monitoring traffic. GitHub uses
 its short-lived `GITHUB_TOKEN` with issue-write permission; no extra API key is
 required, and PR/fork code cannot run the incident-writing workflow.
 
+### Short-outage fallback
+
+The Worker keeps a separate last-successful scoreboard in its regional Cache
+API, capped at five minutes from the original data fetch. Only clients sending
+`allowStale=1` can receive this fallback: `freshness.stale` is true, the original
+`freshness.updatedAt` is preserved, and the response is `no-store`. Old clients
+do not silently receive stale scores without a warning. Updated popups also
+have a bounded local fallback for a failed request and show the timestamp and
+relative age; displaying or re-reading a snapshot never renews its lifetime.
+
+Cache API data is not globally replicated, so a cold region with no recent
+snapshot can still return an error. Standings, details and World Cup season
+rules are unchanged. Cron and external monitors treat stale responses as
+degraded, not healthy, so the fallback does not hide provider outages. The
+popup warning requires an updated extension package; changing the Worker alone
+does not update an already-installed Chrome Web Store client.
+
 ## Deploy the Worker
 
 `wrangler.jsonc` is the canonical Cloudflare configuration.
@@ -144,7 +164,9 @@ npm run deploy
 For token-based automation, provide `CLOUDFLARE_API_TOKEN` through the process
 environment. Never save Cloudflare credentials in the repository.
 
-The optional fallback key must be stored as a Worker secret:
+The optional TheSportsDB live fallback requires its premium API key; its free
+v1 plan is not an independent live-score replacement. Store the key only as a
+Worker secret:
 
 ```powershell
 npx wrangler secret put THESPORTSDB_API_KEY

@@ -49,6 +49,7 @@ export async function runSmokeChecks({
   async function fetchJson(path) {
     const url = new URL(path, base);
     url.searchParams.set("client", "monitor");
+    if (url.pathname === "/live-matches") url.searchParams.set("allowStale", "1");
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
     try {
@@ -110,6 +111,15 @@ export async function runSmokeChecks({
 
 function assertLivePayload(payload) {
   assertObject(payload, "live payload");
+  if (payload.freshness !== undefined &&
+      (typeof payload.freshness?.stale !== "boolean" ||
+       typeof payload.freshness?.updatedAt !== "string" ||
+       !Number.isFinite(Date.parse(payload.freshness.updatedAt)))) {
+    throw new Error("API returned invalid score freshness metadata");
+  }
+  if (payload.freshness?.stale === true) {
+    throw Object.assign(new Error("API is serving a last-successful snapshot, not fresh scores"), { code: "STALE_DATA" });
+  }
   assertArray(payload.matches, "live payload matches");
   assertArray(payload.leagues, "live payload leagues");
 

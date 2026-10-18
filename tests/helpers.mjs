@@ -37,10 +37,10 @@ export function memoryCache() {
   return {
     async match(req) {
       const hit = store.get(String(req.url || req));
-      return hit ? new Response(hit.body, { status: hit.status, headers: { "Content-Type": "application/json" } }) : undefined;
+      return hit ? new Response(hit.body, { status: hit.status, headers: hit.headers }) : undefined;
     },
     async put(req, res) {
-      store.set(String(req.url || req), { body: await res.clone().text(), status: res.status });
+      store.set(String(req.url || req), { body: await res.clone().text(), status: res.status, headers: [...res.headers] });
     },
     size: () => store.size,
   };

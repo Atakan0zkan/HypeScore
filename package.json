@@ -16,8 +16,8 @@
     "analytics:test": "node tools/analytics-dashboard-test.mjs"
   },
   "devDependencies": {
-    "@playwright/test": "^1.64.0",
+    "@playwright/test": "^1.64.1",
     "happy-dom": "^21.0.1",
-    "wrangler": "^4.149.0"
+    "wrangler": "^4.151.0"
   }
 }

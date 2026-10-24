@@ -24,6 +24,38 @@ describe("static release guards (regression watchlist as code)", () => {
     assert.ok(!csp.includes("http:"), "no plain http in CSP");
   });
 
+  it("locks patched development tools without downgrading Wrangler", async () => {
+    const lock = JSON.parse(await read("package-lock.json"));
+    const atLeast = (version, minimum) => {
+      const parts = version.split(".").map(Number);
+      const floor = minimum.split(".").map(Number);
+      if (parts.length !== 3 || !parts.every(Number.isSafeInteger)) return false;
+      for (let i = 0; i < 3; i += 1) {
+        if (parts[i] !== floor[i]) return parts[i] > floor[i];
+      }
+      return true;
+    };
+    // GHSA-834v-8h66-3h79 and the Undici 7.30.1 security release.
+    // Inspect resolved packages at every nesting level, not parent metadata
+    // that may still declare the upstream vulnerable exact pin.
+    let domPackages = 0;
+    let httpPackages = 0;
+    for (const [key, pkg] of Object.entries(lock.packages)) {
+      if (/(?:^|\/)node_modules\/happy-dom$/.test(key)) {
+        domPackages += 1;
+        assert.ok(atLeast(pkg.version, "21.0.4"), `${key}: requires patched happy-dom`);
+      }
+      if (/(?:^|\/)node_modules\/undici$/.test(key)) {
+        httpPackages += 1;
+        const major = Number(pkg.version.split(".")[0]);
+        const minimum = { 6: "6.29.1", 7: "7.30.1", 8: "8.12.2" }[major];
+        assert.ok(minimum && atLeast(pkg.version, minimum), `${key}: requires a reviewed patched Undici release`);
+      }
+    }
+    assert.ok(domPackages > 0 && httpPackages > 0, "development tooling remains present");
+    assert.ok(atLeast(lock.packages["node_modules/wrangler"].version, "4.149.0"), "do not apply the audit --force downgrade");
+  });
+
   it("no injection / eval primitives in runtime", async () => {
     const popup = await read("extension/popup.js");
     const worker = await read("worker/index.js");

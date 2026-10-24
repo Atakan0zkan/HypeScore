@@ -108,6 +108,10 @@ npm run monitor
 ```
 
 - `npm test` runs popup, Worker, and dashboard regression suites.
+- `npm audit --audit-level=moderate` checks development dependencies too; this
+  remains a blocking CI check. A version-scoped npm override replaces vulnerable
+  Undici 7.x pins with patched 7.x releases until the parent tools update them.
+  It does not force future Undici major versions back to 7.x.
 - `npm run analytics:test` validates dashboard queries and data shaping.
 - `npm run smoke` checks the deployed API and therefore requires internet
   access.

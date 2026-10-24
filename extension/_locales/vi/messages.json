@@ -15,7 +15,7 @@
     "message": "Không thể tải dữ liệu"
   },
   "extensionRuntimeRequired": {
-    "message": "Dữ liệu live bị chặn ở chế độ xem trước tệp. Mở popup tiện ích Chrome để tải tỷ số."
+    "message": "Dữ liệu trực tiếp không khả dụng trong chế độ xem trước tệp. Mở cửa sổ tiện ích Chrome để xem tỷ số."
   },
   "empty": {
     "message": "Hôm nay không có trận đấu."
@@ -33,7 +33,7 @@
     "message": "Đã cập nhật"
   },
   "live": {
-    "message": "Trực tiếp"
+    "message": "Đang diễn ra"
   },
   "matches": {
     "message": "Trận đấu"
@@ -48,7 +48,7 @@
     "message": "Bảng xếp hạng"
   },
   "bracket": {
-    "message": "Loại trực tiếp"
+    "message": "Nhánh đấu"
   },
   "loadingBracket": {
     "message": "Đang tải nhánh đấu…"
@@ -108,16 +108,16 @@
     "message": "Tạm dừng"
   },
   "autoPaused": {
-    "message": "Tự làm mới đã tạm dừng để tiết kiệm yêu cầu."
+    "message": "Tạm dừng làm mới tự động để giảm số yêu cầu."
   },
   "idlePaused": {
     "message": "Tạm dừng khi không hoạt động."
   },
   "requestLimitReached": {
-    "message": "Đã đạt giới hạn yêu cầu hằng ngày. Đang hiện dữ liệu đã lưu."
+    "message": "Đã đạt giới hạn yêu cầu hằng ngày. Đang hiển thị dữ liệu đã lưu trong bộ nhớ đệm."
   },
   "refreshFailed": {
-    "message": "Làm mới thất bại. Đang hiện dữ liệu mới nhất."
+    "message": "Không thể làm mới. Đang hiển thị dữ liệu đã tải được gần nhất."
   },
   "club": {
     "message": "CLB"
@@ -129,10 +129,10 @@
     "message": "Chọn giải đấu"
   },
   "noLiveMatches": {
-    "message": "Không có trận trực tiếp"
+    "message": "Không có trận đấu đang diễn ra"
   },
   "liveCount": {
-    "message": "$COUNT$ trực tiếp",
+    "message": "Đang diễn ra: $COUNT$",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -140,7 +140,7 @@
     }
   },
   "matchCount": {
-    "message": "$COUNT$ trận",
+    "message": "$COUNT$ trận đấu",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -148,10 +148,10 @@
     }
   },
   "fullTime": {
-    "message": "Hết"
+    "message": "Kết thúc"
   },
   "halfTime": {
-    "message": "H1"
+    "message": "Nghỉ giữa hiệp"
   },
   "scheduled": {
     "message": "Đã lên lịch"
@@ -160,7 +160,7 @@
     "message": "Thống kê"
   },
   "favorite": {
-    "message": "Yêu thích"
+    "message": "Thêm vào yêu thích"
   },
   "removeFavorite": {
     "message": "Bỏ yêu thích"
@@ -175,7 +175,7 @@
     "message": "Thêm giải vào yêu thích"
   },
   "forceEnglishOn": {
-    "message": "Hiện nhãn tiếng Anh"
+    "message": "Hiển thị bằng tiếng Anh"
   },
   "forceEnglishOff": {
     "message": "Quay lại ngôn ngữ trình duyệt"
@@ -193,25 +193,25 @@
     "message": "Đội không xác định"
   },
   "matchDetails": {
-    "message": "Chi tiết trận"
+    "message": "Chi tiết trận đấu"
   },
   "loadingDetails": {
-    "message": "Đang tải chi tiết trận…"
+    "message": "Đang tải chi tiết trận đấu…"
   },
   "loadingStandings": {
     "message": "Đang tải bảng xếp hạng…"
   },
   "detailsUnavailable": {
-    "message": "Không có chi tiết"
+    "message": "Không có thông tin chi tiết"
   },
   "noDetails": {
-    "message": "Không có chi tiết thêm cho trận này."
+    "message": "Không có thông tin bổ sung về trận đấu này."
   },
   "noSectionData": {
     "message": "Không có dữ liệu."
   },
   "noStats": {
-    "message": "Không có thống kê trận."
+    "message": "Không có thống kê cho trận đấu này."
   },
   "noStandings": {
     "message": "Không có bảng xếp hạng cho giải này."
@@ -244,7 +244,7 @@
     "message": "Tin tức"
   },
   "highlights": {
-    "message": "Highlight"
+    "message": "Video tóm tắt"
   },
   "links": {
     "message": "Liên kết"
@@ -268,7 +268,7 @@
     "message": "Sao lưu cài đặt"
   },
   "settingsBackupHint": {
-    "message": "Gồm các giải yêu thích và kích thước cửa sổ. Nhập sẽ thay thế các cài đặt này."
+    "message": "Gồm các giải đấu yêu thích và kích thước cửa sổ. Khi nhập tệp, các cài đặt này sẽ được thay thế."
   },
   "exportSettings": {
     "message": "Xuất cài đặt"

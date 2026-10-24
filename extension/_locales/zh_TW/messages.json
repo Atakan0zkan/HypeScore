@@ -69,13 +69,13 @@
     "message": "十六強"
   },
   "quarterfinals": {
-    "message": "四分之一決賽"
+    "message": "八強賽"
   },
   "semifinals": {
-    "message": "半決賽"
+    "message": "四強賽"
   },
   "thirdPlace": {
-    "message": "三四名決賽"
+    "message": "季軍賽"
   },
   "final": {
     "message": "決賽"
@@ -108,16 +108,16 @@
     "message": "已暫停"
   },
   "autoPaused": {
-    "message": "為節省請求，已暫停自動重新整理。"
+    "message": "為減少資料請求次數，已暫停自動重新整理。"
   },
   "idlePaused": {
-    "message": "閒置時已暫停。"
+    "message": "因未操作而暫停。"
   },
   "requestLimitReached": {
     "message": "已達每日請求上限。正在顯示快取資料。"
   },
   "refreshFailed": {
-    "message": "重新整理失敗。正在顯示最新資料。"
+    "message": "重新整理失敗。正在顯示上次取得的資料。"
   },
   "club": {
     "message": "俱樂部"
@@ -129,7 +129,7 @@
     "message": "選擇聯賽"
   },
   "noLiveMatches": {
-    "message": "暫無進行中比賽"
+    "message": "目前沒有正在進行的比賽"
   },
   "liveCount": {
     "message": "$COUNT$ 場進行中",
@@ -148,16 +148,16 @@
     }
   },
   "fullTime": {
-    "message": "完場"
+    "message": "終場"
   },
   "halfTime": {
-    "message": "半場"
+    "message": "中場休息"
   },
   "scheduled": {
     "message": "未開始"
   },
   "stats": {
-    "message": "數據"
+    "message": "統計"
   },
   "favorite": {
     "message": "收藏"
@@ -175,10 +175,10 @@
     "message": "收藏聯賽"
   },
   "forceEnglishOn": {
-    "message": "顯示英文標籤"
+    "message": "顯示英文"
   },
   "forceEnglishOff": {
-    "message": "返回瀏覽器語言"
+    "message": "恢復瀏覽器語言"
   },
   "other": {
     "message": "其他"
@@ -193,25 +193,25 @@
     "message": "未知球隊"
   },
   "matchDetails": {
-    "message": "比賽詳情"
+    "message": "比賽詳細資訊"
   },
   "loadingDetails": {
-    "message": "正在載入比賽詳情…"
+    "message": "正在載入比賽詳細資訊…"
   },
   "loadingStandings": {
     "message": "正在載入積分榜…"
   },
   "detailsUnavailable": {
-    "message": "詳情不可用"
+    "message": "無法取得比賽詳細資訊"
   },
   "noDetails": {
-    "message": "本場比賽暫無更多詳情。"
+    "message": "這場比賽目前沒有更多詳細資訊。"
   },
   "noSectionData": {
     "message": "暫無資料。"
   },
   "noStats": {
-    "message": "暫無比賽數據。"
+    "message": "暫無比賽統計資料。"
   },
   "noStandings": {
     "message": "此聯賽暫無積分榜。"
@@ -268,7 +268,7 @@
     "message": "設定備份"
   },
   "settingsBackupHint": {
-    "message": "包含收藏聯賽和視窗大小。匯入將取代這些設定。"
+    "message": "包含收藏的聯賽和彈出視窗大小。匯入檔案後，將取代這些設定。"
   },
   "exportSettings": {
     "message": "匯出設定"

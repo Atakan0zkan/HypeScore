@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "Hype - Live fotbollsresultat"
+    "message": "Hype - Fotbollsresultat live"
   },
   "extDescription": {
-    "message": "Live fotbollsresultat, matcher, resultat och tabeller."
+    "message": "Fotbollsresultat live, spelschema, slutresultat och tabeller."
   },
   "appTitle": {
     "message": "Hype Scores"
@@ -15,7 +15,7 @@
     "message": "Kunde inte ladda data"
   },
   "extensionRuntimeRequired": {
-    "message": "Livedata blockeras i filförhandsvisning. Öppna Chrome-tilläggets popup för att ladda resultat."
+    "message": "Livedata är inte tillgängliga i filförhandsvisningen. Öppna Chrome-tilläggets popup för att se resultaten."
   },
   "empty": {
     "message": "Inga matcher hittades idag."
@@ -48,22 +48,22 @@
     "message": "Tabell"
   },
   "bracket": {
-    "message": "Utslagsspel"
+    "message": "Slutspelsträd"
   },
   "loadingBracket": {
-    "message": "Laddar utslagsträd…"
+    "message": "Laddar slutspelsträdet…"
   },
   "noBracket": {
-    "message": "Inget utslagsträd tillgängligt."
+    "message": "Inget slutspelsträd tillgängligt."
   },
   "bracketUnavailable": {
-    "message": "Utslagsträd otillgängligt."
+    "message": "Slutspelsträdet är inte tillgängligt."
   },
   "tbd": {
-    "message": "TBD"
+    "message": "Inte fastställt"
   },
   "roundOf32": {
-    "message": "Åttondelsfinalkval"
+    "message": "Sextondelsfinal"
   },
   "roundOf16": {
     "message": "Åttondelsfinal"
@@ -108,16 +108,16 @@
     "message": "Pausad"
   },
   "autoPaused": {
-    "message": "Automatisk uppdatering pausad för att spara förfrågningar."
+    "message": "Automatisk uppdatering har pausats för att minska antalet förfrågningar."
   },
   "idlePaused": {
     "message": "Pausad vid inaktivitet."
   },
   "requestLimitReached": {
-    "message": "Daglig förfrågningsgräns nådd. Visar cachad data."
+    "message": "Den dagliga gränsen för förfrågningar har nåtts. Data från cacheminnet visas."
   },
   "refreshFailed": {
-    "message": "Uppdatering misslyckades. Visar senaste data."
+    "message": "Uppdateringen misslyckades. De senast hämtade uppgifterna visas."
   },
   "club": {
     "message": "Klubb"
@@ -148,10 +148,10 @@
     }
   },
   "fullTime": {
-    "message": "FT"
+    "message": "Slut"
   },
   "halfTime": {
-    "message": "HT"
+    "message": "Paus"
   },
   "scheduled": {
     "message": "Schemalagd"
@@ -160,10 +160,10 @@
     "message": "Statistik"
   },
   "favorite": {
-    "message": "Favorit"
+    "message": "Lägg till i favoriter"
   },
   "removeFavorite": {
-    "message": "Ta bort favorit"
+    "message": "Ta bort från favoriter"
   },
   "turnOff": {
     "message": "Stäng av tillägget"
@@ -175,10 +175,10 @@
     "message": "Favoritmarkera liga"
   },
   "forceEnglishOn": {
-    "message": "Visa engelska etiketter"
+    "message": "Visa på engelska"
   },
   "forceEnglishOff": {
-    "message": "Tillbaka till webbläsarspråk"
+    "message": "Återgå till webbläsarens språk"
   },
   "other": {
     "message": "Övrigt"
@@ -208,7 +208,7 @@
     "message": "Inga extra detaljer för den här matchen."
   },
   "noSectionData": {
-    "message": "Ingen data tillgänglig."
+    "message": "Det finns inga data att visa."
   },
   "noStats": {
     "message": "Ingen matchstatistik tillgänglig."
@@ -268,7 +268,7 @@
     "message": "Säkerhetskopia av inställningar"
   },
   "settingsBackupHint": {
-    "message": "Innehåller favoritligor och popupstorlek. Import ersätter dessa inställningar."
+    "message": "Innehåller favoritligor och popupstorlek. Om du importerar en fil ersätts dessa inställningar."
   },
   "exportSettings": {
     "message": "Exportera inställningar"
@@ -307,7 +307,7 @@
     "message": "Matchen slut"
   },
   "halfTimeLabel": {
-    "message": "Halvtid"
+    "message": "Paus"
   },
   "liveMatchCountOne": {
     "message": "$COUNT$ livematch",

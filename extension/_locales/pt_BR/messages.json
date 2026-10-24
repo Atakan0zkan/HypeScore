@@ -3,7 +3,7 @@
     "message": "Hype - Placar de futebol ao vivo"
   },
   "extDescription": {
-    "message": "Placares de futebol ao vivo, jogos, resultados e tabelas."
+    "message": "Placares de futebol ao vivo, calendário de jogos, resultados e tabelas."
   },
   "appTitle": {
     "message": "Hype Scores"
@@ -15,7 +15,7 @@
     "message": "Não foi possível carregar os dados"
   },
   "extensionRuntimeRequired": {
-    "message": "Os dados ao vivo são bloqueados na prévia de arquivo. Abra o pop-up da extensão do Chrome para carregar os placares."
+    "message": "Os dados ao vivo não estão disponíveis na prévia do arquivo. Abra a janela da extensão do Chrome para ver os placares."
   },
   "empty": {
     "message": "Nenhum jogo encontrado hoje."
@@ -63,7 +63,7 @@
     "message": "A definir"
   },
   "roundOf32": {
-    "message": "Fase de 32"
+    "message": "Fase de 32 times"
   },
   "roundOf16": {
     "message": "Oitavas de final"
@@ -108,16 +108,16 @@
     "message": "Pausado"
   },
   "autoPaused": {
-    "message": "Atualização automática pausada para evitar acessos desnecessários."
+    "message": "Atualização automática pausada para reduzir o número de solicitações."
   },
   "idlePaused": {
     "message": "Pausado por inatividade."
   },
   "requestLimitReached": {
-    "message": "Limite diário de atualizações atingido. Mostrando dados salvos."
+    "message": "Limite diário de solicitações atingido. Mostrando dados salvos."
   },
   "refreshFailed": {
-    "message": "Falha ao atualizar. Mostrando os dados mais recentes."
+    "message": "Falha ao atualizar. Mostrando os últimos dados disponíveis."
   },
   "club": {
     "message": "Clube"
@@ -160,10 +160,10 @@
     "message": "Estatísticas"
   },
   "favorite": {
-    "message": "Favorito"
+    "message": "Adicionar aos favoritos"
   },
   "removeFavorite": {
-    "message": "Remover favorito"
+    "message": "Remover dos favoritos"
   },
   "turnOff": {
     "message": "Desativar extensão"
@@ -253,7 +253,7 @@
     "message": "Configurações"
   },
   "popupSize": {
-    "message": "Tamanho do popup"
+    "message": "Tamanho da janela"
   },
   "sizeSmall": {
     "message": "Pequeno"
@@ -268,7 +268,7 @@
     "message": "Backup de configurações"
   },
   "settingsBackupHint": {
-    "message": "Inclui ligas favoritas e tamanho do popup. A importação substitui essas configurações."
+    "message": "Inclui as ligas favoritas e o tamanho da janela. A importação substitui essas configurações."
   },
   "exportSettings": {
     "message": "Exportar configurações"

@@ -3,7 +3,7 @@
     "message": "Hype - Resultats de futbol en directe"
   },
   "extDescription": {
-    "message": "Resultats de futbol en directe, partits, resultats i classificacions."
+    "message": "Marcadors de futbol en directe, calendari, resultats i classificacions."
   },
   "appTitle": {
     "message": "Hype Scores"
@@ -15,7 +15,7 @@
     "message": "No s’han pogut carregar les dades"
   },
   "extensionRuntimeRequired": {
-    "message": "Les dades en directe estan bloquejades a la previsualització del fitxer. Obre la finestra emergent de l’extensió de Chrome."
+    "message": "Les dades en directe no es carreguen a la previsualització del fitxer. Obre la finestra de l’extensió de Chrome per veure els marcadors."
   },
   "empty": {
     "message": "No s’han trobat partits avui."
@@ -108,7 +108,7 @@
     "message": "En pausa"
   },
   "autoPaused": {
-    "message": "Actualització automàtica en pausa per estalviar sol·licituds."
+    "message": "Actualització automàtica en pausa per reduir el nombre de sol·licituds."
   },
   "idlePaused": {
     "message": "En pausa per inactivitat."
@@ -117,7 +117,7 @@
     "message": "S’ha assolit el límit diari de sol·licituds. Es mostren les dades en memòria cau."
   },
   "refreshFailed": {
-    "message": "L’actualització ha fallat. Es mostren les dades més recents."
+    "message": "L’actualització ha fallat. Es mostren les últimes dades disponibles."
   },
   "club": {
     "message": "Club"
@@ -160,7 +160,7 @@
     "message": "Estadístiques"
   },
   "favorite": {
-    "message": "Preferit"
+    "message": "Afegeix als preferits"
   },
   "removeFavorite": {
     "message": "Treu dels preferits"
@@ -175,7 +175,7 @@
     "message": "Afegeix la lliga als preferits"
   },
   "forceEnglishOn": {
-    "message": "Mostra etiquetes en anglès"
+    "message": "Mostra en anglès"
   },
   "forceEnglishOff": {
     "message": "Torna a l’idioma del navegador"
@@ -238,7 +238,7 @@
     "message": "Alineacions"
   },
   "headToHead": {
-    "message": "Cara a cara"
+    "message": "Enfrontaments directes"
   },
   "news": {
     "message": "Notícies"
@@ -265,10 +265,10 @@
     "message": "Gran"
   },
   "settingsBackup": {
-    "message": "Còpia de configuració"
+    "message": "Còpia de seguretat de la configuració"
   },
   "settingsBackupHint": {
-    "message": "Inclou lligues preferides i mida de la finestra. La importació substitueix aquests ajustos."
+    "message": "Inclou les lligues preferides i la mida de la finestra. La importació substitueix aquesta configuració."
   },
   "exportSettings": {
     "message": "Exporta la configuració"
@@ -307,7 +307,7 @@
     "message": "Final del partit"
   },
   "halfTimeLabel": {
-    "message": "Mitja part"
+    "message": "Descans"
   },
   "liveMatchCountOne": {
     "message": "$COUNT$ partit en directe",
@@ -326,7 +326,7 @@
     }
   },
   "upcomingMatchCountOne": {
-    "message": "$COUNT$ partit pròxim",
+    "message": "$COUNT$ partit per disputar",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -334,7 +334,7 @@
     }
   },
   "upcomingMatchesCount": {
-    "message": "$COUNT$ partits pròxims",
+    "message": "$COUNT$ partits per disputar",
     "placeholders": {
       "count": {
         "content": "$1"

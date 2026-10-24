@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "Hype - Живі футбольні рахунки"
+    "message": "Hype - Футбольні результати наживо"
   },
   "extDescription": {
-    "message": "Живі футбольні рахунки, матчі, результати та турнірні таблиці."
+    "message": "Футбольні результати наживо, розклад матчів, підсумки та турнірні таблиці."
   },
   "appTitle": {
     "message": "Hype Scores"
@@ -15,7 +15,7 @@
     "message": "Не вдалося завантажити дані"
   },
   "extensionRuntimeRequired": {
-    "message": "Live-дані заблоковано в попередньому перегляді файлу. Відкрийте спливаюче вікно розширення Chrome."
+    "message": "У попередньому перегляді файлу дані наживо недоступні. Щоб побачити рахунок, відкрийте вікно розширення Chrome."
   },
   "empty": {
     "message": "Сьогодні матчів не знайдено."
@@ -33,7 +33,7 @@
     "message": "Оновлено"
   },
   "live": {
-    "message": "Live"
+    "message": "Наживо"
   },
   "matches": {
     "message": "Матчі"
@@ -48,19 +48,19 @@
     "message": "Таблиця"
   },
   "bracket": {
-    "message": "Плей-офф"
+    "message": "Плей-оф"
   },
   "loadingBracket": {
     "message": "Завантаження сітки…"
   },
   "noBracket": {
-    "message": "Сітка плей-офф недоступна."
+    "message": "Немає сітки плей-оф."
   },
   "bracketUnavailable": {
     "message": "Сітка недоступна."
   },
   "tbd": {
-    "message": "TBD"
+    "message": "Ще не визначено"
   },
   "roundOf32": {
     "message": "1/16 фіналу"
@@ -108,7 +108,7 @@
     "message": "Пауза"
   },
   "autoPaused": {
-    "message": "Автооновлення призупинено для економії запитів."
+    "message": "Автоматичне оновлення призупинено, щоб зменшити кількість запитів."
   },
   "idlePaused": {
     "message": "Пауза через бездіяльність."
@@ -117,7 +117,7 @@
     "message": "Досягнуто денний ліміт запитів. Показано кешовані дані."
   },
   "refreshFailed": {
-    "message": "Не вдалося оновити. Показано останні дані."
+    "message": "Не вдалося оновити дані. Показано останні доступні дані."
   },
   "club": {
     "message": "Клуб"
@@ -129,10 +129,10 @@
     "message": "Оберіть лігу"
   },
   "noLiveMatches": {
-    "message": "Немає live-матчів"
+    "message": "Немає матчів наживо"
   },
   "liveCount": {
-    "message": "$COUNT$ live",
+    "message": "$COUNT$ наживо",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -148,10 +148,10 @@
     }
   },
   "fullTime": {
-    "message": "FT"
+    "message": "Завершено"
   },
   "halfTime": {
-    "message": "HT"
+    "message": "Перерва"
   },
   "scheduled": {
     "message": "Заплановано"
@@ -160,7 +160,7 @@
     "message": "Статистика"
   },
   "favorite": {
-    "message": "Улюблене"
+    "message": "Додати до улюблених"
   },
   "removeFavorite": {
     "message": "Прибрати з улюблених"
@@ -175,7 +175,7 @@
     "message": "Додати лігу до улюблених"
   },
   "forceEnglishOn": {
-    "message": "Показати англійські підписи"
+    "message": "Показати англійською"
   },
   "forceEnglishOff": {
     "message": "Повернутися до мови браузера"
@@ -268,7 +268,7 @@
     "message": "Резервна копія налаштувань"
   },
   "settingsBackupHint": {
-    "message": "Містить улюблені ліги та розмір вікна. Імпорт замінює ці налаштування."
+    "message": "Містить улюблені ліги та розмір вікна. Імпорт файлу замінить ці налаштування."
   },
   "exportSettings": {
     "message": "Експорт налаштувань"
@@ -286,7 +286,7 @@
     "message": "Налаштування імпортовано."
   },
   "settingsImportError": {
-    "message": "Це не дійсний файл налаштувань Hype."
+    "message": "Це некоректний файл налаштувань Hype."
   },
   "settingsSaveError": {
     "message": "Не вдалося зберегти налаштування на цьому пристрої."
@@ -359,6 +359,38 @@
   },
   "matchCountOne": {
     "message": "$COUNT$ матч",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "liveMatchCountFew": {
+    "message": "$COUNT$ матчі наживо",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchCountFew": {
+    "message": "$COUNT$ майбутні матчі",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchCountFew": {
+    "message": "$COUNT$ завершені матчі",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCountFew": {
+    "message": "$COUNT$ матчі",
     "placeholders": {
       "count": {
         "content": "$1"

@@ -158,18 +158,15 @@ function popupPayload(timestamp = Date.now(), stale = false) {
 async function settle() { for (let i = 0; i < 8; i += 1) await new Promise(resolve => setImmediate(resolve)); }
 const stored = (payload, timestamp) => ({ hype_live_matches_cache: JSON.stringify({ payload, savedAt: timestamp, version: "v12" }) });
 
-describe("popup snapshot warning and hard expiry", () => {
-  it("shows source time and relative age, preserves it in storage, and clears the warning after recovery", async () => {
+describe("popup silent bounded fallback and hard expiry", () => {
+  it("preserves source time in storage without freshness UI and recovers", async () => {
     const timestamp = Date.now() - 80000;
     let payload = popupPayload(timestamp, true);
     const calls = [];
     const app = await loadPopupDOM({ fetchImpl: async (url, init) => { calls.push({ url, init }); return workerJson(payload); } });
     try {
       await settle();
-      const notice = app.document.getElementById("snapshotNotice");
-      assert.equal(notice.hidden, false);
-      assert.match(notice.textContent, /Refresh failed/);
-      assert.match(notice.textContent, /1 minute ago/);
+      assert.equal(app.document.getElementById("snapshotNotice"), null);
       assert.ok(app.document.querySelectorAll(".league-pick-card").length > 0);
       assert.equal(JSON.parse(app.window.localStorage.getItem("hype_live_matches_cache")).savedAt, timestamp);
       assert.equal(new URL(calls[0].url).searchParams.get("allowStale"), "1");
@@ -178,8 +175,7 @@ describe("popup snapshot warning and hard expiry", () => {
       assert.equal(JSON.parse(app.window.localStorage.getItem("hype_live_matches_cache")).savedAt, timestamp);
       payload = popupPayload();
       await app.eval("loadMatches({force:true})");
-      assert.equal(notice.hidden, true);
-      assert.equal(app.document.body.classList.contains("has-stale-scores"), false);
+      assert.equal(app.document.getElementById("snapshotNotice"), null);
     } finally { await app.close(); }
   });
 
@@ -189,7 +185,7 @@ describe("popup snapshot warning and hard expiry", () => {
       fetchImpl: async () => new Response("Unavailable", { status: 502 }) });
     try {
       await settle();
-      assert.equal(app.document.getElementById("snapshotNotice").hidden, false);
+      assert.equal(app.document.getElementById("snapshotNotice"), null);
       assert.equal(app.document.getElementById("leaguePickList").hidden, false);
       assert.equal(app.document.getElementById("errorState").hidden, true);
       assert.equal(JSON.parse(app.window.localStorage.getItem("hype_live_matches_cache")).savedAt, timestamp);
@@ -204,7 +200,7 @@ describe("popup snapshot warning and hard expiry", () => {
       await settle();
       assert.equal(app.document.getElementById("errorState").hidden, false);
       assert.equal(app.document.getElementById("leaguePickList").hidden, true);
-      assert.equal(app.document.getElementById("snapshotNotice").hidden, true);
+      assert.equal(app.document.getElementById("snapshotNotice"), null);
     } finally { await app.close(); }
   });
 
@@ -216,9 +212,9 @@ describe("popup snapshot warning and hard expiry", () => {
       await settle();
       const before = calls;
       app.document.getElementById("settingsToggle").click();
-      app.eval(`Date.now = () => ${timestamp + MAX_AGE}; updateSnapshotNotice();`);
+      app.eval(`Date.now = () => ${timestamp + MAX_AGE}; enforceSnapshotExpiry();`);
       app.document.getElementById("settingsClose").click();
-      assert.equal(app.document.getElementById("snapshotNotice").hidden, true);
+      assert.equal(app.document.getElementById("snapshotNotice"), null);
       assert.equal(app.document.getElementById("leaguePickList").hidden, true);
       assert.equal(app.document.getElementById("leagueDetailView").hidden, true);
       assert.equal(app.document.getElementById("errorState").hidden, false);
@@ -256,7 +252,7 @@ describe("popup snapshot warning and hard expiry", () => {
     try {
       await settle();
       assert.equal(app.document.getElementById("errorState").hidden, true);
-      assert.equal(app.document.getElementById("snapshotNotice").hidden, true);
+      assert.equal(app.document.getElementById("snapshotNotice"), null);
       assert.ok(app.document.querySelectorAll(".league-pick-card").length > 0);
     } finally { await app.close(); }
   });

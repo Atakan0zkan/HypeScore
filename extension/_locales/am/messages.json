@@ -3,7 +3,7 @@
     "message": "Hype - የቀጥታ እግር ኳስ ውጤቶች"
   },
   "extDescription": {
-    "message": "የቀጥታ እግር ኳስ ውጤቶች፣ ጨዋታዎች፣ ውጤቶች እና የሊግ ሰንጠረዦች።"
+    "message": "የቀጥታ እግር ኳስ ውጤቶች፣ የጨዋታ መርሃ ግብሮች፣ ውጤቶች እና የሊግ ደረጃ ሰንጠረዦች።"
   },
   "appTitle": {
     "message": "Hype Scores"
@@ -15,7 +15,7 @@
     "message": "ውሂብ መጫን አልተቻለም"
   },
   "extensionRuntimeRequired": {
-    "message": "ቀጥታ ውሂብ በፋይል ቅድመ-እይታ ተከልክሏል። ውጤቶችን ለመጫን የChrome ቅጥያ ብቅ-ባይ ይክፈቱ።"
+    "message": "የቀጥታ ውሂብ በፋይል ቅድመ እይታ አይገኝም። ውጤቶችን ለማየት የChrome ቅጥያውን መስኮት ይክፈቱ።"
   },
   "empty": {
     "message": "ዛሬ ጨዋታዎች አልተገኙም።"
@@ -45,7 +45,7 @@
     "message": "መጪ"
   },
   "standings": {
-    "message": "ሰንጠረዥ"
+    "message": "የደረጃ ሰንጠረዥ"
   },
   "bracket": {
     "message": "ኖክአውት"
@@ -60,7 +60,7 @@
     "message": "የኖክአውት ቻርት አይገኝም።"
   },
   "tbd": {
-    "message": "TBD"
+    "message": "ገና አልተወሰነም"
   },
   "roundOf32": {
     "message": "የ32 ዙር"
@@ -108,16 +108,16 @@
     "message": "ቆሟል"
   },
   "autoPaused": {
-    "message": "ጥያቄዎችን ለመቆጠብ ራስ-ሰር ማደስ ቆሟል።"
+    "message": "የጥያቄዎችን ብዛት ለመቀነስ ራስ-ሰር ማደስ ለጊዜው ቆሟል።"
   },
   "idlePaused": {
     "message": "እንቅስቃሴ በሌለበት ቆሟል።"
   },
   "requestLimitReached": {
-    "message": "የዕለቱ የጥያቄ ገደብ ተሞልቷል። የተሸፈነ ውሂብ ይታያል።"
+    "message": "የቀን የጥያቄ ገደብ ላይ ተደርሷል። የተቀመጠ ውሂብ እየታየ ነው።"
   },
   "refreshFailed": {
-    "message": "ማደስ አልተሳካም። የቅርብ ጊዜ ውሂብ ይታያል።"
+    "message": "ማደስ አልተሳካም። በመጨረሻ የተገኘው ውሂብ እየታየ ነው።"
   },
   "club": {
     "message": "ክለብ"
@@ -151,7 +151,7 @@
     "message": "ተጠናቋል"
   },
   "halfTime": {
-    "message": "ግማሽ"
+    "message": "እረፍት"
   },
   "scheduled": {
     "message": "ታቅዷል"
@@ -160,7 +160,7 @@
     "message": "ስታቲስቲክስ"
   },
   "favorite": {
-    "message": "ተወዳጅ"
+    "message": "ወደ ተወዳጆች ጨምር"
   },
   "removeFavorite": {
     "message": "ከተወዳጆች አስወግድ"
@@ -175,7 +175,7 @@
     "message": "ሊጉን ወደ ተወዳጆች ጨምር"
   },
   "forceEnglishOn": {
-    "message": "የእንግሊዝኛ መለያዎችን አሳይ"
+    "message": "በእንግሊዝኛ አሳይ"
   },
   "forceEnglishOff": {
     "message": "ወደ አሳሽ ቋንቋ ተመለስ"
@@ -223,7 +223,7 @@
     "message": "ስታዲየም"
   },
   "vs": {
-    "message": "በ"
+    "message": "ከ"
   },
   "kickoff": {
     "message": "መጀመሪያ"
@@ -232,13 +232,13 @@
     "message": "ስርጭቶች"
   },
   "timeline": {
-    "message": "ጊዜ መስመር"
+    "message": "የጨዋታው ሂደት"
   },
   "lineups": {
-    "message": "መስመሮች"
+    "message": "አሰላለፍ"
   },
   "headToHead": {
-    "message": "ጭንቅላት ለጭንቅላት"
+    "message": "የእርስ በእርስ ጨዋታዎች"
   },
   "news": {
     "message": "ዜና"
@@ -271,7 +271,7 @@
     "message": "ተወዳጅ ሊጎችን እና የመስኮት መጠንን ያካትታል። ማስመጣት እነዚህን ቅንብሮች ይተካል።"
   },
   "exportSettings": {
-    "message": "ቅንብሮችን ላክ"
+    "message": "ቅንብሮችን ወደ ውጭ ላክ"
   },
   "importSettings": {
     "message": "ቅንብሮችን አስመጣ"
@@ -292,22 +292,22 @@
     "message": "ቅንብሮችን በዚህ መሣሪያ ላይ ማስቀመጥ አልተቻለም።"
   },
   "settingsExported": {
-    "message": "ቅንብሮች ተልከዋል።"
+    "message": "ቅንብሮች ወደ ውጭ ተልከዋል።"
   },
   "settingsExportError": {
-    "message": "ቅንብሮችን መላክ አልተቻለም።"
+    "message": "ቅንብሮችን ወደ ውጭ መላክ አልተቻለም።"
   },
   "substitutes": {
     "message": "ተቀያሪ ተጫዋቾች"
   },
   "startingXI": {
-    "message": "መነሻ አስራ አንድ"
+    "message": "የመጀመሪያ አሰላለፍ"
   },
   "fullTimeLabel": {
-    "message": "ሙሉ ሰዓት"
+    "message": "ጨዋታው ተጠናቋል"
   },
   "halfTimeLabel": {
-    "message": "የእረፍት ሰዓት"
+    "message": "የእረፍት ጊዜ"
   },
   "liveMatchCountOne": {
     "message": "$COUNT$ የቀጥታ ጨዋታ",

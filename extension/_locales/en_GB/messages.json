@@ -15,7 +15,7 @@
     "message": "Could not load data"
   },
   "extensionRuntimeRequired": {
-    "message": "Live data is blocked in file preview. Open the Chrome extension popup to load scores."
+    "message": "Live data is unavailable in file previews. Open the Chrome extension popup to load scores."
   },
   "empty": {
     "message": "No matches found today."
@@ -108,7 +108,7 @@
     "message": "Paused"
   },
   "autoPaused": {
-    "message": "Auto refresh paused to save requests."
+    "message": "Automatic refresh paused to reduce requests."
   },
   "idlePaused": {
     "message": "Paused while inactive."
@@ -117,7 +117,7 @@
     "message": "Daily request limit reached. Showing cached data."
   },
   "refreshFailed": {
-    "message": "Refresh failed. Showing latest data."
+    "message": "Refresh failed. Showing the last available data."
   },
   "club": {
     "message": "Club"
@@ -160,10 +160,10 @@
     "message": "Stats"
   },
   "favorite": {
-    "message": "Favourite"
+    "message": "Add to favourites"
   },
   "removeFavorite": {
-    "message": "Remove favourite"
+    "message": "Remove from favourites"
   },
   "turnOff": {
     "message": "Turn extension off"
@@ -172,13 +172,13 @@
     "message": "Turn extension on"
   },
   "favoriteLeague": {
-    "message": "Favourite league"
+    "message": "Add league to favourites"
   },
   "forceEnglishOn": {
-    "message": "Show English labels"
+    "message": "Show in English"
   },
   "forceEnglishOff": {
-    "message": "Return to browser language"
+    "message": "Use browser language"
   },
   "other": {
     "message": "Other"
@@ -226,7 +226,7 @@
     "message": "vs"
   },
   "kickoff": {
-    "message": "Kickoff"
+    "message": "Kick-off"
   },
   "broadcasts": {
     "message": "Broadcasts"
@@ -268,7 +268,7 @@
     "message": "Settings backup"
   },
   "settingsBackupHint": {
-    "message": "Includes favorite leagues and popup size. Import replaces these settings."
+    "message": "Includes your favourite leagues and popup size. Importing a file replaces these settings."
   },
   "exportSettings": {
     "message": "Export settings"

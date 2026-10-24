@@ -15,7 +15,7 @@
     "message": "Could not load data"
   },
   "extensionRuntimeRequired": {
-    "message": "Live data is blocked in file preview. Open the Chrome extension popup to load scores."
+    "message": "Live data is unavailable in file previews. Open the Chrome extension popup to load scores."
   },
   "empty": {
     "message": "No matches found today."
@@ -48,7 +48,8 @@
     "message": "Standings"
   },
   "bracket": {
-    "message": "Knockout"
+    "message": "Knockout",
+    "description": "Heading for the knockout-stage bracket, not a physical bracket or a network."
   },
   "loadingBracket": {
     "message": "Loading knockout bracket…"
@@ -63,16 +64,17 @@
     "message": "TBD"
   },
   "roundOf32": {
-    "message": "Round of 32"
+    "message": "Round of 32",
+    "description": "Knockout round with 32 teams (16 ties), immediately before the round of 16; not a round with 64 teams."
   },
   "roundOf16": {
     "message": "Round of 16"
   },
   "quarterfinals": {
-    "message": "Quarter-finals"
+    "message": "Quarterfinals"
   },
   "semifinals": {
-    "message": "Semi-finals"
+    "message": "Semifinals"
   },
   "thirdPlace": {
     "message": "Third-place match"
@@ -81,7 +83,8 @@
     "message": "Final"
   },
   "played": {
-    "message": "P"
+    "message": "P",
+    "description": "Compact standings column: matches played."
   },
   "wins": {
     "message": "W"
@@ -93,10 +96,12 @@
     "message": "L"
   },
   "goalsFor": {
-    "message": "F"
+    "message": "F",
+    "description": "Compact standings column: goals scored by the team, not points or shots."
   },
   "goalsAgainst": {
-    "message": "A"
+    "message": "A",
+    "description": "Compact standings column: goals conceded by the team."
   },
   "goalDifference": {
     "message": "GD"
@@ -108,7 +113,7 @@
     "message": "Paused"
   },
   "autoPaused": {
-    "message": "Auto refresh paused to save requests."
+    "message": "Automatic refresh paused to reduce requests."
   },
   "idlePaused": {
     "message": "Paused while inactive."
@@ -117,7 +122,7 @@
     "message": "Daily request limit reached. Showing cached data."
   },
   "refreshFailed": {
-    "message": "Refresh failed. Showing latest data."
+    "message": "Refresh failed. Showing the last available data."
   },
   "club": {
     "message": "Club"
@@ -151,7 +156,8 @@
     "message": "FT"
   },
   "halfTime": {
-    "message": "HT"
+    "message": "HT",
+    "description": "Compact status for the break between halves, not the first half in progress."
   },
   "scheduled": {
     "message": "Scheduled"
@@ -160,10 +166,11 @@
     "message": "Stats"
   },
   "favorite": {
-    "message": "Favorite"
+    "message": "Add to favorites",
+    "description": "Action tooltip on an unselected favorite star, not a heading for the favorites list."
   },
   "removeFavorite": {
-    "message": "Remove favorite"
+    "message": "Remove from favorites"
   },
   "turnOff": {
     "message": "Turn extension off"
@@ -172,13 +179,13 @@
     "message": "Turn extension on"
   },
   "favoriteLeague": {
-    "message": "Favorite league"
+    "message": "Add league to favorites"
   },
   "forceEnglishOn": {
-    "message": "Show English labels"
+    "message": "Show in English"
   },
   "forceEnglishOff": {
-    "message": "Return to browser language"
+    "message": "Use browser language"
   },
   "other": {
     "message": "Other"
@@ -238,7 +245,8 @@
     "message": "Lineups"
   },
   "headToHead": {
-    "message": "Head to head"
+    "message": "Head to head",
+    "description": "Previous matches between the two teams; do not translate the words head literally."
   },
   "news": {
     "message": "News"
@@ -268,7 +276,8 @@
     "message": "Settings backup"
   },
   "settingsBackupHint": {
-    "message": "Includes favorite leagues and popup size. Import replaces these settings."
+    "message": "Includes your favorite leagues and popup size. Importing a file replaces these settings.",
+    "description": "Import replaces the saved favorite leagues and popup-size preference; it does not merge favorites or reset other settings."
   },
   "exportSettings": {
     "message": "Export settings"

@@ -3,7 +3,7 @@
     "message": "Hype - ผลบอลสด"
   },
   "extDescription": {
-    "message": "ผลบอลสด โปรแกรมการแข่งขัน ผลและตารางคะแนน"
+    "message": "ผลบอลสด โปรแกรมการแข่งขัน ผลการแข่งขัน และตารางคะแนน"
   },
   "appTitle": {
     "message": "Hype Scores"
@@ -15,7 +15,7 @@
     "message": "โหลดข้อมูลไม่ได้"
   },
   "extensionRuntimeRequired": {
-    "message": "ข้อมูลสดถูกบล็อกในพรีวิวไฟล์ เปิดป๊อปอัปของส่วนขยาย Chrome เพื่อโหลดสกอร์"
+    "message": "ไม่สามารถโหลดข้อมูลสดในหน้าตัวอย่างไฟล์ได้ เปิดหน้าต่างส่วนขยาย Chrome เพื่อดูสกอร์"
   },
   "empty": {
     "message": "วันนี้ไม่พบแมตช์"
@@ -39,7 +39,7 @@
     "message": "แมตช์"
   },
   "results": {
-    "message": "ผลแข่ง"
+    "message": "ผลการแข่งขัน"
   },
   "upcoming": {
     "message": "กำลังจะแข่ง"
@@ -48,16 +48,16 @@
     "message": "ตารางคะแนน"
   },
   "bracket": {
-    "message": "รอบน็อกเอาต์"
+    "message": "สายการแข่งขัน"
   },
   "loadingBracket": {
-    "message": "กำลังโหลดสายการแข่ง…"
+    "message": "กำลังโหลดสายการแข่งขัน…"
   },
   "noBracket": {
-    "message": "ยังไม่มีสายการแข่ง"
+    "message": "ยังไม่มีสายการแข่งขัน"
   },
   "bracketUnavailable": {
-    "message": "สายการแข่งไม่พร้อมใช้งาน"
+    "message": "สายการแข่งขันไม่พร้อมใช้งาน"
   },
   "tbd": {
     "message": "รอประกาศ"
@@ -108,7 +108,7 @@
     "message": "หยุดชั่วคราว"
   },
   "autoPaused": {
-    "message": "หยุดรีเฟรชอัตโนมัติเพื่อประหยัดคำขอ"
+    "message": "หยุดรีเฟรชอัตโนมัติชั่วคราวเพื่อลดจำนวนคำขอ"
   },
   "idlePaused": {
     "message": "หยุดชั่วคราวเมื่อไม่มีการใช้งาน"
@@ -117,7 +117,7 @@
     "message": "ถึงขีดจำกัดคำขอรายวันแล้ว แสดงข้อมูลแคช"
   },
   "refreshFailed": {
-    "message": "รีเฟรชไม่สำเร็จ แสดงข้อมูลล่าสุด"
+    "message": "รีเฟรชไม่สำเร็จ แสดงข้อมูลที่ดึงมาได้ครั้งล่าสุด"
   },
   "club": {
     "message": "สโมสร"
@@ -129,10 +129,10 @@
     "message": "เลือกลีก"
   },
   "noLiveMatches": {
-    "message": "ไม่มีแมตช์สด"
+    "message": "ขณะนี้ไม่มีการแข่งขัน"
   },
   "liveCount": {
-    "message": "$COUNT$ สด",
+    "message": "กำลังแข่ง $COUNT$ นัด",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -140,7 +140,7 @@
     }
   },
   "matchCount": {
-    "message": "$COUNT$ แมตช์",
+    "message": "$COUNT$ นัด",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -148,19 +148,19 @@
     }
   },
   "fullTime": {
-    "message": "จบ"
+    "message": "จบเกม"
   },
   "halfTime": {
-    "message": "ครึ่งแรก"
+    "message": "พักครึ่ง"
   },
   "scheduled": {
-    "message": "กำหนดการ"
+    "message": "ยังไม่เริ่ม"
   },
   "stats": {
     "message": "สถิติ"
   },
   "favorite": {
-    "message": "รายการโปรด"
+    "message": "เพิ่มในรายการโปรด"
   },
   "removeFavorite": {
     "message": "ลบออกจากรายการโปรด"
@@ -175,7 +175,7 @@
     "message": "เพิ่มลีกเป็นรายการโปรด"
   },
   "forceEnglishOn": {
-    "message": "แสดงป้ายภาษาอังกฤษ"
+    "message": "แสดงเป็นภาษาอังกฤษ"
   },
   "forceEnglishOff": {
     "message": "กลับไปภาษาเบราว์เซอร์"
@@ -187,10 +187,10 @@
     "message": "ทีม"
   },
   "unknownLeague": {
-    "message": "ลีกที่ไม่ทราบ"
+    "message": "ไม่ทราบลีก"
   },
   "unknownTeam": {
-    "message": "ทีมที่ไม่ทราบ"
+    "message": "ไม่ทราบทีม"
   },
   "matchDetails": {
     "message": "รายละเอียดแมตช์"
@@ -226,10 +226,10 @@
     "message": "vs"
   },
   "kickoff": {
-    "message": "เตะเริ่ม"
+    "message": "เวลาเริ่มแข่ง"
   },
   "broadcasts": {
-    "message": "ถ่ายทอด"
+    "message": "การถ่ายทอด"
   },
   "timeline": {
     "message": "ไทม์ไลน์"
@@ -238,7 +238,7 @@
     "message": "รายชื่อผู้เล่น"
   },
   "headToHead": {
-    "message": "สถิติเจอกัน"
+    "message": "สถิติการพบกัน"
   },
   "news": {
     "message": "ข่าว"
@@ -268,7 +268,7 @@
     "message": "สำรองการตั้งค่า"
   },
   "settingsBackupHint": {
-    "message": "รวมลีกโปรดและขนาดหน้าต่าง การนำเข้าจะแทนที่การตั้งค่าเหล่านี้"
+    "message": "รวมลีกโปรดและขนาดหน้าต่าง การนำเข้าไฟล์จะแทนที่การตั้งค่าเหล่านี้"
   },
   "exportSettings": {
     "message": "ส่งออกการตั้งค่า"
@@ -310,7 +310,7 @@
     "message": "พักครึ่ง"
   },
   "liveMatchCountOne": {
-    "message": "$COUNT$ นัดกำลังแข่งขัน",
+    "message": "กำลังแข่งขัน $COUNT$ นัด",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -318,7 +318,7 @@
     }
   },
   "liveMatchesCount": {
-    "message": "$COUNT$ นัดกำลังแข่งขัน",
+    "message": "กำลังแข่งขัน $COUNT$ นัด",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -326,7 +326,7 @@
     }
   },
   "upcomingMatchCountOne": {
-    "message": "$COUNT$ นัดที่กำลังจะเริ่ม",
+    "message": "กำลังจะเริ่ม $COUNT$ นัด",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -334,7 +334,7 @@
     }
   },
   "upcomingMatchesCount": {
-    "message": "$COUNT$ นัดที่กำลังจะเริ่ม",
+    "message": "กำลังจะเริ่ม $COUNT$ นัด",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -342,7 +342,7 @@
     }
   },
   "completedMatchCountOne": {
-    "message": "$COUNT$ นัดที่จบแล้ว",
+    "message": "จบแล้ว $COUNT$ นัด",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -350,7 +350,7 @@
     }
   },
   "completedMatchesCount": {
-    "message": "$COUNT$ นัดที่จบแล้ว",
+    "message": "จบแล้ว $COUNT$ นัด",
     "placeholders": {
       "count": {
         "content": "$1"

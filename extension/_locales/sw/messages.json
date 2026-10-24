@@ -3,7 +3,7 @@
     "message": "Hype - Matokeo ya mpira wa miguu moja kwa moja"
   },
   "extDescription": {
-    "message": "Matokeo ya mpira wa miguu moja kwa moja, mechi, matokeo na meza."
+    "message": "Matokeo ya soka ya moja kwa moja, ratiba za mechi, matokeo ya mwisho na misimamo ya ligi."
   },
   "appTitle": {
     "message": "Hype Scores"
@@ -15,7 +15,7 @@
     "message": "Imeshindwa kupakia data"
   },
   "extensionRuntimeRequired": {
-    "message": "Data ya live imezuiwa katika onyesho la faili. Fungua dirisha la kiendelezi cha Chrome."
+    "message": "Data ya moja kwa moja haipatikani katika hakikisho la faili. Fungua dirisha la kiendelezi cha Chrome ili kuona matokeo."
   },
   "empty": {
     "message": "Hakuna mechi zilizopatikana leo."
@@ -33,7 +33,7 @@
     "message": "Imesasishwa"
   },
   "live": {
-    "message": "Moja kwa moja"
+    "message": "Zinazoendelea"
   },
   "matches": {
     "message": "Mechi"
@@ -45,7 +45,7 @@
     "message": "Zinazokuja"
   },
   "standings": {
-    "message": "Meza"
+    "message": "Msimamo"
   },
   "bracket": {
     "message": "Mchujo"
@@ -60,7 +60,7 @@
     "message": "Chati ya mchujo haipatikani."
   },
   "tbd": {
-    "message": "TBD"
+    "message": "Bado haijaamuliwa"
   },
   "roundOf32": {
     "message": "Raundi ya 32"
@@ -99,7 +99,7 @@
     "message": "MK"
   },
   "goalDifference": {
-    "message": "TF"
+    "message": "TM"
   },
   "points": {
     "message": "P"
@@ -108,16 +108,16 @@
     "message": "Imesimamishwa"
   },
   "autoPaused": {
-    "message": "Usasishaji wa kiotomatiki umesimamishwa ili kuokoa maombi."
+    "message": "Usasishaji wa kiotomatiki umesitishwa kwa muda ili kupunguza idadi ya maombi."
   },
   "idlePaused": {
-    "message": "Imesimamishwa wakati haipo shughuli."
+    "message": "Imesimamishwa kwa muda kwa sababu haitumiki."
   },
   "requestLimitReached": {
     "message": "Kikomo cha maombi ya kila siku kimefikiwa. Inaonyesha data iliyohifadhiwa."
   },
   "refreshFailed": {
-    "message": "Usasishaji umeshindikana. Inaonyesha data ya hivi karibuni."
+    "message": "Usasishaji umeshindikana. Inaonyesha data ya mwisho iliyopatikana."
   },
   "club": {
     "message": "Klabu"
@@ -129,10 +129,10 @@
     "message": "Chagua ligi"
   },
   "noLiveMatches": {
-    "message": "Hakuna mechi moja kwa moja"
+    "message": "Kwa sasa hakuna mechi zinazoendelea."
   },
   "liveCount": {
-    "message": "$COUNT$ moja kwa moja",
+    "message": "Zinazoendelea: $COUNT$",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -140,7 +140,7 @@
     }
   },
   "matchCount": {
-    "message": "$COUNT$ mechi",
+    "message": "Mechi $COUNT$",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -160,10 +160,10 @@
     "message": "Takwimu"
   },
   "favorite": {
-    "message": "Kipendwa"
+    "message": "Ongeza kwenye vipendwa"
   },
   "removeFavorite": {
-    "message": "Ondoa kipendwa"
+    "message": "Ondoa kwenye vipendwa"
   },
   "turnOff": {
     "message": "Zima kiendelezi"
@@ -175,7 +175,7 @@
     "message": "Ongeza ligi kwenye vipendwa"
   },
   "forceEnglishOn": {
-    "message": "Onyesha lebo za Kiingereza"
+    "message": "Onyesha kwa Kiingereza"
   },
   "forceEnglishOff": {
     "message": "Rudi kwenye lugha ya kivinjari"
@@ -199,7 +199,7 @@
     "message": "Inapakia maelezo ya mechi…"
   },
   "loadingStandings": {
-    "message": "Inapakia meza…"
+    "message": "Inapakia msimamo…"
   },
   "detailsUnavailable": {
     "message": "Maelezo hayapatikani"
@@ -214,7 +214,7 @@
     "message": "Hakuna takwimu za mechi."
   },
   "noStandings": {
-    "message": "Hakuna meza ya ligi hii."
+    "message": "Msimamo wa ligi hii haupatikani."
   },
   "noLinks": {
     "message": "Hakuna viungo."
@@ -226,25 +226,25 @@
     "message": "dhidi ya"
   },
   "kickoff": {
-    "message": "Anza"
+    "message": "Muda wa kuanza"
   },
   "broadcasts": {
     "message": "Matangazo"
   },
   "timeline": {
-    "message": "Mfululizo"
+    "message": "Matukio ya mechi"
   },
   "lineups": {
     "message": "Orodha ya wachezaji"
   },
   "headToHead": {
-    "message": "Uso kwa uso"
+    "message": "Mechi za awali kati ya timu hizi"
   },
   "news": {
     "message": "Habari"
   },
   "highlights": {
-    "message": "Vivutio"
+    "message": "Muhtasari wa mechi"
   },
   "links": {
     "message": "Viungo"
@@ -265,10 +265,10 @@
     "message": "Kubwa"
   },
   "settingsBackup": {
-    "message": "Nakala ya mipangilio"
+    "message": "Nakala rudufu ya mipangilio"
   },
   "settingsBackupHint": {
-    "message": "Inajumuisha ligi pendwa na ukubwa wa dirisha. Uagizaji hubadilisha mipangilio hii."
+    "message": "Inajumuisha ligi pendwa na ukubwa wa dirisha. Kuingiza faili kutachukua nafasi ya mipangilio hii."
   },
   "exportSettings": {
     "message": "Hamisha mipangilio"
@@ -310,7 +310,7 @@
     "message": "Mapumziko"
   },
   "liveMatchCountOne": {
-    "message": "$COUNT$ mechi ya moja kwa moja",
+    "message": "Mechi $COUNT$ inayoendelea",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -318,7 +318,7 @@
     }
   },
   "liveMatchesCount": {
-    "message": "$COUNT$ mechi za moja kwa moja",
+    "message": "Mechi $COUNT$ zinazoendelea",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -326,7 +326,7 @@
     }
   },
   "upcomingMatchCountOne": {
-    "message": "$COUNT$ mechi ijayo",
+    "message": "Mechi $COUNT$ ijayo",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -334,7 +334,7 @@
     }
   },
   "upcomingMatchesCount": {
-    "message": "$COUNT$ mechi zijazo",
+    "message": "Mechi $COUNT$ zijazo",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -342,7 +342,7 @@
     }
   },
   "completedMatchCountOne": {
-    "message": "$COUNT$ mechi iliyomalizika",
+    "message": "Mechi $COUNT$ iliyomalizika",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -350,7 +350,7 @@
     }
   },
   "completedMatchesCount": {
-    "message": "$COUNT$ mechi zilizomalizika",
+    "message": "Mechi $COUNT$ zilizomalizika",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -358,7 +358,7 @@
     }
   },
   "matchCountOne": {
-    "message": "$COUNT$ mechi",
+    "message": "Mechi $COUNT$",
     "placeholders": {
       "count": {
         "content": "$1"

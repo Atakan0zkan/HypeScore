@@ -15,7 +15,7 @@
     "message": "Tidak dapat memuat data"
   },
   "extensionRuntimeRequired": {
-    "message": "Data live diblokir di pratinjau file. Buka popup ekstensi Chrome untuk memuat skor."
+    "message": "Data langsung tidak tersedia dalam pratinjau file. Buka jendela ekstensi Chrome untuk melihat skor."
   },
   "empty": {
     "message": "Tidak ada pertandingan hari ini."
@@ -24,7 +24,7 @@
     "message": "Siap"
   },
   "refreshing": {
-    "message": "Menyegarkan"
+    "message": "Memperbarui"
   },
   "notUpdated": {
     "message": "Belum diperbarui"
@@ -60,7 +60,7 @@
     "message": "Bagan tidak tersedia."
   },
   "tbd": {
-    "message": "TBD"
+    "message": "Belum ditentukan"
   },
   "roundOf32": {
     "message": "Babak 32 besar"
@@ -81,7 +81,7 @@
     "message": "Final"
   },
   "played": {
-    "message": "M"
+    "message": "Main"
   },
   "wins": {
     "message": "M"
@@ -108,16 +108,16 @@
     "message": "Dijeda"
   },
   "autoPaused": {
-    "message": "Penyegaran otomatis dijeda untuk menghemat permintaan."
+    "message": "Pembaruan otomatis dijeda untuk mengurangi jumlah permintaan."
   },
   "idlePaused": {
     "message": "Dijeda saat tidak aktif."
   },
   "requestLimitReached": {
-    "message": "Batas permintaan harian tercapai. Menampilkan data cache."
+    "message": "Batas permintaan harian tercapai. Menampilkan data tersimpan."
   },
   "refreshFailed": {
-    "message": "Penyegaran gagal. Menampilkan data terbaru."
+    "message": "Pembaruan gagal. Menampilkan data terakhir yang tersedia."
   },
   "club": {
     "message": "Klub"
@@ -151,7 +151,7 @@
     "message": "Selesai"
   },
   "halfTime": {
-    "message": "Babak 1"
+    "message": "Jeda"
   },
   "scheduled": {
     "message": "Dijadwalkan"
@@ -160,10 +160,10 @@
     "message": "Statistik"
   },
   "favorite": {
-    "message": "Favorit"
+    "message": "Tambahkan ke favorit"
   },
   "removeFavorite": {
-    "message": "Hapus favorit"
+    "message": "Hapus dari favorit"
   },
   "turnOff": {
     "message": "Matikan ekstensi"
@@ -175,7 +175,7 @@
     "message": "Jadikan liga favorit"
   },
   "forceEnglishOn": {
-    "message": "Tampilkan label bahasa Inggris"
+    "message": "Tampilkan dalam bahasa Inggris"
   },
   "forceEnglishOff": {
     "message": "Kembali ke bahasa browser"
@@ -208,7 +208,7 @@
     "message": "Tidak ada detail tambahan untuk pertandingan ini."
   },
   "noSectionData": {
-    "message": "Tidak ada data tersedia."
+    "message": "Data tidak tersedia."
   },
   "noStats": {
     "message": "Statistik pertandingan tidak tersedia."
@@ -226,7 +226,7 @@
     "message": "vs"
   },
   "kickoff": {
-    "message": "Tendangan awal"
+    "message": "Sepak mula"
   },
   "broadcasts": {
     "message": "Siaran"
@@ -238,7 +238,7 @@
     "message": "Susunan pemain"
   },
   "headToHead": {
-    "message": "Head to head"
+    "message": "Riwayat pertemuan"
   },
   "news": {
     "message": "Berita"
@@ -259,7 +259,7 @@
     "message": "Kecil"
   },
   "sizeDefault": {
-    "message": "Default"
+    "message": "Bawaan"
   },
   "sizeBig": {
     "message": "Besar"
@@ -301,13 +301,13 @@
     "message": "Pemain cadangan"
   },
   "startingXI": {
-    "message": "Sebelas awal"
+    "message": "Sebelas pemain inti"
   },
   "fullTimeLabel": {
     "message": "Pertandingan selesai"
   },
   "halfTimeLabel": {
-    "message": "Jeda babak"
+    "message": "Turun minum"
   },
   "liveMatchCountOne": {
     "message": "$COUNT$ pertandingan langsung",

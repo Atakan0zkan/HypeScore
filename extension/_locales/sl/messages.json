@@ -3,7 +3,7 @@
     "message": "Hype - Nogometni rezultati v živo"
   },
   "extDescription": {
-    "message": "Nogometni rezultati v živo, tekme, izidi in lestvice."
+    "message": "Nogometni rezultati v živo, razpored tekem, izidi in lestvice."
   },
   "appTitle": {
     "message": "Hype Scores"
@@ -15,7 +15,7 @@
     "message": "Podatkov ni bilo mogoče naložiti"
   },
   "extensionRuntimeRequired": {
-    "message": "Live podatki so v predogledu datoteke blokirani. Odprite pojavno okno razširitve Chrome."
+    "message": "Podatki v živo niso na voljo v predogledu datoteke. Za ogled rezultatov odprite pojavno okno razširitve za Chrome."
   },
   "empty": {
     "message": "Danes ni najdenih tekem."
@@ -60,7 +60,7 @@
     "message": "Shema ni dosegljiva."
   },
   "tbd": {
-    "message": "TBD"
+    "message": "Še ni določeno"
   },
   "roundOf32": {
     "message": "Šestnajstina finala"
@@ -81,7 +81,7 @@
     "message": "Finale"
   },
   "played": {
-    "message": "T"
+    "message": "OT"
   },
   "wins": {
     "message": "Z"
@@ -108,7 +108,7 @@
     "message": "Zaustavljeno"
   },
   "autoPaused": {
-    "message": "Samodejno osveževanje je zaustavljeno zaradi varčevanja z zahtevami."
+    "message": "Samodejno osveževanje je začasno ustavljeno, da se zmanjša število zahtev."
   },
   "idlePaused": {
     "message": "Zaustavljeno zaradi nedejavnosti."
@@ -117,7 +117,7 @@
     "message": "Dosežena dnevna omejitev zahtev. Prikazani so predpomnjeni podatki."
   },
   "refreshFailed": {
-    "message": "Osveževanje ni uspelo. Prikazani so najnovejši podatki."
+    "message": "Osveževanje ni uspelo. Prikazani so zadnji razpoložljivi podatki."
   },
   "club": {
     "message": "Klub"
@@ -151,7 +151,7 @@
     "message": "Konec"
   },
   "halfTime": {
-    "message": "Polčas"
+    "message": "Odmor"
   },
   "scheduled": {
     "message": "Načrtovano"
@@ -160,7 +160,7 @@
     "message": "Statistika"
   },
   "favorite": {
-    "message": "Priljubljeno"
+    "message": "Dodaj med priljubljene"
   },
   "removeFavorite": {
     "message": "Odstrani iz priljubljenih"
@@ -175,10 +175,10 @@
     "message": "Dodaj ligo med priljubljene"
   },
   "forceEnglishOn": {
-    "message": "Prikaži angleške oznake"
+    "message": "Prikaži v angleščini"
   },
   "forceEnglishOff": {
-    "message": "Vrni jezik brskalnika"
+    "message": "Vrni se na jezik brskalnika"
   },
   "other": {
     "message": "Drugo"
@@ -268,7 +268,7 @@
     "message": "Varnostna kopija nastavitev"
   },
   "settingsBackupHint": {
-    "message": "Vključuje priljubljene lige in velikost okna. Uvoz nadomesti te nastavitve."
+    "message": "Vključuje priljubljene lige in velikost okna. Z uvozom datoteke boste nadomestili te nastavitve."
   },
   "exportSettings": {
     "message": "Izvozi nastavitve"
@@ -307,7 +307,7 @@
     "message": "Konec tekme"
   },
   "halfTimeLabel": {
-    "message": "Polčas"
+    "message": "Odmor"
   },
   "liveMatchCountOne": {
     "message": "$COUNT$ tekma v živo",
@@ -359,6 +359,70 @@
   },
   "matchCountOne": {
     "message": "$COUNT$ tekma",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "liveMatchCountTwo": {
+    "message": "$COUNT$ tekmi v živo",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchCountTwo": {
+    "message": "$COUNT$ prihajajoči tekmi",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchCountTwo": {
+    "message": "$COUNT$ končani tekmi",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCountTwo": {
+    "message": "$COUNT$ tekmi",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "liveMatchCountFew": {
+    "message": "$COUNT$ tekme v živo",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchCountFew": {
+    "message": "$COUNT$ prihajajoče tekme",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchCountFew": {
+    "message": "$COUNT$ končane tekme",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCountFew": {
+    "message": "$COUNT$ tekme",
     "placeholders": {
       "count": {
         "content": "$1"

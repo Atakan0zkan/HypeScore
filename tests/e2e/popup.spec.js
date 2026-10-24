@@ -81,6 +81,9 @@ test.beforeAll(async () => {
   // Copy to a no-space temp path (spaces break --load-extension handling).
   const runId = `hype-e2e-${process.pid}`;
   const root = path.join(os.tmpdir(), runId).replace(/ /g, "");
+  if (path.dirname(path.resolve(root)) !== path.resolve(os.tmpdir())) {
+    throw new Error("The extension test directory must be a direct child of the temporary directory without spaces");
+  }
   extDir = path.join(root, "ext");
   profileDir = path.join(root, "profile");
   fs.rmSync(root, { recursive: true, force: true });
@@ -484,7 +487,7 @@ test("previews prefer popular club matches and upcoming metadata has no repeated
   }
 });
 
-test("last-successful scores show their real age, fit every size, expire and recover", async ({}, testInfo) => {
+test("last-successful scores have no freshness banner, fit every size, expire and recover", async ({}, testInfo) => {
   const snapshotPage = await context.newPage();
   snapshotPage.on("console", message => { if (message.type() === "error") consoleErrors.push(message.text()); });
   snapshotPage.on("pageerror", error => pageErrors.push(String(error)));
@@ -504,31 +507,29 @@ test("last-successful scores show their real age, fit every size, expire and rec
     await page.evaluate(() => localStorage.clear());
     await snapshotPage.goto(POPUP_URL, { waitUntil: "domcontentloaded" });
     const notice = snapshotPage.locator("#snapshotNotice");
-    await expect(notice).toBeVisible();
-    await expect(notice).toContainText("Refresh failed. Showing latest data.");
-    await expect(notice).toContainText("1 minute ago");
+    await expect(notice).toHaveCount(0);
     await expect(snapshotPage.locator(".league-pick-card")).toHaveCount(3);
     expect(await snapshotPage.evaluate(() => JSON.parse(localStorage.getItem("hype_live_matches_cache")).savedAt)).toBe(sourceTime);
     const initialRequests = requests;
     for (const [size, width, height] of [["small", 480, 540], ["default", 580, 600], ["big", 720, 600]]) {
       await snapshotPage.locator("#settingsToggle").click();
-      await expect(notice).toBeHidden();
+      await expect(notice).toHaveCount(0);
       await snapshotPage.locator(`input[name="popupSize"][value="${size}"]`).check();
       await snapshotPage.setViewportSize({ width, height });
       await snapshotPage.locator("#settingsClose").click();
-      await expect(notice).toBeVisible();
-      expect(await notice.evaluate(element => element.scrollWidth > element.clientWidth)).toBe(false);
+      await expect(notice).toHaveCount(0);
       expect(await snapshotPage.locator("#leaguePickList").evaluate(element => element.scrollWidth > element.clientWidth)).toBe(false);
-      await snapshotPage.screenshot({ path: testInfo.outputPath(`stale-score-warning-${size}.png`) });
+      await snapshotPage.screenshot({ path: testInfo.outputPath(`bounded-fallback-${size}.png`) });
     }
     expect(requests).toBe(initialRequests);
     sourceTime = await snapshotPage.evaluate(() => Date.now() - 290000);
     await snapshotPage.evaluate(() => localStorage.removeItem("hype_live_matches_cache"));
     await snapshotPage.reload();
-    await expect(notice).toBeVisible();
+    await expect(snapshotPage.locator(".league-pick-card")).toHaveCount(3);
+    await expect(notice).toHaveCount(0);
     const beforeExpiry = requests;
     await snapshotPage.clock.fastForward(10001);
-    await expect(notice).toBeHidden();
+    await expect(notice).toHaveCount(0);
     await expect(snapshotPage.locator("#leaguePickList")).toBeHidden();
     await expect(snapshotPage.locator("#errorState")).toBeVisible();
     expect(requests).toBe(beforeExpiry);
@@ -536,13 +537,100 @@ test("last-successful scores show their real age, fit every size, expire and rec
     sourceTime = await snapshotPage.evaluate(() => Date.now());
     await snapshotPage.reload();
     await expect(snapshotPage.locator(".league-pick-card")).toHaveCount(3);
-    await expect(notice).toBeHidden();
+    await expect(notice).toHaveCount(0);
     await expect(snapshotPage.locator("#errorState")).toBeHidden();
   } finally {
     await snapshotPage.close();
     await page.evaluate(() => localStorage.clear());
     await page.reload();
     await page.locator(".league-pick-card").first().waitFor();
+  }
+});
+
+test("native Chromium i18n loads reference, Turkish, Slavic count forms and Arabic", async () => {
+  for (const [code, key, expected] of [
+    ["en", "settings", "Settings"],
+    ["tr", "settings", "Ayarlar"],
+    ["ru", "liveMatchCountFew", "Идут 2 матча"],
+    ["pl", "liveMatchCountFew", "2 mecze na żywo"],
+    ["sl", "liveMatchCountTwo", "2 tekmi v živo"],
+    ["ar", "liveMatchesCount", "مباريات مباشرة: 2"],
+  ]) {
+    const options = {
+      headless: false,
+      locale: code,
+      args: [`--lang=${code}`, `--disable-extensions-except=${extDir}`, `--load-extension=${extDir}`],
+    };
+    if (process.env.E2E_BROWSER_PATH) options.executablePath = process.env.E2E_BROWSER_PATH;
+    else options.channel = "chromium";
+    const nativeContext = await chromium.launchPersistentContext(path.join(path.dirname(extDir), `native-${code}`), options);
+    try {
+      await nativeContext.route("**://api.atakanozkan.com/**", route => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ matches: ALL_MATCHES, leagues: LEAGUES }) }));
+      const nativePage = await nativeContext.newPage();
+      await nativePage.goto(POPUP_URL, { waitUntil: "domcontentloaded" });
+      const actual = await nativePage.evaluate(key => ({ language: chrome.i18n.getUILanguage(), message: chrome.i18n.getMessage(key, ["2"]), count: matchCountMessage("live", 2) }), key);
+      expect(actual.language.split(/[-_]/)[0], `${code}: real browser UI locale`).toBe(code);
+      expect(actual.message, `${code}: native Chrome message lookup`).toBe(expected);
+      expect(actual.count).toBe(code === "en" ? "2 live matches" : code === "tr" ? "2 canlı maç" : expected);
+      await nativePage.evaluate(() => { isEnglishOverride = true; applyI18n(); });
+      await expect(nativePage.locator("html")).toHaveAttribute("dir", "ltr");
+      expect(await nativePage.evaluate(() => matchCountMessage("live", 2))).toBe("2 live matches");
+    } finally {
+      await nativeContext.close();
+    }
+  }
+});
+
+test("all 55 locale packs fit Small and preserve translated settings, standings and details", async () => {
+  const localePage = await context.newPage();
+  localePage.on("console", message => { if (message.type() === "error") consoleErrors.push(message.text()); });
+  localePage.on("pageerror", error => pageErrors.push(String(error)));
+  const dir = path.resolve("extension/_locales");
+  const codes = ["en", "tr", ...fs.readdirSync(dir).filter(code => !["en", "tr"].includes(code)).sort()];
+  const screenshots = new Set(["en", "tr", "ar", "ru", "ml", "zh_TW"]);
+  try {
+    await localePage.setViewportSize({ width: 480, height: 540 });
+    await localePage.goto(POPUP_URL, { waitUntil: "domcontentloaded" });
+    await localePage.locator(".league-pick-card").first().waitFor();
+    for (const code of codes) {
+      const messages = JSON.parse(fs.readFileSync(path.join(dir, code, "messages.json"), "utf8"));
+      // Test-only API stubs exercise the actual shipped popup and all 55 packs
+      // without changing the user's browser language or using a translation API.
+      await localePage.evaluate(({ code, messages }) => {
+        if (isSettingsOpen) setSettingsOpen(false);
+        selectedLeagueKey = null;
+        selectedMatchKey = null;
+        isEnglishOverride = false;
+        chrome.i18n.getUILanguage = () => code.replaceAll("_", "-");
+        chrome.i18n.getMessage = (key, values = []) => (messages[key]?.message || "").replaceAll("$COUNT$", String(values[0] ?? ""));
+        applyPopupSize("small");
+        applyI18n();
+        renderPayload(lastPayload);
+        setSettingsOpen(true);
+      }, { code, messages });
+      await expect(localePage.locator("#settingsTitle")).toHaveText(messages.settings.message);
+      await expect(localePage.locator("#settingsBackupHint")).toHaveText(messages.settingsBackupHint.message);
+      await expect(localePage.locator("#settingsFile")).toHaveAttribute("aria-label", messages.importSettings.message);
+      await expect(localePage.locator("html")).toHaveAttribute("dir", ["ar", "fa", "he"].includes(code) ? "rtl" : "ltr");
+      const settingsOverflow = await localePage.locator("#settingsPanel").evaluate(el => el.scrollWidth > el.clientWidth + 1);
+      expect.soft(settingsOverflow, `${code}: settings fit Small`).toBe(false);
+      if (screenshots.has(code)) await localePage.screenshot({ path: `test-results/i18n-${code}-settings.png` });
+      await localePage.locator("#settingsClose").click();
+      await localePage.locator(".league-pick-card", { hasText: "Premier League" }).click();
+      await localePage.locator(".standings-table").waitFor();
+      await expect(localePage.locator(".match-card", { hasText: "Liverpool" }).locator(".status-pill")).toHaveText(messages.fullTime.message);
+      const clippedHeaders = await localePage.locator(".standings-table th").evaluateAll(els => els.filter(el => el.scrollWidth > el.clientWidth + 1).map(el => el.textContent));
+      expect.soft(clippedHeaders, `${code}: standings headings are readable`).toEqual([]);
+      if (screenshots.has(code) || code === "bn") await localePage.locator(".standings-table").screenshot({ path: `test-results/i18n-${code}-standings.png` });
+      await localePage.locator(".match-card", { hasText: "Arsenal" }).first().click();
+      await expect(localePage.locator(".lineup-heading")).toHaveText(messages.lineups.message);
+      await expect(localePage.locator('details[data-section-key="stats"] summary')).toHaveText(messages.stats.message);
+      const detailOverflow = await localePage.locator("#leagueDetailContent").evaluate(el => el.scrollWidth > el.clientWidth + 1);
+      expect.soft(detailOverflow, `${code}: match details fit Small`).toBe(false);
+      if (screenshots.has(code)) await localePage.screenshot({ path: `test-results/i18n-${code}-details.png` });
+    }
+  } finally {
+    await localePage.close();
   }
 });
 

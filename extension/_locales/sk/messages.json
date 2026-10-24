@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "Hype - Živé futbalové výsledky"
+    "message": "Hype - Futbalové výsledky naživo"
   },
   "extDescription": {
-    "message": "Živé futbalové výsledky, zápasy, výsledky a tabuľky."
+    "message": "Futbalové výsledky naživo, rozpis zápasov, konečné výsledky a tabuľky."
   },
   "appTitle": {
     "message": "Hype Scores"
@@ -12,13 +12,13 @@
     "message": "Načítavanie zápasov…"
   },
   "error": {
-    "message": "Dáta sa nepodarilo načítať"
+    "message": "Údaje sa nepodarilo načítať"
   },
   "extensionRuntimeRequired": {
-    "message": "Live dáta sú v náhľade súboru blokované. Otvorte popup rozšírenia Chrome pre skóre."
+    "message": "Údaje v reálnom čase nie sú dostupné v náhľade súboru. Ak chcete vidieť skóre, otvorte okno rozšírenia Chrome."
   },
   "empty": {
-    "message": "Dnes neboli nájdené žiadne zápasy."
+    "message": "Dnes sa nenašli žiadne zápasy."
   },
   "ready": {
     "message": "Pripravené"
@@ -48,7 +48,7 @@
     "message": "Tabuľka"
   },
   "bracket": {
-    "message": "Vyradenie"
+    "message": "Vyraďovacia fáza"
   },
   "loadingBracket": {
     "message": "Načítavanie pavúka…"
@@ -60,10 +60,10 @@
     "message": "Pavúk je nedostupný."
   },
   "tbd": {
-    "message": "TBD"
+    "message": "Bude určené"
   },
   "roundOf32": {
-    "message": "32 najlepších"
+    "message": "Šestnásťfinále"
   },
   "roundOf16": {
     "message": "Osemfinále"
@@ -75,7 +75,7 @@
     "message": "Semifinále"
   },
   "thirdPlace": {
-    "message": "O 3. miesto"
+    "message": "Zápas o 3. miesto"
   },
   "final": {
     "message": "Finále"
@@ -108,16 +108,16 @@
     "message": "Pozastavené"
   },
   "autoPaused": {
-    "message": "Automatické obnovenie pozastavené kvôli úspore požiadaviek."
+    "message": "Automatické obnovovanie je pozastavené, aby sa znížil počet požiadaviek."
   },
   "idlePaused": {
     "message": "Pozastavené pri nečinnosti."
   },
   "requestLimitReached": {
-    "message": "Dosiahnutý denný limit požiadaviek. Zobrazujú sa dáta z vyrovnávacej pamäte."
+    "message": "Dosiahli ste denný limit požiadaviek. Zobrazujú sa údaje z vyrovnávacej pamäte."
   },
   "refreshFailed": {
-    "message": "Obnovenie zlyhalo. Zobrazujú sa najnovšie dáta."
+    "message": "Obnovenie zlyhalo. Zobrazujú sa posledné dostupné údaje."
   },
   "club": {
     "message": "Klub"
@@ -129,7 +129,7 @@
     "message": "Vyberte ligu"
   },
   "noLiveMatches": {
-    "message": "Žiadne zápasy naživo"
+    "message": "Momentálne sa nehrajú žiadne zápasy."
   },
   "liveCount": {
     "message": "$COUNT$ naživo",
@@ -151,16 +151,16 @@
     "message": "Koniec"
   },
   "halfTime": {
-    "message": "Polčas"
+    "message": "Prestávka"
   },
   "scheduled": {
-    "message": "Naplánované"
+    "message": "Naplánovaný"
   },
   "stats": {
     "message": "Štatistiky"
   },
   "favorite": {
-    "message": "Obľúbené"
+    "message": "Pridať do obľúbených"
   },
   "removeFavorite": {
     "message": "Odstrániť z obľúbených"
@@ -175,10 +175,10 @@
     "message": "Pridať ligu do obľúbených"
   },
   "forceEnglishOn": {
-    "message": "Zobraziť anglické popisky"
+    "message": "Zobraziť v angličtine"
   },
   "forceEnglishOff": {
-    "message": "Vrátiť jazyk prehliadača"
+    "message": "Vrátiť sa k jazyku prehliadača"
   },
   "other": {
     "message": "Ostatné"
@@ -205,10 +205,10 @@
     "message": "Detaily nie sú k dispozícii"
   },
   "noDetails": {
-    "message": "Pre tento zápas nie sú ďalšie detaily."
+    "message": "Pre tento zápas nie sú k dispozícii ďalšie podrobnosti."
   },
   "noSectionData": {
-    "message": "Nie sú k dispozícii žiadne dáta."
+    "message": "Nie sú k dispozícii žiadne údaje."
   },
   "noStats": {
     "message": "Štatistiky zápasu nie sú k dispozícii."
@@ -244,7 +244,7 @@
     "message": "Novinky"
   },
   "highlights": {
-    "message": "Súhrny"
+    "message": "Zostrihy"
   },
   "links": {
     "message": "Odkazy"
@@ -268,7 +268,7 @@
     "message": "Záloha nastavení"
   },
   "settingsBackupHint": {
-    "message": "Obsahuje obľúbené ligy a veľkosť okna. Import nahradí tieto nastavenia."
+    "message": "Obsahuje obľúbené ligy a veľkosť okna. Import súboru nahradí tieto nastavenia."
   },
   "exportSettings": {
     "message": "Exportovať nastavenia"
@@ -307,10 +307,10 @@
     "message": "Koniec zápasu"
   },
   "halfTimeLabel": {
-    "message": "Polčas"
+    "message": "Prestávka"
   },
   "liveMatchCountOne": {
-    "message": "$COUNT$ živý zápas",
+    "message": "$COUNT$ zápas naživo",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -318,7 +318,7 @@
     }
   },
   "liveMatchesCount": {
-    "message": "$COUNT$ živých zápasov",
+    "message": "$COUNT$ zápasov naživo",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -359,6 +359,38 @@
   },
   "matchCountOne": {
     "message": "$COUNT$ zápas",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "liveMatchCountFew": {
+    "message": "$COUNT$ zápasy naživo",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchCountFew": {
+    "message": "$COUNT$ nadchádzajúce zápasy",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchCountFew": {
+    "message": "$COUNT$ ukončené zápasy",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCountFew": {
+    "message": "$COUNT$ zápasy",
     "placeholders": {
       "count": {
         "content": "$1"

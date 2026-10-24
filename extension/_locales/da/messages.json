@@ -3,7 +3,7 @@
     "message": "Hype - Live fodboldresultater"
   },
   "extDescription": {
-    "message": "Live fodboldresultater, kampe, resultater og stillinger."
+    "message": "Live fodboldresultater, kampprogram, slutresultater og ligastillinger."
   },
   "appTitle": {
     "message": "Hype Scores"
@@ -15,7 +15,7 @@
     "message": "Kunne ikke indlæse data"
   },
   "extensionRuntimeRequired": {
-    "message": "Livedata blokeres i filforhåndsvisning. Åbn Chrome-udvidelsens popup for at indlæse scoringer."
+    "message": "Livedata er ikke tilgængelige i filforhåndsvisningen. Åbn Chrome-udvidelsens popup for at se resultater."
   },
   "empty": {
     "message": "Ingen kampe fundet i dag."
@@ -51,16 +51,16 @@
     "message": "Knockout"
   },
   "loadingBracket": {
-    "message": "Indlæser knockout-træ…"
+    "message": "Indlæser knockoutskema…"
   },
   "noBracket": {
-    "message": "Intet knockout-træ tilgængeligt."
+    "message": "Intet knockoutskema tilgængeligt."
   },
   "bracketUnavailable": {
-    "message": "Knockout-træ utilgængeligt."
+    "message": "Knockoutskemaet er ikke tilgængeligt."
   },
   "tbd": {
-    "message": "TBD"
+    "message": "Ikke fastlagt"
   },
   "roundOf32": {
     "message": "1/16-finaler"
@@ -108,7 +108,7 @@
     "message": "Pauset"
   },
   "autoPaused": {
-    "message": "Automatisk opdatering pauset for at spare forespørgsler."
+    "message": "Automatisk opdatering er sat på pause for at reducere antallet af forespørgsler."
   },
   "idlePaused": {
     "message": "Pauset under inaktivitet."
@@ -117,7 +117,7 @@
     "message": "Daglig forespørgselsgrænse nået. Viser cachede data."
   },
   "refreshFailed": {
-    "message": "Opdatering mislykkedes. Viser seneste data."
+    "message": "Opdateringen mislykkedes. Viser de senest tilgængelige data."
   },
   "club": {
     "message": "Klub"
@@ -160,7 +160,7 @@
     "message": "Statistik"
   },
   "favorite": {
-    "message": "Favorit"
+    "message": "Føj til favoritter"
   },
   "removeFavorite": {
     "message": "Fjern favorit"
@@ -175,10 +175,10 @@
     "message": "Gør liga til favorit"
   },
   "forceEnglishOn": {
-    "message": "Vis engelske labels"
+    "message": "Vis på engelsk"
   },
   "forceEnglishOff": {
-    "message": "Tilbage til browsersprog"
+    "message": "Brug browserens sprog"
   },
   "other": {
     "message": "Andet"
@@ -268,7 +268,7 @@
     "message": "Sikkerhedskopi af indstillinger"
   },
   "settingsBackupHint": {
-    "message": "Indeholder favoritligaer og popupstørrelse. Import erstatter disse indstillinger."
+    "message": "Indeholder favoritligaer og popupstørrelse. Import af en fil erstatter disse indstillinger."
   },
   "exportSettings": {
     "message": "Eksportér indstillinger"
@@ -298,7 +298,7 @@
     "message": "Indstillingerne kunne ikke eksporteres."
   },
   "substitutes": {
-    "message": "Udskiftningsspillere"
+    "message": "Reserver"
   },
   "startingXI": {
     "message": "Startopstilling"

@@ -3,7 +3,7 @@
     "message": "Hype - Risultati di calcio in diretta"
   },
   "extDescription": {
-    "message": "Risultati di calcio in diretta, partite, risultati e classifiche."
+    "message": "Calcio in diretta: punteggi, calendario, risultati e classifiche."
   },
   "appTitle": {
     "message": "Hype Scores"
@@ -15,7 +15,7 @@
     "message": "Impossibile caricare i dati"
   },
   "extensionRuntimeRequired": {
-    "message": "I dati live non si caricano nell’anteprima file. Apri il popup dell’estensione Chrome per vedere i risultati."
+    "message": "I dati in tempo reale non sono disponibili nell’anteprima del file. Apri la finestra dell’estensione Chrome per vedere i risultati."
   },
   "empty": {
     "message": "Nessuna partita trovata oggi."
@@ -33,7 +33,7 @@
     "message": "Aggiornato"
   },
   "live": {
-    "message": "Live"
+    "message": "In diretta"
   },
   "matches": {
     "message": "Partite"
@@ -63,7 +63,7 @@
     "message": "Da definire"
   },
   "roundOf32": {
-    "message": "Trentaduesimi di finale"
+    "message": "Sedicesimi di finale"
   },
   "roundOf16": {
     "message": "Ottavi di finale"
@@ -75,7 +75,7 @@
     "message": "Semifinali"
   },
   "thirdPlace": {
-    "message": "Finale 3º posto"
+    "message": "Finale per il 3º posto"
   },
   "final": {
     "message": "Finale"
@@ -108,16 +108,16 @@
     "message": "In pausa"
   },
   "autoPaused": {
-    "message": "Aggiornamento automatico in pausa per risparmiare richieste."
+    "message": "Aggiornamento automatico in pausa per ridurre il numero di richieste."
   },
   "idlePaused": {
     "message": "In pausa per inattività."
   },
   "requestLimitReached": {
-    "message": "Limite giornaliero di richieste raggiunto. Mostro i dati in cache."
+    "message": "Limite giornaliero di richieste raggiunto. Vengono mostrati i dati salvati."
   },
   "refreshFailed": {
-    "message": "Aggiornamento non riuscito. Mostro gli ultimi dati."
+    "message": "Aggiornamento non riuscito. Vengono mostrati gli ultimi dati disponibili."
   },
   "club": {
     "message": "Club"
@@ -129,10 +129,10 @@
     "message": "Seleziona un campionato"
   },
   "noLiveMatches": {
-    "message": "Nessuna partita live"
+    "message": "Nessuna partita in diretta"
   },
   "liveCount": {
-    "message": "$COUNT$ live",
+    "message": "$COUNT$ in diretta",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -160,7 +160,7 @@
     "message": "Statistiche"
   },
   "favorite": {
-    "message": "Preferito"
+    "message": "Aggiungi ai preferiti"
   },
   "removeFavorite": {
     "message": "Rimuovi dai preferiti"
@@ -253,22 +253,22 @@
     "message": "Impostazioni"
   },
   "popupSize": {
-    "message": "Dimensione popup"
+    "message": "Dimensione della finestra"
   },
   "sizeSmall": {
-    "message": "Piccolo"
+    "message": "Piccola"
   },
   "sizeDefault": {
-    "message": "Predefinito"
+    "message": "Predefinita"
   },
   "sizeBig": {
     "message": "Grande"
   },
   "settingsBackup": {
-    "message": "Backup impostazioni"
+    "message": "Backup delle impostazioni"
   },
   "settingsBackupHint": {
-    "message": "Include campionati preferiti e dimensione popup. L’importazione sostituisce queste impostazioni."
+    "message": "Include i campionati preferiti e la dimensione della finestra. L’importazione sostituisce queste impostazioni."
   },
   "exportSettings": {
     "message": "Esporta impostazioni"

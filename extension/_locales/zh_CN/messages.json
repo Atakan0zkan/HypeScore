@@ -108,16 +108,16 @@
     "message": "已暂停"
   },
   "autoPaused": {
-    "message": "为节省请求，已暂停自动刷新。"
+    "message": "为减少请求次数，已暂停自动刷新。"
   },
   "idlePaused": {
-    "message": "闲置时已暂停。"
+    "message": "因未操作而暂停。"
   },
   "requestLimitReached": {
     "message": "已达每日请求上限。正在显示缓存数据。"
   },
   "refreshFailed": {
-    "message": "刷新失败。正在显示最新数据。"
+    "message": "刷新失败。正在显示上次获取的数据。"
   },
   "club": {
     "message": "俱乐部"
@@ -129,7 +129,7 @@
     "message": "选择联赛"
   },
   "noLiveMatches": {
-    "message": "暂无进行中比赛"
+    "message": "暂无正在进行的比赛"
   },
   "liveCount": {
     "message": "$COUNT$ 场进行中",
@@ -151,13 +151,13 @@
     "message": "完场"
   },
   "halfTime": {
-    "message": "半场"
+    "message": "中场休息"
   },
   "scheduled": {
     "message": "未开始"
   },
   "stats": {
-    "message": "数据"
+    "message": "统计"
   },
   "favorite": {
     "message": "收藏"
@@ -175,10 +175,10 @@
     "message": "收藏联赛"
   },
   "forceEnglishOn": {
-    "message": "显示英文标签"
+    "message": "显示英文"
   },
   "forceEnglishOff": {
-    "message": "返回浏览器语言"
+    "message": "恢复浏览器语言"
   },
   "other": {
     "message": "其他"
@@ -211,7 +211,7 @@
     "message": "暂无数据。"
   },
   "noStats": {
-    "message": "暂无比赛数据。"
+    "message": "暂无比赛统计。"
   },
   "noStandings": {
     "message": "该联赛暂无积分榜。"
@@ -268,7 +268,7 @@
     "message": "设置备份"
   },
   "settingsBackupHint": {
-    "message": "包含收藏联赛和弹窗大小。导入将替换这些设置。"
+    "message": "包含收藏的联赛和弹窗大小。导入文件后，将替换这些设置。"
   },
   "exportSettings": {
     "message": "导出设置"

@@ -3,7 +3,7 @@
     "message": "Hype - লাইভ ফুটবল স্কোর"
   },
   "extDescription": {
-    "message": "লাইভ ফুটবল স্কোর, ম্যাচ, ফলাফল ও লিগ টেবিল।"
+    "message": "লাইভ ফুটবল স্কোর, ম্যাচের সূচি, ফলাফল ও লিগের পয়েন্ট টেবিল।"
   },
   "appTitle": {
     "message": "Hype Scores"
@@ -15,7 +15,7 @@
     "message": "ডেটা লোড করা যায়নি"
   },
   "extensionRuntimeRequired": {
-    "message": "ফাইল প্রিভিউতে লাইভ ডেটা ব্লক। স্কোরের জন্য Chrome এক্সটেনশন পপআপ খুলুন।"
+    "message": "ফাইলের প্রিভিউতে লাইভ ডেটা পাওয়া যায় না। স্কোর দেখতে Chrome এক্সটেনশনের পপআপ খুলুন।"
   },
   "empty": {
     "message": "আজ কোনো ম্যাচ পাওয়া যায়নি।"
@@ -51,16 +51,16 @@
     "message": "নকআউট"
   },
   "loadingBracket": {
-    "message": "নকআউট ব্র্যাকেট লোড হচ্ছে…"
+    "message": "নকআউট পর্বের ছক লোড হচ্ছে…"
   },
   "noBracket": {
-    "message": "কোনো নকআউট ব্র্যাকেট নেই।"
+    "message": "নকআউট পর্বের ছক পাওয়া যাচ্ছে না।"
   },
   "bracketUnavailable": {
-    "message": "নকআউট ব্র্যাকেট অনুপলব্ধ।"
+    "message": "নকআউট পর্বের ছক পাওয়া যাচ্ছে না।"
   },
   "tbd": {
-    "message": "TBD"
+    "message": "এখনও ঠিক হয়নি"
   },
   "roundOf32": {
     "message": "রাউন্ড অফ ৩২"
@@ -75,7 +75,7 @@
     "message": "সেমিফাইনাল"
   },
   "thirdPlace": {
-    "message": "তৃতীয় স্থান নির্ধারণী"
+    "message": "তৃতীয় স্থান নির্ধারণী ম্যাচ"
   },
   "final": {
     "message": "ফাইনাল"
@@ -93,31 +93,31 @@
     "message": "প"
   },
   "goalsFor": {
-    "message": "করেছে"
+    "message": "গোল+"
   },
   "goalsAgainst": {
-    "message": "খেয়েছে"
+    "message": "গোল−"
   },
   "goalDifference": {
-    "message": "পার্থক্য"
+    "message": "গোল পার্থক্য"
   },
   "points": {
     "message": "পয়েন্ট"
   },
   "paused": {
-    "message": "থামানো"
+    "message": "সাময়িকভাবে থামানো"
   },
   "autoPaused": {
-    "message": "অনুরোধ বাঁচাতে অটো রিফ্রেশ থামানো হয়েছে।"
+    "message": "অনুরোধের সংখ্যা কমাতে স্বয়ংক্রিয় রিফ্রেশ সাময়িকভাবে বন্ধ করা হয়েছে।"
   },
   "idlePaused": {
-    "message": "নিষ্ক্রিয় থাকায় থামানো।"
+    "message": "ব্যবহার না করায় সাময়িকভাবে থামানো হয়েছে।"
   },
   "requestLimitReached": {
-    "message": "দৈনিক অনুরোধ সীমা পূর্ণ। ক্যাশ ডেটা দেখানো হচ্ছে।"
+    "message": "দৈনিক অনুরোধের সীমা পূর্ণ হয়েছে। সংরক্ষিত ডেটা দেখানো হচ্ছে।"
   },
   "refreshFailed": {
-    "message": "রিফ্রেশ ব্যর্থ। সর্বশেষ ডেটা দেখানো হচ্ছে।"
+    "message": "রিফ্রেশ করা যায়নি। শেষবার পাওয়া ডেটা দেখানো হচ্ছে।"
   },
   "club": {
     "message": "ক্লাব"
@@ -140,7 +140,7 @@
     }
   },
   "matchCount": {
-    "message": "$COUNT$ ম্যাচ",
+    "message": "$COUNT$টি ম্যাচ",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -151,7 +151,7 @@
     "message": "শেষ"
   },
   "halfTime": {
-    "message": "হাফ"
+    "message": "বিরতি"
   },
   "scheduled": {
     "message": "নির্ধারিত"
@@ -160,10 +160,10 @@
     "message": "পরিসংখ্যান"
   },
   "favorite": {
-    "message": "পছন্দ"
+    "message": "পছন্দের তালিকায় যোগ করুন"
   },
   "removeFavorite": {
-    "message": "পছন্দ থেকে সরান"
+    "message": "পছন্দের তালিকা থেকে সরান"
   },
   "turnOff": {
     "message": "এক্সটেনশন বন্ধ করুন"
@@ -172,10 +172,10 @@
     "message": "এক্সটেনশন চালু করুন"
   },
   "favoriteLeague": {
-    "message": "লিগ পছন্দে যোগ করুন"
+    "message": "লিগটি পছন্দের তালিকায় যোগ করুন"
   },
   "forceEnglishOn": {
-    "message": "ইংরেজি লেবেল দেখান"
+    "message": "ইংরেজিতে দেখান"
   },
   "forceEnglishOff": {
     "message": "ব্রাউজারের ভাষায় ফিরুন"
@@ -199,22 +199,22 @@
     "message": "ম্যাচের বিবরণ লোড হচ্ছে…"
   },
   "loadingStandings": {
-    "message": "টেবিল লোড হচ্ছে…"
+    "message": "পয়েন্ট টেবিল লোড হচ্ছে…"
   },
   "detailsUnavailable": {
-    "message": "বিবরণ নেই"
+    "message": "বিবরণ পাওয়া যাচ্ছে না"
   },
   "noDetails": {
-    "message": "এই ম্যাচের অতিরিক্ত বিবরণ নেই।"
+    "message": "এই ম্যাচের জন্য অতিরিক্ত তথ্য পাওয়া যাচ্ছে না।"
   },
   "noSectionData": {
     "message": "কোনো ডেটা নেই।"
   },
   "noStats": {
-    "message": "ম্যাচ পরিসংখ্যান নেই।"
+    "message": "ম্যাচের পরিসংখ্যান পাওয়া যাচ্ছে না।"
   },
   "noStandings": {
-    "message": "এই লিগের টেবিল নেই।"
+    "message": "এই লিগের পয়েন্ট টেবিল পাওয়া যায়নি।"
   },
   "noLinks": {
     "message": "কোনো লিঙ্ক নেই।"
@@ -238,7 +238,7 @@
     "message": "লাইনআপ"
   },
   "headToHead": {
-    "message": "হেড টু হেড"
+    "message": "মুখোমুখি লড়াই"
   },
   "news": {
     "message": "খবর"
@@ -268,7 +268,7 @@
     "message": "সেটিংস ব্যাকআপ"
   },
   "settingsBackupHint": {
-    "message": "প্রিয় লিগ এবং পপআপের আকার অন্তর্ভুক্ত। আমদানি এই সেটিংস প্রতিস্থাপন করে।"
+    "message": "পছন্দের লিগ ও পপআপের আকার অন্তর্ভুক্ত থাকে। ফাইল আমদানি করলে এই সেটিংসগুলো প্রতিস্থাপিত হবে।"
   },
   "exportSettings": {
     "message": "সেটিংস রপ্তানি করুন"
@@ -310,7 +310,7 @@
     "message": "বিরতি"
   },
   "liveMatchCountOne": {
-    "message": "$COUNT$ সরাসরি ম্যাচ",
+    "message": "$COUNT$টি লাইভ ম্যাচ",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -318,7 +318,7 @@
     }
   },
   "liveMatchesCount": {
-    "message": "$COUNT$ সরাসরি ম্যাচ",
+    "message": "$COUNT$টি লাইভ ম্যাচ",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -326,7 +326,7 @@
     }
   },
   "upcomingMatchCountOne": {
-    "message": "$COUNT$ আসন্ন ম্যাচ",
+    "message": "$COUNT$টি আসন্ন ম্যাচ",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -334,7 +334,7 @@
     }
   },
   "upcomingMatchesCount": {
-    "message": "$COUNT$ আসন্ন ম্যাচ",
+    "message": "$COUNT$টি আসন্ন ম্যাচ",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -342,7 +342,7 @@
     }
   },
   "completedMatchCountOne": {
-    "message": "$COUNT$ শেষ হওয়া ম্যাচ",
+    "message": "$COUNT$টি শেষ হওয়া ম্যাচ",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -350,7 +350,7 @@
     }
   },
   "completedMatchesCount": {
-    "message": "$COUNT$ শেষ হওয়া ম্যাচ",
+    "message": "$COUNT$টি শেষ হওয়া ম্যাচ",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -358,7 +358,7 @@
     }
   },
   "matchCountOne": {
-    "message": "$COUNT$ ম্যাচ",
+    "message": "$COUNT$টি ম্যাচ",
     "placeholders": {
       "count": {
         "content": "$1"

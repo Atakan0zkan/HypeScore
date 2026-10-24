@@ -3,7 +3,7 @@
     "message": "Hype - Resultados de fútbol en vivo"
   },
   "extDescription": {
-    "message": "Resultados de fútbol en vivo, partidos, resultados y tablas de posiciones."
+    "message": "Marcadores de fútbol en vivo, calendario, resultados y tablas de posiciones."
   },
   "appTitle": {
     "message": "Hype Scores"
@@ -15,7 +15,7 @@
     "message": "No se pudieron cargar los datos"
   },
   "extensionRuntimeRequired": {
-    "message": "Los datos en directo no se cargan en la vista previa local. Abre la ventana de la extensión de Chrome para ver los resultados."
+    "message": "Los datos en vivo no están disponibles en la vista previa del archivo. Abre la ventana de la extensión de Chrome para ver los marcadores."
   },
   "empty": {
     "message": "No hay partidos para hoy."
@@ -45,7 +45,7 @@
     "message": "Próximos"
   },
   "standings": {
-    "message": "Tabla"
+    "message": "Tabla de posiciones"
   },
   "bracket": {
     "message": "Eliminatorias"
@@ -63,7 +63,7 @@
     "message": "Por definir"
   },
   "roundOf32": {
-    "message": "Dieciseisavos"
+    "message": "Dieciseisavos de final"
   },
   "roundOf16": {
     "message": "Octavos de final"
@@ -75,7 +75,7 @@
     "message": "Semifinales"
   },
   "thirdPlace": {
-    "message": "Tercer puesto"
+    "message": "Partido por el tercer puesto"
   },
   "final": {
     "message": "Final"
@@ -108,7 +108,7 @@
     "message": "Pausado"
   },
   "autoPaused": {
-    "message": "Actualización automática pausada para ahorrar solicitudes."
+    "message": "La actualización automática está en pausa para reducir el número de solicitudes."
   },
   "idlePaused": {
     "message": "Pausado por inactividad."
@@ -117,7 +117,7 @@
     "message": "Se alcanzó el límite diario de solicitudes. Mostrando datos guardados."
   },
   "refreshFailed": {
-    "message": "No se pudo actualizar. Mostrando los datos más recientes."
+    "message": "No se pudo actualizar. Se muestran los últimos datos disponibles."
   },
   "club": {
     "message": "Club"
@@ -160,10 +160,10 @@
     "message": "Estadísticas"
   },
   "favorite": {
-    "message": "Favorito"
+    "message": "Agregar a favoritos"
   },
   "removeFavorite": {
-    "message": "Quitar favorito"
+    "message": "Quitar de favoritos"
   },
   "turnOff": {
     "message": "Desactivar extensión"
@@ -199,7 +199,7 @@
     "message": "Cargando detalles del partido…"
   },
   "loadingStandings": {
-    "message": "Cargando clasificación…"
+    "message": "Cargando tabla de posiciones…"
   },
   "detailsUnavailable": {
     "message": "Detalles no disponibles"
@@ -214,7 +214,7 @@
     "message": "No hay estadísticas del partido disponibles."
   },
   "noStandings": {
-    "message": "No hay clasificación disponible para esta liga."
+    "message": "No hay tabla de posiciones disponible para esta liga."
   },
   "noLinks": {
     "message": "No hay enlaces disponibles."
@@ -238,7 +238,7 @@
     "message": "Alineaciones"
   },
   "headToHead": {
-    "message": "Cara a cara"
+    "message": "Enfrentamientos directos"
   },
   "news": {
     "message": "Noticias"
@@ -265,7 +265,7 @@
     "message": "Grande"
   },
   "settingsBackup": {
-    "message": "Copia de ajustes"
+    "message": "Copia de seguridad de los ajustes"
   },
   "settingsBackupHint": {
     "message": "Incluye ligas favoritas y tamaño de la ventana. La importación reemplaza estos ajustes."
@@ -326,7 +326,7 @@
     }
   },
   "upcomingMatchCountOne": {
-    "message": "$COUNT$ próximo partido",
+    "message": "$COUNT$ partido por jugar",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -334,7 +334,7 @@
     }
   },
   "upcomingMatchesCount": {
-    "message": "$COUNT$ próximos partidos",
+    "message": "$COUNT$ partidos por jugar",
     "placeholders": {
       "count": {
         "content": "$1"

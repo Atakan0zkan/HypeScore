@@ -156,7 +156,7 @@ function buildBackendUrl(rawUrl) {
 
 const FALLBACK_MESSAGES = {
   appTitle: "Hype Scores",
-  autoPaused: "Auto refresh paused to save requests.",
+  autoPaused: "Automatic refresh paused to reduce requests.",
   backToLeagues: "← Leagues",
   bracket: "Knockout",
   bracketUnavailable: "Knockout bracket unavailable.",
@@ -169,11 +169,11 @@ const FALLBACK_MESSAGES = {
   extDescription: "Live football scores, fixtures, results and league tables.",
   extName: "Hype - Live Football Scores",
   extensionRuntimeRequired:
-    "Live data is blocked in file preview. Open the Chrome extension popup to load scores.",
-  favorite: "Favorite",
-  favoriteLeague: "Favorite league",
-  forceEnglishOff: "Return to browser language",
-  forceEnglishOn: "Show English labels",
+    "Live data is unavailable in file previews. Open the Chrome extension popup to load scores.",
+  favorite: "Add to favorites",
+  favoriteLeague: "Add league to favorites",
+  forceEnglishOff: "Use browser language",
+  forceEnglishOn: "Show in English",
   fullTime: "FT",
   fullTimeLabel: "Full Time",
   goalDifference: "GD",
@@ -218,10 +218,10 @@ const FALLBACK_MESSAGES = {
   played: "P",
   points: "Pts",
   ready: "Ready",
-  refreshFailed: "Refresh failed. Showing latest data.",
+  refreshFailed: "Refresh failed. Showing the last available data.",
   refreshing: "Refreshing",
   requestLimitReached: "Daily request limit reached. Showing cached data.",
-  removeFavorite: "Remove favorite",
+  removeFavorite: "Remove from favorites",
   results: "Results",
   scheduled: "Scheduled",
   selectLeague: "Select a league",
@@ -233,7 +233,7 @@ const FALLBACK_MESSAGES = {
   sizeDefault: "Default",
   sizeBig: "Big",
   settingsBackup: "Settings backup",
-  settingsBackupHint: "Includes favorite leagues and popup size. Import replaces these settings.",
+  settingsBackupHint: "Includes your favorite leagues and popup size. Importing a file replaces these settings.",
   exportSettings: "Export settings",
   importSettings: "Import settings",
   privacyPolicy: "Privacy policy",
@@ -259,8 +259,8 @@ const FALLBACK_MESSAGES = {
   wins: "W",
   roundOf32: "Round of 32",
   roundOf16: "Round of 16",
-  quarterfinals: "Quarter-finals",
-  semifinals: "Semi-finals",
+  quarterfinals: "Quarterfinals",
+  semifinals: "Semifinals",
   thirdPlace: "Third-place match",
   final: "Final",
 };
@@ -280,7 +280,6 @@ let settingsStatusMessage = null;
 let settingsImportPending = false;
 let loadingState;
 let errorState;
-let snapshotNotice;
 let emptyState;
 let leaguePickList;
 let leagueDetailView;
@@ -292,7 +291,7 @@ let lastPayload = null;
 let lastFetchCompletedAt = 0;
 let lastDataUpdatedAt = 0;
 let lastDataIsStale = false;
-let snapshotNoticeTimer = null;
+let snapshotExpiryTimer = null;
 let refreshTimer = null;
 let sessionAutoPauseTimer = null;
 let inactivityTimer = null;
@@ -334,7 +333,6 @@ document.addEventListener("DOMContentLoaded", () => {
   settingsFile = document.getElementById("settingsFile");
   loadingState = document.getElementById("loadingState");
   errorState = document.getElementById("errorState");
-  snapshotNotice = document.getElementById("snapshotNotice");
   emptyState = document.getElementById("emptyState");
   leaguePickList = document.getElementById("leaguePickList");
   leagueDetailView = document.getElementById("leagueDetailView");
@@ -388,6 +386,42 @@ function msg(key, substitutions) {
   return formatMessage(FALLBACK_MESSAGES[key] || key, substitutions);
 }
 
+// These bundled languages need additional integer count forms (for example,
+// Polish 2/5 matches or Slovenian 2/3 matches). Other packs use one/other, or
+// invariant count labels. Unknown browser languages retain English grammar.
+const MATCH_COUNT_RULE_LANGUAGES = new Set(["cs", "hr", "lt", "lv", "pl", "ro", "ru", "sk", "sl", "sr", "uk"]);
+const matchCountPluralRules = new Map();
+const MATCH_COUNT_MESSAGES = {
+  live: ["liveMatchCountOne", "liveMatchesCount", "liveMatchCount"],
+  upcoming: ["upcomingMatchCountOne", "upcomingMatchesCount", "upcomingMatchCount"],
+  completed: ["completedMatchCountOne", "completedMatchesCount", "completedMatchCount"],
+  matches: ["matchCountOne", "matchCount", "matchCount"],
+};
+
+function matchCountMessage(kind, count) {
+  const [oneKey, otherKey, prefix] = MATCH_COUNT_MESSAGES[kind] || MATCH_COUNT_MESSAGES.matches;
+  const substitutions = [String(count)];
+  let category = count === 1 ? "one" : "other";
+  const canLocalize = !isEnglishOverride && typeof chrome !== "undefined" && chrome.i18n?.getMessage;
+  if (canLocalize) {
+    const language = String(getUiLanguage()).toLowerCase().split(/[-_]/)[0];
+    if (MATCH_COUNT_RULE_LANGUAGES.has(language)) {
+      try {
+        if (!matchCountPluralRules.has(language)) matchCountPluralRules.set(language, new Intl.PluralRules(language));
+        category = matchCountPluralRules.get(language).select(count);
+      } catch {
+        // Preserve the usable one/other labels if locale support is missing.
+      }
+    }
+    if (category !== "one" && category !== "other") {
+      const suffix = category[0].toUpperCase() + category.slice(1);
+      const translated = chrome.i18n.getMessage(prefix + suffix, substitutions);
+      if (translated) return translated;
+    }
+  }
+  return msg(category === "one" ? oneKey : otherKey, substitutions);
+}
+
 function formatMessage(template, substitutions) {
   if (!substitutions) return template;
   const values = Array.isArray(substitutions) ? substitutions : [substitutions];
@@ -395,7 +429,7 @@ function formatMessage(template, substitutions) {
   values.forEach((value, index) => {
     text = text.replaceAll("$" + (index + 1), String(value));
   });
-  // Locale files use $COUNT$ for liveCount/matchCount; keep English override working.
+  // Locale count messages use $COUNT$; keep the English override working.
   if (values[0] != null) {
     text = text.replaceAll("$COUNT$", String(values[0]));
   }
@@ -510,7 +544,7 @@ function setSettingsOpen(open) {
   if (isSettingsOpen === open) return;
   if (open) captureViewState();
   isSettingsOpen = open;
-  updateSnapshotNotice();
+  enforceSnapshotExpiry();
   settingsPanel.hidden = !open;
   appShell.classList.toggle("app-shell--settings-open", open);
   settingsToggle.setAttribute("aria-expanded", String(open));
@@ -676,7 +710,7 @@ function restoreEnabledState() {
 
 function applyEnabledState() {
   updatePowerToggleLabel();
-  updateSnapshotNotice();
+  enforceSnapshotExpiry();
 
   if (isEnabled) {
     appShell.classList.remove("app-shell--disabled");
@@ -977,7 +1011,7 @@ function getRemainingRefreshDelay(payload, completedAt = lastFetchCompletedAt) {
 }
 
 function handleVisibilityChange() {
-  updateSnapshotNotice();
+  enforceSnapshotExpiry();
   if (document.hidden) {
     clearTimeout(refreshTimer);
     clearTimeout(inactivityTimer);
@@ -1010,7 +1044,7 @@ function handleVisibilityChange() {
 }
 
 function renderPayload(payload) {
-  if (updateSnapshotNotice() === false) return;
+  if (enforceSnapshotExpiry() === false) return;
   if (isSettingsOpen) return;
   const leagues = normalizeLeagueGroups(payload);
 
@@ -1272,10 +1306,10 @@ function buildLeagueMetaText(league, liveCount, upcomingCount) {
   const completedCount = matches.filter(match => match?.state === "finished").length;
   const otherCount = Math.max(0, totalMatches - liveCount - upcomingCount - completedCount);
 
-  if (liveCount > 0) metaParts.push(msg(liveCount === 1 ? "liveMatchCountOne" : "liveMatchesCount", [String(liveCount)]));
-  if (upcomingCount > 0) metaParts.push(msg(upcomingCount === 1 ? "upcomingMatchCountOne" : "upcomingMatchesCount", [String(upcomingCount)]));
-  if (completedCount > 0) metaParts.push(msg(completedCount === 1 ? "completedMatchCountOne" : "completedMatchesCount", [String(completedCount)]));
-  if (otherCount > 0) metaParts.push(msg(otherCount === 1 ? "matchCountOne" : "matchCount", [String(otherCount)]));
+  if (liveCount > 0) metaParts.push(matchCountMessage("live", liveCount));
+  if (upcomingCount > 0) metaParts.push(matchCountMessage("upcoming", upcomingCount));
+  if (completedCount > 0) metaParts.push(matchCountMessage("completed", completedCount));
+  if (otherCount > 0) metaParts.push(matchCountMessage("matches", otherCount));
   if (totalMatches === 0) metaParts.push(msg("noLiveMatches"));
 
   return metaParts.join(" · ");
@@ -2383,8 +2417,8 @@ function restoreRecentSnapshot() {
 }
 
 function discardSnapshot() {
-  clearTimeout(snapshotNoticeTimer);
-  snapshotNoticeTimer = null;
+  clearTimeout(snapshotExpiryTimer);
+  snapshotExpiryTimer = null;
   lastPayload = null;
   lastDataUpdatedAt = 0;
   lastDataIsStale = false;
@@ -2392,39 +2426,22 @@ function discardSnapshot() {
   selectedMatchKey = null;
   selectedLeagueKey = null;
   abortDetailRequest();
-  if (snapshotNotice) snapshotNotice.hidden = true;
-  document.body.classList.remove("has-stale-scores");
 }
 
-function formatSnapshotAge(timestamp) {
-  const seconds = Math.max(0, Math.floor((Date.now() - timestamp) / 1000));
-  const unit = seconds >= 60 ? "minute" : "second";
-  const value = unit === "minute" ? Math.floor(seconds / 60) : seconds;
-  try {
-    return new Intl.RelativeTimeFormat(isEnglishOverride ? "en" : getUiLanguage().replace("_", "-"),
-      { numeric: "always" }).format(-value, unit);
-  } catch { return `${seconds}s`; }
-}
-
-function updateSnapshotNotice() {
-  clearTimeout(snapshotNoticeTimer);
-  snapshotNoticeTimer = null;
-  if (!snapshotNotice) return;
+function enforceSnapshotExpiry() {
+  clearTimeout(snapshotExpiryTimer);
+  snapshotExpiryTimer = null;
   if (lastPayload && lastDataIsStale && !isRecentSnapshot(lastDataUpdatedAt)) {
     discardSnapshot();
     showError(msg("error"));
     return false;
   }
-  const stale = Boolean(lastPayload && lastDataIsStale);
-  snapshotNotice.hidden = !stale || !isEnabled || isSettingsOpen;
-  document.body.classList.toggle("has-stale-scores", stale);
-  if (!stale) return;
-  const text = `⚠ ${msg("refreshFailed")} ${msg("updated")} ${formatClockTime(lastDataUpdatedAt)} · ${formatSnapshotAge(lastDataUpdatedAt)}`;
-  if (snapshotNotice.textContent !== text) snapshotNotice.textContent = text;
-  // This updates only text, never the network or the saved data timestamp.
-  // Check the hard expiry even while automatic refresh is paused.
-  if (!document.hidden) snapshotNoticeTimer = setTimeout(updateSnapshotNotice,
-    Math.min(1000, Math.max(1, CLIENT_SNAPSHOT_MAX_AGE_MS - (Date.now() - lastDataUpdatedAt))));
+  // No freshness text or banner is shown. Enforce the original source-time
+  // limit even while settings are open or automatic refresh is paused.
+  if (lastPayload && lastDataIsStale && !document.hidden) {
+    snapshotExpiryTimer = setTimeout(enforceSnapshotExpiry,
+      Math.max(1, CLIENT_SNAPSHOT_MAX_AGE_MS - (Date.now() - lastDataUpdatedAt)));
+  }
 }
 
 function getClientLiveCacheMaxAge(payload) {
@@ -2843,32 +2860,51 @@ function formatUpcomingKickoff(value) {
   if (!value) return "-";
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return "-";
-  return new Intl.DateTimeFormat(undefined, {
+  return new Intl.DateTimeFormat(isEnglishOverride ? "en" : undefined, {
     hour: "2-digit",
     minute: "2-digit",
   }).format(date);
 }
 
 function translateMinute(minute) {
-  if (minute === "Scheduled") return msg("scheduled");
+  const key = getStatusMessageKey(minute);
+  if (key) return msg(key);
   return minute || "-";
 }
 
 function translateStatus(status) {
-  const map = {
-    "Full Time": msg("fullTime"),
-    "Half Time": msg("halfTime"),
-    Scheduled: msg("scheduled"),
-    Live: msg("live"),
-  };
-  return map[status] || status || "";
+  const key = getStatusMessageKey(status);
+  return key ? msg(key) : status || "";
+}
+
+function getStatusMessageKey(value) {
+  if (typeof value !== "string") return null;
+  // Providers send both short codes and words. A playing half (1H/2H) is
+  // not a half-time break, and unknown status text must not be guessed.
+  switch (value.trim().toLowerCase().replace(/[\s_-]+/g, "")) {
+    case "ft":
+    case "fulltime":
+    case "statusfulltime":
+      return "fullTime";
+    case "ht":
+    case "halftime":
+    case "statushalftime":
+      return "halfTime";
+    case "scheduled":
+    case "statusscheduled":
+      return "scheduled";
+    case "live":
+      return "live";
+    default:
+      return null;
+  }
 }
 
 function formatDateTime(value) {
   if (!value) return "-";
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return String(value);
-  return new Intl.DateTimeFormat(undefined, {
+  return new Intl.DateTimeFormat(isEnglishOverride ? "en" : undefined, {
     day: "2-digit",
     hour: "2-digit",
     minute: "2-digit",
@@ -2880,7 +2916,7 @@ function formatShortDate(value) {
   if (!value) return "-";
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return String(value);
-  return new Intl.DateTimeFormat(undefined, {
+  return new Intl.DateTimeFormat(isEnglishOverride ? "en" : undefined, {
     day: "2-digit",
     month: "short",
   }).format(date);
@@ -2889,7 +2925,7 @@ function formatShortDate(value) {
 function formatClockTime(value) {
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return "";
-  return new Intl.DateTimeFormat(undefined, {
+  return new Intl.DateTimeFormat(isEnglishOverride ? "en" : undefined, {
     hour: "2-digit",
     minute: "2-digit",
   }).format(date);

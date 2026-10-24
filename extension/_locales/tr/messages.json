@@ -6,7 +6,7 @@
     "message": "Canlı futbol skorları, fikstür, sonuçlar ve lig puan durumları."
   },
   "appTitle": {
-    "message": "Hype Skorları"
+    "message": "Hype Scores"
   },
   "loading": {
     "message": "Maçlar yükleniyor…"
@@ -15,7 +15,7 @@
     "message": "Veri alınamadı"
   },
   "extensionRuntimeRequired": {
-    "message": "Canlı veriler dosya önizlemesinde yüklenmez. Skorları görmek için Chrome eklenti penceresini açın."
+    "message": "Dosya önizlemesinde canlı verilere erişilemez. Skorları görmek için Chrome uzantısının penceresini açın."
   },
   "empty": {
     "message": "Bugün gösterilecek maç bulunamadı."
@@ -42,22 +42,22 @@
     "message": "Sonuçlar"
   },
   "upcoming": {
-    "message": "Yaklaşan"
+    "message": "Yaklaşan maçlar"
   },
   "standings": {
-    "message": "Puan Durumu"
+    "message": "Puan durumu"
   },
   "bracket": {
-    "message": "Eleme Ağacı"
+    "message": "Eleme turları"
   },
   "loadingBracket": {
-    "message": "Eleme ağacı yükleniyor…"
+    "message": "Eleme tablosu yükleniyor…"
   },
   "noBracket": {
-    "message": "Eleme ağacı henüz yok."
+    "message": "Gösterilecek eleme tablosu yok."
   },
   "bracketUnavailable": {
-    "message": "Eleme ağacı alınamadı."
+    "message": "Eleme tablosu yüklenemedi."
   },
   "tbd": {
     "message": "Belli değil"
@@ -111,13 +111,13 @@
     "message": "İstekleri azaltmak için otomatik yenileme duraklatıldı."
   },
   "idlePaused": {
-    "message": "Pasif kalındığı için yenileme durdu."
+    "message": "Kullanılmadığı için yenileme duraklatıldı."
   },
   "requestLimitReached": {
-    "message": "Günlük istek limiti doldu. Kayıtlı veriler gösteriliyor."
+    "message": "Günlük istek sınırına ulaşıldı. Kayıtlı veriler gösteriliyor."
   },
   "refreshFailed": {
-    "message": "Yenileme başarısız. Son veriler gösteriliyor."
+    "message": "Veriler yenilenemedi. Son alınan veriler gösteriliyor."
   },
   "club": {
     "message": "Takım"
@@ -160,16 +160,16 @@
     "message": "İstatistikler"
   },
   "favorite": {
-    "message": "Favori"
+    "message": "Favorilere ekle"
   },
   "removeFavorite": {
     "message": "Favoriden kaldır"
   },
   "turnOff": {
-    "message": "Eklentiyi kapat"
+    "message": "Uzantıyı kapat"
   },
   "turnOn": {
-    "message": "Eklentiyi aç"
+    "message": "Uzantıyı aç"
   },
   "favoriteLeague": {
     "message": "Ligi favorilere ekle"
@@ -187,10 +187,10 @@
     "message": "Takım"
   },
   "unknownLeague": {
-    "message": "Bilinmeyen Lig"
+    "message": "Bilinmeyen lig"
   },
   "unknownTeam": {
-    "message": "Bilinmeyen Takım"
+    "message": "Bilinmeyen takım"
   },
   "matchDetails": {
     "message": "Maç detayları"
@@ -211,7 +211,7 @@
     "message": "Veri bulunamadı."
   },
   "noStats": {
-    "message": "Maç istatistiği bulunamadı."
+    "message": "Maç istatistikleri bulunamadı."
   },
   "noStandings": {
     "message": "Bu lig için puan durumu bulunamadı."
@@ -223,7 +223,7 @@
     "message": "Stadyum"
   },
   "vs": {
-    "message": "karşı"
+    "message": "–"
   },
   "kickoff": {
     "message": "Başlama saati"
@@ -232,7 +232,7 @@
     "message": "Yayınlar"
   },
   "timeline": {
-    "message": "Olaylar"
+    "message": "Maç akışı"
   },
   "lineups": {
     "message": "Kadrolar"
@@ -253,7 +253,7 @@
     "message": "Ayarlar"
   },
   "popupSize": {
-    "message": "Popup boyutu"
+    "message": "Pencere boyutu"
   },
   "sizeSmall": {
     "message": "Küçük"
@@ -268,7 +268,7 @@
     "message": "Ayar yedeği"
   },
   "settingsBackupHint": {
-    "message": "Favori ligleri ve popup boyutunu içerir. İçe aktarma bu ayarları değiştirir."
+    "message": "Favori ligleri ve pencere boyutunu içerir. İçe aktarma, bu ayarları dosyadaki değerlerle değiştirir."
   },
   "exportSettings": {
     "message": "Ayarları dışa aktar"
@@ -304,10 +304,10 @@
     "message": "İlk 11"
   },
   "fullTimeLabel": {
-    "message": "Maç Bitti"
+    "message": "Maç bitti"
   },
   "halfTimeLabel": {
-    "message": "Devre Arası"
+    "message": "Devre arası"
   },
   "liveMatchCountOne": {
     "message": "$COUNT$ canlı maç",
@@ -326,7 +326,7 @@
     }
   },
   "upcomingMatchCountOne": {
-    "message": "$COUNT$ yaklaşan maç",
+    "message": "Yaklaşan $COUNT$ maç",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -334,7 +334,7 @@
     }
   },
   "upcomingMatchesCount": {
-    "message": "$COUNT$ yaklaşan maç",
+    "message": "Yaklaşan $COUNT$ maç",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -342,7 +342,7 @@
     }
   },
   "completedMatchCountOne": {
-    "message": "$COUNT$ tamamlanan maç",
+    "message": "Tamamlanan $COUNT$ maç",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -350,7 +350,7 @@
     }
   },
   "completedMatchesCount": {
-    "message": "$COUNT$ tamamlanan maç",
+    "message": "Tamamlanan $COUNT$ maç",
     "placeholders": {
       "count": {
         "content": "$1"

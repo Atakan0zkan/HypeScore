@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "Hype - Futbola rezultāti tiešraidē"
+    "message": "Hype - Futbola rezultāti reāllaikā"
   },
   "extDescription": {
-    "message": "Futbola rezultāti tiešraidē, spēles, iznākumi un tabulas."
+    "message": "Futbola rezultāti reāllaikā, spēļu kalendārs, galarezultāti un turnīra tabulas."
   },
   "appTitle": {
     "message": "Hype Scores"
@@ -15,7 +15,7 @@
     "message": "Neizdevās ielādēt datus"
   },
   "extensionRuntimeRequired": {
-    "message": "Live dati ir bloķēti faila priekšskatījumā. Atveriet Chrome paplašinājuma uznirstošo logu."
+    "message": "Reāllaika dati nav pieejami faila priekšskatījumā. Lai redzētu rezultātus, atveriet Chrome paplašinājuma uznirstošo logu."
   },
   "empty": {
     "message": "Šodien spēles nav atrastas."
@@ -33,7 +33,7 @@
     "message": "Atjaunināts"
   },
   "live": {
-    "message": "Tiešraidē"
+    "message": "Notiek"
   },
   "matches": {
     "message": "Spēles"
@@ -45,7 +45,7 @@
     "message": "Gaidāmās"
   },
   "standings": {
-    "message": "Tabula"
+    "message": "Turnīra tabula"
   },
   "bracket": {
     "message": "Izslēgšanas spēles"
@@ -60,7 +60,7 @@
     "message": "Shēma nav pieejama."
   },
   "tbd": {
-    "message": "TBD"
+    "message": "Vēl nav zināms"
   },
   "roundOf32": {
     "message": "1/16 fināls"
@@ -96,10 +96,10 @@
     "message": "GV"
   },
   "goalsAgainst": {
-    "message": "ZI"
+    "message": "IV"
   },
   "goalDifference": {
-    "message": "St"
+    "message": "VS"
   },
   "points": {
     "message": "P"
@@ -108,16 +108,16 @@
     "message": "Apturēts"
   },
   "autoPaused": {
-    "message": "Automātiskā atsvaidzināšana apturēta, lai taupītu pieprasījumus."
+    "message": "Automātiskā atsvaidzināšana ir apturēta, lai samazinātu pieprasījumu skaitu."
   },
   "idlePaused": {
-    "message": "Apturēts dīkstāves dēļ."
+    "message": "Atjaunināšana apturēta neaktivitātes dēļ."
   },
   "requestLimitReached": {
     "message": "Sasniegts dienas pieprasījumu limits. Rāda kešatmiņas datus."
   },
   "refreshFailed": {
-    "message": "Atsvaidzināšana neizdevās. Rāda jaunākos datus."
+    "message": "Atsvaidzināšana neizdevās. Rāda pēdējos saņemtos datus."
   },
   "club": {
     "message": "Klubs"
@@ -129,10 +129,10 @@
     "message": "Izvēlieties līgu"
   },
   "noLiveMatches": {
-    "message": "Nav tiešraides spēļu"
+    "message": "Pašlaik nenotiek neviena spēle"
   },
   "liveCount": {
-    "message": "$COUNT$ tiešraidē",
+    "message": "Notiek: $COUNT$",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -160,7 +160,7 @@
     "message": "Statistika"
   },
   "favorite": {
-    "message": "Izlase"
+    "message": "Pievienot izlasei"
   },
   "removeFavorite": {
     "message": "Noņemt no izlases"
@@ -175,7 +175,7 @@
     "message": "Pievienot līgu izlasei"
   },
   "forceEnglishOn": {
-    "message": "Rādīt angļu etiķetes"
+    "message": "Rādīt angļu valodā"
   },
   "forceEnglishOff": {
     "message": "Atgriezties pie pārlūkprogrammas valodas"
@@ -199,7 +199,7 @@
     "message": "Ielādē spēles detaļas…"
   },
   "loadingStandings": {
-    "message": "Ielādē tabulu…"
+    "message": "Ielādē turnīra tabulu…"
   },
   "detailsUnavailable": {
     "message": "Detaļas nav pieejamas"
@@ -214,7 +214,7 @@
     "message": "Spēles statistika nav pieejama."
   },
   "noStandings": {
-    "message": "Šai līgai nav tabulas."
+    "message": "Šīs līgas turnīra tabula nav pieejama."
   },
   "noLinks": {
     "message": "Nav saišu."
@@ -307,10 +307,10 @@
     "message": "Spēle beigusies"
   },
   "halfTimeLabel": {
-    "message": "Puslaiks"
+    "message": "Pārtraukums"
   },
   "liveMatchCountOne": {
-    "message": "$COUNT$ spēle tiešraidē",
+    "message": "$COUNT$ notiekoša spēle",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -318,7 +318,7 @@
     }
   },
   "liveMatchesCount": {
-    "message": "$COUNT$ spēles tiešraidē",
+    "message": "$COUNT$ notiekošas spēles",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -359,6 +359,38 @@
   },
   "matchCountOne": {
     "message": "$COUNT$ spēle",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "liveMatchCountZero": {
+    "message": "$COUNT$ notiekošu spēļu",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchCountZero": {
+    "message": "$COUNT$ gaidāmu spēļu",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchCountZero": {
+    "message": "$COUNT$ pabeigtu spēļu",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCountZero": {
+    "message": "$COUNT$ spēļu",
     "placeholders": {
       "count": {
         "content": "$1"

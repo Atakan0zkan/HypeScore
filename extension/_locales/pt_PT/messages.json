@@ -3,7 +3,7 @@
     "message": "Hype - Resultados de futebol em direto"
   },
   "extDescription": {
-    "message": "Resultados de futebol em direto, jogos, resultados finais e classificações."
+    "message": "Resultados de futebol em direto, calendário de jogos, resultados finais e classificações."
   },
   "appTitle": {
     "message": "Hype Scores"
@@ -15,7 +15,7 @@
     "message": "Não foi possível carregar os dados"
   },
   "extensionRuntimeRequired": {
-    "message": "Os dados em direto estão bloqueados na pré-visualização de ficheiro. Abra a janela da extensão do Chrome para carregar os resultados."
+    "message": "Os dados em direto não estão disponíveis na pré-visualização do ficheiro. Abra a janela da extensão do Chrome para ver os resultados."
   },
   "empty": {
     "message": "Não foram encontrados jogos para hoje."
@@ -63,7 +63,7 @@
     "message": "Por definir"
   },
   "roundOf32": {
-    "message": "Ronda de 32"
+    "message": "Dezasseis avos de final"
   },
   "roundOf16": {
     "message": "Oitavos de final"
@@ -108,16 +108,16 @@
     "message": "Em pausa"
   },
   "autoPaused": {
-    "message": "Atualização automática em pausa para evitar pedidos desnecessários."
+    "message": "Atualização automática em pausa para reduzir o número de pedidos."
   },
   "idlePaused": {
     "message": "Em pausa por inatividade."
   },
   "requestLimitReached": {
-    "message": "Limite diário de atualizações atingido. A mostrar dados guardados."
+    "message": "Limite diário de pedidos atingido. A mostrar dados guardados."
   },
   "refreshFailed": {
-    "message": "Falha ao atualizar. A mostrar os dados mais recentes."
+    "message": "Não foi possível atualizar. A mostrar os últimos dados disponíveis."
   },
   "club": {
     "message": "Clube"
@@ -148,7 +148,7 @@
     }
   },
   "fullTime": {
-    "message": "Final"
+    "message": "Fim"
   },
   "halfTime": {
     "message": "Intervalo"
@@ -160,7 +160,7 @@
     "message": "Estatísticas"
   },
   "favorite": {
-    "message": "Favorito"
+    "message": "Adicionar aos favoritos"
   },
   "removeFavorite": {
     "message": "Remover dos favoritos"
@@ -235,7 +235,7 @@
     "message": "Cronologia"
   },
   "lineups": {
-    "message": "Formações"
+    "message": "Equipas iniciais"
   },
   "headToHead": {
     "message": "Confronto direto"
@@ -244,7 +244,7 @@
     "message": "Notícias"
   },
   "highlights": {
-    "message": "Destaques"
+    "message": "Melhores momentos"
   },
   "links": {
     "message": "Ligações"
@@ -253,7 +253,7 @@
     "message": "Definições"
   },
   "popupSize": {
-    "message": "Tamanho do popup"
+    "message": "Tamanho da janela"
   },
   "sizeSmall": {
     "message": "Pequeno"
@@ -265,10 +265,10 @@
     "message": "Grande"
   },
   "settingsBackup": {
-    "message": "Cópia das definições"
+    "message": "Cópia de segurança das definições"
   },
   "settingsBackupHint": {
-    "message": "Inclui ligas favoritas e tamanho do popup. A importação substitui estas definições."
+    "message": "Inclui as ligas favoritas e o tamanho da janela. A importação substitui estas definições."
   },
   "exportSettings": {
     "message": "Exportar definições"

@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "Hype - תוצאות כדורגל בשידור חי"
+    "message": "Hype - תוצאות כדורגל בזמן אמת"
   },
   "extDescription": {
-    "message": "תוצאות כדורגל בשידור חי, משחקים, תוצאות וטבלאות."
+    "message": "תוצאות כדורגל בזמן אמת, לוח משחקים, תוצאות סופיות וטבלאות ליגה."
   },
   "appTitle": {
     "message": "Hype Scores"
@@ -15,7 +15,7 @@
     "message": "לא ניתן לטעון נתונים"
   },
   "extensionRuntimeRequired": {
-    "message": "נתונים חיים חסומים בתצוגה מקדימה של קובץ. פתחו את חלון התוסף של Chrome."
+    "message": "נתונים בזמן אמת אינם זמינים בתצוגה המקדימה של הקובץ. כדי לראות תוצאות, פתחו את חלון התוסף של Chrome."
   },
   "empty": {
     "message": "לא נמצאו משחקים היום."
@@ -33,7 +33,7 @@
     "message": "עודכן"
   },
   "live": {
-    "message": "חי"
+    "message": "בזמן אמת"
   },
   "matches": {
     "message": "משחקים"
@@ -63,7 +63,7 @@
     "message": "ייקבע"
   },
   "roundOf32": {
-    "message": "שמינית גמר מוקדמות"
+    "message": "שלב 32 האחרונות"
   },
   "roundOf16": {
     "message": "שמינית גמר"
@@ -81,7 +81,7 @@
     "message": "גמר"
   },
   "played": {
-    "message": "מש"
+    "message": "מש׳"
   },
   "wins": {
     "message": "נ"
@@ -93,31 +93,31 @@
     "message": "ה"
   },
   "goalsFor": {
-    "message": "שז"
+    "message": "זכות"
   },
   "goalsAgainst": {
-    "message": "שח"
+    "message": "חובה"
   },
   "goalDifference": {
     "message": "הפרש"
   },
   "points": {
-    "message": "נק"
+    "message": "נק׳"
   },
   "paused": {
     "message": "מושהה"
   },
   "autoPaused": {
-    "message": "רענון אוטומטי הושהה כדי לחסוך בבקשות."
+    "message": "הרענון האוטומטי הושהה כדי לצמצם את מספר הבקשות."
   },
   "idlePaused": {
     "message": "מושהה בזמן חוסר פעילות."
   },
   "requestLimitReached": {
-    "message": "הגעת למכסת הבקשות היומית. מציג נתונים שמורים."
+    "message": "מכסת הבקשות היומית נוצלה. מוצגים נתונים שמורים."
   },
   "refreshFailed": {
-    "message": "הרענון נכשל. מציג את הנתונים העדכניים ביותר."
+    "message": "הרענון נכשל. מוצגים הנתונים האחרונים שהתקבלו."
   },
   "club": {
     "message": "מועדון"
@@ -129,10 +129,10 @@
     "message": "בחרו ליגה"
   },
   "noLiveMatches": {
-    "message": "אין משחקים חיים"
+    "message": "אין משחקים שמתקיימים כעת"
   },
   "liveCount": {
-    "message": "$COUNT$ חי",
+    "message": "משחקים כעת: $COUNT$",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -148,7 +148,7 @@
     }
   },
   "fullTime": {
-    "message": "סיום"
+    "message": "הסתיים"
   },
   "halfTime": {
     "message": "הפסקה"
@@ -160,7 +160,7 @@
     "message": "סטטיסטיקה"
   },
   "favorite": {
-    "message": "מועדף"
+    "message": "הוספה למועדפים"
   },
   "removeFavorite": {
     "message": "הסרה ממועדפים"
@@ -175,7 +175,7 @@
     "message": "הוספת ליגה למועדפים"
   },
   "forceEnglishOn": {
-    "message": "הצגת תוויות באנגלית"
+    "message": "הצגה באנגלית"
   },
   "forceEnglishOff": {
     "message": "חזרה לשפת הדפדפן"
@@ -235,7 +235,7 @@
     "message": "ציר זמן"
   },
   "lineups": {
-    "message": "הרכב"
+    "message": "הרכבים"
   },
   "headToHead": {
     "message": "מפגשים קודמים"
@@ -307,10 +307,10 @@
     "message": "סיום המשחק"
   },
   "halfTimeLabel": {
-    "message": "מחצית"
+    "message": "הפסקת המחצית"
   },
   "liveMatchCountOne": {
-    "message": "$COUNT$ משחק חי",
+    "message": "$COUNT$ משחק שמתקיים כעת",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -318,7 +318,7 @@
     }
   },
   "liveMatchesCount": {
-    "message": "$COUNT$ משחקים חיים",
+    "message": "$COUNT$ משחקים שמתקיימים כעת",
     "placeholders": {
       "count": {
         "content": "$1"

@@ -3,7 +3,7 @@
     "message": "Hype - Live voetbaluitslagen"
   },
   "extDescription": {
-    "message": "Live voetbaluitslagen, wedstrijden, resultaten en standen."
+    "message": "Live voetbalscores, speelschema’s, uitslagen en standen."
   },
   "appTitle": {
     "message": "Hype Scores"
@@ -15,7 +15,7 @@
     "message": "Kon gegevens niet laden"
   },
   "extensionRuntimeRequired": {
-    "message": "Livedata wordt geblokkeerd in bestandsvoorbeeld. Open de Chrome-extensiepopup om scores te laden."
+    "message": "Livegegevens zijn niet beschikbaar in de bestandsvoorbeeldweergave. Open de pop-up van de Chrome-extensie om scores te laden."
   },
   "empty": {
     "message": "Geen wedstrijden gevonden vandaag."
@@ -24,7 +24,7 @@
     "message": "Klaar"
   },
   "refreshing": {
-    "message": "Vernieuwen"
+    "message": "Bezig met vernieuwen"
   },
   "notUpdated": {
     "message": "Nog niet bijgewerkt"
@@ -81,7 +81,7 @@
     "message": "Finale"
   },
   "played": {
-    "message": "G"
+    "message": "GS"
   },
   "wins": {
     "message": "W"
@@ -108,16 +108,16 @@
     "message": "Gepauzeerd"
   },
   "autoPaused": {
-    "message": "Automatisch verversen gepauzeerd om requests te sparen."
+    "message": "Automatisch vernieuwen is gepauzeerd om het aantal aanvragen te beperken."
   },
   "idlePaused": {
     "message": "Gepauzeerd bij inactiviteit."
   },
   "requestLimitReached": {
-    "message": "Dagelijkse requestlimiet bereikt. Gecachte data wordt getoond."
+    "message": "Dagelijkse aanvraaglimiet bereikt. Opgeslagen gegevens worden getoond."
   },
   "refreshFailed": {
-    "message": "Vernieuwen mislukt. Laatste data wordt getoond."
+    "message": "Vernieuwen mislukt. De laatst beschikbare gegevens worden getoond."
   },
   "club": {
     "message": "Club"
@@ -129,7 +129,7 @@
     "message": "Kies een competitie"
   },
   "noLiveMatches": {
-    "message": "Geen live wedstrijden"
+    "message": "Geen livewedstrijden"
   },
   "liveCount": {
     "message": "$COUNT$ live",
@@ -148,7 +148,7 @@
     }
   },
   "fullTime": {
-    "message": "Eind"
+    "message": "Einde"
   },
   "halfTime": {
     "message": "Rust"
@@ -160,10 +160,10 @@
     "message": "Statistieken"
   },
   "favorite": {
-    "message": "Favoriet"
+    "message": "Toevoegen aan favorieten"
   },
   "removeFavorite": {
-    "message": "Favoriet verwijderen"
+    "message": "Uit favorieten verwijderen"
   },
   "turnOff": {
     "message": "Extensie uitschakelen"
@@ -175,7 +175,7 @@
     "message": "Competitie favoriet maken"
   },
   "forceEnglishOn": {
-    "message": "Engelse labels tonen"
+    "message": "In het Engels weergeven"
   },
   "forceEnglishOff": {
     "message": "Terug naar browsertaal"
@@ -253,7 +253,7 @@
     "message": "Instellingen"
   },
   "popupSize": {
-    "message": "Popupgrootte"
+    "message": "Pop-upgrootte"
   },
   "sizeSmall": {
     "message": "Klein"
@@ -268,7 +268,7 @@
     "message": "Back-up van instellingen"
   },
   "settingsBackupHint": {
-    "message": "Bevat favoriete competities en popupgrootte. Importeren vervangt deze instellingen."
+    "message": "Bevat favoriete competities en de pop-upgrootte. Bij het importeren worden deze instellingen vervangen."
   },
   "exportSettings": {
     "message": "Instellingen exporteren"

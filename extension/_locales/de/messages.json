@@ -3,7 +3,7 @@
     "message": "Hype - Live-Fußballergebnisse"
   },
   "extDescription": {
-    "message": "Live-Ergebnisse, Spielpläne, Resultate und Tabellen für Fußball."
+    "message": "Live-Fußballergebnisse, Spielpläne, Resultate und Tabellen."
   },
   "appTitle": {
     "message": "Hype Scores"
@@ -15,7 +15,7 @@
     "message": "Daten konnten nicht geladen werden"
   },
   "extensionRuntimeRequired": {
-    "message": "Live-Daten werden in der Dateivorschau nicht geladen. Öffne das Chrome-Erweiterungs-Popup, um Ergebnisse zu sehen."
+    "message": "Live-Daten sind in der Dateivorschau nicht verfügbar. Öffne das Popup der Chrome-Erweiterung, um Ergebnisse zu laden."
   },
   "empty": {
     "message": "Heute wurden keine Spiele gefunden."
@@ -24,7 +24,7 @@
     "message": "Bereit"
   },
   "refreshing": {
-    "message": "Aktualisiere"
+    "message": "Wird aktualisiert"
   },
   "notUpdated": {
     "message": "Noch nicht aktualisiert"
@@ -51,13 +51,13 @@
     "message": "K.-o.-Runde"
   },
   "loadingBracket": {
-    "message": "K.-o.-Baum wird geladen…"
+    "message": "Turnierbaum wird geladen…"
   },
   "noBracket": {
-    "message": "Kein K.-o.-Baum verfügbar."
+    "message": "Kein Turnierbaum verfügbar."
   },
   "bracketUnavailable": {
-    "message": "K.-o.-Baum nicht verfügbar."
+    "message": "Turnierbaum nicht verfügbar."
   },
   "tbd": {
     "message": "Offen"
@@ -108,16 +108,16 @@
     "message": "Pausiert"
   },
   "autoPaused": {
-    "message": "Automatische Aktualisierung pausiert, um Anfragen zu sparen."
+    "message": "Automatische Aktualisierung pausiert, um die Anzahl der Anfragen zu reduzieren."
   },
   "idlePaused": {
-    "message": "Pausiert, während du inaktiv bist."
+    "message": "Bei Nichtbenutzung pausiert."
   },
   "requestLimitReached": {
     "message": "Tägliches Anfrage-Limit erreicht. Gespeicherte Daten werden angezeigt."
   },
   "refreshFailed": {
-    "message": "Aktualisierung fehlgeschlagen. Die neuesten Daten werden angezeigt."
+    "message": "Aktualisierung fehlgeschlagen. Die zuletzt verfügbaren Daten werden angezeigt."
   },
   "club": {
     "message": "Verein"
@@ -160,10 +160,10 @@
     "message": "Statistiken"
   },
   "favorite": {
-    "message": "Favorit"
+    "message": "Zu Favoriten hinzufügen"
   },
   "removeFavorite": {
-    "message": "Favorit entfernen"
+    "message": "Aus Favoriten entfernen"
   },
   "turnOff": {
     "message": "Erweiterung ausschalten"
@@ -265,10 +265,10 @@
     "message": "Groß"
   },
   "settingsBackup": {
-    "message": "Einstellungen sichern"
+    "message": "Sicherung der Einstellungen"
   },
   "settingsBackupHint": {
-    "message": "Enthält Lieblingsligen und Popup-Größe. Ein Import ersetzt diese Einstellungen."
+    "message": "Enthält favorisierte Ligen und die Popup-Größe. Beim Import werden diese Einstellungen ersetzt."
   },
   "exportSettings": {
     "message": "Einstellungen exportieren"

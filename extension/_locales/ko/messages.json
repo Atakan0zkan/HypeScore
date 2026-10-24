@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "Hype - 라이브 축구 스코어"
+    "message": "Hype - 실시간 축구 스코어"
   },
   "extDescription": {
-    "message": "라이브 축구 스코어, 경기, 결과 및 순위표."
+    "message": "실시간 축구 스코어, 경기 일정, 결과와 리그 순위표."
   },
   "appTitle": {
     "message": "Hype Scores"
@@ -15,7 +15,7 @@
     "message": "데이터를 불러올 수 없습니다"
   },
   "extensionRuntimeRequired": {
-    "message": "파일 미리보기에서는 라이브 데이터가 차단됩니다. Chrome 확장 프로그램 팝업을 여세요."
+    "message": "파일 미리보기에서는 실시간 데이터를 불러올 수 없습니다. 스코어를 보려면 Chrome 확장 프로그램 팝업을 여세요."
   },
   "empty": {
     "message": "오늘 경기가 없습니다."
@@ -33,7 +33,7 @@
     "message": "업데이트됨"
   },
   "live": {
-    "message": "라이브"
+    "message": "진행 중"
   },
   "matches": {
     "message": "경기"
@@ -45,7 +45,7 @@
     "message": "예정"
   },
   "standings": {
-    "message": "순위"
+    "message": "순위표"
   },
   "bracket": {
     "message": "토너먼트"
@@ -108,16 +108,16 @@
     "message": "일시 중지"
   },
   "autoPaused": {
-    "message": "요청을 아끼기 위해 자동 새로고침이 일시 중지되었습니다."
+    "message": "요청 수를 줄이기 위해 자동 새로고침을 일시 중지했습니다."
   },
   "idlePaused": {
-    "message": "비활성 상태로 일시 중지됨."
+    "message": "사용하지 않아 자동 새로고침을 일시 중지했습니다."
   },
   "requestLimitReached": {
     "message": "일일 요청 한도에 도달했습니다. 캐시된 데이터를 표시합니다."
   },
   "refreshFailed": {
-    "message": "새로고침에 실패했습니다. 최신 데이터를 표시합니다."
+    "message": "새로고침에 실패했습니다. 마지막으로 받은 데이터를 표시합니다."
   },
   "club": {
     "message": "클럽"
@@ -129,10 +129,10 @@
     "message": "리그 선택"
   },
   "noLiveMatches": {
-    "message": "라이브 경기 없음"
+    "message": "진행 중인 경기가 없습니다"
   },
   "liveCount": {
-    "message": "라이브 $COUNT$",
+    "message": "진행 중 $COUNT$경기",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -140,7 +140,7 @@
     }
   },
   "matchCount": {
-    "message": "경기 $COUNT$",
+    "message": "$COUNT$경기",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -151,7 +151,7 @@
     "message": "종료"
   },
   "halfTime": {
-    "message": "전반 종료"
+    "message": "하프타임"
   },
   "scheduled": {
     "message": "예정"
@@ -160,7 +160,7 @@
     "message": "통계"
   },
   "favorite": {
-    "message": "즐겨찾기"
+    "message": "즐겨찾기에 추가"
   },
   "removeFavorite": {
     "message": "즐겨찾기 해제"
@@ -175,7 +175,7 @@
     "message": "리그를 즐겨찾기에 추가"
   },
   "forceEnglishOn": {
-    "message": "영어 라벨 표시"
+    "message": "영어로 표시"
   },
   "forceEnglishOff": {
     "message": "브라우저 언어로 돌아가기"
@@ -199,10 +199,10 @@
     "message": "경기 상세 불러오는 중…"
   },
   "loadingStandings": {
-    "message": "순위 불러오는 중…"
+    "message": "순위표 불러오는 중…"
   },
   "detailsUnavailable": {
-    "message": "상세 정보 없음"
+    "message": "상세 정보를 불러올 수 없습니다"
   },
   "noDetails": {
     "message": "이 경기의 추가 상세 정보가 없습니다."
@@ -211,10 +211,10 @@
     "message": "사용 가능한 데이터가 없습니다."
   },
   "noStats": {
-    "message": "경기 통계가 없습니다."
+    "message": "제공되는 경기 통계가 없습니다."
   },
   "noStandings": {
-    "message": "이 리그의 순위가 없습니다."
+    "message": "이 리그의 순위표를 볼 수 없습니다."
   },
   "noLinks": {
     "message": "링크가 없습니다."
@@ -268,7 +268,7 @@
     "message": "설정 백업"
   },
   "settingsBackupHint": {
-    "message": "즐겨찾는 리그와 팝업 크기를 포함합니다. 가져오면 이 설정이 교체됩니다."
+    "message": "즐겨찾는 리그와 팝업 크기를 포함합니다. 파일을 가져오면 해당 설정을 덮어씁니다."
   },
   "exportSettings": {
     "message": "설정 내보내기"
@@ -298,7 +298,7 @@
     "message": "설정을 내보낼 수 없습니다."
   },
   "substitutes": {
-    "message": "교체 선수"
+    "message": "후보 선수"
   },
   "startingXI": {
     "message": "선발 명단"
@@ -310,7 +310,7 @@
     "message": "하프타임"
   },
   "liveMatchCountOne": {
-    "message": "$COUNT$ 경기가 진행 중",
+    "message": "진행 중 $COUNT$경기",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -318,7 +318,7 @@
     }
   },
   "liveMatchesCount": {
-    "message": "$COUNT$ 경기가 진행 중",
+    "message": "진행 중 $COUNT$경기",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -326,7 +326,7 @@
     }
   },
   "upcomingMatchCountOne": {
-    "message": "$COUNT$ 경기가 예정됨",
+    "message": "예정 $COUNT$경기",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -334,7 +334,7 @@
     }
   },
   "upcomingMatchesCount": {
-    "message": "$COUNT$ 경기가 예정됨",
+    "message": "예정 $COUNT$경기",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -342,7 +342,7 @@
     }
   },
   "completedMatchCountOne": {
-    "message": "$COUNT$ 경기가 종료됨",
+    "message": "종료 $COUNT$경기",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -350,7 +350,7 @@
     }
   },
   "completedMatchesCount": {
-    "message": "$COUNT$ 경기가 종료됨",
+    "message": "종료 $COUNT$경기",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -358,7 +358,7 @@
     }
   },
   "matchCountOne": {
-    "message": "$COUNT$ 경기",
+    "message": "$COUNT$경기",
     "placeholders": {
       "count": {
         "content": "$1"

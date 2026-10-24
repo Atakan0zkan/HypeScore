@@ -1,141 +1,44 @@
-/**
- * Audit popup.js/html against locale keys and hard-coded UI strings.
- */
+/** Audit all shipped locales; English is the reference, not ignored seed files. */
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { isOptionalCountMessage, validateLocaleMessages } from "./locale-validation.mjs";
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const ROOT = path.resolve(__dirname, "..");
-const popup = fs.readFileSync(path.join(ROOT, "extension/popup.js"), "utf8");
-const html = fs.readFileSync(path.join(ROOT, "extension/popup.html"), "utf8");
-const en = JSON.parse(
-  fs.readFileSync(path.join(ROOT, "extension/_locales/en/messages.json"), "utf8"),
-);
-const enKeys = Object.keys(en);
-
-const msgKeys = [
-  ...popup.matchAll(/msg\(\s*["']([A-Za-z0-9_]+)["']/g),
-].map((m) => m[1]);
-const uniqueMsg = [...new Set(msgKeys)].sort();
-
-const missingInEn = uniqueMsg.filter((k) => !enKeys.includes(k));
-const unusedInEn = enKeys.filter(
-  (k) => !uniqueMsg.includes(k) && k !== "extName" && k !== "extDescription",
-);
-
-const fbBlock = popup.match(/const FALLBACK_MESSAGES = \{([\s\S]*?)\n\};/);
-const fbKeys = fbBlock
-  ? [...fbBlock[1].matchAll(/^\s*([A-Za-z0-9_]+):/gm)].map((m) => m[1])
-  : [];
-const missingFb = uniqueMsg.filter(
-  (k) =>
-    !fbKeys.includes(k) && k !== "extName" && k !== "extDescription",
-);
-
-// Hard-coded English UI candidates in popup.js (string literals)
-const stringLits = [...popup.matchAll(/(["'`])((?:\\.|(?!\1)[\s\S])*?)\1/g)]
-  .map((m) => m[2])
-  .filter((s) => s.length >= 3 && s.length < 120)
-  .filter((s) => /[A-Za-z]/.test(s))
-  .filter(
-    (s) =>
-      !s.startsWith("http") &&
-      !s.startsWith("icons/") &&
-      !s.startsWith("hype_") &&
-      !s.includes("site.api") &&
-      !s.includes("atakanozkan") &&
-      !s.includes("fifa") &&
-      !s.includes("data:") &&
-      !s.includes("xmlns") &&
-      !s.includes("font-") &&
-      !s.includes("rgb") &&
-      !s.includes("#") &&
-      !/^[a-z0-9_.-]+$/i.test(s) === false ||
-      /^(Live|Scheduled|Full Time|Half Time|vs|Loading|Could|No |Ready|Paused)/i.test(
-        s,
-      ),
-  );
-
-// More focused: English phrases used as status maps / UI glue
-const suspicious = [];
-const patterns = [
-  /["']vs["']/g,
-  /["']Full Time["']/g,
-  /["']Half Time["']/g,
-  /["']Scheduled["']/g,
-  /["']Live["']/g,
-  /textContent\s*=\s*["'][^"']*[A-Za-z]{3,}[^"']*["']/g,
-  /createTextElement\([^,]+,\s*[^,]+,\s*["'][^"']+[A-Za-z]{3,}[^"']*["']/g,
-  /setAttribute\(\s*["']aria-label["']\s*,\s*["'][^"']+["']/g,
-  /title\s*=\s*["'][^"']+[A-Za-z]{3,}[^"']*["']/g,
-];
-
-for (const re of patterns) {
-  for (const m of popup.matchAll(re)) {
-    suspicious.push(m[0]);
-  }
-}
-
-// HTML static text
-const htmlText = html
-  .replace(/<script[\s\S]*?<\/script>/gi, "")
-  .replace(/<[^>]+>/g, "\n")
-  .split("\n")
-  .map((s) => s.trim())
-  .filter((s) => s && /[A-Za-z]{3,}/.test(s));
-
-// Locale parity
-const localesDir = path.join(ROOT, "extension/_locales");
-const codes = fs
-  .readdirSync(localesDir)
-  .filter((d) => fs.statSync(path.join(localesDir, d)).isDirectory())
-  .sort();
-
-let parityIssues = [];
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const dir = path.join(ROOT, "extension/_locales");
+const read = file => fs.readFileSync(path.join(ROOT, file), "utf8");
+const popup = read("extension/popup.js");
+const en = JSON.parse(read("extension/_locales/en/messages.json"));
+const codes = fs.readdirSync(dir).filter(code => fs.statSync(path.join(dir, code)).isDirectory()).sort();
+const issues = [];
+let optionalCount = 0;
+let totalMessages = 0;
 for (const code of codes) {
-  const data = JSON.parse(
-    fs.readFileSync(path.join(localesDir, code, "messages.json"), "utf8"),
-  );
-  const keys = Object.keys(data);
-  if (keys.length !== enKeys.length) {
-    parityIssues.push(`${code}: count ${keys.length} != ${enKeys.length}`);
-  }
-  for (const k of enKeys) {
-    if (!(k in data)) parityIssues.push(`${code}: missing ${k}`);
-    else if (!data[k].message || !String(data[k].message).trim()) {
-      parityIssues.push(`${code}: empty ${k}`);
-    }
-  }
-  // identical to English (possible untranslated) — exclude en*
-  if (!code.startsWith("en")) {
-    let same = 0;
-    for (const k of enKeys) {
-      if (data[k] && data[k].message === en[k].message) same += 1;
-    }
-    if (same > 40) {
-      parityIssues.push(`${code}: ${same}/${enKeys.length} strings identical to English`);
-    }
-  }
+  const raw = read(`extension/_locales/${code}/messages.json`);
+  const messages = JSON.parse(raw);
+  const topLevelKeys = [...raw.matchAll(/^  "([a-z0-9_]+)":/gmi)].map(m => m[1]);
+  if (new Set(topLevelKeys).size !== topLevelKeys.length) issues.push(`${code}: duplicate message keys`);
+  issues.push(...validateLocaleMessages(code, messages, en));
+  optionalCount += Object.keys(messages).filter(isOptionalCountMessage).length;
+  totalMessages += Object.keys(messages).length;
 }
 
-console.log("=== LOCALE PARITY ===");
-console.log("locales:", codes.length);
-console.log("en keys:", enKeys.length);
-console.log("parity issues:", parityIssues.length);
-if (parityIssues.length) console.log(parityIssues.slice(0, 30).join("\n"));
+const fallback = popup.match(/const FALLBACK_MESSAGES = \{([\s\S]*?)\n\};/)?.[1] || "";
+const fallbackMessages = Object.fromEntries([...fallback.matchAll(/\b([a-z0-9_]+):\s*("(?:\\.|[^"\\])*")/gmi)].map(m => [m[1], JSON.parse(m[2])]));
+for (const [key, value] of Object.entries(en)) {
+  if (!(key in fallbackMessages)) issues.push(`English fallback missing ${key}`);
+  else if (fallbackMessages[key].replaceAll("$1", "$COUNT$") !== value.message) issues.push(`English fallback differs for ${key}`);
+}
+for (const match of popup.matchAll(/msg\(\s*["']([a-z0-9_]+)["']/gmi)) {
+  if (!(match[1] in en)) issues.push(`Runtime message missing from English: ${match[1]}`);
+}
 
-console.log("\n=== msg() COVERAGE ===");
-console.log("unique msg keys:", uniqueMsg.length);
-console.log("missing in en:", missingInEn);
-console.log("en keys unused via msg() (except ext*):", unusedInEn);
-console.log("missing FALLBACK_MESSAGES:", missingFb);
-
-console.log("\n=== SUSPICIOUS HARDCODED UI ===");
-console.log([...new Set(suspicious)].join("\n") || "(none)");
-
-console.log("\n=== HTML STATIC TEXT ===");
-console.log(htmlText.join("\n"));
-
-console.log("\n=== ALL msg() KEYS USED ===");
-console.log(uniqueMsg.join(", "));
+console.log(`Locales: ${codes.length}`);
+console.log(`Required English reference messages: ${Object.keys(en).length}`);
+console.log(`Additional language-specific count forms: ${optionalCount}`);
+console.log(`Total packaged messages: ${totalMessages}`);
+console.log(`Structural, substitution and English-fallback issues: ${issues.length}`);
+if (issues.length) {
+  console.error(issues.join("\n"));
+  process.exitCode = 1;
+}

@@ -3,7 +3,7 @@
     "message": "Hype - Skor bola sepak langsung"
   },
   "extDescription": {
-    "message": "Skor bola sepak langsung, perlawanan, keputusan dan carta kedudukan."
+    "message": "Skor bola sepak langsung, jadual perlawanan, keputusan dan kedudukan liga."
   },
   "appTitle": {
     "message": "Hype Scores"
@@ -15,7 +15,7 @@
     "message": "Tidak dapat memuatkan data"
   },
   "extensionRuntimeRequired": {
-    "message": "Data live disekat dalam pratonton fail. Buka tetingkap timbul sambungan Chrome untuk skor."
+    "message": "Data langsung tidak tersedia dalam pratonton fail. Buka tetingkap sambungan Chrome untuk melihat skor."
   },
   "empty": {
     "message": "Tiada perlawanan dijumpai hari ini."
@@ -24,7 +24,7 @@
     "message": "Sedia"
   },
   "refreshing": {
-    "message": "Menyegarkan"
+    "message": "Memuat semula"
   },
   "notUpdated": {
     "message": "Belum dikemas kini"
@@ -33,7 +33,7 @@
     "message": "Dikemas kini"
   },
   "live": {
-    "message": "Langsung"
+    "message": "Sedang berlangsung"
   },
   "matches": {
     "message": "Perlawanan"
@@ -60,13 +60,13 @@
     "message": "Carta kalah mati tidak tersedia."
   },
   "tbd": {
-    "message": "TBD"
+    "message": "Belum ditentukan"
   },
   "roundOf32": {
-    "message": "Pusingan 32"
+    "message": "Pusingan 32 pasukan"
   },
   "roundOf16": {
-    "message": "Pusingan 16"
+    "message": "Pusingan 16 pasukan"
   },
   "quarterfinals": {
     "message": "Suku akhir"
@@ -78,7 +78,7 @@
     "message": "Penentuan tempat ketiga"
   },
   "final": {
-    "message": "Akhir"
+    "message": "Perlawanan akhir"
   },
   "played": {
     "message": "P"
@@ -108,16 +108,16 @@
     "message": "Dijeda"
   },
   "autoPaused": {
-    "message": "Muat semula automatik dijeda untuk menjimatkan permintaan."
+    "message": "Muat semula automatik dijeda untuk mengurangkan bilangan permintaan."
   },
   "idlePaused": {
     "message": "Dijeda semasa tidak aktif."
   },
   "requestLimitReached": {
-    "message": "Had permintaan harian dicapai. Menunjukkan data cache."
+    "message": "Had permintaan harian dicapai. Memaparkan data yang disimpan."
   },
   "refreshFailed": {
-    "message": "Muat semula gagal. Menunjukkan data terkini."
+    "message": "Gagal memuat semula. Memaparkan data terakhir yang diterima."
   },
   "club": {
     "message": "Kelab"
@@ -129,10 +129,10 @@
     "message": "Pilih liga"
   },
   "noLiveMatches": {
-    "message": "Tiada perlawanan langsung"
+    "message": "Tiada perlawanan yang sedang berlangsung"
   },
   "liveCount": {
-    "message": "$COUNT$ langsung",
+    "message": "Sedang berlangsung: $COUNT$",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -151,7 +151,7 @@
     "message": "Tamat"
   },
   "halfTime": {
-    "message": "Separuh masa"
+    "message": "Rehat"
   },
   "scheduled": {
     "message": "Dijadualkan"
@@ -160,10 +160,10 @@
     "message": "Statistik"
   },
   "favorite": {
-    "message": "Kegemaran"
+    "message": "Tambah ke kegemaran"
   },
   "removeFavorite": {
-    "message": "Buang kegemaran"
+    "message": "Alih keluar daripada kegemaran"
   },
   "turnOff": {
     "message": "Matikan sambungan"
@@ -175,7 +175,7 @@
     "message": "Jadikan liga kegemaran"
   },
   "forceEnglishOn": {
-    "message": "Tunjukkan label Bahasa Inggeris"
+    "message": "Papar dalam bahasa Inggeris"
   },
   "forceEnglishOff": {
     "message": "Kembali ke bahasa pelayar"
@@ -226,7 +226,7 @@
     "message": "lwn"
   },
   "kickoff": {
-    "message": "Anjakan bola"
+    "message": "Sepak mula"
   },
   "broadcasts": {
     "message": "Siaran"
@@ -253,7 +253,7 @@
     "message": "Tetapan"
   },
   "popupSize": {
-    "message": "Saiz popup"
+    "message": "Saiz tetingkap"
   },
   "sizeSmall": {
     "message": "Kecil"
@@ -268,7 +268,7 @@
     "message": "Sandaran tetapan"
   },
   "settingsBackupHint": {
-    "message": "Mengandungi liga kegemaran dan saiz popup. Import menggantikan tetapan ini."
+    "message": "Mengandungi liga kegemaran dan saiz tetingkap. Mengimport fail akan menggantikan tetapan ini."
   },
   "exportSettings": {
     "message": "Eksport tetapan"
@@ -310,7 +310,7 @@
     "message": "Rehat separuh masa"
   },
   "liveMatchCountOne": {
-    "message": "$COUNT$ perlawanan langsung",
+    "message": "$COUNT$ perlawanan sedang berlangsung",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -318,7 +318,7 @@
     }
   },
   "liveMatchesCount": {
-    "message": "$COUNT$ perlawanan langsung",
+    "message": "$COUNT$ perlawanan sedang berlangsung",
     "placeholders": {
       "count": {
         "content": "$1"

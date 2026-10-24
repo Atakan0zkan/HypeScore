@@ -3,7 +3,7 @@
     "message": "Hype - Wyniki piłkarskie na żywo"
   },
   "extDescription": {
-    "message": "Wyniki piłkarskie na żywo, mecze, rezultaty i tabele ligowe."
+    "message": "Wyniki piłkarskie na żywo, terminarz, rezultaty i tabele ligowe."
   },
   "appTitle": {
     "message": "Hype Scores"
@@ -15,7 +15,7 @@
     "message": "Nie udało się wczytać danych"
   },
   "extensionRuntimeRequired": {
-    "message": "Dane na żywo są zablokowane w podglądzie pliku. Otwórz popup rozszerzenia Chrome, aby wczytać wyniki."
+    "message": "Dane na żywo nie są dostępne w podglądzie pliku. Otwórz okno rozszerzenia Chrome, aby zobaczyć wyniki."
   },
   "empty": {
     "message": "Brak meczów na dziś."
@@ -60,7 +60,7 @@
     "message": "Drabinka niedostępna."
   },
   "tbd": {
-    "message": "TBD"
+    "message": "Do ustalenia"
   },
   "roundOf32": {
     "message": "1/16 finału"
@@ -108,16 +108,16 @@
     "message": "Wstrzymano"
   },
   "autoPaused": {
-    "message": "Auto-odświeżanie wstrzymane, aby oszczędzać zapytania."
+    "message": "Automatyczne odświeżanie wstrzymano, aby ograniczyć liczbę zapytań."
   },
   "idlePaused": {
     "message": "Wstrzymano podczas bezczynności."
   },
   "requestLimitReached": {
-    "message": "Osiągnięto dzienny limit zapytań. Pokazuję dane z pamięci podręcznej."
+    "message": "Osiągnięto dzienny limit zapytań. Wyświetlane są zapisane dane."
   },
   "refreshFailed": {
-    "message": "Odświeżanie nie powiodło się. Pokazuję najnowsze dane."
+    "message": "Odświeżanie nie powiodło się. Wyświetlane są ostatnie dostępne dane."
   },
   "club": {
     "message": "Klub"
@@ -151,7 +151,7 @@
     "message": "Koniec"
   },
   "halfTime": {
-    "message": "HT"
+    "message": "Przerwa"
   },
   "scheduled": {
     "message": "Zaplanowany"
@@ -160,7 +160,7 @@
     "message": "Statystyki"
   },
   "favorite": {
-    "message": "Ulubione"
+    "message": "Dodaj do ulubionych"
   },
   "removeFavorite": {
     "message": "Usuń z ulubionych"
@@ -175,7 +175,7 @@
     "message": "Dodaj ligę do ulubionych"
   },
   "forceEnglishOn": {
-    "message": "Pokaż etykiety po angielsku"
+    "message": "Pokaż po angielsku"
   },
   "forceEnglishOff": {
     "message": "Wróć do języka przeglądarki"
@@ -265,7 +265,7 @@
     "message": "Duży"
   },
   "settingsBackup": {
-    "message": "Kopia ustawień"
+    "message": "Kopia zapasowa ustawień"
   },
   "settingsBackupHint": {
     "message": "Zawiera ulubione ligi i rozmiar okna. Import zastępuje te ustawienia."
@@ -359,6 +359,38 @@
   },
   "matchCountOne": {
     "message": "$COUNT$ mecz",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "liveMatchCountFew": {
+    "message": "$COUNT$ mecze na żywo",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchCountFew": {
+    "message": "$COUNT$ nadchodzące mecze",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchCountFew": {
+    "message": "$COUNT$ zakończone mecze",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCountFew": {
+    "message": "$COUNT$ mecze",
     "placeholders": {
       "count": {
         "content": "$1"

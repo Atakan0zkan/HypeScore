@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "Hype - Живые футбольные счета"
+    "message": "Hype - Футбольные результаты онлайн"
   },
   "extDescription": {
-    "message": "Живые футбольные счета, матчи, результаты и турнирные таблицы."
+    "message": "Футбольные результаты в реальном времени, расписание матчей, итоги и турнирные таблицы."
   },
   "appTitle": {
     "message": "Hype Scores"
@@ -15,7 +15,7 @@
     "message": "Не удалось загрузить данные"
   },
   "extensionRuntimeRequired": {
-    "message": "Live-данные недоступны в предпросмотре файла. Откройте всплывающее окно расширения Chrome."
+    "message": "В предпросмотре файла данные в реальном времени недоступны. Откройте окно расширения Chrome, чтобы увидеть счёт."
   },
   "empty": {
     "message": "Сегодня матчей не найдено."
@@ -33,7 +33,7 @@
     "message": "Обновлено"
   },
   "live": {
-    "message": "Live"
+    "message": "В игре"
   },
   "matches": {
     "message": "Матчи"
@@ -54,13 +54,13 @@
     "message": "Загрузка сетки…"
   },
   "noBracket": {
-    "message": "Сетка плей-офф недоступна."
+    "message": "Нет сетки плей-офф."
   },
   "bracketUnavailable": {
     "message": "Сетка недоступна."
   },
   "tbd": {
-    "message": "TBD"
+    "message": "Пока не определено"
   },
   "roundOf32": {
     "message": "1/16 финала"
@@ -108,7 +108,7 @@
     "message": "Пауза"
   },
   "autoPaused": {
-    "message": "Автообновление приостановлено для экономии запросов."
+    "message": "Автообновление приостановлено, чтобы сократить число запросов."
   },
   "idlePaused": {
     "message": "Пауза из-за бездействия."
@@ -117,7 +117,7 @@
     "message": "Дневной лимит запросов исчерпан. Показаны кэшированные данные."
   },
   "refreshFailed": {
-    "message": "Не удалось обновить. Показаны последние данные."
+    "message": "Не удалось обновить данные. Показаны последние доступные данные."
   },
   "club": {
     "message": "Клуб"
@@ -129,10 +129,10 @@
     "message": "Выберите лигу"
   },
   "noLiveMatches": {
-    "message": "Нет live-матчей"
+    "message": "Сейчас матчей нет"
   },
   "liveCount": {
-    "message": "$COUNT$ live",
+    "message": "В игре: $COUNT$",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -148,10 +148,10 @@
     }
   },
   "fullTime": {
-    "message": "FT"
+    "message": "Завершён"
   },
   "halfTime": {
-    "message": "HT"
+    "message": "Перерыв"
   },
   "scheduled": {
     "message": "Запланирован"
@@ -160,7 +160,7 @@
     "message": "Статистика"
   },
   "favorite": {
-    "message": "Избранное"
+    "message": "Добавить в избранное"
   },
   "removeFavorite": {
     "message": "Убрать из избранного"
@@ -175,7 +175,7 @@
     "message": "Добавить лигу в избранное"
   },
   "forceEnglishOn": {
-    "message": "Показать английские подписи"
+    "message": "Показать на английском"
   },
   "forceEnglishOff": {
     "message": "Вернуться к языку браузера"
@@ -193,19 +193,19 @@
     "message": "Неизвестная команда"
   },
   "matchDetails": {
-    "message": "Детали матча"
+    "message": "Информация о матче"
   },
   "loadingDetails": {
-    "message": "Загрузка деталей матча…"
+    "message": "Загрузка информации о матче…"
   },
   "loadingStandings": {
     "message": "Загрузка таблицы…"
   },
   "detailsUnavailable": {
-    "message": "Детали недоступны"
+    "message": "Информация недоступна"
   },
   "noDetails": {
-    "message": "Для этого матча нет дополнительных деталей."
+    "message": "Дополнительной информации об этом матче нет."
   },
   "noSectionData": {
     "message": "Нет доступных данных."
@@ -268,7 +268,7 @@
     "message": "Резервная копия настроек"
   },
   "settingsBackupHint": {
-    "message": "Содержит любимые лиги и размер окна. Импорт заменяет эти настройки."
+    "message": "Содержит избранные лиги и размер окна. При импорте файла эти настройки будут заменены."
   },
   "exportSettings": {
     "message": "Экспорт настроек"
@@ -286,7 +286,7 @@
     "message": "Настройки импортированы."
   },
   "settingsImportError": {
-    "message": "Это не корректный файл настроек Hype."
+    "message": "Это некорректный файл настроек Hype."
   },
   "settingsSaveError": {
     "message": "Не удалось сохранить настройки на этом устройстве."
@@ -310,7 +310,7 @@
     "message": "Перерыв"
   },
   "liveMatchCountOne": {
-    "message": "$COUNT$ матч в прямом эфире",
+    "message": "Идёт $COUNT$ матч",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -318,7 +318,7 @@
     }
   },
   "liveMatchesCount": {
-    "message": "$COUNT$ матчей в прямом эфире",
+    "message": "Идут $COUNT$ матчей",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -359,6 +359,38 @@
   },
   "matchCountOne": {
     "message": "$COUNT$ матч",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "liveMatchCountFew": {
+    "message": "Идут $COUNT$ матча",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchCountFew": {
+    "message": "$COUNT$ предстоящих матча",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchCountFew": {
+    "message": "$COUNT$ завершённых матча",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCountFew": {
+    "message": "$COUNT$ матча",
     "placeholders": {
       "count": {
         "content": "$1"

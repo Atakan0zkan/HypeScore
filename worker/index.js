@@ -300,8 +300,8 @@ async function handleLiveMatchesRequest(request, env) {
   } catch (error) {
     const message = getErrorMessage(error);
     console.warn(`Live match refresh failed: ${message}`);
-    // Older Store clients cannot show the stale-data warning. They must opt in
-    // to this contract before receiving a successful but degraded response.
+    // Clients must explicitly support the bounded snapshot contract before
+    // receiving a successful but degraded response.
     if (new URL(request.url).searchParams.get("allowStale") === "1") {
       const snapshot = await readLiveSnapshot(cache, new Request(LAST_GOOD_LIVE_CACHE_URL));
       if (snapshot) return liveSnapshotResponse(snapshot, request, true);

@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "Hype - Uživo nogometni rezultati"
+    "message": "Hype - Nogometni rezultati uživo"
   },
   "extDescription": {
-    "message": "Uživo nogometni rezultati, utakmice, ishodi i ljestvice."
+    "message": "Nogometni rezultati uživo, raspored utakmica, konačni rezultati i ljestvice."
   },
   "appTitle": {
     "message": "Hype Scores"
@@ -15,10 +15,10 @@
     "message": "Podaci se nisu mogli učitati"
   },
   "extensionRuntimeRequired": {
-    "message": "Live podaci su blokirani u pregledu datoteke. Otvori skočni prozor Chrome proširenja za rezultate."
+    "message": "Podaci uživo nisu dostupni u pregledu datoteke. Za rezultate otvori skočni prozor proširenja za Chrome."
   },
   "empty": {
-    "message": "Danas nema pronađenih utakmica."
+    "message": "Danas nisu pronađene utakmice."
   },
   "ready": {
     "message": "Spremno"
@@ -51,16 +51,16 @@
     "message": "Eliminacije"
   },
   "loadingBracket": {
-    "message": "Učitavanje eliminacijske ljestvice…"
+    "message": "Učitavanje eliminacijskog ždrijeba…"
   },
   "noBracket": {
-    "message": "Eliminacijska ljestvica nije dostupna."
+    "message": "Eliminacijski ždrijeb nije dostupan."
   },
   "bracketUnavailable": {
-    "message": "Eliminacijska ljestvica nedostupna."
+    "message": "Eliminacijski ždrijeb nije dostupan."
   },
   "tbd": {
-    "message": "TBD"
+    "message": "Još nije određeno"
   },
   "roundOf32": {
     "message": "Šesnaestina finala"
@@ -108,16 +108,16 @@
     "message": "Pauzirano"
   },
   "autoPaused": {
-    "message": "Automatsko osvježavanje pauzirano radi uštede zahtjeva."
+    "message": "Automatsko osvježavanje pauzirano je radi smanjenja broja zahtjeva."
   },
   "idlePaused": {
     "message": "Pauzirano zbog neaktivnosti."
   },
   "requestLimitReached": {
-    "message": "Dostignut dnevni limit zahtjeva. Prikazuju se predmemorirani podaci."
+    "message": "Dosegnuto je dnevno ograničenje zahtjeva. Prikazuju se podaci iz predmemorije."
   },
   "refreshFailed": {
-    "message": "Osvježavanje nije uspjelo. Prikazuju se najnoviji podaci."
+    "message": "Osvježavanje nije uspjelo. Prikazuju se posljednji dostupni podaci."
   },
   "club": {
     "message": "Klub"
@@ -160,7 +160,7 @@
     "message": "Statistika"
   },
   "favorite": {
-    "message": "Omiljeno"
+    "message": "Dodaj u omiljene"
   },
   "removeFavorite": {
     "message": "Ukloni iz omiljenih"
@@ -175,10 +175,10 @@
     "message": "Dodaj ligu u omiljene"
   },
   "forceEnglishOn": {
-    "message": "Prikaži engleske oznake"
+    "message": "Prikaži na engleskom"
   },
   "forceEnglishOff": {
-    "message": "Vrati jezik preglednika"
+    "message": "Vrati se na jezik preglednika"
   },
   "other": {
     "message": "Ostalo"
@@ -298,7 +298,7 @@
     "message": "Postavke se nisu mogle izvesti."
   },
   "substitutes": {
-    "message": "Zamjene"
+    "message": "Pričuvni igrači"
   },
   "startingXI": {
     "message": "Početna jedanaestorica"
@@ -359,6 +359,38 @@
   },
   "matchCountOne": {
     "message": "$COUNT$ utakmica",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "liveMatchCountFew": {
+    "message": "$COUNT$ utakmice uživo",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchCountFew": {
+    "message": "$COUNT$ nadolazeće utakmice",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchCountFew": {
+    "message": "$COUNT$ završene utakmice",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCountFew": {
+    "message": "$COUNT$ utakmice",
     "placeholders": {
       "count": {
         "content": "$1"

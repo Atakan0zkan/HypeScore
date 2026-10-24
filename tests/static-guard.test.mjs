@@ -1,6 +1,7 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import { readFile, readdir } from "node:fs/promises";
+import { validateLocaleMessages } from "../tools/locale-validation.mjs";
 
 const ROOT = new URL("../", import.meta.url);
 const read = (p) => readFile(new URL(p, ROOT), "utf8");
@@ -44,7 +45,7 @@ describe("static release guards (regression watchlist as code)", () => {
     assert.ok(!/100vh/.test(css), "100vh collapses MV3 popup");
   });
 
-  it("locale parity fast (en count == all others, msg keys covered)", async () => {
+  it("locale parity, valid count forms and substitution declarations", async () => {
     const dir = new URL("extension/_locales/", ROOT);
     const locales = (await readdir(dir)).filter((d) => !d.startsWith("."));
     assert.ok(locales.length >= 50, `locales=${locales.length}`);
@@ -53,7 +54,7 @@ describe("static release guards (regression watchlist as code)", () => {
     assert.ok(enKeys.length >= 80, `en keys=${enKeys.length}`);
     for (const loc of locales) {
       const m = JSON.parse(await read(`extension/_locales/${loc}/messages.json`));
-      assert.equal(Object.keys(m).length, enKeys.length, loc);
+      assert.deepEqual(validateLocaleMessages(loc, m, en), [], loc);
     }
     const popup = await read("extension/popup.js");
     const used = new Set([...popup.matchAll(/msg\(\s*["']([A-Za-z0-9_]+)["']/g)].map((x) => x[1]));

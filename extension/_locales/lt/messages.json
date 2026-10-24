@@ -1,24 +1,24 @@
 {
   "extName": {
-    "message": "Hype - Gyvi futbolo rezultatai"
+    "message": "Hype - Futbolo rezultatai gyvai"
   },
   "extDescription": {
-    "message": "Gyvi futbolo rezultatai, rungtynės, baigtys ir lentelės."
+    "message": "Futbolo rezultatai gyvai, rungtynių tvarkaraščiai, galutiniai rezultatai ir turnyrinės lentelės."
   },
   "appTitle": {
     "message": "Hype Scores"
   },
   "loading": {
-    "message": "Įkeliami mačai…"
+    "message": "Įkeliamos rungtynės…"
   },
   "error": {
     "message": "Nepavyko įkelti duomenų"
   },
   "extensionRuntimeRequired": {
-    "message": "Live duomenys blokuojami failo peržiūroje. Atidarykite Chrome plėtinio iššokantįjį langą."
+    "message": "Failo peržiūroje realiojo laiko duomenys nepasiekiami. Norėdami matyti rezultatus, atidarykite Chrome plėtinio iššokantįjį langą."
   },
   "empty": {
-    "message": "Šiandien mačų nerasta."
+    "message": "Šiandien rungtynių nerasta."
   },
   "ready": {
     "message": "Paruošta"
@@ -51,16 +51,16 @@
     "message": "Atkrintamosios"
   },
   "loadingBracket": {
-    "message": "Įkeliamas tinklas…"
+    "message": "Įkeliama atkrintamųjų varžybų schema…"
   },
   "noBracket": {
-    "message": "Tinklas nepasiekiamas."
+    "message": "Atkrintamųjų varžybų schemos nėra."
   },
   "bracketUnavailable": {
-    "message": "Tinklas nepasiekiamas."
+    "message": "Atkrintamųjų varžybų schema nepasiekiama."
   },
   "tbd": {
-    "message": "TBD"
+    "message": "Dar nenustatyta"
   },
   "roundOf32": {
     "message": "1/16 finalo"
@@ -75,7 +75,7 @@
     "message": "Pusfinalis"
   },
   "thirdPlace": {
-    "message": "Mačas dėl 3 vietos"
+    "message": "Rungtynės dėl 3-iosios vietos"
   },
   "final": {
     "message": "Finalas"
@@ -87,7 +87,7 @@
     "message": "L"
   },
   "draws": {
-    "message": "L"
+    "message": "Lyg."
   },
   "losses": {
     "message": "Pr"
@@ -96,7 +96,7 @@
     "message": "Įv"
   },
   "goalsAgainst": {
-    "message": "Pr"
+    "message": "PrĮ"
   },
   "goalDifference": {
     "message": "Skirt."
@@ -108,7 +108,7 @@
     "message": "Pristabdyta"
   },
   "autoPaused": {
-    "message": "Automatinis atnaujinimas pristabdytas taupant užklausas."
+    "message": "Automatinis atnaujinimas pristabdytas, kad sumažėtų užklausų skaičius."
   },
   "idlePaused": {
     "message": "Pristabdyta dėl neaktyvumo."
@@ -117,7 +117,7 @@
     "message": "Pasiektas dienos užklausų limitas. Rodomi podėlio duomenys."
   },
   "refreshFailed": {
-    "message": "Atnaujinti nepavyko. Rodomi naujausi duomenys."
+    "message": "Atnaujinti nepavyko. Rodomi paskutiniai gauti duomenys."
   },
   "club": {
     "message": "Klubas"
@@ -129,7 +129,7 @@
     "message": "Pasirinkite lygą"
   },
   "noLiveMatches": {
-    "message": "Nėra gyvų mačų"
+    "message": "Šiuo metu rungtynės nevyksta"
   },
   "liveCount": {
     "message": "$COUNT$ gyvai",
@@ -140,7 +140,7 @@
     }
   },
   "matchCount": {
-    "message": "$COUNT$ mačų",
+    "message": "$COUNT$ rungtynių",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -160,7 +160,7 @@
     "message": "Statistika"
   },
   "favorite": {
-    "message": "Mėgstama"
+    "message": "Pridėti prie mėgstamų"
   },
   "removeFavorite": {
     "message": "Pašalinti iš mėgstamų"
@@ -175,7 +175,7 @@
     "message": "Pridėti lygą prie mėgstamų"
   },
   "forceEnglishOn": {
-    "message": "Rodyti angliškas etiketes"
+    "message": "Rodyti anglų kalba"
   },
   "forceEnglishOff": {
     "message": "Grįžti prie naršyklės kalbos"
@@ -193,25 +193,25 @@
     "message": "Nežinoma komanda"
   },
   "matchDetails": {
-    "message": "Mačo detalės"
+    "message": "Rungtynių informacija"
   },
   "loadingDetails": {
-    "message": "Įkeliamos mačo detalės…"
+    "message": "Įkeliama rungtynių informacija…"
   },
   "loadingStandings": {
     "message": "Įkeliama lentelė…"
   },
   "detailsUnavailable": {
-    "message": "Detalės nepasiekiamos"
+    "message": "Informacija nepasiekiama"
   },
   "noDetails": {
-    "message": "Šiam mačui nėra papildomų detalių."
+    "message": "Papildomos informacijos apie šias rungtynes nėra."
   },
   "noSectionData": {
     "message": "Nėra pasiekiamų duomenų."
   },
   "noStats": {
-    "message": "Mačo statistikos nėra."
+    "message": "Rungtynių statistikos nėra."
   },
   "noStandings": {
     "message": "Šiai lygai lentelės nėra."
@@ -238,7 +238,7 @@
     "message": "Sudėtys"
   },
   "headToHead": {
-    "message": "Tarpusavio mačai"
+    "message": "Tarpusavio rungtynės"
   },
   "news": {
     "message": "Naujienos"
@@ -310,7 +310,7 @@
     "message": "Pertrauka"
   },
   "liveMatchCountOne": {
-    "message": "$COUNT$ tiesioginės rungtynės",
+    "message": "$COUNT$ vykstančios rungtynės",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -318,7 +318,7 @@
     }
   },
   "liveMatchesCount": {
-    "message": "$COUNT$ tiesioginių rungtynių",
+    "message": "$COUNT$ vykstančių rungtynių",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -358,6 +358,38 @@
     }
   },
   "matchCountOne": {
+    "message": "$COUNT$ rungtynės",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "liveMatchCountFew": {
+    "message": "$COUNT$ vykstančios rungtynės",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchCountFew": {
+    "message": "$COUNT$ artėjančios rungtynės",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchCountFew": {
+    "message": "$COUNT$ baigtos rungtynės",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCountFew": {
     "message": "$COUNT$ rungtynės",
     "placeholders": {
       "count": {

@@ -3,7 +3,7 @@
     "message": "Hype - نتائج كرة القدم المباشرة"
   },
   "extDescription": {
-    "message": "نتائج كرة القدم المباشرة والمباريات والنتائج وترتيب الدوريات."
+    "message": "نتائج كرة القدم المباشرة، وجداول المباريات، والنتائج النهائية، وترتيب الدوريات."
   },
   "appTitle": {
     "message": "Hype Scores"
@@ -15,7 +15,7 @@
     "message": "تعذّر تحميل البيانات"
   },
   "extensionRuntimeRequired": {
-    "message": "البيانات المباشرة محظورة في معاينة الملف. افتح نافذة إضافة Chrome لتحميل النتائج."
+    "message": "البيانات المباشرة غير متاحة في معاينة الملف. افتح نافذة إضافة Chrome لعرض النتائج."
   },
   "empty": {
     "message": "لا توجد مباريات اليوم."
@@ -51,13 +51,13 @@
     "message": "خروج المغلوب"
   },
   "loadingBracket": {
-    "message": "جارٍ تحميل شبكة خروج المغلوب…"
+    "message": "جارٍ تحميل جدول خروج المغلوب…"
   },
   "noBracket": {
-    "message": "لا تتوفر شبكة خروج المغلوب."
+    "message": "لا يتوفر جدول لخروج المغلوب."
   },
   "bracketUnavailable": {
-    "message": "شبكة خروج المغلوب غير متاحة."
+    "message": "جدول خروج المغلوب غير متاح."
   },
   "tbd": {
     "message": "يُحدد لاحقًا"
@@ -108,7 +108,7 @@
     "message": "متوقف مؤقتًا"
   },
   "autoPaused": {
-    "message": "تم إيقاف التحديث التلقائي لتوفير الطلبات."
+    "message": "أُوقف التحديث التلقائي مؤقتًا لتقليل عدد الطلبات."
   },
   "idlePaused": {
     "message": "متوقف أثناء عدم النشاط."
@@ -117,7 +117,7 @@
     "message": "تم بلوغ الحد اليومي للطلبات. يتم عرض البيانات المخزّنة."
   },
   "refreshFailed": {
-    "message": "فشل التحديث. يتم عرض أحدث البيانات."
+    "message": "تعذّر التحديث. تُعرض آخر البيانات المتاحة."
   },
   "club": {
     "message": "النادي"
@@ -132,7 +132,7 @@
     "message": "لا توجد مباريات مباشرة"
   },
   "liveCount": {
-    "message": "$COUNT$ مباشر",
+    "message": "مباشر: $COUNT$",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -140,7 +140,7 @@
     }
   },
   "matchCount": {
-    "message": "$COUNT$ مباراة",
+    "message": "المباريات: $COUNT$",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -160,7 +160,7 @@
     "message": "إحصائيات"
   },
   "favorite": {
-    "message": "مفضلة"
+    "message": "إضافة إلى المفضلة"
   },
   "removeFavorite": {
     "message": "إزالة من المفضلة"
@@ -175,7 +175,7 @@
     "message": "إضافة الدوري إلى المفضلة"
   },
   "forceEnglishOn": {
-    "message": "عرض التسميات بالإنجليزية"
+    "message": "العرض بالإنجليزية"
   },
   "forceEnglishOff": {
     "message": "العودة إلى لغة المتصفح"
@@ -235,7 +235,7 @@
     "message": "الأحداث"
   },
   "lineups": {
-    "message": "التشكيلة"
+    "message": "التشكيلات"
   },
   "headToHead": {
     "message": "المواجهات المباشرة"
@@ -268,7 +268,7 @@
     "message": "نسخة احتياطية للإعدادات"
   },
   "settingsBackupHint": {
-    "message": "تشمل الدوريات المفضلة وحجم النافذة. يحل الاستيراد محل هذه الإعدادات."
+    "message": "تتضمن الدوريات المفضلة وحجم النافذة. يؤدي استيراد الملف إلى استبدال هذه الإعدادات."
   },
   "exportSettings": {
     "message": "تصدير الإعدادات"
@@ -310,7 +310,7 @@
     "message": "بين الشوطين"
   },
   "liveMatchCountOne": {
-    "message": "$COUNT$ مباراة مباشرة",
+    "message": "مباريات مباشرة: $COUNT$",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -318,7 +318,7 @@
     }
   },
   "liveMatchesCount": {
-    "message": "$COUNT$ مباريات مباشرة",
+    "message": "مباريات مباشرة: $COUNT$",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -326,7 +326,7 @@
     }
   },
   "upcomingMatchCountOne": {
-    "message": "$COUNT$ مباراة قادمة",
+    "message": "مباريات قادمة: $COUNT$",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -334,7 +334,7 @@
     }
   },
   "upcomingMatchesCount": {
-    "message": "$COUNT$ مباريات قادمة",
+    "message": "مباريات قادمة: $COUNT$",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -342,7 +342,7 @@
     }
   },
   "completedMatchCountOne": {
-    "message": "$COUNT$ مباراة مكتملة",
+    "message": "مباريات منتهية: $COUNT$",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -350,7 +350,7 @@
     }
   },
   "completedMatchesCount": {
-    "message": "$COUNT$ مباريات مكتملة",
+    "message": "مباريات منتهية: $COUNT$",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -358,7 +358,7 @@
     }
   },
   "matchCountOne": {
-    "message": "$COUNT$ مباراة",
+    "message": "المباريات: $COUNT$",
     "placeholders": {
       "count": {
         "content": "$1"

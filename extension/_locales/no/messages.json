@@ -3,7 +3,7 @@
     "message": "Hype - Live fotballresultater"
   },
   "extDescription": {
-    "message": "Live fotballresultater, kamper, resultater og tabeller."
+    "message": "Fotballresultater live, kampoppsett, sluttresultater og tabeller."
   },
   "appTitle": {
     "message": "Hype Scores"
@@ -15,7 +15,7 @@
     "message": "Kunne ikke laste data"
   },
   "extensionRuntimeRequired": {
-    "message": "Livedata blokkeres i filforhåndsvisning. Åpne Chrome-utvidelsens popup for å laste resultater."
+    "message": "Livedata er ikke tilgjengelige i filforhåndsvisningen. Åpne Chrome-utvidelsens popup for å se resultatene."
   },
   "empty": {
     "message": "Ingen kamper funnet i dag."
@@ -51,19 +51,19 @@
     "message": "Utslagsspill"
   },
   "loadingBracket": {
-    "message": "Laster utslagstre…"
+    "message": "Laster sluttspilltreet…"
   },
   "noBracket": {
-    "message": "Ingen utslagstre tilgjengelig."
+    "message": "Ikke noe sluttspilltre tilgjengelig."
   },
   "bracketUnavailable": {
-    "message": "Utslagstre utilgjengelig."
+    "message": "Sluttspilltreet er ikke tilgjengelig."
   },
   "tbd": {
-    "message": "TBD"
+    "message": "Ikke avklart"
   },
   "roundOf32": {
-    "message": "32-delsfinale"
+    "message": "Sekstendedelsfinale"
   },
   "roundOf16": {
     "message": "Åttendedelsfinale"
@@ -108,7 +108,7 @@
     "message": "Satt på pause"
   },
   "autoPaused": {
-    "message": "Automatisk oppdatering satt på pause for å spare forespørsler."
+    "message": "Automatisk oppdatering er satt på pause for å redusere antall forespørsler."
   },
   "idlePaused": {
     "message": "Satt på pause ved inaktivitet."
@@ -117,7 +117,7 @@
     "message": "Daglig forespørselsgrense nådd. Viser bufrede data."
   },
   "refreshFailed": {
-    "message": "Oppdatering mislyktes. Viser nyeste data."
+    "message": "Oppdateringen mislyktes. Viser de sist tilgjengelige dataene."
   },
   "club": {
     "message": "Klubb"
@@ -160,10 +160,10 @@
     "message": "Statistikk"
   },
   "favorite": {
-    "message": "Favoritt"
+    "message": "Legg til i favoritter"
   },
   "removeFavorite": {
-    "message": "Fjern favoritt"
+    "message": "Fjern fra favoritter"
   },
   "turnOff": {
     "message": "Slå av utvidelsen"
@@ -175,10 +175,10 @@
     "message": "Favorittmerk liga"
   },
   "forceEnglishOn": {
-    "message": "Vis engelske etiketter"
+    "message": "Vis på engelsk"
   },
   "forceEnglishOff": {
-    "message": "Tilbake til nettleserspråk"
+    "message": "Tilbake til nettleserens språk"
   },
   "other": {
     "message": "Annet"
@@ -310,7 +310,7 @@
     "message": "Pause"
   },
   "liveMatchCountOne": {
-    "message": "$COUNT$ direktekamp",
+    "message": "$COUNT$ livekamp",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -318,7 +318,7 @@
     }
   },
   "liveMatchesCount": {
-    "message": "$COUNT$ direktekamper",
+    "message": "$COUNT$ livekamper",
     "placeholders": {
       "count": {
         "content": "$1"

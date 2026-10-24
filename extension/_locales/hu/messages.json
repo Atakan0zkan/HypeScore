@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "Hype - Élő futball eredmények"
+    "message": "Hype - Élő futballeredmények"
   },
   "extDescription": {
-    "message": "Élő futball eredmények, meccsek, eredmények és tabellák."
+    "message": "Élő futballeredmények, mérkőzésprogram, végeredmények és tabellák."
   },
   "appTitle": {
     "message": "Hype Scores"
@@ -15,7 +15,7 @@
     "message": "Nem sikerült betölteni az adatokat"
   },
   "extensionRuntimeRequired": {
-    "message": "Az élő adatok fájlelőnézetben blokkolva vannak. Nyisd meg a Chrome-bővítmény felugró ablakát az eredményekhez."
+    "message": "A fájl előnézetében nem érhetők el élő adatok. Az eredmények megtekintéséhez nyisd meg a Chrome-bővítmény felugró ablakát."
   },
   "empty": {
     "message": "Ma nincs megjeleníthető meccs."
@@ -60,10 +60,10 @@
     "message": "Az ágrajz nem elérhető."
   },
   "tbd": {
-    "message": "TBD"
+    "message": "Még nem ismert"
   },
   "roundOf32": {
-    "message": "32 közé jutás"
+    "message": "Legjobb 32"
   },
   "roundOf16": {
     "message": "Nyolcaddöntő"
@@ -108,7 +108,7 @@
     "message": "Szüneteltetve"
   },
   "autoPaused": {
-    "message": "Az automatikus frissítés szünetel a kérések takarékoskodása miatt."
+    "message": "Az automatikus frissítés szünetel a kérések számának csökkentése érdekében."
   },
   "idlePaused": {
     "message": "Inaktivitás miatt szünetel."
@@ -117,7 +117,7 @@
     "message": "Elérted a napi kéréskorlátot. Gyorsítótárazott adatok jelennek meg."
   },
   "refreshFailed": {
-    "message": "A frissítés sikertelen. A legfrissebb adatok jelennek meg."
+    "message": "A frissítés sikertelen. A legutóbb elérhető adatok jelennek meg."
   },
   "club": {
     "message": "Klub"
@@ -140,7 +140,7 @@
     }
   },
   "matchCount": {
-    "message": "$COUNT$ meccs",
+    "message": "$COUNT$ mérkőzés",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -154,16 +154,16 @@
     "message": "Félidő"
   },
   "scheduled": {
-    "message": "Ütemezett"
+    "message": "Kiírt mérkőzés"
   },
   "stats": {
     "message": "Statisztikák"
   },
   "favorite": {
-    "message": "Kedvenc"
+    "message": "Hozzáadás a kedvencekhez"
   },
   "removeFavorite": {
-    "message": "Kedvenc eltávolítása"
+    "message": "Eltávolítás a kedvencek közül"
   },
   "turnOff": {
     "message": "Bővítmény kikapcsolása"
@@ -175,7 +175,7 @@
     "message": "Liga kedvencekhez adása"
   },
   "forceEnglishOn": {
-    "message": "Angol feliratok mutatása"
+    "message": "Megjelenítés angolul"
   },
   "forceEnglishOff": {
     "message": "Vissza a böngésző nyelvéhez"
@@ -238,7 +238,7 @@
     "message": "Felállások"
   },
   "headToHead": {
-    "message": "Egymás elleni"
+    "message": "Egymás elleni meccsek"
   },
   "news": {
     "message": "Hírek"
@@ -265,7 +265,7 @@
     "message": "Nagy"
   },
   "settingsBackup": {
-    "message": "Beállítások mentése"
+    "message": "Beállítások biztonsági mentése"
   },
   "settingsBackupHint": {
     "message": "Tartalmazza a kedvenc ligákat és az ablakméretet. Az importálás felülírja ezeket a beállításokat."
@@ -298,7 +298,7 @@
     "message": "A beállításokat nem sikerült exportálni."
   },
   "substitutes": {
-    "message": "Cserék"
+    "message": "Cserejátékosok"
   },
   "startingXI": {
     "message": "Kezdő tizenegy"

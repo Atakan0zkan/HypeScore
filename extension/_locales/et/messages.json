@@ -3,7 +3,7 @@
     "message": "Hype - Jalgpalli live-tulemused"
   },
   "extDescription": {
-    "message": "Jalgpalli live-tulemused, mängud, skoorid ja tabelid."
+    "message": "Jalgpalli reaalajas skoorid, mängukava, tulemused ja liigatabelid."
   },
   "appTitle": {
     "message": "Hype Scores"
@@ -15,7 +15,7 @@
     "message": "Andmeid ei saanud laadida"
   },
   "extensionRuntimeRequired": {
-    "message": "Live-andmed on faili eelvaates blokeeritud. Ava Chrome’i laienduse hüpik skooride jaoks."
+    "message": "Reaalajas andmed pole faili eelvaates saadaval. Skooride nägemiseks ava Chrome’i laienduse hüpikaken."
   },
   "empty": {
     "message": "Täna mänge ei leitud."
@@ -33,7 +33,7 @@
     "message": "Uuendatud"
   },
   "live": {
-    "message": "Live"
+    "message": "Käimas"
   },
   "matches": {
     "message": "Mängud"
@@ -51,19 +51,19 @@
     "message": "Väljalangemismängud"
   },
   "loadingBracket": {
-    "message": "Võrgustiku laadimine…"
+    "message": "Väljalangemistabeli laadimine…"
   },
   "noBracket": {
-    "message": "Võrgustik pole saadaval."
+    "message": "Väljalangemistabel pole saadaval."
   },
   "bracketUnavailable": {
-    "message": "Võrgustik pole kättesaadav."
+    "message": "Väljalangemistabel pole kättesaadav."
   },
   "tbd": {
-    "message": "TBD"
+    "message": "Veel määramata"
   },
   "roundOf32": {
-    "message": "32 paremat"
+    "message": "1/16-finaal"
   },
   "roundOf16": {
     "message": "Kaheksandikfinaal"
@@ -84,19 +84,19 @@
     "message": "M"
   },
   "wins": {
-    "message": "V"
+    "message": "Võ"
   },
   "draws": {
-    "message": "V"
+    "message": "Vi"
   },
   "losses": {
     "message": "K"
   },
   "goalsFor": {
-    "message": "V"
+    "message": "LV"
   },
   "goalsAgainst": {
-    "message": "L"
+    "message": "SV"
   },
   "goalDifference": {
     "message": "VV"
@@ -108,7 +108,7 @@
     "message": "Peatatud"
   },
   "autoPaused": {
-    "message": "Automaatne värskendus peatatud päringute säästmiseks."
+    "message": "Automaatne värskendamine on päringute arvu vähendamiseks peatatud."
   },
   "idlePaused": {
     "message": "Peatatud tegevusetuse ajal."
@@ -117,7 +117,7 @@
     "message": "Päevane päringulimiit on täis. Kuvatakse vahemälu andmed."
   },
   "refreshFailed": {
-    "message": "Värskendamine ebaõnnestus. Kuvatakse viimased andmed."
+    "message": "Värskendamine ebaõnnestus. Kuvatakse viimati saadud andmeid."
   },
   "club": {
     "message": "Klubi"
@@ -129,10 +129,10 @@
     "message": "Vali liiga"
   },
   "noLiveMatches": {
-    "message": "Live-mänge pole"
+    "message": "Käimasolevaid mänge pole"
   },
   "liveCount": {
-    "message": "$COUNT$ live",
+    "message": "$COUNT$ käimas",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -151,7 +151,7 @@
     "message": "Lõpp"
   },
   "halfTime": {
-    "message": "Poolaeg"
+    "message": "Vaheaeg"
   },
   "scheduled": {
     "message": "Planeeritud"
@@ -160,7 +160,7 @@
     "message": "Statistika"
   },
   "favorite": {
-    "message": "Lemmik"
+    "message": "Lisa lemmikutesse"
   },
   "removeFavorite": {
     "message": "Eemalda lemmikutest"
@@ -175,7 +175,7 @@
     "message": "Lisa liiga lemmikutesse"
   },
   "forceEnglishOn": {
-    "message": "Näita ingliskeelseid silte"
+    "message": "Näita inglise keeles"
   },
   "forceEnglishOff": {
     "message": "Tagasi brauseri keele juurde"
@@ -205,7 +205,7 @@
     "message": "Detailid pole saadaval"
   },
   "noDetails": {
-    "message": "Selle mängu kohta pole lisadetailid."
+    "message": "Selle mängu kohta pole lisateavet."
   },
   "noSectionData": {
     "message": "Andmeid pole saadaval."
@@ -238,7 +238,7 @@
     "message": "Koosseisud"
   },
   "headToHead": {
-    "message": "Omavahelised"
+    "message": "Omavahelised mängud"
   },
   "news": {
     "message": "Uudised"
@@ -307,7 +307,7 @@
     "message": "Mäng lõppenud"
   },
   "halfTimeLabel": {
-    "message": "Poolaeg"
+    "message": "Vaheaeg"
   },
   "liveMatchCountOne": {
     "message": "$COUNT$ käimasolev mäng",

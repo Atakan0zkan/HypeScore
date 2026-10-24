@@ -3,7 +3,7 @@
     "message": "Hype - थेट फुटबॉल स्कोअर"
   },
   "extDescription": {
-    "message": "थेट फुटबॉल स्कोअर, सामने, निकाल आणि लीग तक्ते."
+    "message": "थेट फुटबॉल स्कोअर, सामन्यांचे वेळापत्रक, निकाल आणि लीगच्या गुणतालिका."
   },
   "appTitle": {
     "message": "Hype Scores"
@@ -15,7 +15,7 @@
     "message": "डेटा लोड करता आला नाही"
   },
   "extensionRuntimeRequired": {
-    "message": "फाइल पूर्वावलोकनात थेट डेटा ब्लॉक आहे. स्कोअरसाठी Chrome विस्तार पॉपअप उघडा."
+    "message": "फाइलच्या पूर्वावलोकनात थेट डेटा उपलब्ध नाही. स्कोअर पाहण्यासाठी Chrome विस्ताराचा पॉपअप उघडा."
   },
   "empty": {
     "message": "आज सामने सापडले नाहीत."
@@ -45,7 +45,7 @@
     "message": "आगामी"
   },
   "standings": {
-    "message": "तक्ता"
+    "message": "गुणतालिका"
   },
   "bracket": {
     "message": "नॉकआउट"
@@ -60,7 +60,7 @@
     "message": "नॉकआउट ब्रॅकेट अनुपलब्ध."
   },
   "tbd": {
-    "message": "TBD"
+    "message": "अद्याप ठरलेले नाही"
   },
   "roundOf32": {
     "message": "राउंड ऑफ ३२"
@@ -93,13 +93,13 @@
     "message": "प"
   },
   "goalsFor": {
-    "message": "के"
+    "message": "गोल+"
   },
   "goalsAgainst": {
-    "message": "खे"
+    "message": "गोल−"
   },
   "goalDifference": {
-    "message": "फरक"
+    "message": "गोल फरक"
   },
   "points": {
     "message": "गुण"
@@ -108,16 +108,16 @@
     "message": "थांबवले"
   },
   "autoPaused": {
-    "message": "विनंत्या वाचवण्यासाठी ऑटो रिफ्रेश थांबवले."
+    "message": "विनंत्यांची संख्या कमी करण्यासाठी ऑटो-रिफ्रेश थांबवले आहे."
   },
   "idlePaused": {
-    "message": "निष्क्रियतेमुळे थांबवले."
+    "message": "वापर होत नसल्यामुळे रिफ्रेश थांबवले आहे."
   },
   "requestLimitReached": {
-    "message": "दैनिक विनंती मर्यादा पूर्ण. कॅश डेटा दाखवत आहे."
+    "message": "विनंत्यांची दैनिक मर्यादा गाठली आहे. साठवलेला डेटा दाखवला जात आहे."
   },
   "refreshFailed": {
-    "message": "रिफ्रेश अयशस्वी. नवीनतम डेटा दाखवत आहे."
+    "message": "रिफ्रेश करता आले नाही. शेवटचा मिळालेला डेटा दाखवला जात आहे."
   },
   "club": {
     "message": "क्लब"
@@ -151,7 +151,7 @@
     "message": "संपले"
   },
   "halfTime": {
-    "message": "अर्धवेळ"
+    "message": "मध्यंतर"
   },
   "scheduled": {
     "message": "नियोजित"
@@ -160,10 +160,10 @@
     "message": "आकडेवारी"
   },
   "favorite": {
-    "message": "आवडते"
+    "message": "आवडत्यांमध्ये जोडा"
   },
   "removeFavorite": {
-    "message": "आवडते काढा"
+    "message": "आवडत्यांमधून काढा"
   },
   "turnOff": {
     "message": "विस्तार बंद करा"
@@ -172,13 +172,13 @@
     "message": "विस्तार चालू करा"
   },
   "favoriteLeague": {
-    "message": "लीग आवडत्यामध्ये जोडा"
+    "message": "लीग आवडत्यांमध्ये जोडा"
   },
   "forceEnglishOn": {
-    "message": "इंग्रजी लेबल दाखवा"
+    "message": "इंग्रजीत दाखवा"
   },
   "forceEnglishOff": {
-    "message": "ब्राउझर भाषेकडे परत"
+    "message": "ब्राउझरची भाषा वापरा"
   },
   "other": {
     "message": "इतर"
@@ -193,13 +193,13 @@
     "message": "अज्ञात संघ"
   },
   "matchDetails": {
-    "message": "सामना तपशील"
+    "message": "सामन्याचे तपशील"
   },
   "loadingDetails": {
-    "message": "सामना तपशील लोड होत आहे…"
+    "message": "सामन्याचे तपशील लोड होत आहेत…"
   },
   "loadingStandings": {
-    "message": "तक्ता लोड होत आहे…"
+    "message": "गुणतालिका लोड होत आहे…"
   },
   "detailsUnavailable": {
     "message": "तपशील उपलब्ध नाहीत"
@@ -211,10 +211,10 @@
     "message": "डेटा उपलब्ध नाही."
   },
   "noStats": {
-    "message": "सामना आकडेवारी उपलब्ध नाही."
+    "message": "सामन्याची आकडेवारी उपलब्ध नाही."
   },
   "noStandings": {
-    "message": "या लीगसाठी तक्ता नाही."
+    "message": "या लीगची गुणतालिका उपलब्ध नाही."
   },
   "noLinks": {
     "message": "दुवे नाहीत."
@@ -232,13 +232,13 @@
     "message": "प्रसारण"
   },
   "timeline": {
-    "message": "टाइमलाइन"
+    "message": "सामन्यातील घटनाक्रम"
   },
   "lineups": {
     "message": "संघ रचना"
   },
   "headToHead": {
-    "message": "एकमेकांविरुद्ध"
+    "message": "एकमेकांविरुद्धचे सामने"
   },
   "news": {
     "message": "बातम्या"
@@ -268,13 +268,13 @@
     "message": "सेटिंग्ज बॅकअप"
   },
   "settingsBackupHint": {
-    "message": "आवडत्या लीग आणि पॉपअपचा आकार समाविष्ट आहे. आयात या सेटिंग्ज बदलते."
+    "message": "यात आवडत्या लीग आणि पॉपअपचा आकार असतो. फाइल इंपोर्ट केल्यावर या सेटिंग्ज पूर्णपणे बदलल्या जातील."
   },
   "exportSettings": {
-    "message": "सेटिंग्ज निर्यात करा"
+    "message": "सेटिंग्ज एक्सपोर्ट करा"
   },
   "importSettings": {
-    "message": "सेटिंग्ज आयात करा"
+    "message": "सेटिंग्ज इंपोर्ट करा"
   },
   "privacyPolicy": {
     "message": "गोपनीयता धोरण"
@@ -283,7 +283,7 @@
     "message": "सेटिंग्ज बंद करा"
   },
   "settingsImported": {
-    "message": "सेटिंग्ज आयात केल्या."
+    "message": "सेटिंग्ज इंपोर्ट केल्या."
   },
   "settingsImportError": {
     "message": "ही वैध Hype सेटिंग्ज फाइल नाही."
@@ -292,16 +292,16 @@
     "message": "या उपकरणावर सेटिंग्ज जतन करता आल्या नाहीत."
   },
   "settingsExported": {
-    "message": "सेटिंग्ज निर्यात केल्या."
+    "message": "सेटिंग्ज एक्सपोर्ट केल्या."
   },
   "settingsExportError": {
-    "message": "सेटिंग्ज निर्यात करता आल्या नाहीत."
+    "message": "सेटिंग्ज एक्सपोर्ट करता आल्या नाहीत."
   },
   "substitutes": {
     "message": "बदली खेळाडू"
   },
   "startingXI": {
-    "message": "सुरुवातीचे अकरा"
+    "message": "सुरुवातीचे अकरा खेळाडू"
   },
   "fullTimeLabel": {
     "message": "सामना संपला"

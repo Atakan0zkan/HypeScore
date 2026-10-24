@@ -3,7 +3,7 @@
     "message": "Hype - Živé fotbalové výsledky"
   },
   "extDescription": {
-    "message": "Živé fotbalové výsledky, zápasy, výsledky a tabulky."
+    "message": "Fotbalové výsledky živě, rozpis zápasů, konečné výsledky a tabulky."
   },
   "appTitle": {
     "message": "Hype Scores"
@@ -15,7 +15,7 @@
     "message": "Data se nepodařilo načíst"
   },
   "extensionRuntimeRequired": {
-    "message": "Živá data jsou v náhledu souboru blokována. Otevřete popup rozšíření Chrome pro načtení skóre."
+    "message": "Živá data nejsou v náhledu souboru dostupná. Pro zobrazení skóre otevřete okno rozšíření Chrome."
   },
   "empty": {
     "message": "Dnes nebyly nalezeny žádné zápasy."
@@ -60,10 +60,10 @@
     "message": "Pavouk je nedostupný."
   },
   "tbd": {
-    "message": "TBD"
+    "message": "Bude určeno"
   },
   "roundOf32": {
-    "message": "32 silných"
+    "message": "Šestnáctifinále"
   },
   "roundOf16": {
     "message": "Osmifinále"
@@ -75,7 +75,7 @@
     "message": "Semifinále"
   },
   "thirdPlace": {
-    "message": "O 3. místo"
+    "message": "Zápas o 3. místo"
   },
   "final": {
     "message": "Finále"
@@ -99,7 +99,7 @@
     "message": "IG"
   },
   "goalDifference": {
-    "message": "RO"
+    "message": "RG"
   },
   "points": {
     "message": "B"
@@ -108,16 +108,16 @@
     "message": "Pozastaveno"
   },
   "autoPaused": {
-    "message": "Automatické obnovení pozastaveno kvůli úspoře požadavků."
+    "message": "Automatická aktualizace je pozastavena, aby se snížil počet požadavků."
   },
   "idlePaused": {
     "message": "Pozastaveno při nečinnosti."
   },
   "requestLimitReached": {
-    "message": "Denní limit požadavků dosažen. Zobrazuji data z mezipaměti."
+    "message": "Byl dosažen denní limit požadavků. Zobrazují se uložená data."
   },
   "refreshFailed": {
-    "message": "Obnovení selhalo. Zobrazuji nejnovější data."
+    "message": "Aktualizace se nezdařila. Zobrazují se poslední dostupná data."
   },
   "club": {
     "message": "Klub"
@@ -129,7 +129,7 @@
     "message": "Vyberte ligu"
   },
   "noLiveMatches": {
-    "message": "Žádné živé zápasy"
+    "message": "Žádné právě hrané zápasy"
   },
   "liveCount": {
     "message": "$COUNT$ živě",
@@ -148,10 +148,10 @@
     }
   },
   "fullTime": {
-    "message": "KP"
+    "message": "Konec"
   },
   "halfTime": {
-    "message": "PO"
+    "message": "Pol."
   },
   "scheduled": {
     "message": "Naplánováno"
@@ -160,7 +160,7 @@
     "message": "Statistiky"
   },
   "favorite": {
-    "message": "Oblíbené"
+    "message": "Přidat do oblíbených"
   },
   "removeFavorite": {
     "message": "Odebrat z oblíbených"
@@ -178,7 +178,7 @@
     "message": "Zobrazit anglické popisky"
   },
   "forceEnglishOff": {
-    "message": "Vrátit jazyk prohlížeče"
+    "message": "Vrátit se k jazyku prohlížeče"
   },
   "other": {
     "message": "Ostatní"
@@ -205,7 +205,7 @@
     "message": "Detaily nejsou k dispozici"
   },
   "noDetails": {
-    "message": "Pro tento zápas nejsou další detaily."
+    "message": "Pro tento zápas nejsou k dispozici další podrobnosti."
   },
   "noSectionData": {
     "message": "Nejsou k dispozici žádná data."
@@ -310,7 +310,7 @@
     "message": "Poločas"
   },
   "liveMatchCountOne": {
-    "message": "$COUNT$ živý zápas",
+    "message": "$COUNT$ zápas živě",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -318,7 +318,7 @@
     }
   },
   "liveMatchesCount": {
-    "message": "$COUNT$ živých zápasů",
+    "message": "$COUNT$ zápasů živě",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -359,6 +359,38 @@
   },
   "matchCountOne": {
     "message": "$COUNT$ zápas",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "liveMatchCountFew": {
+    "message": "$COUNT$ zápasy živě",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "upcomingMatchCountFew": {
+    "message": "$COUNT$ nadcházející zápasy",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "completedMatchCountFew": {
+    "message": "$COUNT$ ukončené zápasy",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "matchCountFew": {
+    "message": "$COUNT$ zápasy",
     "placeholders": {
       "count": {
         "content": "$1"

@@ -3,7 +3,7 @@
     "message": "Hype - Scores de football en direct"
   },
   "extDescription": {
-    "message": "Scores de football en direct, matchs, résultats et classements."
+    "message": "Scores de football en direct, calendrier, résultats et classements."
   },
   "appTitle": {
     "message": "Hype Scores"
@@ -15,7 +15,7 @@
     "message": "Impossible de charger les données"
   },
   "extensionRuntimeRequired": {
-    "message": "Les données en direct ne se chargent pas dans l’aperçu local. Ouvrez la fenêtre de l’extension Chrome pour voir les scores."
+    "message": "Les données en direct ne sont pas disponibles dans l’aperçu du fichier. Ouvrez la fenêtre de l’extension Chrome pour afficher les scores."
   },
   "empty": {
     "message": "Aucun match trouvé aujourd’hui."
@@ -48,7 +48,7 @@
     "message": "Classement"
   },
   "bracket": {
-    "message": "Phase à élimination"
+    "message": "Élimination directe"
   },
   "loadingBracket": {
     "message": "Chargement du tableau final…"
@@ -108,7 +108,7 @@
     "message": "En pause"
   },
   "autoPaused": {
-    "message": "Actualisation automatique mise en pause pour économiser les requêtes."
+    "message": "Actualisation automatique mise en pause pour réduire le nombre de requêtes."
   },
   "idlePaused": {
     "message": "Mise en pause pendant l’inactivité."
@@ -117,7 +117,7 @@
     "message": "Limite quotidienne de requêtes atteinte. Affichage des données en cache."
   },
   "refreshFailed": {
-    "message": "Échec de l’actualisation. Affichage des dernières données."
+    "message": "Échec de l’actualisation. Affichage des dernières données disponibles."
   },
   "club": {
     "message": "Club"
@@ -160,7 +160,7 @@
     "message": "Statistiques"
   },
   "favorite": {
-    "message": "Favori"
+    "message": "Ajouter aux favoris"
   },
   "removeFavorite": {
     "message": "Retirer des favoris"
@@ -187,7 +187,7 @@
     "message": "Équipe"
   },
   "unknownLeague": {
-    "message": "Championnat inconnu"
+    "message": "Ligue inconnue"
   },
   "unknownTeam": {
     "message": "Équipe inconnue"
@@ -238,7 +238,7 @@
     "message": "Compositions"
   },
   "headToHead": {
-    "message": "Face-à-face"
+    "message": "Confrontations directes"
   },
   "news": {
     "message": "Actualités"
@@ -253,22 +253,22 @@
     "message": "Paramètres"
   },
   "popupSize": {
-    "message": "Taille du popup"
+    "message": "Taille de la fenêtre"
   },
   "sizeSmall": {
-    "message": "Petit"
+    "message": "Petite"
   },
   "sizeDefault": {
     "message": "Par défaut"
   },
   "sizeBig": {
-    "message": "Grand"
+    "message": "Grande"
   },
   "settingsBackup": {
     "message": "Sauvegarde des paramètres"
   },
   "settingsBackupHint": {
-    "message": "Comprend les ligues favorites et la taille du popup. L’import remplace ces paramètres."
+    "message": "Comprend les ligues favorites et la taille de la fenêtre. L’importation remplace ces paramètres."
   },
   "exportSettings": {
     "message": "Exporter les paramètres"

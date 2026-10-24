@@ -37,20 +37,6 @@
   display: none !important;
 }
 
-.snapshot-notice {
-  flex: 0 0 auto;
-  margin: 0 0 8px;
-  padding: 8px 10px;
-  border: 1px solid rgba(240, 189, 99, 0.4);
-  border-radius: 10px;
-  background: rgba(240, 189, 99, 0.08);
-  color: var(--gold);
-  font-family: "Segoe UI", system-ui, sans-serif;
-  font-size: 12px;
-  line-height: 1.4;
-  overflow-wrap: anywhere;
-}
-
 html,
 body {
   width: var(--popup-width);
@@ -1498,6 +1484,11 @@ html[dir="rtl"] .settings-panel { padding: 0 0 12px 6px; }
   color: var(--muted);
   font-size: 10px;
   text-transform: uppercase;
+  /* Some scripts need more room than Latin abbreviations. Keep the full
+     translated heading readable instead of overlapping adjacent columns. */
+  white-space: normal;
+  overflow-wrap: anywhere;
+  line-height: 1.35;
 }
 
 .standings-table th:nth-child(4) {

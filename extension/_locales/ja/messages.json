@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "Hype - ライブサッカー速報"
+    "message": "Hype - サッカーのライブスコア"
   },
   "extDescription": {
-    "message": "サッカーのライブスコア、試合、結果、順位表。"
+    "message": "サッカーのライブスコア、試合日程、結果、順位表。"
   },
   "appTitle": {
     "message": "Hype Scores"
@@ -108,16 +108,16 @@
     "message": "一時停止"
   },
   "autoPaused": {
-    "message": "リクエスト節約のため自動更新を一時停止しました。"
+    "message": "リクエスト数を抑えるため、自動更新を一時停止しました。"
   },
   "idlePaused": {
-    "message": "非アクティブのため一時停止中。"
+    "message": "操作がないため、自動更新を一時停止しています。"
   },
   "requestLimitReached": {
-    "message": "1日のリクエスト上限に達しました。キャッシュを表示しています。"
+    "message": "1日のリクエスト上限に達しました。キャッシュに保存されたデータを表示しています。"
   },
   "refreshFailed": {
-    "message": "更新に失敗しました。最新データを表示しています。"
+    "message": "更新できませんでした。最後に取得したデータを表示しています。"
   },
   "club": {
     "message": "クラブ"
@@ -140,7 +140,7 @@
     }
   },
   "matchCount": {
-    "message": "$COUNT$ 試合",
+    "message": "$COUNT$試合",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -151,7 +151,7 @@
     "message": "終了"
   },
   "halfTime": {
-    "message": "前半終了"
+    "message": "ハーフタイム"
   },
   "scheduled": {
     "message": "予定"
@@ -160,7 +160,7 @@
     "message": "スタッツ"
   },
   "favorite": {
-    "message": "お気に入り"
+    "message": "お気に入りに追加"
   },
   "removeFavorite": {
     "message": "お気に入りを解除"
@@ -175,10 +175,10 @@
     "message": "リーグをお気に入りに追加"
   },
   "forceEnglishOn": {
-    "message": "英語ラベルを表示"
+    "message": "英語で表示"
   },
   "forceEnglishOff": {
-    "message": "ブラウザ言語に戻す"
+    "message": "ブラウザの言語に戻す"
   },
   "other": {
     "message": "その他"
@@ -202,19 +202,19 @@
     "message": "順位表を読み込み中…"
   },
   "detailsUnavailable": {
-    "message": "詳細を利用できません"
+    "message": "詳細情報を表示できません"
   },
   "noDetails": {
-    "message": "この試合の追加詳細はありません。"
+    "message": "この試合の追加情報はありません。"
   },
   "noSectionData": {
     "message": "データがありません。"
   },
   "noStats": {
-    "message": "試合スタッツはありません。"
+    "message": "この試合のスタッツは利用できません。"
   },
   "noStandings": {
-    "message": "このリーグの順位表はありません。"
+    "message": "このリーグの順位表は利用できません。"
   },
   "noLinks": {
     "message": "リンクはありません。"
@@ -235,7 +235,7 @@
     "message": "タイムライン"
   },
   "lineups": {
-    "message": "スタメン"
+    "message": "メンバー"
   },
   "headToHead": {
     "message": "対戦成績"
@@ -268,7 +268,7 @@
     "message": "設定のバックアップ"
   },
   "settingsBackupHint": {
-    "message": "お気に入りのリーグとサイズを含みます。読み込みでこれらの設定が置き換わります。"
+    "message": "お気に入りのリーグとポップアップのサイズを含みます。読み込むと、現在の設定が置き換わります。"
   },
   "exportSettings": {
     "message": "設定を書き出す"
@@ -310,7 +310,7 @@
     "message": "ハーフタイム"
   },
   "liveMatchCountOne": {
-    "message": "$COUNT$ 試合が進行中",
+    "message": "$COUNT$試合が進行中",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -318,7 +318,7 @@
     }
   },
   "liveMatchesCount": {
-    "message": "$COUNT$ 試合が進行中",
+    "message": "$COUNT$試合が進行中",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -326,7 +326,7 @@
     }
   },
   "upcomingMatchCountOne": {
-    "message": "$COUNT$ 試合が開催予定",
+    "message": "開催予定：$COUNT$試合",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -334,7 +334,7 @@
     }
   },
   "upcomingMatchesCount": {
-    "message": "$COUNT$ 試合が開催予定",
+    "message": "開催予定：$COUNT$試合",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -342,7 +342,7 @@
     }
   },
   "completedMatchCountOne": {
-    "message": "$COUNT$ 試合が終了",
+    "message": "$COUNT$試合が終了",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -350,7 +350,7 @@
     }
   },
   "completedMatchesCount": {
-    "message": "$COUNT$ 試合が終了",
+    "message": "$COUNT$試合が終了",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -358,7 +358,7 @@
     }
   },
   "matchCountOne": {
-    "message": "$COUNT$ 試合",
+    "message": "$COUNT$試合",
     "placeholders": {
       "count": {
         "content": "$1"

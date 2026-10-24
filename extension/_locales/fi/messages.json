@@ -3,7 +3,7 @@
     "message": "Hype - Live-jalkapallotulokset"
   },
   "extDescription": {
-    "message": "Live-jalkapallotulokset, ottelut, tulokset ja sarjataulukot."
+    "message": "Jalkapallon livetulokset, otteluohjelmat, tulokset ja sarjataulukot."
   },
   "appTitle": {
     "message": "Hype Scores"
@@ -15,7 +15,7 @@
     "message": "Tietoja ei voitu ladata"
   },
   "extensionRuntimeRequired": {
-    "message": "Livedata on estetty tiedostoesikatselussa. Avaa Chrome-laajennuksen ponnahdusikkuna ladataksesi tulokset."
+    "message": "Reaaliaikaiset tiedot eivät ole käytettävissä tiedoston esikatselussa. Avaa Chrome-laajennuksen ponnahdusikkuna nähdäksesi tulokset."
   },
   "empty": {
     "message": "Ei otteluita tänään."
@@ -48,19 +48,19 @@
     "message": "Sarjataulukko"
   },
   "bracket": {
-    "message": "Cup-kaavio"
+    "message": "Pudotuspelit"
   },
   "loadingBracket": {
-    "message": "Ladataan cup-kaaviota…"
+    "message": "Ladataan pudotuspelikaaviota…"
   },
   "noBracket": {
-    "message": "Cup-kaaviota ei ole saatavilla."
+    "message": "Pudotuspelikaaviota ei ole saatavilla."
   },
   "bracketUnavailable": {
-    "message": "Cup-kaavio ei ole saatavilla."
+    "message": "Pudotuspelikaavio ei ole saatavilla."
   },
   "tbd": {
-    "message": "TBD"
+    "message": "Ei vielä tiedossa"
   },
   "roundOf32": {
     "message": "1/16-finaalit"
@@ -108,16 +108,16 @@
     "message": "Keskeytetty"
   },
   "autoPaused": {
-    "message": "Automaattinen päivitys keskeytetty pyyntöjen säästämiseksi."
+    "message": "Automaattinen päivitys on keskeytetty pyyntöjen määrän vähentämiseksi."
   },
   "idlePaused": {
-    "message": "Keskeytetty toimettomuuden ajaksi."
+    "message": "Päivitys on keskeytetty, kun laajennusta ei käytetä."
   },
   "requestLimitReached": {
-    "message": "Päivittäinen pyyntöraja täynnä. Näytetään välimuistin tiedot."
+    "message": "Päivittäinen pyyntöraja on saavutettu. Näytetään välimuistiin tallennetut tiedot."
   },
   "refreshFailed": {
-    "message": "Päivitys epäonnistui. Näytetään viimeisimmät tiedot."
+    "message": "Päivitys epäonnistui. Näytetään viimeksi saadut tiedot."
   },
   "club": {
     "message": "Seura"
@@ -148,19 +148,19 @@
     }
   },
   "fullTime": {
-    "message": "LP"
+    "message": "Loppu"
   },
   "halfTime": {
-    "message": "HT"
+    "message": "Tauko"
   },
   "scheduled": {
-    "message": "Ajastettu"
+    "message": "Tuleva ottelu"
   },
   "stats": {
     "message": "Tilastot"
   },
   "favorite": {
-    "message": "Suosikki"
+    "message": "Lisää suosikkeihin"
   },
   "removeFavorite": {
     "message": "Poista suosikki"
@@ -238,7 +238,7 @@
     "message": "Kokoonpanot"
   },
   "headToHead": {
-    "message": "Keskinäiset"
+    "message": "Keskinäiset ottelut"
   },
   "news": {
     "message": "Uutiset"

@@ -3007,7 +3007,7 @@ function sanitizeExternalUrl(value, allowedHostSuffixes) {
     const isAllowedHost = allowedHostSuffixes.some(
       (suffix) => host === suffix || host.endsWith("." + suffix),
     );
-    if (url.protocol !== "https:" || !isAllowedHost) return "";
+    if (url.protocol !== "https:" || url.username || url.password || url.port || !isAllowedHost) return "";
     return url.href;
   } catch (error) {
     return "";

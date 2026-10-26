@@ -20,7 +20,7 @@ const workerContext = vm.createContext({
   }),
 });
 vm.runInContext(workerSource.replace("export default", "const worker ="), workerContext);
-const bodyRead = vm.runInContext("fetchJson('https://upstream.test')", workerContext);
+const bodyRead = vm.runInContext("fetchJson(ESPN_SCOREBOARD_URL)", workerContext);
 const bodyFailure = assert.rejects(bodyRead, /Body aborted/);
 await new Promise(setImmediate);
 assert.equal(cleared, false, "timeout must cover body consumption, not only response headers");

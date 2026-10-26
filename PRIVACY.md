@@ -1,6 +1,6 @@
 # HypeScore Privacy Notice
 
-Last updated: 2026-10-05
+Last updated: 2026-10-27
 
 Hype - Live Football Scores does not require an account and does not use
 advertising trackers, analytics cookies, or a persistent device identifier.
@@ -14,6 +14,10 @@ Cloudflare necessarily processes network information, including IP address,
 to deliver and protect those requests. Cloudflare hostname analytics may
 provide aggregate visit estimates. These are traffic metrics, not an exact
 count of people or devices.
+
+Cloudflare also uses the connecting IP address for short-window API abuse
+prevention and rate limiting. Rate-limit keys are not added to Hype product
+analytics, used for advertising, or used to track activity outside the service.
 
 For product reliability and aggregate feature usage, the Worker writes one
 Analytics Engine data point for each existing functional API request. It may

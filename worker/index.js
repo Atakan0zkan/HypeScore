@@ -18,6 +18,8 @@ const STANDINGS_CACHE_TTL_SECONDS = 1800;
 const MATCH_DETAIL_CACHE_TTL_SECONDS = 60;
 const TOURNAMENT_BRACKET_CACHE_TTL_SECONDS = 900;
 const UPSTREAM_FETCH_TIMEOUT_MS = 8000;
+const MAX_UPSTREAM_BODY_BYTES = 8 * 1024 * 1024;
+const MAX_API_URL_LENGTH = 2048;
 const MONITOR_USER_AGENT = "HypeScore-HealthMonitor/1.0";
 const UPCOMING_MATCH_WINDOW_MS = 24 * 60 * 60 * 1000;
 const MAX_EVENT_ID_LENGTH = 20;
@@ -191,6 +193,8 @@ const securityHeaders = {
   "Referrer-Policy": "no-referrer",
   "X-Content-Type-Options": "nosniff",
   "X-Robots-Tag": "noindex",
+  "X-Frame-Options": "DENY",
+  "Content-Security-Policy": "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
 };
 
 export default {
@@ -204,9 +208,13 @@ export default {
     try {
       response = await handleRequest(request, env);
       return response;
-    } catch (error) {
-      recordUsageAnalytics(env, request, null, startedAt, error);
-      throw error;
+    } catch (_error) {
+      // Keep unexpected failures observable as HTTP 500 without exposing
+      // cache internals, provider diagnostics, credentials, or stack traces.
+      console.error("Worker request failed unexpectedly");
+      response = jsonResponse({ error: "Request could not be completed" },
+        { status: 500, cache: "BYPASS", source: "none", request });
+      return response;
     } finally {
       if (response) {
         recordUsageAnalytics(env, request, response, startedAt);
@@ -237,6 +245,9 @@ async function runScheduledHealthCheck(env) {
 }
 
 async function handleRequest(request, env) {
+  if (request.url.length > MAX_API_URL_LENGTH) {
+    return jsonResponse({ error: "Request URL is too long" }, { status: 414, request });
+  }
   const url = new URL(request.url);
 
   const originPolicy = getRequestOriginPolicy(request);
@@ -256,6 +267,19 @@ async function handleRequest(request, env) {
       status: 204,
       headers: responseHeaders({ request, cacheControl: "no-store" }),
     });
+  }
+
+  const parameters = new Set();
+  for (const [name] of url.searchParams) {
+    if (parameters.has(name)) {
+      return jsonResponse({ error: "Duplicate request parameter" }, { status: 400, request });
+    }
+    parameters.add(name);
+  }
+
+  if (request.method === "GET") {
+    const limited = await applyApiRateLimit(request, env);
+    if (limited) return limited;
   }
 
   if (url.pathname === "/live-matches") {
@@ -278,6 +302,26 @@ async function handleRequest(request, env) {
     { error: "Not found" },
     { status: 404, cache: "BYPASS", source: "none", request },
   );
+}
+
+async function applyApiRateLimit(request, env) {
+  // CF-Connecting-IP is supplied by Cloudflare. Never use a caller-selected
+  // client/version/monitor label as authentication or as a rate-limit bypass.
+  // Cron calls have no connecting IP; no shared "anonymous" bucket is created.
+  const ip = request.headers.get("CF-Connecting-IP");
+  if (!ip || ip.length > 64 || typeof env?.API_RATE_LIMITER?.limit !== "function") return null;
+  try {
+    const result = await env.API_RATE_LIMITER.limit({ key: `hype-api-v1:${ip}` });
+    if (result?.success === false) {
+      return jsonResponse({ error: "Too many requests. Please try again shortly." },
+        { status: 429, retryAfter: 60, request });
+    }
+  } catch (_error) {
+    // This protects a public, read-only service, not access to private data.
+    // A limiter outage must not become an outage for every legitimate user.
+    console.warn("API rate limiter unavailable; continuing with existing request guards");
+  }
+  return null;
 }
 
 async function handleLiveMatchesRequest(request, env) {
@@ -307,7 +351,7 @@ async function handleLiveMatchesRequest(request, env) {
       if (snapshot) return liveSnapshotResponse(snapshot, request, true);
     }
     return jsonResponse(
-      { error: "Live match data could not be fetched", details: message },
+      { error: "Live match data could not be fetched" },
       { status: 502, cache: "BYPASS", source: "none", request },
     );
   }
@@ -474,7 +518,7 @@ async function handleLeagueStandingsRequest(request, url) {
     const message = getErrorMessage(error);
     console.warn(`League standings failed: ${message}`);
     return jsonResponse(
-      { error: "League standings could not be fetched", details: message },
+      { error: "League standings could not be fetched" },
       { status: 502, cache: "BYPASS", source: "none", request },
     );
   }
@@ -772,6 +816,7 @@ function normalizeEspnMatchPayloads(payloads) {
 }
 
 async function fetchJson(url, init = {}) {
+  url = validateUpstreamUrl(url);
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), UPSTREAM_FETCH_TIMEOUT_MS);
   const externalSignal = init.signal;
@@ -792,6 +837,9 @@ async function fetchJson(url, init = {}) {
       try {
         const response = await fetch(urls[index], {
           ...init,
+          // Workers forwards custom headers across redirects in follow mode.
+          // In particular, never send a provider API key to a redirect target.
+          redirect: "manual",
           signal: controller.signal,
           headers: {
             ...DEFAULT_FETCH_HEADERS,
@@ -808,13 +856,13 @@ async function fetchJson(url, init = {}) {
 
         /* SEC-03: validate Content-Type before parsing */
         const contentType = response.headers.get("content-type") || "";
-        if (!contentType.includes("json")) {
+        if (!/^application\/(?:[a-z0-9!#$&^_.+-]+\+)?json(?:\s*;|$)/i.test(contentType)) {
           await response.body?.cancel();
-          throw new Error(`${urls[index]} returned unexpected Content-Type: ${contentType}`);
+          throw new Error("Upstream returned an unexpected Content-Type");
         }
 
         // Both ESPN hosts share one deadline, including response body consumption.
-        return await response.json();
+        return await readBoundedUpstreamJson(response, controller.signal);
       } catch (error) {
         // Do not turn missing seasons, authentication failures or rate limits
         // into extra requests. In particular, World Cup 2030's 400/404 stays empty.
@@ -829,6 +877,60 @@ async function fetchJson(url, init = {}) {
   } finally {
     clearTimeout(timeoutId);
     externalSignal?.removeEventListener("abort", abortFromExternal);
+  }
+}
+
+function validateUpstreamUrl(value) {
+  const text = String(value);
+  if (text.length > MAX_API_URL_LENGTH) throw new Error("Unsupported upstream destination");
+  const url = new URL(text);
+  const espn = (url.origin === "https://site.api.espn.com" || url.origin === "https://site.web.api.espn.com") &&
+    (url.pathname.startsWith("/apis/site/v2/sports/soccer/") || url.pathname.startsWith("/apis/v2/sports/soccer/"));
+  if (url.username || url.password || url.hash || (!espn && url.href !== THESPORTSDB_LIVE_SCORE_URL)) {
+    throw new Error("Unsupported upstream destination");
+  }
+  return url.href;
+}
+
+async function readBoundedUpstreamJson(response, signal) {
+  const oversized = () => Object.assign(new Error("Upstream response exceeds size limit"), { status: 413 });
+  const declaredLength = Number(response.headers.get("content-length"));
+  if (Number.isFinite(declaredLength) && declaredLength > MAX_UPSTREAM_BODY_BYTES) {
+    void response.body?.cancel().catch(() => {});
+    throw oversized();
+  }
+  // A real response without a body is empty. This also preserves lightweight
+  // test adapters whose json() method models a pending, abort-aware body.
+  if (!response.body) return response.json();
+  const reader = response.body.getReader();
+  const chunks = [];
+  let bytes = 0;
+  let rejectAborted;
+  const aborted = new Promise((_resolve, reject) => { rejectAborted = reject; });
+  const onAbort = () => {
+    void reader.cancel().catch(() => {});
+    rejectAborted(Object.assign(new Error("Upstream body read aborted"), { name: "AbortError" }));
+  };
+  signal.addEventListener("abort", onAbort, { once: true });
+  try {
+    if (signal.aborted) onAbort();
+    while (true) {
+      const { done, value } = await Promise.race([reader.read(), aborted]);
+      if (done) break;
+      bytes += value.byteLength;
+      if (bytes > MAX_UPSTREAM_BODY_BYTES) {
+        void reader.cancel().catch(() => {});
+        throw oversized();
+      }
+      chunks.push(value);
+    }
+    const body = new Uint8Array(bytes);
+    let offset = 0;
+    for (const chunk of chunks) { body.set(chunk, offset); offset += chunk.byteLength; }
+    return await new Response(body).json();
+  } finally {
+    signal.removeEventListener("abort", onAbort);
+    reader.releaseLock();
   }
 }
 
@@ -2246,7 +2348,7 @@ function safeHttpsUrl(value, allowedHostSuffixes = null) {
 
   try {
     const url = new URL(String(value));
-    if (url.protocol !== "https:") {
+    if (url.protocol !== "https:" || url.username || url.password || url.port) {
       return null;
     }
 
@@ -2313,15 +2415,7 @@ function isAllowedCorsOrigin(origin) {
 }
 
 function isChromeExtensionOrigin(origin) {
-  try {
-    const url = new URL(origin);
-    return (
-      url.protocol === "chrome-extension:" &&
-      /^[a-p]{32}$/.test(url.hostname)
-    );
-  } catch {
-    return false;
-  }
+  return /^chrome-extension:\/\/[a-p]{32}$/.test(origin);
 }
 
 function isAllowedHostname(hostname, allowedHostSuffixes) {
@@ -2353,7 +2447,8 @@ function responseHeaders(options = {}) {
     "Cache-Control": options.cacheControl || "no-store",
     "X-Cache": options.cache || "BYPASS",
     "X-Data-Source": options.source || "none",
-    "X-Worker-Revision": "v15-20260826",
+    "X-Worker-Revision": "v16-20261027-security",
+    ...(options.retryAfter ? { "Retry-After": String(options.retryAfter) } : {}),
   };
 }
 

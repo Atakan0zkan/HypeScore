@@ -9,6 +9,13 @@
   "triggers": {
     "crons": ["*/5 * * * *"]
   },
+  "ratelimits": [
+    {
+      "name": "API_RATE_LIMITER",
+      "namespace_id": "483910627",
+      "simple": { "limit": 240, "period": 60 }
+    }
+  ],
   "analytics_engine_datasets": [
     {
       "binding": "USAGE_ANALYTICS",

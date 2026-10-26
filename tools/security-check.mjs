@@ -7,7 +7,8 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const SECRET_PATTERNS = [
   ["Cloudflare token", /\bcfat_[A-Za-z0-9_-]{32,}\b/g],
-  ["GitHub token", /\b(?:gh[pors]_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{30,})\b/g],
+  ["GitHub token", /\b(?:gh[pousr]_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{30,})\b/g],
+  ["hardcoded service credential", /\b(?:CLOUDFLARE_API_TOKEN|THESPORTSDB_API_KEY|OPENCODE_API_KEY)["']?\s*[:=]\s*["'][A-Za-z0-9_-]{24,}["']/g],
   ["npm token", /\bnpm_[A-Za-z0-9]{30,}\b/g],
   ["provider key", /\bsk-(?:proj-|ant-)?[A-Za-z0-9_-]{32,}\b/g],
   ["private key", /-----BEGIN (?:[A-Z0-9 ]+ )?PRIVATE KEY-----/g],
@@ -53,7 +54,7 @@ export function runSecurityChecks({ root = ROOT, history = false } = {}) {
   let historyCommits = 0;
   if (history) {
     const commits = git(["rev-list", "--all"]).trim().split(/\r?\n/).filter(Boolean);
-    const expression = "cfat_[A-Za-z0-9_-]{32,}|gh[pors]_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{30,}|npm_[A-Za-z0-9]{30,}|sk-(proj-|ant-)?[A-Za-z0-9_-]{32,}|-----BEGIN ([A-Z0-9 ]+ )?PRIVATE KEY-----";
+    const expression = "cfat_[A-Za-z0-9_-]{32,}|gh[pousr]_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{30,}|npm_[A-Za-z0-9]{30,}|sk-(proj-|ant-)?[A-Za-z0-9_-]{32,}|-----BEGIN ([A-Z0-9 ]+ )?PRIVATE KEY-----|(CLOUDFLARE_API_TOKEN|THESPORTSDB_API_KEY|OPENCODE_API_KEY)[\"']?[[:space:]]*[:=][[:space:]]*[\"'][A-Za-z0-9_-]{24,}[\"']";
     for (let index = 0; index < commits.length; index += 25) {
       const batch = commits.slice(index, index + 25);
       let output = "";

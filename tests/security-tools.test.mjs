@@ -15,6 +15,8 @@ describe("safe deterministic security checks", () => {
     assert.equal(found[0].line, 2);
     assert.ok(!JSON.stringify(found).includes(token));
     assert.equal(findSecrets('const token = process.env.CLOUDFLARE_API_TOKEN;', "file.js").length, 0);
+    assert.equal(findSecrets("ghu_" + "b".repeat(40), "file.js")[0].kind, "GitHub token");
+    assert.equal(findSecrets('"CLOUDFLARE_API_TOKEN": ' + JSON.stringify("z".repeat(40)), "file.json")[0].kind, "hardcoded service credential");
   });
   it("prevents private memory, local env and release output from becoming tracked", () => {
     for (const file of [".ecc/memory/project/notes/x.md", ".codex/config.toml", ".agents/skills/x/SKILL.md", "memory-bank/active.md", ".dev.vars", ".env.local", "dist/release.zip"]) {

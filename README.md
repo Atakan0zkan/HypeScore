@@ -102,12 +102,19 @@ Run the local checks:
 
 ```powershell
 npm test
+npm run security:check
+npm run verify
 npm run analytics:test
 npm run smoke
 npm run monitor
 ```
 
 - `npm test` runs popup, Worker, and dashboard regression suites.
+- `npm run security:check` checks current source for known credential patterns,
+  accidentally tracked private files, and mutable remote workflow actions.
+- `npm run verify -- --release --live` adds source-coverage measurement,
+  browser E2E, historical secret scanning, and production smoke checks.
+  See [the release checklist](docs/RELEASE-CHECKLIST.md) for human review gates.
 - `npm audit --audit-level=moderate` checks development dependencies too; this
   remains a blocking CI check. A version-scoped npm override replaces vulnerable
   Undici 7.x pins with patched 7.x releases until the parent tools update them.
@@ -123,6 +130,9 @@ Dependabot checks npm packages at 06:30 and GitHub Actions at 06:45 every day,
 then opens update pull requests. Compatible minor/patch updates are grouped;
 major changes stay separate. Pull requests run offline/browser tests and the
 dependency audit; merging and production deployment remain owner-approved.
+Daily runs also validate the Worker bundle and retain browser failure artifacts
+for seven days. A deterministic reporter maintains one bot-owned validation
+issue; it does not send logs to an AI provider or require an extra API key.
 
 Production availability is checked separately every five minutes. Cloudflare's
 cron exercises the data/cache/upstream-failover path; an independent GitHub

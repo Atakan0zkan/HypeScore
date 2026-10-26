@@ -134,6 +134,25 @@ test.afterAll(async () => {
   fs.rmSync(path.dirname(extDir), { recursive: true, force: true });
 });
 
+test.beforeEach(async () => {
+  await context.tracing.start({ screenshots: true, snapshots: true, sources: false });
+});
+
+test.afterEach(async ({}, testInfo) => {
+  if (testInfo.status !== testInfo.expectedStatus) {
+    const screenshot = testInfo.outputPath("failure.png");
+    if (page && !page.isClosed()) {
+      await page.screenshot({ path: screenshot, fullPage: true });
+      await testInfo.attach("failure", { path: screenshot, contentType: "image/png" });
+    }
+    const trace = testInfo.outputPath("trace.zip");
+    await context.tracing.stop({ path: trace });
+    await testInfo.attach("trace", { path: trace, contentType: "application/zip" });
+  } else {
+    await context.tracing.stop();
+  }
+});
+
 test("renders league cards from the API", async () => {
   await expect(page.locator(".league-pick-card")).toHaveCount(3);
   await expect(page.locator(".league-pick-name", { hasText: "Premier League" })).toBeVisible();
@@ -631,6 +650,33 @@ test("all 55 locale packs fit Small and preserve translated settings, standings 
     }
   } finally {
     await localePage.close();
+  }
+});
+
+test("provider text stays plain text and unsafe external URLs never become clickable", async () => {
+  const safetyPage = await context.newPage();
+  const unsafeName = '<img data-hype-injected src=x onerror="window.hypeInjected=true"> FC';
+  const leagues = structuredClone(LEAGUES);
+  leagues[0].matches[0].homeTeam = unsafeName;
+  await safetyPage.route("**://api.atakanozkan.com/**", route => route.fulfill({
+    status: 200, contentType: "application/json",
+    body: JSON.stringify({ leagues, matches: leagues.flatMap(league => league.matches) }),
+  }));
+  try {
+    await safetyPage.goto(POPUP_URL, { waitUntil: "domcontentloaded" });
+    await safetyPage.locator(".league-pick-card", { hasText: "Premier League" }).waitFor();
+    await safetyPage.locator(".league-pick-card", { hasText: "Premier League" }).click();
+    await expect(safetyPage.locator(".match-card").first()).toContainText(unsafeName);
+    await expect(safetyPage.locator("[data-hype-injected]")).toHaveCount(0);
+    const safety = await safetyPage.evaluate(() => ({
+      injected: window.hypeInjected === true,
+      links: ["javascript:alert(1)", "https://user:password@www.espn.com/story", "https://www.espn.com:444/story"]
+        .map(url => createExternalLink("Unsafe fixture", url).tagName),
+      valid: createExternalLink("Safe fixture", "https://www.espn.com/story").tagName,
+    }));
+    expect(safety).toEqual({ injected: false, links: ["SPAN", "SPAN", "SPAN"], valid: "A" });
+  } finally {
+    await safetyPage.close();
   }
 });
 

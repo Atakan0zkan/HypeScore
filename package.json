@@ -6,8 +6,11 @@
   "description": "Hype - Live Football Scores Chrome Extension & Cloudflare Worker",
   "license": "SEE LICENSE IN LICENSE",
   "scripts": {
-    "test": "node --test tests/popup-guard.test.mjs tests/worker-guard.test.mjs tests/worker-http.test.mjs tests/static-guard.test.mjs tests/popup-dom.test.mjs tests/popup-settings.test.mjs tests/popup-timers.test.mjs tests/tournament-season.test.mjs tests/monitoring.test.mjs tests/stale-cache.test.mjs tests/i18n.test.mjs && node tools/worker-regression-test.mjs && node tools/hardening-test.mjs && node tools/analytics-dashboard-test.mjs",
-    "test:fast": "node --test --test-reporter=dot tests/popup-guard.test.mjs tests/worker-guard.test.mjs tests/worker-http.test.mjs tests/static-guard.test.mjs tests/popup-dom.test.mjs tests/popup-settings.test.mjs tests/popup-timers.test.mjs tests/tournament-season.test.mjs tests/monitoring.test.mjs tests/stale-cache.test.mjs tests/i18n.test.mjs",
+    "test": "node --test tests/*.test.mjs && node tools/worker-regression-test.mjs && node tools/hardening-test.mjs && node tools/analytics-dashboard-test.mjs",
+    "test:fast": "node --test --test-reporter=dot tests/*.test.mjs",
+    "test:coverage": "node --test --experimental-test-coverage --test-coverage-include=worker/** --test-coverage-include=extension/popup.js --test-coverage-include=tools/security-check.mjs --test-coverage-include=tools/report-test-failure.mjs tests/*.test.mjs",
+    "security:check": "node tools/security-check.mjs",
+    "verify": "node tools/verify.mjs",
     "test:i18n": "node tools/audit-i18n.js && node --test tests/i18n.test.mjs",
     "test:e2e": "playwright test",
     "smoke": "node tools/smoke-test.js",

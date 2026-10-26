@@ -6,6 +6,7 @@ Thumbs.db
 .idea/
 .agents/
 .codex/
+.ecc/
 .chrome-store-capture-profile/
 
 # Cloudflare/Wrangler local state and secrets
@@ -26,6 +27,7 @@ pnpm-debug.log*
 *.tmp
 *.bak
 coverage/
+coverage-summary.txt
 dist/
 *.zip
 test-results/

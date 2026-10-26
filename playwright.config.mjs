@@ -10,5 +10,6 @@ export default defineConfig({
   fullyParallel: false,
   workers: 1,
   retries: 0,
-  reporter: "line",
+  forbidOnly: Boolean(process.env.CI),
+  reporter: [["line"], ["html", { open: "never" }]],
 });

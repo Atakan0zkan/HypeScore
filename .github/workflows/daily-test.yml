@@ -1,8 +1,5 @@
-# Daily offline test run. No AI tokens spent unless tests fail.
-# - offline-tests: dumb `npm test` on a timer ($0 on public repo).
-# - ai-triage: wakes ONLY when offline-tests fails, reads the failed log
-#   with a free Zen model and opens a triage issue. Needs repo secret
-#   OPENCODE_API_KEY (Zen key) — see README note below.
+# Daily deterministic validation. No AI provider or extra API key is required.
+# Failure reporting sends job states and a run link, never raw logs.
 # - live-smoke: blocking production check with deterministic incident handling.
 name: Daily tests
 
@@ -26,44 +23,53 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v7
-      - uses: actions/setup-node@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
         with:
           node-version: 26
       # Required: tests/ imports devDeps (happy-dom). Previously zero-dep,
       # so this step was unnecessary — it is mandatory now.
       - run: npm ci
       - run: npm test
+      - run: npm run security:check
+      - name: Measure source coverage
+        run: npm run test:coverage > coverage-summary.txt
+      - name: Validate Worker deployment bundle
+        run: npx --no-install wrangler deploy --dry-run --outdir dist/worker-dry-run
       - run: npm audit --audit-level=moderate
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        if: ${{ always() }}
+        with:
+          name: offline-validation
+          path: coverage-summary.txt
+          retention-days: 7
 
-  ai-triage:
-    needs: offline-tests
-    if: ${{ failure() && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') }}
+  failure-report:
+    needs: [offline-tests, e2e]
+    if: ${{ always() && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') && github.repository == 'Atakan0zkan/HypeScore' && github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
+    timeout-minutes: 3
+    concurrency:
+      group: daily-test-incident
+      cancel-in-progress: false
     permissions:
       actions: read
       contents: read
       issues: write
     steps:
-      - uses: actions/checkout@v7
-      - uses: anomalyco/opencode/github@latest
-        env:
-          OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
-          # Primary: free (limited time). If Zen retires it, swap to backup:
-          # opencode/muse-spark-1.2-contributor-free (free, 1M ctx, same family)
-          model: opencode/muse-spark-1.3-contributor-free
-          use_github_token: true
-          prompt: |
-            The daily `npm test` run failed (run id ${{ github.run_id }}).
-            1. Fetch ONLY the failed log lines: `gh run view ${{ github.run_id }} --log-failed | head -100`
-            2. Identify the failing test file and the exact assertion (tests/ or tools/).
-            3. Open ONE GitHub issue titled `[daily-test] <failing test name>` with:
-               - failing test file + error excerpt (max 20 lines)
-               - suspected source file + line (worker/index.js or extension/popup.js)
-               - one minimal suggested fix, no code changes, no PR
-               Write the issue body in English. Do not push commits.
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: 26
+      - name: Maintain one deterministic validation incident
+        run: node tools/report-test-failure.mjs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HYPE_TEST_RESULTS: '{"offline":"${{ needs.offline-tests.result }}","e2e":"${{ needs.e2e.result }}"}'
 
   live-smoke:
     if: ${{ github.event_name != 'pull_request' && github.repository == 'Atakan0zkan/HypeScore' && github.ref == 'refs/heads/main' }}
@@ -77,10 +83,10 @@ jobs:
       group: production-availability
       cancel-in-progress: false
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           persist-credentials: false
-      - uses: actions/setup-node@v7
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
         with:
           node-version: 26
       - name: Wait for this commit's Cloudflare deployment
@@ -98,10 +104,20 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v7
-      - uses: actions/setup-node@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
         with:
           node-version: 26
       - run: npm ci
       - run: npx playwright install --with-deps chromium
       - run: xvfb-run -a npx playwright test
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        if: ${{ always() }}
+        with:
+          name: browser-validation
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 7

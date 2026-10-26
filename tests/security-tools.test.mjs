@@ -1,6 +1,10 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
-import { findSecrets, isPrivateProjectPath, findMutableActions } from "../tools/security-check.mjs";
+import { mkdtempSync, writeFileSync, rmSync, realpathSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join, dirname, basename } from "node:path";
+import { execFileSync } from "node:child_process";
+import { findSecrets, isPrivateProjectPath, findMutableActions, runSecurityChecks } from "../tools/security-check.mjs";
 import { reportTestResults } from "../tools/report-test-failure.mjs";
 
 describe("safe deterministic security checks", () => {
@@ -22,6 +26,34 @@ describe("safe deterministic security checks", () => {
     assert.equal(findMutableActions('- uses: actions/checkout@v7', 'a.yml').length, 1);
     assert.equal(findMutableActions('- uses: actions/checkout@' + 'a'.repeat(40), 'a.yml').length, 0);
     assert.equal(findMutableActions('# - uses: arbitrary/action@main', 'a.yml').length, 0);
+  });
+  it("scans a real Git worktree and history without disclosing a detected value", () => {
+    const root = mkdtempSync(join(tmpdir(), "hype-security-check-"));
+    const git = args => execFileSync("git", args, { cwd: root, stdio: "pipe", windowsHide: true });
+    try {
+      git(["init", "--quiet"]);
+      git(["config", "user.name", "Fixture"]);
+      git(["config", "user.email", "fixture@example.invalid"]);
+      const fake = "cfat_" + "a".repeat(48);
+      writeFileSync(join(root, "example.txt"), fake);
+      git(["add", "example.txt"]);
+      git(["commit", "--quiet", "-m", "Fixture"]);
+      const current = runSecurityChecks({ root });
+      assert.equal(current.ok, false);
+      assert.equal(current.findings[0].kind, "Cloudflare token");
+      assert.ok(!JSON.stringify(current).includes(fake));
+      writeFileSync(join(root, "example.txt"), "ordinary text");
+      assert.equal(runSecurityChecks({ root }).ok, true);
+      const historical = runSecurityChecks({ root, history: true });
+      assert.equal(historical.ok, false);
+      assert.equal(historical.historyCommits, 1);
+      assert.equal(historical.findings[0].kind, "suspected secret in historical snapshot");
+      assert.ok(!JSON.stringify(historical).includes(fake));
+    } finally {
+      assert.equal(dirname(realpathSync(root)), realpathSync(tmpdir()));
+      assert.ok(basename(root).startsWith("hype-security-check-"));
+      rmSync(root, { recursive: true, force: true });
+    }
   });
 });
 

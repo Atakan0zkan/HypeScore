@@ -1,5 +1,6 @@
 import { readFile } from "node:fs/promises";
 import vm from "node:vm";
+import { fileURLToPath } from "node:url";
 
 const ROOT = new URL("../", import.meta.url);
 
@@ -27,7 +28,7 @@ export async function loadWorkerContext(overrides = {}) {
     ...overrides.globals,
   });
   const runnable = source.replace("export default", "const __workerDefault =");
-vm.runInContext(`${runnable}\nglobalThis.__W = { normalizeEspnMatches: typeof normalizeEspnMatches !== "undefined" ? normalizeEspnMatches : undefined, normalizeTimeline: typeof normalizeTimeline !== "undefined" ? normalizeTimeline : undefined, normalizeBroadcasts: typeof normalizeBroadcasts !== "undefined" ? normalizeBroadcasts : undefined, groupMatchesByLeague: typeof groupMatchesByLeague !== "undefined" ? groupMatchesByLeague : undefined, handleRequest: typeof handleRequest !== "undefined" ? handleRequest : undefined, isSafeEventId: typeof isSafeEventId !== "undefined" ? isSafeEventId : undefined, isChromeExtensionOrigin: typeof isChromeExtensionOrigin !== "undefined" ? isChromeExtensionOrigin : undefined, getRequestOriginPolicy: typeof getRequestOriginPolicy !== "undefined" ? getRequestOriginPolicy : undefined };`, ctx);
+vm.runInContext(`${runnable}\nglobalThis.__W = { normalizeEspnMatches: typeof normalizeEspnMatches !== "undefined" ? normalizeEspnMatches : undefined, normalizeTimeline: typeof normalizeTimeline !== "undefined" ? normalizeTimeline : undefined, normalizeBroadcasts: typeof normalizeBroadcasts !== "undefined" ? normalizeBroadcasts : undefined, groupMatchesByLeague: typeof groupMatchesByLeague !== "undefined" ? groupMatchesByLeague : undefined, handleRequest: typeof handleRequest !== "undefined" ? handleRequest : undefined, isSafeEventId: typeof isSafeEventId !== "undefined" ? isSafeEventId : undefined, isChromeExtensionOrigin: typeof isChromeExtensionOrigin !== "undefined" ? isChromeExtensionOrigin : undefined, getRequestOriginPolicy: typeof getRequestOriginPolicy !== "undefined" ? getRequestOriginPolicy : undefined };`, ctx, { filename: fileURLToPath(new URL("../worker/index.js", import.meta.url)) });
   return { ctx, run: (expr) => vm.runInContext(expr, ctx), source };
 }
 
@@ -88,7 +89,7 @@ export async function loadPopupContext() {
       removeItem: (k) => storage.delete(k),
     },
   });
-  vm.runInContext(source, ctx);
+  vm.runInContext(source, ctx, { filename: fileURLToPath(new URL("../extension/popup.js", import.meta.url)) });
   return { ctx, run: (expr) => vm.runInContext(expr, ctx), storage, source };
 }
 

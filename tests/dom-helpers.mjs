@@ -1,6 +1,5 @@
 import { Window } from "happy-dom";
 import { readFile } from "node:fs/promises";
-import { fileURLToPath } from "node:url";
 
 // Full popup runtime in a real DOM (popup.html + popup.js, no mocks
 // except fetch). Each call returns an isolated window.
@@ -36,7 +35,7 @@ export async function loadPopupDOM({ fetchImpl = null, storage = {} } = {}) {
     get standingsCache(){ return leagueStandingsCache; },
     get detailCache(){ return matchDetailCache; },
     renderLast(){ renderPayload(lastPayload); },
-  };\n//# sourceURL=${fileURLToPath(new URL("../extension/popup.js", import.meta.url)).replaceAll("\\", "/")}`);
+  };\n//# sourceURL=${new URL("../extension/popup.js", import.meta.url).href}`);
   // happy-dom does not fire DOMContentLoaded for document.write() before the
   // script registers its listener, so boot the popup explicitly. The handler
   // only (re)assigns element refs and listeners, so a later native fire is

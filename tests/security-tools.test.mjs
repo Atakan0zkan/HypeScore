@@ -101,4 +101,28 @@ describe("daily failure reporting without AI or raw logs", () => {
     assert.equal((await reportTestResults({ ...options, ...api, results: { offline: "cancelled", e2e: "skipped" } })).state, "deferred");
     assert.equal(api.calls.length, 0);
   });
+  it("updates one owned incident, suppresses the same run and omits tokens from transport errors", async () => {
+    const issue = { number: 7, title: "[daily-test] Automated validation failed", body: marker, user: { login: "github-actions[bot]" } };
+    const changed = transport([issue]);
+    assert.equal((await reportTestResults({ ...options, ...changed, results: { offline: "success", e2e: "failure" } })).state, "updated");
+    assert.equal(changed.calls[1].init.method, "PATCH");
+    const unchanged = transport([{ ...issue, body: marker + " https://github.com/owner/repo/actions/runs/12345" }]);
+    assert.equal((await reportTestResults({ ...options, ...unchanged, results: { offline: "failure", e2e: "failure" } })).state, "unchanged");
+    assert.equal(unchanged.calls.length, 1);
+    await assert.rejects(reportTestResults({ ...options, results: { offline: "failure", e2e: "success" },
+      fetchImpl: async () => new Response("untrusted-body", { status: 403 }),
+    }), error => error.message.includes("HTTP 403") && !error.message.includes(options.token));
+    await assert.rejects(reportTestResults({ ...options, ...transport(), results: { offline: "invented", e2e: "success" } }));
+  });
+  it("refuses duplicate reports when five full inventory pages cannot establish completeness", async () => {
+    let calls = 0;
+    await assert.rejects(reportTestResults({ ...options, results: { offline: "failure", e2e: "success" },
+      fetchImpl: async (_url, init) => {
+        calls++;
+        assert.equal(init.method, "GET");
+        return new Response(JSON.stringify(Array.from({ length: 100 }, (_, index) => ({ number: index + 1, title: "Human issue" }))));
+      },
+    }), /inventory incomplete/);
+    assert.equal(calls, 5);
+  });
 });

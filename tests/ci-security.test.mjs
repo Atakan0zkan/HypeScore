@@ -40,4 +40,12 @@ describe("daily validation and supply-chain guards", () => {
     assert.match(suite, /tracing\.stop/);
     assert.match(suite, /testInfo\.status !== testInfo\.expectedStatus/);
   });
+  it("deploys the tested public API limiter without changing scheduled health checks", async () => {
+    const config = JSON.parse(await read("wrangler.jsonc"));
+    const limiter = config.ratelimits?.find(binding => binding.name === "API_RATE_LIMITER");
+    assert.ok(limiter);
+    assert.match(limiter.namespace_id, /^[1-9][0-9]+$/);
+    assert.deepEqual(limiter.simple, { limit: 240, period: 60 });
+    assert.deepEqual(config.triggers.crons, ["*/5 * * * *"]);
+  });
 });

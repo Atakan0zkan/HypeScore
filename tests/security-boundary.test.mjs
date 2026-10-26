@@ -138,6 +138,21 @@ describe("upstream and rendered-link boundaries", () => {
     }
   });
 
+  it("never accepts a valid JSON prefix when the body is cancelled before EOF", async () => {
+    let cancelled = false;
+    const { run } = await loadWorkerContext({ fetch: async () => new Response(new ReadableStream({
+      start(controller) { controller.enqueue(new TextEncoder().encode("{}")); },
+      cancel() { cancelled = true; },
+    }), { headers: { "Content-Type": "application/json" } }) });
+    run("globalThis.bodyCaller = new AbortController()");
+    const pending = run("fetchJson(ESPN_SCOREBOARD_URL, {signal:bodyCaller.signal})");
+    const rejected = assert.rejects(pending, { name: "AbortError" });
+    await new Promise(setImmediate);
+    run("bodyCaller.abort()");
+    await rejected;
+    assert.equal(cancelled, true);
+  });
+
   it("rejects credential-bearing media and external links in both Worker and popup", async () => {
     const worker = await loadWorkerContext();
     const popup = await loadPopupContext();

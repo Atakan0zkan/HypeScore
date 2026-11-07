@@ -3,10 +3,11 @@ import { readFile } from "node:fs/promises";
 
 // Full popup runtime in a real DOM (popup.html + popup.js, no mocks
 // except fetch). Each call returns an isolated window.
-export async function loadPopupDOM({ fetchImpl = null, storage = {} } = {}) {
+export async function loadPopupDOM({ fetchImpl = null, storage = {}, manifestVersion = null } = {}) {
   const html = await readFile(new URL("../extension/popup.html", import.meta.url), "utf8");
   const js = await readFile(new URL("../extension/popup.js", import.meta.url), "utf8");
   const window = new Window({ url: "chrome-extension://test/popup.html" });
+  if (manifestVersion !== null) window.chrome = { runtime: { getManifest: () => ({ version: manifestVersion }) } };
   for (const [key, value] of Object.entries(storage)) window.localStorage.setItem(key, value);
   if (fetchImpl) window.fetch = fetchImpl;
   window.document.write(html);

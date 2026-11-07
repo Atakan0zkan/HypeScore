@@ -234,6 +234,24 @@
   "timeline": {
     "message": "Ajajoon"
   },
+  "qualifying": {
+    "message": "Valikmängud"
+  },
+  "standingsRelegation": {
+    "message": "Väljalangemine"
+  },
+  "standingsRelegationPlayoff": {
+    "message": "Üleminekumängud"
+  },
+  "standingsElimination": {
+    "message": "Väljalangemistsoon"
+  },
+  "feedbackHint": {
+    "message": "Kas sul on mõni idee või ettepanek või märkasid viga? Kirjuta mulle!"
+  },
+  "extensionVersion": {
+    "message": "Versioon"
+  },
   "lineups": {
     "message": "Koosseisud"
   },

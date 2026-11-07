@@ -5,8 +5,8 @@ import { loadWorkerContext, memoryCache, espnEvent, scoreboardResponse } from ".
 const EXT_ORIGIN = "chrome-extension://cdnpjnmhmagmiefkleefgchgffeaacaa";
 
 describe("ESPN upstream host recovery", () => {
-  const primaryUrl = "https://site.api.espn.com/apis/site/v2/sports/soccer/all/scoreboard";
-  const alternateUrl = "https://site.web.api.espn.com/apis/site/v2/sports/soccer/all/scoreboard";
+  const primaryUrl = "https://site.api.espn.com/apis/site/v2/sports/soccer/all/scoreboard?limit=1000";
+  const alternateUrl = "https://site.web.api.espn.com/apis/site/v2/sports/soccer/all/scoreboard?limit=1000";
 
   it("uses the public API host for the aggregate scoreboard without an extra request on success", async () => {
     const calls = [];

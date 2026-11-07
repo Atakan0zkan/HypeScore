@@ -234,6 +234,24 @@
   "timeline": {
     "message": "Garis masa"
   },
+  "qualifying": {
+    "message": "Kelayakan"
+  },
+  "standingsRelegation": {
+    "message": "Penurunan liga"
+  },
+  "standingsRelegationPlayoff": {
+    "message": "Play-off untuk kekal dalam liga"
+  },
+  "standingsElimination": {
+    "message": "Zon penyingkiran"
+  },
+  "feedbackHint": {
+    "message": "Ada idea, cadangan atau terjumpa masalah? Tulis kepada saya!"
+  },
+  "extensionVersion": {
+    "message": "Versi"
+  },
   "lineups": {
     "message": "Barisan pemain"
   },

@@ -234,6 +234,24 @@
   "timeline": {
     "message": "ಪಂದ್ಯದ ಘಟನಾಕ್ರಮ"
   },
+  "qualifying": {
+    "message": "ಅರ್ಹತಾ ಸುತ್ತು"
+  },
+  "standingsRelegation": {
+    "message": "ಕೆಳ ಹಂತದ ಲೀಗ್‌ಗೆ ಇಳಿಕೆ"
+  },
+  "standingsRelegationPlayoff": {
+    "message": "ಲೀಗ್‌ನಲ್ಲಿ ಉಳಿಯಲು ಪ್ಲೇಆಫ್"
+  },
+  "standingsElimination": {
+    "message": "ಹೊರಬೀಳುವ ಸ್ಥಾನಗಳು"
+  },
+  "feedbackHint": {
+    "message": "ಯಾವುದಾದರೂ ಆಲೋಚನೆ ಅಥವಾ ಸಲಹೆ ಇದೆಯೇ, ಅಥವಾ ದೋಷ ಕಂಡಿದೆಯೇ? ನನಗೆ ಬರೆಯಿರಿ!"
+  },
+  "extensionVersion": {
+    "message": "ಆವೃತ್ತಿ"
+  },
   "lineups": {
     "message": "ಲೈನಪ್"
   },

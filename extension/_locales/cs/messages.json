@@ -234,6 +234,24 @@
   "timeline": {
     "message": "Průběh"
   },
+  "qualifying": {
+    "message": "Kvalifikace"
+  },
+  "standingsRelegation": {
+    "message": "Sestup"
+  },
+  "standingsRelegationPlayoff": {
+    "message": "Baráž o udržení"
+  },
+  "standingsElimination": {
+    "message": "Pásmo vyřazení"
+  },
+  "feedbackHint": {
+    "message": "Máš nápad, návrh nebo jsi narazil na chybu? Napiš mi!"
+  },
+  "extensionVersion": {
+    "message": "Verze"
+  },
   "lineups": {
     "message": "Sestavy"
   },

@@ -1,6 +1,7 @@
 :root {
   --popup-width: 580px;
   --popup-height: 600px;
+  --detail-logo-size: 88px;
   --scroll-safe-bottom: 46px;
   --bg: #0a0a0a;
   --bg-mid: #1a0e0e;
@@ -22,11 +23,13 @@
 :root[data-popup-size="small"] {
   --popup-width: 480px;
   --popup-height: 540px;
+  --detail-logo-size: 76px;
 }
 
 :root[data-popup-size="big"] {
   --popup-width: 720px;
   --popup-height: 600px;
+  --detail-logo-size: 96px;
 }
 
 * {
@@ -279,7 +282,11 @@ html[dir="rtl"] .settings-panel { padding: 0 0 12px 6px; }
 .settings-link:hover { border-color: var(--accent); }
 .settings-status { margin: 12px 0 0; color: #b1f0df; font-size: 12px; line-height: 1.5; overflow-wrap: anywhere; }
 .settings-status--error { color: var(--danger); }
-.settings-toggle:focus-visible, .settings-close:focus-visible, .settings-action:focus-visible, .settings-link:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.settings-contact { margin-top: 14px; }
+.settings-contact .settings-hint { margin-top: 0; }
+.settings-contact-link { display: inline-block; max-width: 100%; padding: 4px 0; color: var(--gold); font-size: 12px; line-height: 1.5; overflow-wrap: anywhere; text-underline-offset: 3px; }
+.settings-version { display: flex; justify-content: space-between; gap: 12px; margin: 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
+.settings-toggle:focus-visible, .settings-close:focus-visible, .settings-action:focus-visible, .settings-link:focus-visible, .settings-contact-link:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
 
 /* ── Shared card style ──────────────────────── */
 
@@ -550,10 +557,7 @@ html[dir="rtl"] .settings-panel { padding: 0 0 12px 6px; }
   width: 100%;
   height: 100%;
   object-fit: contain;
-  filter:
-    drop-shadow(0 0 1px rgba(255, 255, 255, 0.9))
-    drop-shadow(0 0 8px rgba(255, 255, 255, 0.28))
-    drop-shadow(0 3px 7px rgba(0, 0, 0, 0.5));
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.4));
 }
 
 .league-logo--light {
@@ -567,9 +571,7 @@ html[dir="rtl"] .settings-panel { padding: 0 0 12px 6px; }
 }
 
 .league-logo--light .league-logo-image {
-  filter:
-    drop-shadow(0 1px 0 rgba(255, 255, 255, 0.75))
-    drop-shadow(0 3px 6px rgba(0, 0, 0, 0.38));
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.3));
 }
 
 .league-detail-title {
@@ -809,7 +811,7 @@ html[dir="rtl"] .settings-panel { padding: 0 0 12px 6px; }
 
 .match-detail-hero {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 96px minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) 82px minmax(0, 1fr);
   align-items: stretch;
   gap: 10px;
   border-radius: 22px;
@@ -820,7 +822,7 @@ html[dir="rtl"] .settings-panel { padding: 0 0 12px 6px; }
   display: grid;
   align-content: center;
   justify-items: center;
-  gap: 6px;
+  gap: 8px;
   min-width: 0;
   border-radius: 18px;
   padding: 10px;
@@ -829,29 +831,25 @@ html[dir="rtl"] .settings-panel { padding: 0 0 12px 6px; }
 }
 
 .detail-team-logo {
-  width: 48px;
-  height: 48px;
-  border-radius: 14px;
+  width: var(--detail-logo-size);
+  height: var(--detail-logo-size);
+  max-width: 100%;
   object-fit: contain;
-  background: rgba(255, 255, 255, 0.07);
+  object-position: center;
+  filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.4)) drop-shadow(0 2px 3px rgba(0, 0, 0, 0.3));
 }
 
 .detail-team-name {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
   overflow: hidden;
-  max-width: 118px;
+  max-width: 100%;
   color: var(--ink);
   font-family: "Trebuchet MS", Verdana, sans-serif;
   font-size: 12px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.detail-team-score {
-  color: var(--accent-strong);
-  font-family: "Trebuchet MS", Verdana, sans-serif;
-  font-size: 30px;
-  font-weight: 900;
-  line-height: 1;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
 }
 
 .detail-score-block {
@@ -862,6 +860,8 @@ html[dir="rtl"] .settings-panel { padding: 0 0 12px 6px; }
 }
 
 .detail-score {
+  direction: ltr;
+  unicode-bidi: isolate;
   color: #fff;
   font-family: "Trebuchet MS", Verdana, sans-serif;
   font-size: 24px;
@@ -1132,8 +1132,7 @@ html[dir="rtl"] .settings-panel { padding: 0 0 12px 6px; }
   top: 50%; left: 50%; transform: translate(-50%, -50%);
   pointer-events: none;
 }
-.lineup-heading { padding: 12px; }
-.pitch-teams { display: flex; justify-content: space-between; gap: 12px; padding: 0 12px 9px; direction: ltr; font: 700 11px/1.4 "Trebuchet MS", Verdana, sans-serif; }
+.pitch-teams { display: flex; justify-content: space-between; gap: 12px; padding: 12px 12px 9px; direction: ltr; font: 700 11px/1.4 "Trebuchet MS", Verdana, sans-serif; }
 .pitch-teams > span { max-width: 48%; color: #b1f0df; }
 .pitch-teams > span:last-child { color: #ffd1cb; text-align: right; }
 .lineup-subheading { margin: 0; padding: 3px 12px 0; color: var(--muted); font: 800 11px/1.4 "Trebuchet MS", Verdana, sans-serif; letter-spacing: .06em; text-transform: uppercase; }
@@ -1505,6 +1504,69 @@ html[dir="rtl"] .settings-panel { padding: 0 0 12px 6px; }
 
 .standings-table td {
   font-weight: 800;
+}
+
+.standings-position {
+  position: relative;
+}
+
+.standings-position--champions-league { --standings-zone-color: #73a9ff; }
+.standings-position--europa-league { --standings-zone-color: #ffb45e; }
+.standings-position--conference-league { --standings-zone-color: #76dba1; }
+.standings-position--relegation, .standings-position--elimination { --standings-zone-color: #ff6b72; }
+
+.standings-position[class*="standings-position--"]::before {
+  content: "";
+  position: absolute;
+  inset-block: 5px;
+  inset-inline-start: 0;
+  width: 3px;
+  border-radius: 3px;
+  background: var(--standings-zone-color);
+}
+
+.standings-position.standings-position--conditional::before {
+  background: repeating-linear-gradient(to bottom, var(--standings-zone-color) 0 4px, transparent 4px 6px);
+}
+
+.standings-legend {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 160px), 1fr));
+  gap: 8px 12px;
+  margin: 12px 0 0;
+  padding: 0 12px 12px;
+  list-style: none;
+  color: var(--muted);
+  font: 700 10px/1.45 "Trebuchet MS", Verdana, sans-serif;
+}
+
+.standings-legend-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.standings-legend-item > span:last-child {
+  min-width: 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.standings-legend-marker {
+  display: inline-block;
+  flex: 0 0 3px;
+  width: 3px;
+  height: 13px;
+  margin-top: 1px;
+  border-radius: 3px;
+  background: var(--standings-zone-color);
+}
+
+.standings-legend-marker--conditional {
+  background: repeating-linear-gradient(to bottom, var(--standings-zone-color) 0 4px, transparent 4px 6px);
 }
 
 .standings-group-cell {

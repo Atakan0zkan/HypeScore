@@ -234,6 +234,24 @@
   "timeline": {
     "message": "Idővonal"
   },
+  "qualifying": {
+    "message": "Selejtező"
+  },
+  "standingsRelegation": {
+    "message": "Kiesés"
+  },
+  "standingsRelegationPlayoff": {
+    "message": "Osztályozó"
+  },
+  "standingsElimination": {
+    "message": "Kieső helyek"
+  },
+  "feedbackHint": {
+    "message": "Van ötleted, javaslatod, vagy hibát találtál? Írj nekem!"
+  },
+  "extensionVersion": {
+    "message": "Verzió"
+  },
   "lineups": {
     "message": "Felállások"
   },

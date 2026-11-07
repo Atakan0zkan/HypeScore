@@ -234,6 +234,24 @@
   "timeline": {
     "message": "Potek"
   },
+  "qualifying": {
+    "message": "Kvalifikacije"
+  },
+  "standingsRelegation": {
+    "message": "Izpad"
+  },
+  "standingsRelegationPlayoff": {
+    "message": "Dodatne kvalifikacije za obstanek"
+  },
+  "standingsElimination": {
+    "message": "Območje izpada"
+  },
+  "feedbackHint": {
+    "message": "Imaš idejo, predlog ali si opazil napako? Piši mi!"
+  },
+  "extensionVersion": {
+    "message": "Različica"
+  },
   "lineups": {
     "message": "Postave"
   },

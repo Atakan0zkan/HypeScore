@@ -234,6 +234,24 @@
   "timeline": {
     "message": "টাইমলাইন"
   },
+  "qualifying": {
+    "message": "বাছাইপর্ব"
+  },
+  "standingsRelegation": {
+    "message": "অবনমন"
+  },
+  "standingsRelegationPlayoff": {
+    "message": "অবনমন এড়ানোর প্লে-অফ"
+  },
+  "standingsElimination": {
+    "message": "বাদ পড়ার অঞ্চল"
+  },
+  "feedbackHint": {
+    "message": "কোনো ধারণা বা পরামর্শ আছে, কিংবা কোনো ত্রুটি চোখে পড়েছে? আমাকে জানাও!"
+  },
+  "extensionVersion": {
+    "message": "সংস্করণ"
+  },
   "lineups": {
     "message": "লাইনআপ"
   },

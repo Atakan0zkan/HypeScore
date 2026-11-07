@@ -234,6 +234,24 @@
   "timeline": {
     "message": "Tijdlijn"
   },
+  "qualifying": {
+    "message": "Kwalificatie"
+  },
+  "standingsRelegation": {
+    "message": "Degradatie"
+  },
+  "standingsRelegationPlayoff": {
+    "message": "Promotie-/degradatieplay-offs"
+  },
+  "standingsElimination": {
+    "message": "Uitschakelingszone"
+  },
+  "feedbackHint": {
+    "message": "Heb je een idee, een suggestie of een fout ontdekt? Stuur me gerust een bericht!"
+  },
+  "extensionVersion": {
+    "message": "Versie"
+  },
   "lineups": {
     "message": "Opstellingen"
   },

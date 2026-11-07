@@ -234,6 +234,24 @@
   "timeline": {
     "message": "رویدادهای بازی"
   },
+  "qualifying": {
+    "message": "مرحله مقدماتی"
+  },
+  "standingsRelegation": {
+    "message": "سقوط"
+  },
+  "standingsRelegationPlayoff": {
+    "message": "پلی‌آف بقا"
+  },
+  "standingsElimination": {
+    "message": "منطقه حذف"
+  },
+  "feedbackHint": {
+    "message": "ایده یا پیشنهادی داری، یا به مشکلی برخوردی؟ خوشحال می‌شوم برایم بنویسی!"
+  },
+  "extensionVersion": {
+    "message": "نسخه"
+  },
   "lineups": {
     "message": "ترکیب"
   },

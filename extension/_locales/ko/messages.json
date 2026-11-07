@@ -234,6 +234,24 @@
   "timeline": {
     "message": "타임라인"
   },
+  "qualifying": {
+    "message": "예선"
+  },
+  "standingsRelegation": {
+    "message": "강등"
+  },
+  "standingsRelegationPlayoff": {
+    "message": "승강 플레이오프"
+  },
+  "standingsElimination": {
+    "message": "탈락권"
+  },
+  "feedbackHint": {
+    "message": "아이디어나 제안이 있거나 오류를 발견하셨나요? 편하게 메일을 보내 주세요!"
+  },
+  "extensionVersion": {
+    "message": "버전"
+  },
   "lineups": {
     "message": "라인업"
   },

@@ -11,6 +11,33 @@ beforeEach(async () => {
 afterEach(async () => { await app.close(); });
 
 describe("popup settings and local backups", () => {
+  it("offers a fixed public feedback mailbox without sending additional requests", async () => {
+    await new Promise(resolve => setTimeout(resolve, 0));
+    let requests = 0;
+    app.window.fetch = async () => { requests++; return workerJson(domPayload()); };
+    app.document.getElementById("settingsToggle").click();
+    const email = app.document.getElementById("feedbackEmail");
+    assert.equal(email?.getAttribute("href"), "mailto:atakanozkanapps@gmail.com");
+    assert.equal(email.textContent, "atakanozkanapps@gmail.com");
+    assert.equal(email.getAttribute("dir"), "ltr");
+    assert.match(app.document.getElementById("settingsFeedbackHint").textContent, /idea.*suggestion.*bug/i);
+    assert.equal(requests, 0);
+  });
+
+  it("shows the installed manifest version, not a hardcoded release number, even when switched off", async () => {
+    for (const version of ["1.6.3", "2.4.9", "3.0.1.12"]) {
+      await app.close();
+      app = await loadPopupDOM({ manifestVersion: version, storage: { hype_enabled: "0" } });
+      assert.equal(app.document.getElementById("settingsVersion").textContent, version);
+      assert.equal(app.document.getElementById("settingsVersionRow").hidden, false);
+      assert.equal(app.document.getElementById("settingsVersionLabel").textContent, "Version");
+    }
+  });
+
+  it("does not invent a version outside an extension runtime", () => {
+    assert.equal(app.document.getElementById("settingsVersionRow")?.hidden, true);
+  });
+
   it("removes the subtitle and puts settings between ENG and power", () => {
     assert.equal(app.document.getElementById("subtitle"), null);
     assert.deepEqual([...app.document.querySelectorAll(".hero-actions > button")].map(b => b.id), ["englishToggle", "settingsToggle", "powerToggle"]);

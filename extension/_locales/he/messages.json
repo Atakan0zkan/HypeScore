@@ -234,6 +234,24 @@
   "timeline": {
     "message": "ציר זמן"
   },
+  "qualifying": {
+    "message": "מוקדמות"
+  },
+  "standingsRelegation": {
+    "message": "ירידת ליגה"
+  },
+  "standingsRelegationPlayoff": {
+    "message": "פלייאוף הישרדות"
+  },
+  "standingsElimination": {
+    "message": "אזור ההדחה"
+  },
+  "feedbackHint": {
+    "message": "יש לך רעיון, הצעה או באג לדווח עליו? אשמח לשמוע ממך!"
+  },
+  "extensionVersion": {
+    "message": "גרסה"
+  },
   "lineups": {
     "message": "הרכבים"
   },

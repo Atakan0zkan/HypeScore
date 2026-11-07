@@ -234,6 +234,24 @@
   "timeline": {
     "message": "Tidslinje"
   },
+  "qualifying": {
+    "message": "Kvalifisering"
+  },
+  "standingsRelegation": {
+    "message": "Nedrykk"
+  },
+  "standingsRelegationPlayoff": {
+    "message": "Nedrykkskvalifisering"
+  },
+  "standingsElimination": {
+    "message": "Utslagsplasser"
+  },
+  "feedbackHint": {
+    "message": "Har du en idé, et forslag eller funnet en feil? Skriv til meg!"
+  },
+  "extensionVersion": {
+    "message": "Versjon"
+  },
   "lineups": {
     "message": "Lagoppstillinger"
   },

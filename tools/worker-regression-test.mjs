@@ -28,9 +28,10 @@ const TEST_ENV = {
 globalThis.caches = { default: cache };
 globalThis.fetch = async (input) => {
   const url = String(input);
+  const pathname = new URL(url).pathname;
   upstreamCalls.push(url);
 
-  if (url.endsWith("/all/scoreboard") || url.endsWith("/eng.1/scoreboard")) {
+  if (pathname.endsWith("/all/scoreboard") || pathname.endsWith("/eng.1/scoreboard")) {
     await delay(25);
     return jsonResponse(createScoreboardPayload());
   }
@@ -40,15 +41,15 @@ globalThis.fetch = async (input) => {
     return jsonResponse({});
   }
 
-  if (url.endsWith("/uefa.nations/scoreboard")) {
+  if (pathname.endsWith("/uefa.nations/scoreboard")) {
     return jsonResponse(createEmptyLeaguePayload("2395", "uefa.nations", "UEFA Nations League"));
   }
 
-  if (url.endsWith("/uefa.euro/scoreboard")) {
+  if (pathname.endsWith("/uefa.euro/scoreboard")) {
     return jsonResponse(createEmptyLeaguePayload("781", "uefa.euro", "UEFA European Championship"));
   }
 
-  if (url.endsWith("/conmebol.america/scoreboard")) {
+  if (pathname.endsWith("/conmebol.america/scoreboard")) {
     return jsonResponse(createEmptyLeaguePayload("780", "conmebol.america", "Copa America"));
   }
 
@@ -95,11 +96,11 @@ for (const code of [
   "conmebol.america",
 ]) {
   assert.ok(
-    upstreamCalls.some((url) => url.endsWith(`/${code}/scoreboard`)),
+    upstreamCalls.some((url) => new URL(url).pathname.endsWith(`/${code}/scoreboard`) && new URL(url).searchParams.get("limit") === "1000"),
     `missing direct scoreboard probe for ${code}`,
   );
 }
-assert.ok(!upstreamCalls.some((url) => url.endsWith("/fifa.world/scoreboard")), "do not probe previous World Cup seasons in the live hot path");
+assert.ok(!upstreamCalls.some((url) => new URL(url).pathname.endsWith("/fifa.world/scoreboard")), "do not probe previous World Cup seasons in the live hot path");
 
 const detailCallsBefore = countSummaryCalls();
 const [detailResponseA, detailResponseB] = await Promise.all([

@@ -71,7 +71,8 @@ const LOCAL_LEAGUE_LOGOS = {
   "rus.1": "icons/leagues/rus-1.png",
   "sco.1": "icons/leagues/sco-1.png",
   "swe.1": "icons/leagues/swe-1.png",
-  "tur.1": "icons/leagues/tur-1.png",
+  // Official TFF wordmark: https://www.tff.org/Images/Common/tsl.png
+  "tur.1": "icons/leagues/tur-1.png?v=trendyol-2024",
   "uefa.champions": "icons/leagues/uefa-champions.png",
   "uefa.europa": "icons/leagues/uefa-europa.png",
   "uefa.europa.conf": "icons/leagues/uefa-europa-conf.png",
@@ -186,6 +187,12 @@ const FALLBACK_MESSAGES = {
   idlePaused: "Paused while inactive.",
   kickoff: "Kickoff",
   lineups: "Lineups",
+  qualifying: "Qualifying",
+  standingsRelegation: "Relegation",
+  standingsRelegationPlayoff: "Relegation play-off",
+  standingsElimination: "Elimination zone",
+  feedbackHint: "Got an idea, a suggestion, or spotted a bug? I'd love to hear from you!",
+  extensionVersion: "Version",
   links: "Links",
   live: "Live",
   liveCount: "$1 live",
@@ -531,11 +538,15 @@ function applySettingsLabels() {
     sizeBigLabel: msg("sizeBig"),
     settingsBackupTitle: msg("settingsBackup"),
     settingsBackupHint: msg("settingsBackupHint"),
+    settingsFeedbackHint: msg("feedbackHint"),
+    settingsVersionLabel: msg("extensionVersion"),
     exportSettings: msg("exportSettings"),
     importSettings: msg("importSettings"),
   };
   for (const [id, text] of Object.entries(labels)) document.getElementById(id).textContent = text;
   document.getElementById("privacyLink").firstChild.textContent = `${msg("privacyPolicy")} `;
+  document.getElementById("settingsVersion").textContent = EXTENSION_VERSION === "unknown" ? "" : EXTENSION_VERSION;
+  document.getElementById("settingsVersionRow").hidden = EXTENSION_VERSION === "unknown";
   settingsFile.setAttribute("aria-label", msg("importSettings"));
   if (settingsStatusMessage) settingsStatus.textContent = msg(settingsStatusMessage);
 }
@@ -1416,9 +1427,9 @@ function renderMatchDetail(league, match) {
   const header = document.createElement("article");
   header.className = "match-detail-hero";
   header.append(
-    createDetailTeam(match.homeLogo, match.homeTeam, match.homeScore),
+    createDetailTeam(match.homeLogo, match.homeTeam),
     createScoreBlock(match),
-    createDetailTeam(match.awayLogo, match.awayTeam, match.awayScore),
+    createDetailTeam(match.awayLogo, match.awayTeam),
   );
   leagueDetailContent.appendChild(header);
 
@@ -1479,13 +1490,14 @@ function restoreViewState(key, loading = false) {
   }
 }
 
-function createDetailTeam(logoUrl, name, score) {
+function createDetailTeam(logoUrl, name) {
   const team = document.createElement("div");
   team.className = "detail-team";
+  const label = createTextElement("strong", "detail-team-name", name || msg("team"));
+  label.title = name || msg("team");
   team.append(
     createLogoImage("detail-team-logo", logoUrl, name),
-    createTextElement("strong", "detail-team-name", name || msg("team")),
-    createTextElement("span", "detail-team-score", String(Number(score) || 0)),
+    label,
   );
   return team;
 }
@@ -1494,8 +1506,8 @@ function createScoreBlock(match) {
   const block = document.createElement("div");
   block.className = "detail-score-block";
   block.append(
-    createTextElement("span", "detail-score", `${Number(match.homeScore) || 0} - ${Number(match.awayScore) || 0}`),
     createTextElement("span", "detail-minute", getMatchTimeLabel(match)),
+    createTextElement("span", "detail-score", `${Number(match.homeScore) || 0} - ${Number(match.awayScore) || 0}`),
   );
   return block;
 }
@@ -1598,7 +1610,7 @@ function appendLineupsSection(lineups) {
   rows.sort((a, b) => Number(b.homeAway === "home") - Number(a.homeAway === "home"));
   const section = document.createElement("section");
   section.className = "detail-section lineup-section";
-  section.appendChild(createTextElement("h2", "detail-section-title lineup-heading", msg("lineups")));
+  section.setAttribute("aria-label", msg("lineups"));
   const layouts = rows.map(getPitchLayout);
   const hasPitch = rows.length === 2 && layouts.every(Boolean);
   if (hasPitch) {
@@ -2206,6 +2218,8 @@ function createStandingsSection(league) {
   tableWrap.className = "standings-table-wrap";
   tableWrap.appendChild(table);
   wrapper.appendChild(tableWrap);
+  const legend = createStandingsLegend(standings);
+  if (legend) wrapper.appendChild(legend);
 
   return wrapper;
 }
@@ -2274,8 +2288,16 @@ function createStandingsBody(standings) {
     }
 
     const row = document.createElement("tr");
+    const position = createTextElement("td", "standings-position", String(team.position));
+    const zone = getStandingZonePresentation(team.zone);
+    if (zone) {
+      position.classList.add(`standings-position--${zone.kind}`);
+      if (zone.phase !== "direct") position.classList.add("standings-position--conditional");
+      position.title = zone.label;
+      position.setAttribute("aria-label", `${team.position} · ${zone.label}`);
+    }
     row.append(
-      createTextElement("td", "", String(team.position)),
+      position,
       createStandingTeamCell(team),
       createTextElement("td", "", String(team.played)),
       createTextElement("td", "", String(team.wins)),
@@ -2290,6 +2312,48 @@ function createStandingsBody(standings) {
   }
 
   return body;
+}
+
+function getStandingZonePresentation(zone) {
+  if (!zone || typeof zone !== "object" || Array.isArray(zone)) return null;
+  if (typeof zone.kind !== "string" || typeof zone.phase !== "string") return null;
+  const competitions = {
+    "champions-league": "UEFA Champions League",
+    "europa-league": "UEFA Europa League",
+    "conference-league": "UEFA Conference League",
+  };
+  if (zone.kind === "elimination" && zone.phase === "direct") {
+    return { kind: zone.kind, phase: zone.phase, label: msg("standingsElimination") };
+  }
+  if (zone.kind === "relegation" && ["direct", "playoff"].includes(zone.phase)) {
+    return { kind: zone.kind, phase: zone.phase,
+      label: msg(zone.phase === "playoff" ? "standingsRelegationPlayoff" : "standingsRelegation") };
+  }
+  if (!Object.hasOwn(competitions, zone.kind) || !["direct", "qualifying"].includes(zone.phase)) return null;
+  const label = competitions[zone.kind] + (zone.phase === "qualifying" ? ` · ${msg("qualifying")}` : "");
+  return { kind: zone.kind, phase: zone.phase, label };
+}
+
+function createStandingsLegend(standings) {
+  const zones = new Map();
+  for (const team of standings) {
+    const zone = getStandingZonePresentation(team.zone);
+    if (zone) zones.set(`${zone.kind}:${zone.phase}`, zone);
+  }
+  if (zones.size === 0) return null;
+  const legend = document.createElement("ul");
+  legend.className = "standings-legend";
+  for (const zone of zones.values()) {
+    const item = document.createElement("li");
+    item.className = `standings-legend-item standings-position--${zone.kind}`;
+    const marker = document.createElement("span");
+    marker.className = "standings-legend-marker";
+    if (zone.phase !== "direct") marker.classList.add("standings-legend-marker--conditional");
+    marker.setAttribute("aria-hidden", "true");
+    item.append(marker, createTextElement("span", "", zone.label));
+    legend.appendChild(item);
+  }
+  return legend;
 }
 
 function createStandingTeamCell(team) {
@@ -2948,41 +3012,48 @@ function hasAnyDetail(detail) {
 }
 
 function createLogoImage(className, src, alt, options = {}) {
-  if (className === "league-pick-logo" || className === "league-detail-logo") {
+  const isLeagueLogo = className === "league-pick-logo" || className === "league-detail-logo";
+  const img = document.createElement("img");
+  img.className = isLeagueLogo ? "league-logo-image" : className;
+  img.alt = isLeagueLogo ? "" : alt || "";
+  img.referrerPolicy = "no-referrer";
+  img.decoding = "async";
+  img.src = getSafeLogoUrl(src);
+  img.onerror = function () {
+    this.onerror = null;
+    this.src = FALLBACK_LOGO;
+  };
+  if (isLeagueLogo) {
     const wrapper = document.createElement("span");
     wrapper.className = className;
-    if (options.tone === "light") {
+    // The official Süper Lig wordmark is black; old API tone metadata must
+    // not make the packaged replacement disappear against a dark background.
+    if (options.tone === "light" || src === LOCAL_LEAGUE_LOGOS["tur.1"]) {
       wrapper.classList.add("league-logo--light");
     }
     wrapper.setAttribute("role", "img");
     wrapper.setAttribute("aria-label", alt || "");
 
-    const img = document.createElement("img");
-    img.className = "league-logo-image";
-    img.alt = "";
-    img.referrerPolicy = "no-referrer";
-    img.decoding = "async";
-    img.src = src || FALLBACK_LOGO;
-    img.onerror = function () {
-      this.src = FALLBACK_LOGO;
-      this.onerror = null;
-    };
-
     wrapper.appendChild(img);
     return wrapper;
   }
 
-  const img = document.createElement("img");
-  img.className = className;
-  img.alt = alt || "";
-  img.referrerPolicy = "no-referrer";
-  img.decoding = "async";
-  img.src = src || FALLBACK_LOGO;
-  img.onerror = function () {
-    this.src = FALLBACK_LOGO;
-    this.onerror = null;
-  };
   return img;
+}
+
+function getSafeLogoUrl(value) {
+  if (value === FALLBACK_LOGO || Object.values(LOCAL_LEAGUE_LOGOS).includes(value)) return value;
+  if (typeof value !== "string" || value.length > 2048) return FALLBACK_LOGO;
+  try {
+    const url = new URL(value);
+    const host = url.hostname.toLowerCase();
+    const allowedHost = host === "espncdn.com" || host.endsWith(".espncdn.com") ||
+      ["cancunfc.mx", "www.cancunfc.mx", "commons.wikimedia.org", "upload.wikimedia.org"].includes(host);
+    return url.protocol === "https:" && !url.username && !url.password && !url.port && allowedHost
+      ? url.href : FALLBACK_LOGO;
+  } catch {
+    return FALLBACK_LOGO;
+  }
 }
 
 function createExternalLink(text, href) {

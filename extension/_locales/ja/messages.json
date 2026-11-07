@@ -234,6 +234,24 @@
   "timeline": {
     "message": "タイムライン"
   },
+  "qualifying": {
+    "message": "予選"
+  },
+  "standingsRelegation": {
+    "message": "降格"
+  },
+  "standingsRelegationPlayoff": {
+    "message": "残留プレーオフ"
+  },
+  "standingsElimination": {
+    "message": "敗退圏"
+  },
+  "feedbackHint": {
+    "message": "アイデアやご提案、不具合の報告など、お気軽にメールしてください！"
+  },
+  "extensionVersion": {
+    "message": "バージョン"
+  },
   "lineups": {
     "message": "メンバー"
   },

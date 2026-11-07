@@ -234,6 +234,24 @@
   "timeline": {
     "message": "الأحداث"
   },
+  "qualifying": {
+    "message": "التصفيات"
+  },
+  "standingsRelegation": {
+    "message": "الهبوط"
+  },
+  "standingsRelegationPlayoff": {
+    "message": "ملحق تفادي الهبوط"
+  },
+  "standingsElimination": {
+    "message": "منطقة الإقصاء"
+  },
+  "feedbackHint": {
+    "message": "لديك فكرة أو اقتراح، أو لاحظت خطأ؟ يسعدني أن تكتب لي!"
+  },
+  "extensionVersion": {
+    "message": "الإصدار"
+  },
   "lineups": {
     "message": "التشكيلات"
   },

@@ -234,6 +234,24 @@
   "timeline": {
     "message": "મેચનો ઘટનાક્રમ"
   },
+  "qualifying": {
+    "message": "ક્વોલિફાઇંગ"
+  },
+  "standingsRelegation": {
+    "message": "નીચલી લીગમાં ઉતરવું"
+  },
+  "standingsRelegationPlayoff": {
+    "message": "લીગમાં ટકવા માટે પ્લે-ઓફ"
+  },
+  "standingsElimination": {
+    "message": "બહાર થવાના ક્રમ"
+  },
+  "feedbackHint": {
+    "message": "કોઈ વિચાર કે સૂચન છે, અથવા કોઈ ખામી દેખાઈ છે? મને લખો!"
+  },
+  "extensionVersion": {
+    "message": "આવૃત્તિ"
+  },
   "lineups": {
     "message": "લાઇનઅપ"
   },

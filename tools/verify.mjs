@@ -26,7 +26,7 @@ function check(name, command, args) {
   }
 }
 const npmCheck = (name, args) => check(name, process.execPath, [npmCli, ...args]);
-for (const file of ["worker/index.js", "extension/popup.js", "analytics-dashboard/server.mjs", "analytics-dashboard/public/app.js"]) {
+for (const file of ["worker/index.js", "extension/popup.js", "analytics-dashboard/server.mjs", "analytics-dashboard/public/app.js", "tools/scoreboard-coverage.mjs", "tools/smoke-test.js", "tools/production-monitor.mjs"]) {
   check(`Syntax: ${file}`, process.execPath, ["--check", file]);
 }
 npmCheck("Regression suites", ["test"]);

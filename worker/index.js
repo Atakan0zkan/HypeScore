@@ -3,8 +3,9 @@ const DEFAULT_FETCH_HEADERS = {
   "User-Agent":
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
 };
+const ESPN_SCOREBOARD_EVENT_LIMIT = 1000;
 const ESPN_SCOREBOARD_URL =
-  "https://site.api.espn.com/apis/site/v2/sports/soccer/all/scoreboard";
+  `https://site.api.espn.com/apis/site/v2/sports/soccer/all/scoreboard?limit=${ESPN_SCOREBOARD_EVENT_LIMIT}`;
 const THESPORTSDB_LIVE_SCORE_URL =
   "https://www.thesportsdb.com/api/v2/json/livescore/soccer";
 const ESPN_STANDINGS_BASE_URL =
@@ -24,8 +25,8 @@ const MONITOR_USER_AGENT = "HypeScore-HealthMonitor/1.0";
 const UPCOMING_MATCH_WINDOW_MS = 24 * 60 * 60 * 1000;
 const MAX_EVENT_ID_LENGTH = 20;
 const MAX_REMEMBERED_EVENT_KEYS = 1024;
-const LIVE_MATCHES_CACHE_KEY_VERSION = "v17";
-const STANDINGS_CACHE_KEY_VERSION = "v4";
+const LIVE_MATCHES_CACHE_KEY_VERSION = "v18";
+const STANDINGS_CACHE_KEY_VERSION = "v6";
 const MATCH_DETAIL_CACHE_KEY_VERSION = "v8";
 const KNOWN_EVENTS_TTL_MS = 60 * 60 * 1000;
 const KNOWN_EVENTS_CACHE_URL = "https://live-score-extension.internal/known-events/v2";
@@ -109,7 +110,7 @@ const ESPN_LEAGUES_BY_ID = {
   "745": { code: "arg.1", name: "Argentine Liga Profesional", logoId: "1" },
   "760": { code: "mex.1", name: "Mexican Liga MX", logoId: "22" },
   "770": { code: "usa.1", name: "MLS", logoId: "19" },
-  "2310": {
+  "776": {
     code: "uefa.europa",
     name: "UEFA Europa League",
     logoId: "2310",
@@ -162,7 +163,7 @@ const ESPN_LEAGUES_BY_ID = {
     name: "English Women's Super League",
     logoId: "2314",
   },
-  "uefa.europa.conf": {
+  "20296": {
     code: "uefa.europa.conf",
     name: "UEFA Conference League",
     logoId: null,
@@ -776,9 +777,9 @@ async function getLiveMatches(env) {
 
 async function fetchEspnScoreboardPayloads() {
   const [primaryResult, ...extraResults] = await Promise.allSettled([
-    fetchJson(ESPN_SCOREBOARD_URL),
+    fetchJson(ESPN_SCOREBOARD_URL, {}, validateEspnScoreboard),
     ...EXTRA_ESPN_SCOREBOARD_LEAGUES.map((leagueCode) =>
-      fetchJson(`${ESPN_SUMMARY_BASE_URL}/${leagueCode}/scoreboard`),
+      fetchJson(`${ESPN_SUMMARY_BASE_URL}/${leagueCode}/scoreboard?limit=${ESPN_SCOREBOARD_EVENT_LIMIT}`, {}, validateEspnScoreboard),
     ),
   ]);
 
@@ -801,21 +802,34 @@ async function fetchEspnScoreboardPayloads() {
   return payloads;
 }
 
+function validateEspnScoreboard(payload) {
+  if (!payload || !Array.isArray(payload.events)) {
+    throw new Error("ESPN scoreboard events must be an array");
+  }
+  // A full page is not proof that the provider returned the complete list.
+  // Reject it rather than silently replacing a good snapshot with partial data.
+  if (payload.events.length >= ESPN_SCOREBOARD_EVENT_LIMIT) {
+    throw new Error("ESPN scoreboard reached its event limit and may be truncated");
+  }
+}
+
 function normalizeEspnMatchPayloads(payloads) {
-  const matchesById = new Map();
+  const matchesByKey = new Map();
 
   for (const payload of payloads) {
+    const directLeagueCode = getPayloadLeagueMetadata(payload)?.code;
     for (const match of normalizeEspnMatches(payload)) {
-      if (!matchesById.has(match.id)) {
-        matchesById.set(match.id, match);
+      const key = getEventKey(match.id, match.leagueCode);
+      if (!matchesByKey.has(key) || directLeagueCode === match.leagueCode) {
+        matchesByKey.set(key, match);
       }
     }
   }
 
-  return [...matchesById.values()];
+  return [...matchesByKey.values()];
 }
 
-async function fetchJson(url, init = {}) {
+async function fetchJson(url, init = {}, validate = null) {
   url = validateUpstreamUrl(url);
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), UPSTREAM_FETCH_TIMEOUT_MS);
@@ -862,7 +876,9 @@ async function fetchJson(url, init = {}) {
         }
 
         // Both ESPN hosts share one deadline, including response body consumption.
-        return await readBoundedUpstreamJson(response, controller.signal);
+        const payload = await readBoundedUpstreamJson(response, controller.signal);
+        if (validate) validate(payload);
+        return payload;
       } catch (error) {
         // Do not turn missing seasons, authentication failures or rate limits
         // into extra requests. In particular, World Cup 2030's 400/404 stays empty.
@@ -992,6 +1008,10 @@ function normalizeEspnMatches(payload) {
       if (!competition || !home || !away) {
         return null;
       }
+      const rawId = event.id || competition.id;
+      if (typeof rawId !== "string" && typeof rawId !== "number") return null;
+      const id = String(rawId);
+      if (!isSafeEventId(id)) return null;
 
       const status = competition.status || event.status || {};
       const leagueId = extractLeagueId(event.uid) || payloadLeague?.id || "";
@@ -1004,7 +1024,7 @@ function normalizeEspnMatches(payload) {
       if (league.code === FIFA_WORLD_CUP_LEAGUE_CODE && !isWorldCup2030Event(event)) return null;
 
       return {
-        id: String(event.id || competition.id || ""),
+        id,
         leagueId: league.id || leagueId || league.code,
         leagueCode: league.code,
         league: league.name,
@@ -1200,12 +1220,22 @@ function getTeamLogoFromTeam(team) {
     return null;
   }
 
-  if (Array.isArray(team.logos) && team.logos[0]?.href) {
-    return safeHttpsUrl(team.logos[0].href, ESPN_MEDIA_HOST_SUFFIXES);
+  if (Array.isArray(team.logos)) {
+    const logos = team.logos.slice(0, 16).filter((logo) => logo && typeof logo === "object").map((logo) => {
+      const dimension = (value) => typeof value === "number" || typeof value === "string" ? Number(value) : 0;
+      const size = Math.min(dimension(logo.width), dimension(logo.height));
+      return {
+        url: safeHttpsUrl(logo.href, ESPN_MEDIA_HOST_SUFFIXES),
+        isDefault: Array.isArray(logo.rel) && logo.rel.includes("default"),
+        size: Number.isFinite(size) && size > 0 ? Math.min(size, 4096) : 0,
+      };
+    }).filter((logo) => logo.url).sort((a, b) => b.size - a.size || Number(b.isDefault) - Number(a.isDefault));
+    if (logos.length > 0) return logos[0].url;
   }
 
   if (team.logo) {
-    return safeHttpsUrl(team.logo, ESPN_MEDIA_HOST_SUFFIXES);
+    const logo = safeHttpsUrl(team.logo, ESPN_MEDIA_HOST_SUFFIXES);
+    if (logo) return logo;
   }
 
   const overrideLogo = getTeamLogoOverrideFromTeam(team);
@@ -1809,6 +1839,7 @@ function normalizeEspnStandings(payload) {
 
     return {
       position: toNumber(getStat("rank")) || fallbackPosition,
+      zone: normalizeStandingZone(entry.note),
       group,
       groupOrder,
       abbreviation: entry.team?.abbreviation || "",
@@ -1831,6 +1862,27 @@ function normalizeEspnStandings(payload) {
       overall: String(getStat("overall", true) || ""),
     };
   }).sort(compareStandingRows);
+}
+
+function normalizeStandingZone(note) {
+  if (!note || typeof note !== "object" || Array.isArray(note) || typeof note.description !== "string") return null;
+  const description = note.description.trim().replace(/\s+/g, " ");
+  if (!description || description.length > 120) return null;
+  if (/^eliminated$/i.test(description)) {
+    return { kind: "elimination", phase: "direct", description };
+  }
+  if (/^relegat(?:ion|ed)$/i.test(description)) {
+    return { kind: "relegation", phase: "direct", description };
+  }
+  if (/^relegation play-?offs?$/i.test(description)) {
+    return { kind: "relegation", phase: "playoff", description };
+  }
+  const match = description.match(/^(?:UEFA )?(Champions League|Europa League|(?:Europa )?Conference League)( qualifying)?$/i);
+  if (!match) return null;
+  const competition = match[1].toLowerCase();
+  const kind = competition === "champions league" ? "champions-league" :
+    competition === "europa league" ? "europa-league" : "conference-league";
+  return { kind, phase: match[2] ? "qualifying" : "direct", description };
 }
 
 function getEspnStandingRows(payload) {
@@ -2447,7 +2499,7 @@ function responseHeaders(options = {}) {
     "Cache-Control": options.cacheControl || "no-store",
     "X-Cache": options.cache || "BYPASS",
     "X-Data-Source": options.source || "none",
-    "X-Worker-Revision": "v16-20261027-security",
+    "X-Worker-Revision": "v19-20261107-scoreboard",
     ...(options.retryAfter ? { "Retry-After": String(options.retryAfter) } : {}),
   };
 }

@@ -38,8 +38,8 @@ describe("worker cache/TTL/bound contract", () => {
     assert.equal(run("STANDINGS_CACHE_TTL_SECONDS"), 1800);
     assert.equal(run("MATCH_DETAIL_CACHE_TTL_SECONDS"), 60);
     assert.equal(run("TOURNAMENT_BRACKET_CACHE_TTL_SECONDS"), 900);
-    assert.equal(run("LIVE_MATCHES_CACHE_KEY_VERSION"), "v17");
-    assert.equal(run("STANDINGS_CACHE_KEY_VERSION"), "v4");
+    assert.equal(run("LIVE_MATCHES_CACHE_KEY_VERSION"), "v18");
+    assert.equal(run("STANDINGS_CACHE_KEY_VERSION"), "v6");
     assert.equal(run("MATCH_DETAIL_CACHE_KEY_VERSION"), "v8");
     assert.equal(run("TOURNAMENT_BRACKET_CACHE_KEY_VERSION"), "v2");
     assert.equal(run("MAX_EVENT_ID_LENGTH"), 20);

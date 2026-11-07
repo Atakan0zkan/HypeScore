@@ -234,6 +234,24 @@
   "timeline": {
     "message": "Linimasa"
   },
+  "qualifying": {
+    "message": "Kualifikasi"
+  },
+  "standingsRelegation": {
+    "message": "Degradasi"
+  },
+  "standingsRelegationPlayoff": {
+    "message": "Play-off degradasi"
+  },
+  "standingsElimination": {
+    "message": "Zona eliminasi"
+  },
+  "feedbackHint": {
+    "message": "Punya ide, saran, atau menemukan masalah? Kirimkan pesan kepadaku!"
+  },
+  "extensionVersion": {
+    "message": "Versi"
+  },
   "lineups": {
     "message": "Susunan pemain"
   },

@@ -234,6 +234,24 @@
   "timeline": {
     "message": "Maç akışı"
   },
+  "qualifying": {
+    "message": "Ön eleme"
+  },
+  "standingsRelegation": {
+    "message": "Küme düşme"
+  },
+  "standingsRelegationPlayoff": {
+    "message": "Kümede kalma play-off'u"
+  },
+  "standingsElimination": {
+    "message": "Elenme potası"
+  },
+  "feedbackHint": {
+    "message": "Bir fikrin, önerin ya da fark ettiğin bir hata mı var? Bana yaz!"
+  },
+  "extensionVersion": {
+    "message": "Sürüm"
+  },
   "lineups": {
     "message": "Kadrolar"
   },

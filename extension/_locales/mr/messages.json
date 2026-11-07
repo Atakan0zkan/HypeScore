@@ -234,6 +234,24 @@
   "timeline": {
     "message": "सामन्यातील घटनाक्रम"
   },
+  "qualifying": {
+    "message": "पात्रता फेरी"
+  },
+  "standingsRelegation": {
+    "message": "खालच्या लीगमध्ये घसरण"
+  },
+  "standingsRelegationPlayoff": {
+    "message": "लीगमध्ये टिकण्यासाठी प्लेऑफ"
+  },
+  "standingsElimination": {
+    "message": "बाहेर पडण्याची स्थाने"
+  },
+  "feedbackHint": {
+    "message": "काही कल्पना किंवा सूचना आहे, किंवा काही त्रुटी दिसली? मला लिहा!"
+  },
+  "extensionVersion": {
+    "message": "आवृत्ती"
+  },
   "lineups": {
     "message": "संघ रचना"
   },

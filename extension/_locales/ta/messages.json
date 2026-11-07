@@ -234,6 +234,24 @@
   "timeline": {
     "message": "போட்டி நிகழ்வுகள்"
   },
+  "qualifying": {
+    "message": "தகுதிச் சுற்று"
+  },
+  "standingsRelegation": {
+    "message": "கீழ் லீக்கிற்கு இறக்கம்"
+  },
+  "standingsRelegationPlayoff": {
+    "message": "லீக்கில் நீடிப்பதற்கான பிளே-ஆஃப்"
+  },
+  "standingsElimination": {
+    "message": "வெளியேறும் இடங்கள்"
+  },
+  "feedbackHint": {
+    "message": "ஏதேனும் யோசனை, பரிந்துரை உள்ளதா, அல்லது பிழையைக் கண்டீர்களா? எனக்கு எழுதுங்கள்!"
+  },
+  "extensionVersion": {
+    "message": "பதிப்பு"
+  },
   "lineups": {
     "message": "அணி அமைப்பு"
   },

@@ -234,6 +234,24 @@
   "timeline": {
     "message": "Cronologie"
   },
+  "qualifying": {
+    "message": "Calificări"
+  },
+  "standingsRelegation": {
+    "message": "Retrogradare"
+  },
+  "standingsRelegationPlayoff": {
+    "message": "Baraj de menținere"
+  },
+  "standingsElimination": {
+    "message": "Zona de eliminare"
+  },
+  "feedbackHint": {
+    "message": "Ai o idee, o sugestie sau ai găsit o eroare? Scrie-mi!"
+  },
+  "extensionVersion": {
+    "message": "Versiune"
+  },
   "lineups": {
     "message": "Formații"
   },

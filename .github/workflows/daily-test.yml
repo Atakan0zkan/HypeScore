@@ -95,7 +95,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Confirm production health and maintain one incident
-        run: node tools/production-monitor.mjs --manage-incidents
+        run: node tools/production-monitor.mjs --manage-incidents --verify-coverage
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           HYPE_MONITOR_ASSIGNEE: Atakan0zkan

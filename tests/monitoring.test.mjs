@@ -22,6 +22,23 @@ function fixtureFetch(url) {
 }
 
 describe("production smoke probes", () => {
+  it("can detect missing live fixtures even when the API returns healthy JSON and 32 league cards", async () => {
+    const calls = [];
+    const live = emptyLive();
+    live.leagues[4] = {code:"tur.1",id:"3946",name:"Turkish Super Lig",matches:[]};
+    const report = await runSmokeChecks({ verifyCoverage:true, now:() => Date.parse("2026-11-07T16:15:00Z"), fetchImpl:async url => {
+      const parsed = new URL(url); calls.push(parsed);
+      if (parsed.hostname === "site.api.espn.com") {
+        const code = parsed.pathname.split("/").at(-2);
+        return json({leagues:[{slug:code,...(code === "tur.1" ? {id:"3946"} : {})}],events:code === "tur.1" ? [{id:"401888371",date:"2026-11-07T16:00:00Z",status:{type:{state:"in",completed:false}}}] : []});
+      }
+      return parsed.pathname === "/live-matches" ? json(live) : fixtureFetch(url);
+    }});
+    assert.equal(report.ok,false);
+    assert.equal(report.checks.find(check => check.name === "Live fixture coverage tur.1")?.code,"MISSING_LIVE_FIXTURES");
+    assert.equal(calls.filter(url => url.hostname === "site.api.espn.com").length,31);
+  });
+
   it("labels every request as monitoring, preserves endpoint queries and accepts genuine empty data", async () => {
     const calls = [];
     const report = await runSmokeChecks({ fetchImpl: async (url, init) => {
@@ -50,6 +67,35 @@ describe("production smoke probes", () => {
     assert.equal(report.ok, false);
     assert.equal(report.checks[0].code, "HTTP_502");
     assert.deepEqual(calls, ["/live-matches", "/league-standings", "/tournament-bracket"]);
+  });
+  it("checks the entire payload instead of accepting an invalid league or match after the first five rows", async () => {
+    for (const alter of [
+      value => { value.leagues[31].matches = null; },
+      value => { value.leagues[31].code = value.leagues[0].code; },
+      value => { value.leagues.push({...value.leagues[0]}); },
+      value => { value.matches = Array.from({length:6},() => ({id:"760486",league:"Premier League",homeTeam:"Home",awayTeam:"Away",homeScore:0,awayScore:0,minute:"1'",status:"Live"})); value.matches[5].homeScore = "bad"; },
+    ]) {
+      const value = emptyLive(); alter(value);
+      const report = await runSmokeChecks({fetchImpl:async url => new URL(url).pathname === "/live-matches" ? json(value) : fixtureFetch(url)});
+      assert.equal(report.checks[0].status,"failed");
+    }
+  });
+
+  it("compares league/event identities without treating a newly starting fixture as an outage", async () => {
+    const live = emptyLive();
+    live.leagues[4] = {code:"tur.1",id:"3946",name:"Turkish Super Lig",matches:[]};
+    const provider = (code, overrides = {}) => ({leagues:[{slug:code,id:code === "tur.1" ? "3946" : "1"}],events:code === "tur.1" ? [{id:"401888371",date:"2026-11-07T16:14:30Z",status:{type:{state:"in",completed:false}}}] : [],...overrides});
+    for (const [overrides, expected] of [[{},"ok"],[{leagues:[{slug:"wrong.1",id:"3946"}]} ,"failed"],[{events:null},"failed"]]) {
+      const report = await runSmokeChecks({verifyCoverage:true,now:() => Date.parse("2026-11-07T16:15:00Z"),fetchImpl:async url => {
+        const parsed = new URL(url);
+        if (parsed.hostname === "site.api.espn.com" || parsed.hostname === "site.web.api.espn.com") {
+          const code = parsed.pathname.split("/").at(-2);
+          return json(provider(code,code === "tur.1" ? overrides : {}));
+        }
+        return parsed.pathname === "/live-matches" ? json(live) : fixtureFetch(url);
+      }});
+      assert.equal(report.checks.find(check => check.name === "Live fixture coverage tur.1")?.status,expected);
+    }
   });
   it("rejects non-JSON and invalid successful responses", async () => {
     for (const response of [() => new Response("HTML"), () => json({}), () => json({ matches: [], leagues: [] })]) {
@@ -288,7 +334,8 @@ describe("production monitoring workflow guards", () => {
     const live = daily.split("  live-smoke:")[1].split("  e2e:")[0];
     assert.ok(!live.includes("continue-on-error"));
     assert.match(live, /wait-for-worker-build/);
-    assert.match(live, /production-monitor.mjs --manage-incidents/);
+    assert.match(live, /production-monitor.mjs --manage-incidents --verify-coverage/);
+    assert.ok(!workflow.includes("--verify-coverage"),"the five-minute probe stays lightweight");
     assert.ok(!workflow.includes("pull_request"));
   });
 });

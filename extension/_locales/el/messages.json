@@ -234,6 +234,24 @@
   "timeline": {
     "message": "Χρονολόγιο"
   },
+  "qualifying": {
+    "message": "Προκριματικά"
+  },
+  "standingsRelegation": {
+    "message": "Υποβιβασμός"
+  },
+  "standingsRelegationPlayoff": {
+    "message": "Μπαράζ παραμονής"
+  },
+  "standingsElimination": {
+    "message": "Ζώνη αποκλεισμού"
+  },
+  "feedbackHint": {
+    "message": "Έχεις κάποια ιδέα ή πρόταση, ή εντόπισες κάποιο σφάλμα; Γράψε μου!"
+  },
+  "extensionVersion": {
+    "message": "Έκδοση"
+  },
   "lineups": {
     "message": "Ενδεκάδες"
   },

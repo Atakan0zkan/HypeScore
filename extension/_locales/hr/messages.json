@@ -234,6 +234,24 @@
   "timeline": {
     "message": "Tijek"
   },
+  "qualifying": {
+    "message": "Kvalifikacije"
+  },
+  "standingsRelegation": {
+    "message": "Ispadanje"
+  },
+  "standingsRelegationPlayoff": {
+    "message": "Doigravanje za ostanak"
+  },
+  "standingsElimination": {
+    "message": "Zona ispadanja"
+  },
+  "feedbackHint": {
+    "message": "Imaš ideju, prijedlog ili si primijetio grešku? Piši mi!"
+  },
+  "extensionVersion": {
+    "message": "Verzija"
+  },
   "lineups": {
     "message": "Sastavi"
   },

@@ -234,6 +234,24 @@
   "timeline": {
     "message": "Chronologie"
   },
+  "qualifying": {
+    "message": "Tours de qualification"
+  },
+  "standingsRelegation": {
+    "message": "Relégation"
+  },
+  "standingsRelegationPlayoff": {
+    "message": "Barrage de maintien"
+  },
+  "standingsElimination": {
+    "message": "Zone d'élimination"
+  },
+  "feedbackHint": {
+    "message": "Une idée, une suggestion ou un bug à signaler ? N'hésite pas à m'écrire !"
+  },
+  "extensionVersion": {
+    "message": "Version"
+  },
   "lineups": {
     "message": "Compositions"
   },

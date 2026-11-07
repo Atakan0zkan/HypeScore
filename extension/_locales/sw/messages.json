@@ -234,6 +234,24 @@
   "timeline": {
     "message": "Matukio ya mechi"
   },
+  "qualifying": {
+    "message": "Mchujo"
+  },
+  "standingsRelegation": {
+    "message": "Kushuka daraja"
+  },
+  "standingsRelegationPlayoff": {
+    "message": "Mchujo wa kubaki ligi"
+  },
+  "standingsElimination": {
+    "message": "Nafasi za kuondolewa"
+  },
+  "feedbackHint": {
+    "message": "Una wazo, pendekezo au umeona hitilafu? Niandikie!"
+  },
+  "extensionVersion": {
+    "message": "Toleo"
+  },
   "lineups": {
     "message": "Orodha ya wachezaji"
   },

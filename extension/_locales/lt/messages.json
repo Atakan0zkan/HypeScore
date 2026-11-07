@@ -234,6 +234,24 @@
   "timeline": {
     "message": "Eiga"
   },
+  "qualifying": {
+    "message": "Atranka"
+  },
+  "standingsRelegation": {
+    "message": "Iškritimas"
+  },
+  "standingsRelegationPlayoff": {
+    "message": "Pereinamosios rungtynės"
+  },
+  "standingsElimination": {
+    "message": "Iškritimo zona"
+  },
+  "feedbackHint": {
+    "message": "Turi idėją, pasiūlymą ar pastebėjai klaidą? Parašyk man!"
+  },
+  "extensionVersion": {
+    "message": "Versija"
+  },
   "lineups": {
     "message": "Sudėtys"
   },

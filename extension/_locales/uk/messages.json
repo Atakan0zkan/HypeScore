@@ -234,6 +234,24 @@
   "timeline": {
     "message": "Хронологія"
   },
+  "qualifying": {
+    "message": "Кваліфікація"
+  },
+  "standingsRelegation": {
+    "message": "Виліт"
+  },
+  "standingsRelegationPlayoff": {
+    "message": "Перехідні матчі за збереження місця"
+  },
+  "standingsElimination": {
+    "message": "Зона вильоту"
+  },
+  "feedbackHint": {
+    "message": "Маєте ідею, пропозицію чи помітили помилку? Напишіть мені!"
+  },
+  "extensionVersion": {
+    "message": "Версія"
+  },
   "lineups": {
     "message": "Склади"
   },

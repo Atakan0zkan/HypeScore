@@ -234,6 +234,24 @@
   "timeline": {
     "message": "Tapahtumat"
   },
+  "qualifying": {
+    "message": "Karsinnat"
+  },
+  "standingsRelegation": {
+    "message": "Putoaminen"
+  },
+  "standingsRelegationPlayoff": {
+    "message": "Putoamiskarsinta"
+  },
+  "standingsElimination": {
+    "message": "Putoamisalue"
+  },
+  "feedbackHint": {
+    "message": "Onko sinulla idea tai ehdotus, tai huomasitko virheen? Kirjoita minulle!"
+  },
+  "extensionVersion": {
+    "message": "Versio"
+  },
   "lineups": {
     "message": "Kokoonpanot"
   },

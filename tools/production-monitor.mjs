@@ -123,14 +123,15 @@ export function createGithubClient({ token, repository, assignee = "", fetchImpl
 }
 
 export async function main(args = process.argv.slice(2)) {
-  if (args.some(arg => arg !== "--manage-incidents")) throw new Error("Unknown monitor option");
+  if (args.some(arg => !["--manage-incidents", "--verify-coverage"].includes(arg))) throw new Error("Unknown monitor option");
   const manage = args.includes("--manage-incidents");
   const repository = process.env.GITHUB_REPOSITORY;
   const github = manage ? createGithubClient({ token: process.env.GITHUB_TOKEN, repository,
     assignee: process.env.HYPE_MONITOR_ASSIGNEE || "" }) : null;
   const runId = process.env.GITHUB_RUN_ID || "";
   const runUrl = manage && /^\d+$/.test(runId) ? `https://github.com/${repository}/actions/runs/${runId}` : "";
-  const result = await monitorProduction({ github, runUrl });
+  const result = await monitorProduction({ github, runUrl,
+    runChecks:() => runSmokeChecks({verifyCoverage:args.includes("--verify-coverage")}) });
   printResults(result.report.checks);
   console.log(`Production monitor: ${result.state}${result.issue ? ` (#${result.issue})` : ""}`);
   if (!result.ok) process.exitCode = 1;

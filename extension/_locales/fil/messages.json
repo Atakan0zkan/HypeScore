@@ -234,6 +234,24 @@
   "timeline": {
     "message": "Mga pangyayari sa laban"
   },
+  "qualifying": {
+    "message": "Qualifying round"
+  },
+  "standingsRelegation": {
+    "message": "Pagbaba sa mas mababang liga"
+  },
+  "standingsRelegationPlayoff": {
+    "message": "Play-off para manatili sa liga"
+  },
+  "standingsElimination": {
+    "message": "Mga puwestong malalaglag"
+  },
+  "feedbackHint": {
+    "message": "May ideya, suhestiyon, o napansing problema? Sulatan mo ako!"
+  },
+  "extensionVersion": {
+    "message": "Bersiyon"
+  },
   "lineups": {
     "message": "Mga lineup"
   },

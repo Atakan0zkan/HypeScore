@@ -241,6 +241,24 @@
   "timeline": {
     "message": "Timeline"
   },
+  "qualifying": {
+    "message": "Qualifying"
+  },
+  "standingsRelegation": {
+    "message": "Relegation"
+  },
+  "standingsRelegationPlayoff": {
+    "message": "Relegation play-off"
+  },
+  "standingsElimination": {
+    "message": "Elimination zone"
+  },
+  "feedbackHint": {
+    "message": "Got an idea, a suggestion, or spotted a bug? I'd love to hear from you!"
+  },
+  "extensionVersion": {
+    "message": "Version"
+  },
   "lineups": {
     "message": "Lineups"
   },

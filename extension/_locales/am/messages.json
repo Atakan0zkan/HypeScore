@@ -234,6 +234,24 @@
   "timeline": {
     "message": "የጨዋታው ሂደት"
   },
+  "qualifying": {
+    "message": "የማጣሪያ ዙር"
+  },
+  "standingsRelegation": {
+    "message": "ወደ ታችኛው ሊግ መውረድ"
+  },
+  "standingsRelegationPlayoff": {
+    "message": "በሊጉ ለመቆየት የማጣሪያ ጨዋታ"
+  },
+  "standingsElimination": {
+    "message": "የመውጫ ቀጠና"
+  },
+  "feedbackHint": {
+    "message": "ሀሳብ፣ አስተያየት አለዎት ወይም ስህተት አይተዋል? ይጻፉልኝ!"
+  },
+  "extensionVersion": {
+    "message": "ስሪት"
+  },
   "lineups": {
     "message": "አሰላለፍ"
   },

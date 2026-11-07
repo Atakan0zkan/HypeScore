@@ -234,6 +234,24 @@
   "timeline": {
     "message": "Linha do tempo"
   },
+  "qualifying": {
+    "message": "Eliminatórias"
+  },
+  "standingsRelegation": {
+    "message": "Rebaixamento"
+  },
+  "standingsRelegationPlayoff": {
+    "message": "Play-off contra o rebaixamento"
+  },
+  "standingsElimination": {
+    "message": "Zona de eliminação"
+  },
+  "feedbackHint": {
+    "message": "Tem uma ideia, sugestão ou encontrou um erro? Me escreva!"
+  },
+  "extensionVersion": {
+    "message": "Versão"
+  },
   "lineups": {
     "message": "Escalações"
   },

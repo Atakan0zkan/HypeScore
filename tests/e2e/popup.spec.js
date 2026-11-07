@@ -42,8 +42,13 @@ const LEAGUES = [
 ];
 const ALL_MATCHES = LEAGUES.flatMap((l) => l.matches);
 const STANDINGS = [
-  { position: 1, team: "Arsenal", logo: null, played: 10, wins: 8, draws: 1, losses: 1, goalsFor: 20, goalsAgainst: 8, goalDifference: "+12", points: 25 },
-  { position: 2, team: "Chelsea", logo: null, played: 10, wins: 7, draws: 2, losses: 1, goalsFor: 18, goalsAgainst: 9, goalDifference: "+9", points: 23 },
+  { position: 1, team: "Arsenal", logo: null, played: 10, wins: 8, draws: 1, losses: 1, goalsFor: 20, goalsAgainst: 8, goalDifference: "+12", points: 25, zone: {kind:"champions-league",phase:"direct"} },
+  { position: 2, team: "Chelsea", logo: null, played: 10, wins: 7, draws: 2, losses: 1, goalsFor: 18, goalsAgainst: 9, goalDifference: "+9", points: 23, zone: {kind:"europa-league",phase:"qualifying"} },
+  ...[
+    ["Conference fixture", 4, "conference-league", "qualifying"],
+    ["Playoff fixture", 17, "relegation", "playoff"],
+    ["Relegation fixture", 18, "relegation", "direct"],
+  ].map(([team, position, kind, phase]) => ({position,team,logo:null,played:10,wins:2,draws:3,losses:5,goalsFor:8,goalsAgainst:20,goalDifference:"-12",points:9,zone:{kind,phase}})),
 ];
 const DETAIL = {
   id: "e2e1", leagueCode: "eng.1", title: "Arsenal vs Chelsea",
@@ -212,6 +217,127 @@ test("opens match detail hero and returns", async () => {
   await expect(page.locator(".league-pick-card")).toHaveCount(3);
 });
 
+test("single-score hero, larger uncropped crests and unlabelled lineups fit every popup size", async () => {
+  const heroPage = await context.newPage();
+  const errors = [];
+  heroPage.on("pageerror", error => errors.push(String(error)));
+  // Deliberately non-square synthetic crests: test image fitting without CDN availability.
+  await heroPage.route("https://a.espncdn.com/hype-e2e/*", route => {
+    const home = route.request().url().endsWith("home.svg");
+    return route.fulfill({ contentType:"image/svg+xml", body:`<svg xmlns="http://www.w3.org/2000/svg" width="${home ? 100 : 180}" height="${home ? 180 : 100}" viewBox="0 0 ${home ? "100 180" : "180 100"}"><rect x="2" y="2" width="${home ? 96 : 176}" height="${home ? 176 : 96}" rx="10" fill="${home ? "#2955af" : "#f2d35b"}" stroke="white" stroke-width="4"/></svg>` });
+  });
+  const match = { ...ALL_MATCHES[0], homeTeam:"Everton", awayTeam:"Coventry City", homeScore:3, awayScore:1, minute:"90'+4'", homeLogo:"https://a.espncdn.com/hype-e2e/home.svg", awayLogo:"https://a.espncdn.com/hype-e2e/away.svg" };
+  await heroPage.route("**://api.atakanozkan.com/live-matches**", route => route.fulfill({ contentType:"application/json", body:JSON.stringify({matches:[match],leagues:[{...LEAGUES[0],matches:[match]}]}) }));
+  try {
+    await heroPage.goto(POPUP_URL);
+    await heroPage.locator(".league-pick-card").first().click();
+    await heroPage.locator(".match-card").first().click();
+    const hero = heroPage.locator(".match-detail-hero");
+    await expect(hero.locator(".detail-team-score")).toHaveCount(0);
+    await expect(hero.locator(".detail-score")).toHaveText("3 - 1");
+    await expect(hero.locator(".detail-minute")).toHaveText("90'+4'");
+    await expect(heroPage.locator(".lineup-heading")).toHaveCount(0);
+    await expect(heroPage.locator(".lineup-section")).toHaveAttribute("aria-label", "Lineups");
+    for (const [size,width,height,crestSize] of [["small",480,540,76],["default",580,600,88],["big",720,600,96]]) {
+      await heroPage.locator("#settingsToggle").click();
+      await heroPage.locator(`input[name="popupSize"][value="${size}"]`).check();
+      await heroPage.setViewportSize({width,height});
+      await heroPage.locator("#settingsClose").click();
+      await expect(hero.locator(".detail-team-logo").first()).toHaveJSProperty("complete", true);
+      const geometry = await hero.evaluate(el => {
+        const score = el.querySelector(".detail-score").getBoundingClientRect();
+        const minute = el.querySelector(".detail-minute").getBoundingClientRect();
+        return { minuteAbove:minute.bottom <= score.top, overflow:el.scrollWidth > el.clientWidth + 1,
+          crests:[...el.querySelectorAll(".detail-team-logo")].map(img => ({width:img.getBoundingClientRect().width,height:img.getBoundingClientRect().height,fit:getComputedStyle(img).objectFit,loaded:img.naturalWidth > 0})),
+          names:[...el.querySelectorAll(".detail-team-name")].map(name => ({color:getComputedStyle(name).color,bottom:name.getBoundingClientRect().bottom,cardBottom:name.parentElement.getBoundingClientRect().bottom})) };
+      });
+      expect(geometry.minuteAbove).toBe(true);
+      expect(geometry.overflow).toBe(false);
+      for (const crest of geometry.crests) expect(crest).toEqual({width:crestSize,height:crestSize,fit:"contain",loaded:true});
+      for (const name of geometry.names) expect(name.bottom).toBeLessThanOrEqual(name.cardBottom);
+      await hero.screenshot({path:`test-results/match-header-${size}.png`});
+    }
+    await heroPage.evaluate(match => renderMatchDetail({code:"eng.1",name:"Premier League"}, {
+      ...match, homeTeam:"Wolverhampton Wanderers Football Club", awayTeam:"Borussia Mönchengladbach 1900 Football Club",
+    }), match);
+    for (const name of await hero.locator(".detail-team-name").all()) {
+      const bounds = await name.evaluate(el => ({height:el.getBoundingClientRect().height,lineHeight:parseFloat(getComputedStyle(el).lineHeight),fullName:el.title,text:el.textContent}));
+      expect(bounds.height).toBeLessThanOrEqual(bounds.lineHeight * 2 + 1);
+      expect(bounds.fullName).toBe(bounds.text);
+    }
+    expect(await hero.evaluate(el => el.scrollWidth > el.clientWidth + 1)).toBe(false);
+    // Native image error behavior must keep the card size and stop retrying.
+    await hero.locator(".detail-team-logo").first().evaluate(img => img.dispatchEvent(new Event("error")));
+    await expect(hero.locator(".detail-team-logo").first()).toHaveAttribute("src", /^data:image\/svg\+xml,/);
+    expect(errors).toEqual([]);
+  } finally {
+    await heroPage.close();
+    await page.evaluate(() => localStorage.setItem("hype_popup_size", "default"));
+  }
+});
+
+test("standings show accessible rank markers with a compact qualification/relegation legend", async () => {
+  await page.locator(".league-pick-card", {hasText:"Premier League"}).click();
+  const table = page.locator(".standings-table");
+  await expect(table.locator("td.standings-position--champions-league")).toHaveCount(1);
+  await expect(table.locator("td.standings-position--relegation")).toHaveCount(2);
+  await expect(page.locator(".standings-legend-item")).toHaveCount(5);
+  await expect(table.locator("td.standings-position--relegation").first()).toHaveAttribute("aria-label", /Relegation play-off/);
+  const stripe = await table.locator("td.standings-position--relegation").last().evaluate(el => ({
+    color:getComputedStyle(el,"::before").backgroundColor, width:getComputedStyle(el,"::before").width,
+  }));
+  expect(stripe).toEqual({color:"rgb(255, 107, 114)",width:"3px"});
+  expect(await page.locator(".standings-legend").evaluate(el => el.scrollWidth > el.clientWidth + 1)).toBe(false);
+  await page.locator(".standings").screenshot({path:"test-results/standings-zones.png"});
+  await page.locator("#backBtn").click();
+});
+
+test("standings legend keeps complete text inside the rounded panel at every size and direction", async () => {
+  await page.locator(".league-pick-card", {hasText:"Premier League"}).click();
+  await page.locator(".standings-legend").waitFor();
+  try {
+    for (const [size,width,height] of [["small",480,540],["default",580,600],["big",720,600]]) {
+      await page.locator("#settingsToggle").click();
+      await page.locator(`input[name="popupSize"][value="${size}"]`).check();
+      await page.setViewportSize({width,height});
+      await page.locator("#settingsClose").click();
+      for (const dir of ["ltr","rtl"]) {
+        await page.evaluate(dir => { document.documentElement.dir = dir; }, dir);
+        const bounds = await page.locator(".standings-legend").evaluate(legend => {
+          const panel = legend.closest(".standings").getBoundingClientRect();
+          return [...legend.children].map(item => {
+            const marker = item.firstElementChild.getBoundingClientRect();
+            const range = document.createRange();
+            range.selectNodeContents(item.lastElementChild);
+            const text = range.getBoundingClientRect();
+            return {
+              markerInset:Math.min(marker.left-panel.left,panel.right-marker.right),
+              textInset:Math.min(text.left-panel.left,panel.right-text.right),
+              bottomInset:panel.bottom-text.bottom,
+              clipped:item.lastElementChild.scrollWidth > item.lastElementChild.clientWidth + 1,
+            };
+          });
+        });
+        for (const item of bounds) {
+          expect(item.markerInset, `${size}/${dir}: marker avoids rounded corners`).toBeGreaterThanOrEqual(10);
+          expect(item.textInset, `${size}/${dir}: full label has horizontal space`).toBeGreaterThanOrEqual(10);
+          expect(item.bottomInset, `${size}/${dir}: text has bottom space`).toBeGreaterThanOrEqual(10);
+          expect(item.clipped, `${size}/${dir}: label wraps without clipping`).toBe(false);
+        }
+        await expect(page.locator(".standings-qualification-note")).toHaveCount(0);
+        if (dir === "ltr") await page.locator(".standings").screenshot({path:`test-results/standings-legend-${size}.png`});
+      }
+    }
+  } finally {
+    await page.evaluate(() => { document.documentElement.dir = "ltr"; });
+    await page.locator("#settingsToggle").click();
+    await page.locator('input[name="popupSize"][value="default"]').check();
+    await page.setViewportSize({width:580,height:600});
+    await page.locator("#settingsClose").click();
+    await page.locator("#backBtn").click();
+  }
+});
+
 test("readable stats, event timeline and two starting XIs fit the popup", async () => {
   await page.locator(".league-pick-card", { hasText: "Premier League" }).click();
   await page.locator(".match-card").first().click();
@@ -314,6 +440,9 @@ test("settings sizes persist and local backup safely round-trips only favorites 
   await expect(page.locator("#subtitle")).toHaveCount(0);
   expect(await page.locator(".hero-actions > button").evaluateAll(els => els.map(el => el.id))).toEqual(["englishToggle", "settingsToggle", "powerToggle"]);
   await page.locator("#settingsToggle").click();
+  await expect(page.locator("#feedbackEmail")).toHaveAttribute("href", "mailto:atakanozkanapps@gmail.com");
+  await expect(page.locator("#settingsFeedbackHint")).toContainText("idea, a suggestion, or spotted a bug");
+  await expect(page.locator("#settingsVersion")).toHaveText(await page.evaluate(() => chrome.runtime.getManifest().version));
   const before = apiCalls.length;
   for (const [size, width, height] of [["small", 480, 540], ["default", 580, 600], ["big", 720, 600]]) {
     await page.setViewportSize({ width, height });
@@ -321,6 +450,9 @@ test("settings sizes persist and local backup safely round-trips only favorites 
     await expect(page.locator("html")).toHaveAttribute("data-popup-size", size);
     expect(await page.evaluate(() => ({ width: document.body.getBoundingClientRect().width, height: document.body.getBoundingClientRect().height }))).toEqual({ width, height });
     expect(await page.locator("#settingsPanel").evaluate(el => el.scrollWidth > el.clientWidth)).toBe(false);
+    await page.locator("#settingsVersion").scrollIntoViewIfNeeded();
+    await expect(page.locator("#settingsVersionRow")).toBeVisible();
+    expect(await page.locator("#feedbackEmail").evaluate(el => el.scrollWidth > el.clientWidth + 1)).toBe(false);
     await page.screenshot({ path: testInfo.outputPath(`settings-${size}.png`) });
   }
   const [download] = await Promise.all([page.waitForEvent("download"), page.locator("#exportSettings").click()]);
@@ -629,10 +761,15 @@ test("all 55 locale packs fit Small and preserve translated settings, standings 
       }, { code, messages });
       await expect(localePage.locator("#settingsTitle")).toHaveText(messages.settings.message);
       await expect(localePage.locator("#settingsBackupHint")).toHaveText(messages.settingsBackupHint.message);
+      await expect(localePage.locator("#settingsFeedbackHint")).toHaveText(messages.feedbackHint.message);
+      await expect(localePage.locator("#settingsVersionLabel")).toHaveText(messages.extensionVersion.message);
+      await expect(localePage.locator("#settingsVersion")).toHaveText(await localePage.evaluate(() => chrome.runtime.getManifest().version));
+      await expect(localePage.locator("#feedbackEmail")).toHaveAttribute("dir", "ltr");
       await expect(localePage.locator("#settingsFile")).toHaveAttribute("aria-label", messages.importSettings.message);
       await expect(localePage.locator("html")).toHaveAttribute("dir", ["ar", "fa", "he"].includes(code) ? "rtl" : "ltr");
       const settingsOverflow = await localePage.locator("#settingsPanel").evaluate(el => el.scrollWidth > el.clientWidth + 1);
       expect.soft(settingsOverflow, `${code}: settings fit Small`).toBe(false);
+      expect.soft(await localePage.locator("#feedbackEmail").evaluate(el => el.scrollWidth > el.clientWidth + 1), `${code}: contact address fits Small`).toBe(false);
       if (screenshots.has(code)) await localePage.screenshot({ path: `test-results/i18n-${code}-settings.png` });
       await localePage.locator("#settingsClose").click();
       await localePage.locator(".league-pick-card", { hasText: "Premier League" }).click();
@@ -640,9 +777,15 @@ test("all 55 locale packs fit Small and preserve translated settings, standings 
       await expect(localePage.locator(".match-card", { hasText: "Liverpool" }).locator(".status-pill")).toHaveText(messages.fullTime.message);
       const clippedHeaders = await localePage.locator(".standings-table th").evaluateAll(els => els.filter(el => el.scrollWidth > el.clientWidth + 1).map(el => el.textContent));
       expect.soft(clippedHeaders, `${code}: standings headings are readable`).toEqual([]);
+      await expect(localePage.locator(".standings-legend")).toContainText(messages.qualifying.message);
+      await expect(localePage.locator("td.standings-position--relegation").last()).toHaveAttribute("title", messages.standingsRelegation.message);
+      const legendOverflow = await localePage.locator(".standings-legend").evaluate(el => el.scrollWidth > el.clientWidth + 1);
+      expect.soft(legendOverflow, `${code}: standings legend fits Small`).toBe(false);
+      await expect(localePage.locator(".standings-qualification-note")).toHaveCount(0);
       if (screenshots.has(code) || code === "bn") await localePage.locator(".standings-table").screenshot({ path: `test-results/i18n-${code}-standings.png` });
       await localePage.locator(".match-card", { hasText: "Arsenal" }).first().click();
-      await expect(localePage.locator(".lineup-heading")).toHaveText(messages.lineups.message);
+      await expect(localePage.locator(".lineup-heading")).toHaveCount(0);
+      await expect(localePage.locator(".lineup-section")).toHaveAttribute("aria-label", messages.lineups.message);
       await expect(localePage.locator('details[data-section-key="stats"] summary')).toHaveText(messages.stats.message);
       const detailOverflow = await localePage.locator("#leagueDetailContent").evaluate(el => el.scrollWidth > el.clientWidth + 1);
       expect.soft(detailOverflow, `${code}: match details fit Small`).toBe(false);

@@ -234,6 +234,24 @@
   "timeline": {
     "message": "മത്സരത്തിലെ സംഭവക്രമം"
   },
+  "qualifying": {
+    "message": "യോഗ്യതാ റൗണ്ട്"
+  },
+  "standingsRelegation": {
+    "message": "തരംതാഴ്ത്തൽ"
+  },
+  "standingsRelegationPlayoff": {
+    "message": "തരംതാഴ്ത്തൽ ഒഴിവാക്കാനുള്ള പ്ലേ ഓഫ്"
+  },
+  "standingsElimination": {
+    "message": "പുറത്താകുന്ന സ്ഥാനങ്ങൾ"
+  },
+  "feedbackHint": {
+    "message": "എന്തെങ്കിലും ആശയമോ നിർദേശമോ ഉണ്ടോ, അല്ലെങ്കിൽ പിശക് ശ്രദ്ധയിൽപ്പെട്ടോ? എനിക്ക് എഴുതൂ!"
+  },
+  "extensionVersion": {
+    "message": "പതിപ്പ്"
+  },
   "lineups": {
     "message": "ലൈനപ്പുകൾ"
   },

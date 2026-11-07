@@ -2,6 +2,7 @@
 
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
+import { checkLiveFixtureCoverage } from "./scoreboard-coverage.mjs";
 
 export const DEFAULT_WORKER_URL = "https://api.atakanozkan.com";
 export const MONITOR_USER_AGENT = "HypeScore-HealthMonitor/1.0";
@@ -24,6 +25,8 @@ export async function runSmokeChecks({
   baseUrl = process.env.HYPE_WORKER_URL || DEFAULT_WORKER_URL,
   fetchImpl = globalThis.fetch,
   timeoutMs = REQUEST_TIMEOUT_MS,
+  verifyCoverage = false,
+  now = Date.now,
 } = {}) {
   const base = new URL(baseUrl);
   if (base.username || base.password || base.search || base.hash ||
@@ -106,6 +109,9 @@ export async function runSmokeChecks({
     });
   }
 
+  if (verifyCoverage && livePayload) {
+    results.push(...await checkLiveFixtureCoverage(livePayload, {fetchImpl,timeoutMs,now}));
+  }
   return { ok: results.every(result => result.status !== "failed"), checks: results };
 }
 
@@ -123,23 +129,24 @@ function assertLivePayload(payload) {
   assertArray(payload.matches, "live payload matches");
   assertArray(payload.leagues, "live payload leagues");
 
-  if (payload.leagues.length < 32) {
+  if (payload.leagues.length !== 32) {
     throw new Error(`Expected 32 curated leagues, got only ${payload.leagues.length} leagues`);
   }
 
   const leagueCodes = new Set(payload.leagues.map((league) => league?.code));
+  if (leagueCodes.size !== 32) throw new Error("Expected 32 unique league codes");
   for (const code of REQUIRED_LEAGUE_CODES) {
     if (!leagueCodes.has(code)) {
       throw new Error(`Missing required league code: ${code}`);
     }
   }
 
-  for (const league of payload.leagues.slice(0, 5)) {
+  for (const league of payload.leagues) {
     assertString(league.name, "league.name");
     assertArray(league.matches, `${league.name}.matches`);
   }
 
-  for (const match of payload.matches.slice(0, 5)) {
+  for (const match of payload.matches) {
     assertString(match.id, "match.id");
     assertString(match.league, "match.league");
     assertString(match.homeTeam, "match.homeTeam");
@@ -256,8 +263,10 @@ function assertNumber(value, label) {
 }
 
 if (process.argv[1] && pathToFileURL(resolve(process.argv[1])).href === import.meta.url) {
+  const args = process.argv.slice(2);
+  if (args.some(arg => arg !== "--coverage")) throw new Error("Usage: npm run smoke -- [--coverage]");
   console.log("Smoke testing the deployed Hype API");
-  runSmokeChecks().then(report => {
+  runSmokeChecks({verifyCoverage:args.includes("--coverage")}).then(report => {
     printResults(report.checks);
     if (!report.ok) process.exitCode = 1;
   }).catch(() => { console.error("Smoke test could not run"); process.exitCode = 1; });

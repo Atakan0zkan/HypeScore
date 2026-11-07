@@ -234,6 +234,24 @@
   "timeline": {
     "message": "赛况"
   },
+  "qualifying": {
+    "message": "资格赛"
+  },
+  "standingsRelegation": {
+    "message": "降级"
+  },
+  "standingsRelegationPlayoff": {
+    "message": "保级附加赛"
+  },
+  "standingsElimination": {
+    "message": "淘汰区"
+  },
+  "feedbackHint": {
+    "message": "有想法、建议，或发现了问题？欢迎发邮件告诉我！"
+  },
+  "extensionVersion": {
+    "message": "版本"
+  },
   "lineups": {
     "message": "阵容"
   },

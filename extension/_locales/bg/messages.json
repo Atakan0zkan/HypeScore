@@ -234,6 +234,24 @@
   "timeline": {
     "message": "Хронология"
   },
+  "qualifying": {
+    "message": "Квалификации"
+  },
+  "standingsRelegation": {
+    "message": "Изпадане"
+  },
+  "standingsRelegationPlayoff": {
+    "message": "Плейоф за оставане"
+  },
+  "standingsElimination": {
+    "message": "Зона на отпадане"
+  },
+  "feedbackHint": {
+    "message": "Имаш идея, предложение или забеляза грешка? Пиши ми!"
+  },
+  "extensionVersion": {
+    "message": "Версия"
+  },
   "lineups": {
     "message": "Състави"
   },

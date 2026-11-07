@@ -234,6 +234,24 @@
   "timeline": {
     "message": "Diễn biến"
   },
+  "qualifying": {
+    "message": "Vòng loại"
+  },
+  "standingsRelegation": {
+    "message": "Xuống hạng"
+  },
+  "standingsRelegationPlayoff": {
+    "message": "Play-off trụ hạng"
+  },
+  "standingsElimination": {
+    "message": "Nhóm bị loại"
+  },
+  "feedbackHint": {
+    "message": "Bạn có ý tưởng, góp ý hoặc phát hiện lỗi? Hãy viết thư cho tôi nhé!"
+  },
+  "extensionVersion": {
+    "message": "Phiên bản"
+  },
   "lineups": {
     "message": "Đội hình"
   },

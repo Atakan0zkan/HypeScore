@@ -234,6 +234,24 @@
   "timeline": {
     "message": "టైమ్‌లైన్"
   },
+  "qualifying": {
+    "message": "అర్హత రౌండ్"
+  },
+  "standingsRelegation": {
+    "message": "దిగువ లీగ్‌కు దిగజారడం"
+  },
+  "standingsRelegationPlayoff": {
+    "message": "లీగ్‌లో నిలిచేందుకు ప్లేఆఫ్"
+  },
+  "standingsElimination": {
+    "message": "నిష్క్రమణ స్థానాలు"
+  },
+  "feedbackHint": {
+    "message": "ఏదైనా ఆలోచన లేదా సూచన ఉందా, లేక లోపం కనిపించిందా? నాకు రాయండి!"
+  },
+  "extensionVersion": {
+    "message": "వెర్షన్"
+  },
   "lineups": {
     "message": "లైనప్‌లు"
   },

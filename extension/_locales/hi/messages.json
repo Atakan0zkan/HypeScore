@@ -234,6 +234,24 @@
   "timeline": {
     "message": "मैच का घटनाक्रम"
   },
+  "qualifying": {
+    "message": "क्वालिफ़ाइंग"
+  },
+  "standingsRelegation": {
+    "message": "निचली लीग में जाना"
+  },
+  "standingsRelegationPlayoff": {
+    "message": "लीग में बने रहने का प्लेऑफ़"
+  },
+  "standingsElimination": {
+    "message": "बाहर होने वाले स्थान"
+  },
+  "feedbackHint": {
+    "message": "कोई विचार या सुझाव है, या कोई गड़बड़ी दिखी? मुझे लिखें!"
+  },
+  "extensionVersion": {
+    "message": "संस्करण"
+  },
   "lineups": {
     "message": "लाइनअप"
   },

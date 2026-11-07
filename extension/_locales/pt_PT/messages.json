@@ -234,6 +234,24 @@
   "timeline": {
     "message": "Cronologia"
   },
+  "qualifying": {
+    "message": "Qualificação"
+  },
+  "standingsRelegation": {
+    "message": "Despromoção"
+  },
+  "standingsRelegationPlayoff": {
+    "message": "Play-off de manutenção"
+  },
+  "standingsElimination": {
+    "message": "Zona de eliminação"
+  },
+  "feedbackHint": {
+    "message": "Tens uma ideia, uma sugestão ou encontraste um erro? Escreve-me!"
+  },
+  "extensionVersion": {
+    "message": "Versão"
+  },
   "lineups": {
     "message": "Equipas iniciais"
   },

@@ -234,6 +234,24 @@
   "timeline": {
     "message": "Laika skala"
   },
+  "qualifying": {
+    "message": "Kvalifikācija"
+  },
+  "standingsRelegation": {
+    "message": "Izkrišana"
+  },
+  "standingsRelegationPlayoff": {
+    "message": "Pārspēles par palikšanu līgā"
+  },
+  "standingsElimination": {
+    "message": "Izslēgšanas zona"
+  },
+  "feedbackHint": {
+    "message": "Tev ir ideja, ieteikums vai pamanīji kļūdu? Uzraksti man!"
+  },
+  "extensionVersion": {
+    "message": "Versija"
+  },
   "lineups": {
     "message": "Sastāvi"
   },

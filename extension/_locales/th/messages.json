@@ -234,6 +234,24 @@
   "timeline": {
     "message": "ไทม์ไลน์"
   },
+  "qualifying": {
+    "message": "รอบคัดเลือก"
+  },
+  "standingsRelegation": {
+    "message": "ตกชั้น"
+  },
+  "standingsRelegationPlayoff": {
+    "message": "เพลย์ออฟหนีตกชั้น"
+  },
+  "standingsElimination": {
+    "message": "โซนตกรอบ"
+  },
+  "feedbackHint": {
+    "message": "มีไอเดีย ข้อเสนอแนะ หรือพบข้อผิดพลาดไหม? ส่งอีเมลมาหาฉันได้เลย!"
+  },
+  "extensionVersion": {
+    "message": "เวอร์ชัน"
+  },
   "lineups": {
     "message": "รายชื่อผู้เล่น"
   },

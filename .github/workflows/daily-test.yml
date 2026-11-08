@@ -33,6 +33,8 @@ jobs:
       # so this step was unnecessary — it is mandatory now.
       - run: npm ci
       - run: npm test
+      - name: Validate extension resources, permissions and size budgets
+        run: npm run test:package
       - run: npm run security:check
       - name: Measure source coverage
         run: npm run test:coverage > coverage-summary.txt

@@ -11,9 +11,9 @@ jobs. Passing tests reduces risk; it is not a security or uptime guarantee.
 - Credential-pattern scan, private-file exclusion and immutable Action refs
   (`npm run security:check`). Findings never print matched credential values.
 - Dependency advisories, including development tools (`npm audit`).
-- Source-coverage measurement (`npm run test:coverage`). This is a report, not
-  proof that every browser path is covered; VM/eval and real-browser coverage
-  are different. Do not claim an unmeasured 80% project-wide guarantee.
+- Enforced measured-source coverage (`npm run test:coverage`): at least 90%
+  lines, 80% branches and 85% functions. VM/eval and real-browser coverage are
+  different; this is not a claim about unmeasured files or every possible path.
 - Worker build/config validation with Wrangler `deploy --dry-run`.
 - Headed Chromium extension E2E under xvfb, with an HTML report and failed-test
   screenshot/trace artifacts retained for seven days. Fixtures are synthetic;
@@ -24,8 +24,11 @@ does not load-test the service. The five-minute monitor remains in place.
 
 ## Before every version
 
-1. Run `npm run verify -- --release --live`. On a local machine, use a supported
-   installed Chromium build; set `E2E_BROWSER_PATH` only when necessary.
+1. Run `npm run test:release`. It saves per-phase logs, JSON and a readable
+   summary under `test-results/release-gate/`. Candidate and deployed-service
+   results are distinct. On Windows an installed Edge/Brave is selected when
+   available; `E2E_BROWSER_PATH` overrides it. Linux browser runs need a display
+   or `xvfb-run -a npm run test:release`. No browser is installed automatically.
 2. Review the entire release diff, permission/CSP changes, third-party URLs,
    error paths, request budgets, cache expiry and rollback plan. Build/typecheck
    steps that do not exist in this plain-JavaScript project are not invented;
@@ -51,7 +54,9 @@ does not load-test the service. The five-minute monitor remains in place.
    and inspect any finding privately. Do not erase history or revoke unrelated
    access without an explicit decision.
 9. Keep a TDD evidence note for behavior changes: user journey, intended RED
-   result, checkpoint commit, GREEN result, coverage limits and remaining risks.
+   result, GREEN result, coverage limits and remaining risks. Create checkpoint
+   commits only when the owner has authorized Git commits; otherwise keep
+   local evidence without staging or committing user work.
    Daily CI does not replay the old buggy implementation to manufacture RED.
 10. Verify package/manifest versions, review the exact extension ZIP contents,
     exclude development tools/private memory, and compare the archive with the
@@ -60,6 +65,36 @@ does not load-test the service. The five-minute monitor remains in place.
     all four production API features. Record the deployment and tested revision.
     Revert a faulty release with a reviewed forward revert or known-good Worker
     version; do not reset user work or silently remove security controls.
+
+## Automated feature and regression matrix
+
+| Area | Evidence |
+| --- | --- |
+| League lists, favorite sorting, popular previews and Live/HT/FT/upcoming labels | Node/DOM regressions and native popup E2E |
+| Single score, stats proportions, event icons, pitch/player cards/goals, substitutes, broadcasts and H2H | Native browser fixtures, candidate Worker-to-popup contract, empty/incomplete-lineup fallbacks |
+| Combined news/highlights and safe external links | Native browser and sanitizer regressions; no links/email are opened by release checks |
+| Power, settings, three sizes, JSON import/export, language override and saved navigation | Storage/DOM/timer tests and native browser round trips |
+| 55 locales, plural forms, RTL, long labels and responsive geometry | Locale audit and all-pack Small-size browser checks; semantic translation review remains manual |
+| Cold/offline/429/502, bounded snapshots, expiry, coalescing, lazy cache and request budget | Worker/DOM/timer tests plus native cold-error and concurrency scenarios |
+| MV3/CSP, minimal permissions, injection, URL/redirect guards, rate limiting and analytics boundaries | Static/package guards, local HTTP security regressions and real-browser CSP test; not penetration testing |
+| Resource size, speed and DOM stability | Extension <=4 MiB; each file <=256 KiB; Worker <=256 KiB raw/64 KiB gzip; 930-match redraw median <300ms/p95 <1000ms, league render <750ms and stable DOM over 20 redraws |
+| Deployed data and latency | 31 current provider league/event comparisons; real popup settings/standings/available detail/World Cup 2030; three measured warm responses <3000ms on this runner/network |
+
+The release gate refuses zero/insufficient test counts, skipped/todo tests,
+flaky browser results, stale/missing browser evidence or a candidate changed
+during the run. A limited `--local-only` pass is not deploy readiness. Reports
+are local and ignored; credentials are redacted from diagnostic logs.
+
+Live HTTP probes are labeled monitoring. The small real-browser journey uses
+the genuine extension request shape to test WAF/CORS and can appear in product
+traffic; its responses and headers are not rewritten. Empty provider data is
+valid and may leave a feature unobserved live; synthetic candidate fixtures
+exercise those paths independently. These are bounded reads, not a load test.
+
+`npm run deploy` is guarded by `predeploy`; raw `npx wrangler deploy`, direct
+Cloudflare API calls and Git-linked Cloudflare builds bypass that hook. Changing
+remote deployment wiring requires a separate owner-approved operation. No test
+command grants permission to deploy, push, merge, alter accounts or publish.
 
 ## ECC workflows
 

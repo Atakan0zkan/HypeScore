@@ -92,7 +92,7 @@ The extension connects to the production API configured in
 
 ## Development
 
-Install the development dependencies:
+Use Node.js 26 and install the development dependencies:
 
 ```powershell
 npm install
@@ -107,13 +107,21 @@ npm run verify
 npm run analytics:test
 npm run smoke
 npm run monitor
+npm run test:release
 ```
 
 - `npm test` runs popup, Worker, and dashboard regression suites.
 - `npm run security:check` checks current source for known credential patterns,
   accidentally tracked private files, and mutable remote workflow actions.
-- `npm run verify -- --release --live` adds source-coverage measurement,
-  browser E2E, historical secret scanning, and production smoke checks.
+- `npm run test:release` is the comprehensive pre-deploy gate: package/CSP and
+  size checks, regression tests, enforced coverage, dependency/secret audits,
+  native browser feature/security/accessibility/performance checks, and
+  read-only production API/browser checks. It saves a source fingerprint and
+  a PASS/FAIL report under the ignored `test-results/release-gate/` directory.
+  `-- --local-only` skips production probes and never reports deploy readiness.
+- `npm run verify -- --release --live` remains available and shares the same
+  validation plan, but the release command adds the consolidated report and
+  detects source changes during verification.
   See [the release checklist](docs/RELEASE-CHECKLIST.md) for human review gates.
 - `npm audit --audit-level=moderate` checks development dependencies too; this
   remains a blocking CI check. A version-scoped npm override replaces vulnerable
@@ -174,6 +182,12 @@ Worker alone does not update an already-installed Chrome Web Store client.
 npx wrangler login
 npm run deploy
 ```
+
+`npm run deploy` first runs the complete release gate and stops on a failure.
+It preserves existing Worker variables with `--keep-vars`. Direct Wrangler
+commands and Cloudflare Git-linked builds bypass npm's `predeploy` hook;
+they must be gated separately and are not reconfigured by this test suite.
+The release command itself never deploys, pushes, publishes or sends email.
 
 For token-based automation, provide `CLOUDFLARE_API_TOKEN` through the process
 environment. Never save Cloudflare credentials in the repository.

@@ -2,6 +2,7 @@
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { existsSync } from "node:fs";
+import { createValidationPlan } from "./release-gate.mjs";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const release = process.argv.includes("--release");
@@ -25,20 +26,5 @@ function check(name, command, args) {
     process.exit(result.status || 1);
   }
 }
-const npmCheck = (name, args) => check(name, process.execPath, [npmCli, ...args]);
-for (const file of ["worker/index.js", "extension/popup.js", "analytics-dashboard/server.mjs", "analytics-dashboard/public/app.js", "tools/scoreboard-coverage.mjs", "tools/smoke-test.js", "tools/production-monitor.mjs"]) {
-  check(`Syntax: ${file}`, process.execPath, ["--check", file]);
-}
-npmCheck("Regression suites", ["test"]);
-npmCheck("Secrets, private files, immutable CI actions", ["run", "security:check"]);
-npmCheck("Development dependency audit", ["audit", "--audit-level=moderate"]);
-check("Diff whitespace", "git", ["diff", "--check"]);
-check("Worker deployment bundle", process.execPath,
-  ["node_modules/wrangler/bin/wrangler.js", "deploy", "--dry-run", "--outdir", "dist/worker-dry-run"]);
-if (release) {
-  npmCheck("Source coverage measurement", ["run", "test:coverage"]);
-  npmCheck("Browser extension E2E", ["run", "test:e2e"]);
-  check("Historical secret scan", process.execPath, ["tools/security-check.mjs", "--history"]);
-}
-if (live) npmCheck("Production API smoke", ["run", "smoke"]);
+for (const step of createValidationPlan({root,npmCli,release,live})) check(step.name,step.command,step.args);
 console.log("\nVerification PASS for the selected checks. Human security/UI/release review remains required.");
